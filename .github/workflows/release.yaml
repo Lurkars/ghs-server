@@ -42,3 +42,13 @@ jobs:
           asset_path: ./target/ghs-server-${{github.ref_name}}.jar
           asset_name: ghs-server-${{github.ref_name}}.jar
           asset_content_type: application/octet-stream
+  publish:
+    name: Publish Draft Release
+    needs: [create_release, release_jar]
+    runs-on: ubuntu-latest
+    steps:
+      - uses: eregon/publish-release@v1
+        env:
+          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+        with:
+          release_id: ${{ needs.create_release.outputs.release_id }}
