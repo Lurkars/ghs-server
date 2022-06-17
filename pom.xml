@@ -57,7 +57,7 @@
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
 					<mainClass>de.champonthis.ghs.server.Application</mainClass>
-					<finalName>ghs-server-${revision}</finalName>
+					<finalName>ghs-server-v${revision}</finalName>
 					<executable>true</executable>
 					<layout>ZIP</layout>
 				</configuration>
