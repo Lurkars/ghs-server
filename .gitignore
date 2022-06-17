@@ -1,0 +1,9 @@
+bin/
+target/
+config/
+.settings/
+.project
+.classpath
+hs_err*.log
+application.properties
+ghs.sqlite
