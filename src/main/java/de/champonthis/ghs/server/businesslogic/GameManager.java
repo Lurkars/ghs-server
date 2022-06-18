@@ -162,8 +162,8 @@ public class GameManager implements SmartInitializingSingleton {
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("INSERT INTO games (game) VALUES('" + gson.toJson(game) + "')");
-			ResultSet gameResultSet = statement.executeQuery("SELECT id FROM games;");
-			return gameResultSet.getInt("id");
+			ResultSet resultSet = statement.getGeneratedKeys();
+			return resultSet.getInt(1);
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}

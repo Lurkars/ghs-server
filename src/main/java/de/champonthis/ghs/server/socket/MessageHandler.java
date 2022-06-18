@@ -8,7 +8,9 @@ import java.util.Collections;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
@@ -37,6 +39,9 @@ public class MessageHandler extends TextWebSocketHandler {
 	@Autowired
 	private Gson gson;
 
+	@Value("${ghs-server.public:false}")
+	private boolean isPublic;
+
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
@@ -63,18 +68,21 @@ public class MessageHandler extends TextWebSocketHandler {
 				}
 
 				String password = messageObject.get("password").getAsString();
-				// if first password set!
-				if (gameManager.countPasswords() == 0) {
-					int gameId = gameManager.createGame(new Game());
-					gameManager.createPassword(password, gameId);
-				} else {
 
+				if (!StringUtils.hasText(password)) {
+					sendError(session, "empty 'password'");
 				}
-
+				
 				Integer gameId = gameManager.getGameIdByPassword(password);
 
 				if (gameId == null) {
-					sendError(session, "Invalid password '" + password + "'");
+					// if first password or public create new game for password
+					if (gameManager.countPasswords() == 0 || isPublic) {
+						gameId = gameManager.createGame(new Game());
+						gameManager.createPassword(password, gameId);
+					} else {
+						sendError(session, "Invalid password '" + password + "'");
+					}
 				}
 
 				Game game = gameManager.getGame(gameId);

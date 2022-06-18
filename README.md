@@ -20,14 +20,13 @@ To run the server in headless mode, just set `-Djava.awt.headless=true` paramete
 
 ### Change port
 
-To run the server on a different port (default: 8080), place an `application.properties`-file next to the `jar`-executable with 
-
-```
-server.port=9999
-```
+To run the server on a different port (default: 8080), place/edit the `application.properties`-file next to the `jar`-executable and add the following line: `server.port=9999`.
 
 Replace `9999` with the port of your choice.
 
+### Run public
+
+A public server accepts any password and creates a game for it. So the password is more an identifier for an individual game than a protection. To make a public server place/edit the `application.properties`-file next to the `jar`-executable and add the following line: `ghs-server.public=true`.
 
 ## How to use with GHS
 
@@ -51,4 +50,13 @@ On the first time, just choose the **Password** of your choice. This will create
 - The database is a simple `ghs.sqlite`-file next to the `jar`-executable. You can manipulate the file directly with `Sqlite`. To reset the database, simple delete the `sqlite`-file.
 - on startup, the passwords are written into syslog in plaintext.
 
+## Copyright / License
+
+Gloomhaven and all related properties, images and text are owned by [Cephalofair Games](https://cephalofair.com).
+
+Source code is licenced under [AGPL](/LICENSE)
+
+## Personal disclaimer
+
+This is a hobby project I do in my free-time. The software provides a practical need due to the end of the original Helper app and so I completely follow the **Quick'n'Dirty** approach to get things fast done. This leads of course to a lack of quality and testing and the code base does definitely not comply with my profession.
 	 
