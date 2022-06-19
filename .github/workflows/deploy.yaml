@@ -24,6 +24,6 @@ jobs:
           port: ${{secrets.PORT}}
           user: ${{secrets.USER}}
           key: ${{secrets.KEY}}
-          pre_upload: ${{secrets.PRE_UPLOAD}}
-          post_upload: ${{secrets.POST_UPLOAD}}sudo systemctrl start ghs-server.service
+          pre_upload: sudo systemctl stop ghs-server.service
+          post_upload: sudo systemctl start ghs-server.service
           ssh_options: -o StrictHostKeyChecking=no
