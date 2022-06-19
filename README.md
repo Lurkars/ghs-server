@@ -4,6 +4,8 @@ This is a server component for [Gloomhaven Secretary](https://ghs.champonthis.de
 
 It's a java application to run on most systems the old [Gloomhaven Helper](http://esotericsoftware.com/gloomhaven-helper) (by [Esoteric Software®](http://esotericsoftware.com)) Desktop version run. Besides an headless mode is integrated.
 
+A public server is available under `152.70.60.220` port `8080`. If the browser enforces a secure connection, use proxy under `ghs.champonthis.de/server` port `443`.
+
 ## How to run
 
 Prerequisite:
