@@ -16,7 +16,7 @@ jobs:
           distribution: "adopt"
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots clean package
-      - uses: mdallasanta/ssh-scp-deploy@{version}
+      - uses: mdallasanta/ssh-scp-deploy@v1.2.0
         with:
           local: "./target/ghs-server-${{github.ref_name}}.jar"
           remote: "~/ghs-server.jar"
