@@ -14,6 +14,8 @@ public class Character {
 
 	@Required
 	private String name;
+	@Required
+	private String edition;
 	private String title;
 	@Required
 	private int initiative;
@@ -56,6 +58,24 @@ public class Character {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Gets the edition.
+	 *
+	 * @return the edition
+	 */
+	public String getEdition() {
+		return edition;
+	}
+
+	/**
+	 * Sets the edition.
+	 *
+	 * @param edition the new edition
+	 */
+	public void setEdition(String edition) {
+		this.edition = edition;
 	}
 
 	/**

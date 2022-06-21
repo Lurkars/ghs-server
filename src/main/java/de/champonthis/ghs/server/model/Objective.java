@@ -13,6 +13,8 @@ import de.champonthis.ghs.server.util.Required;
 public class Objective {
 
 	@Required
+	private int id;
+	@Required
 	private String name;
 	private String title;
 	private Integer initiative;
@@ -26,6 +28,42 @@ public class Objective {
 	private int maxHealth;
 	private ArrayList<Condition> conditions = new ArrayList<Condition>();
 	private ArrayList<Condition> turnConditions = new ArrayList<Condition>();
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Gets the title.
@@ -46,6 +84,24 @@ public class Objective {
 	}
 
 	/**
+	 * Gets the initiative.
+	 *
+	 * @return the initiative
+	 */
+	public Integer getInitiative() {
+		return initiative;
+	}
+
+	/**
+	 * Sets the initiative.
+	 *
+	 * @param initiative the new initiative
+	 */
+	public void setInitiative(Integer initiative) {
+		this.initiative = initiative;
+	}
+
+	/**
 	 * Gets the exhausted.
 	 *
 	 * @return the exhausted
@@ -61,24 +117,6 @@ public class Objective {
 	 */
 	public void setExhausted(Boolean exhausted) {
 		this.exhausted = exhausted;
-	}
-
-	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
-	public void setName(String name) {
-		this.name = name;
 	}
 
 	/**
@@ -140,7 +178,7 @@ public class Objective {
 	 *
 	 * @return the health
 	 */
-	public Integer getHealth() {
+	public int getHealth() {
 		return health;
 	}
 
@@ -149,7 +187,7 @@ public class Objective {
 	 *
 	 * @param health the new health
 	 */
-	public void setHealth(Integer health) {
+	public void setHealth(int health) {
 		this.health = health;
 	}
 
@@ -158,7 +196,7 @@ public class Objective {
 	 *
 	 * @return the max health
 	 */
-	public Integer getMaxHealth() {
+	public int getMaxHealth() {
 		return maxHealth;
 	}
 
@@ -167,7 +205,7 @@ public class Objective {
 	 *
 	 * @param maxHealth the new max health
 	 */
-	public void setMaxHealth(Integer maxHealth) {
+	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 	}
 
@@ -205,24 +243,6 @@ public class Objective {
 	 */
 	public void setTurnConditions(ArrayList<Condition> turnConditions) {
 		this.turnConditions = turnConditions;
-	}
-
-	/**
-	 * Gets the initiative.
-	 *
-	 * @return the initiative
-	 */
-	public Integer getInitiative() {
-		return initiative;
-	}
-
-	/**
-	 * Sets the initiative.
-	 *
-	 * @param initiative the new initiative
-	 */
-	public void setInitiative(Integer initiative) {
-		this.initiative = initiative;
 	}
 
 }

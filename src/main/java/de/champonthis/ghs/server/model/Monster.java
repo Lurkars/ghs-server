@@ -15,6 +15,8 @@ public class Monster {
 	@Required
 	private String name;
 	@Required
+	private String edition;
+	@Required
 	private int level = 1;
 	@Required
 	private boolean off = false;
@@ -43,6 +45,24 @@ public class Monster {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Gets the edition.
+	 *
+	 * @return the edition
+	 */
+	public String getEdition() {
+		return edition;
+	}
+
+	/**
+	 * Sets the edition.
+	 *
+	 * @param edition the new edition
+	 */
+	public void setEdition(String edition) {
+		this.edition = edition;
 	}
 
 	/**

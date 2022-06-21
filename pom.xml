@@ -8,13 +8,13 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
-		<revision>0.1.1</revision>
+		<revision>0.2.0</revision>
 	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>2.6.8</version>
+		<version>2.7.0</version>
 		<relativePath />
 	</parent>
 

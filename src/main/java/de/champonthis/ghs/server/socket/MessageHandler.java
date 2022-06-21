@@ -23,8 +23,10 @@ import com.google.gson.JsonParser;
 
 import de.champonthis.ghs.server.businesslogic.GameManager;
 import de.champonthis.ghs.server.model.Game;
+import de.champonthis.ghs.server.model.Settings;
 import de.champonthis.ghs.server.socket.exception.SendErrorException;
 import de.champonthis.ghs.server.socket.model.MessageType;
+import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 
 /**
  * The Class MessageHandler.
@@ -32,7 +34,7 @@ import de.champonthis.ghs.server.socket.model.MessageType;
 @Component
 public class MessageHandler extends TextWebSocketHandler {
 
-	List<WebSocketSession> webSocketSessions = Collections.synchronizedList(new ArrayList<>());
+	List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new ArrayList<>());
 
 	@Autowired
 	private GameManager gameManager;
@@ -45,13 +47,22 @@ public class MessageHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
-		webSocketSessions.add(session);
+		webSocketSessions.add(new WebSocketSessionContainer(-1, session));
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);
-		webSocketSessions.remove(session);
+		WebSocketSessionContainer webSocketSessionContainer = null;
+		for (WebSocketSessionContainer container : webSocketSessions) {
+			if (container.getSession() == session) {
+				webSocketSessionContainer = container;
+				break;
+			}
+		}
+		if (webSocketSessionContainer != null) {
+			webSocketSessions.remove(webSocketSessionContainer);
+		}
 	}
 
 	@Override
@@ -72,7 +83,7 @@ public class MessageHandler extends TextWebSocketHandler {
 				if (!StringUtils.hasText(password)) {
 					sendError(session, "empty 'password'");
 				}
-				
+
 				Integer gameId = gameManager.getGameIdByPassword(password);
 
 				if (gameId == null) {
@@ -91,9 +102,21 @@ public class MessageHandler extends TextWebSocketHandler {
 					sendError(session, "No game found for 'id=" + gameId + "'");
 				}
 
-				MessageType type = MessageType.valueOf(messageObject.get("type").getAsString().toUpperCase());
-				if (MessageType.GAME.equals(type)) {
+				for (WebSocketSessionContainer container : webSocketSessions) {
+					if (container.getSession() == session) {
+						container.setGameId(gameId);
+						break;
+					}
+				}
 
+				MessageType type = MessageType
+						.valueOf(messageObject.get("type").getAsString().toUpperCase().replace("-", "_"));
+
+				switch (type) {
+				case ERROR:
+					sendError(session, "cannot send errors to server!");
+					break;
+				case GAME:
 					if (messageObject.get("payload") == null || messageObject.get("payload").isJsonNull()) {
 						sendError(session, "'payload' missing");
 					}
@@ -106,15 +129,62 @@ public class MessageHandler extends TextWebSocketHandler {
 
 					gameManager.setGame(gameId, gameUpdate);
 
-					for (WebSocketSession webSocketSession : webSocketSessions) {
-						if (webSocketSession != session) {
-							webSocketSession.sendMessage(new TextMessage(gson.toJson(gameUpdate)));
+					for (WebSocketSessionContainer container : webSocketSessions) {
+						if (container.getSession() != session && container.getGameId() == gameId) {
+							JsonObject gameResponse = new JsonObject();
+							gameResponse.addProperty("type", "game");
+							gameResponse.add("payload", gson.toJsonTree(gameUpdate));
+							container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
 						}
 					}
-				} else if (MessageType.REQUEST.equals(type)) {
-					session.sendMessage(new TextMessage(gson.toJson(game)));
-				} else {
+					break;
+				case REQUEST_GAME:
+					JsonObject gameResponse = new JsonObject();
+					gameResponse.addProperty("type", "game");
+					gameResponse.add("payload", gson.toJsonTree(game));
+					session.sendMessage(new TextMessage(gson.toJson(gameResponse)));
+					break;
+				case REQUEST_SETTINGS:
+					Settings settings = gameManager.getSettings(gameId);
+					if (settings == null) {
+						settings = new Settings();
+						gameManager.createSettings(settings, gameId);
+					}
+
+					JsonObject settingsRequestResponse = new JsonObject();
+					settingsRequestResponse.addProperty("type", "settings");
+					settingsRequestResponse.add("payload", gson.toJsonTree(settings));
+					session.sendMessage(new TextMessage(gson.toJson(settingsRequestResponse)));
+					break;
+				case SETTINGS:
+					if (messageObject.get("payload") == null || messageObject.get("payload").isJsonNull()) {
+						sendError(session, "'payload' missing");
+					}
+
+					Settings settingsUpdate = gson.fromJson(messageObject.get("payload"), Settings.class);
+
+					if (settingsUpdate == null) {
+						sendError(session, "invalid settings payload");
+					}
+
+					if (gameManager.getSettings(gameId) == null) {
+						gameManager.createSettings(settingsUpdate, gameId);
+					} else {
+						gameManager.setSettings(settingsUpdate, gameId);
+					}
+
+					for (WebSocketSessionContainer container : webSocketSessions) {
+						if (container.getSession() != session && container.getGameId() == gameId) {
+							JsonObject settingsResponse = new JsonObject();
+							settingsResponse.addProperty("type", "settings");
+							settingsResponse.add("payload", gson.toJsonTree(settingsUpdate));
+							container.getSession().sendMessage(new TextMessage(gson.toJson(settingsResponse)));
+						}
+					}
+					break;
+				default:
 					sendError(session, "invalid message type");
+					break;
 				}
 			} catch (Exception e) {
 				if (!(e instanceof SendErrorException)) {
@@ -144,7 +214,10 @@ public class MessageHandler extends TextWebSocketHandler {
 	 * @throws Exception the exception
 	 */
 	protected void sendError(WebSocketSession session, String message, boolean stop) throws Exception {
-		session.sendMessage(new TextMessage("Error: " + message));
+		JsonObject error = new JsonObject();
+		error.addProperty("type", "error");
+		error.addProperty("message", message);
+		session.sendMessage(new TextMessage(gson.toJson(error)));
 		if (stop) {
 			throw new SendErrorException("Error: " + message);
 		}

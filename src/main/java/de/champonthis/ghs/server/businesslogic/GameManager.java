@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import com.google.gson.Gson;
 
 import de.champonthis.ghs.server.model.Game;
+import de.champonthis.ghs.server.model.Settings;
 
 /**
  * The Class GameManager.
@@ -37,10 +38,13 @@ public class GameManager implements SmartInitializingSingleton {
 		try {
 			connection = DriverManager.getConnection("jdbc:sqlite:ghs.sqlite");
 			Statement statement = connection.createStatement();
+			statement.executeUpdate("PRAGMA foreign_keys = ON");
 			statement.executeUpdate(
 					"CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY AUTOINCREMENT, game STRING)");
 			statement.executeUpdate(
-					"CREATE TABLE IF NOT EXISTS passwords (game_id INTEGER, password STRING, json_path STRING)");
+					"CREATE TABLE IF NOT EXISTS passwords (password STRING PRIMARY KEY, game_id INTEGER, json_path STRING, FOREIGN KEY(game_id) REFERENCES games(id))");
+			statement.executeUpdate(
+					"CREATE TABLE IF NOT EXISTS settings (game_id INTEGER PRIMARY KEY, settings STRING, FOREIGN KEY(game_id) REFERENCES games(id))");
 
 			ResultSet passwordResultSet = passwords();
 
@@ -52,7 +56,8 @@ public class GameManager implements SmartInitializingSingleton {
 						jsonPath = "[ALL]";
 					}
 					int gameId = passwordResultSet.getInt("game_id");
-					System.out.println("\nPASSWORD: " + password + " GRANTING " + jsonPath + " ON GAME: " + gameId + "\n");
+					System.out.println(
+							"\nPASSWORD: " + password + " GRANTING " + jsonPath + " ON GAME: " + gameId + "\n");
 				}
 			}
 		} catch (SQLException e) {
@@ -186,4 +191,58 @@ public class GameManager implements SmartInitializingSingleton {
 		}
 	}
 
+	/**
+	 * Gets the settings.
+	 *
+	 * @param gameId the game id
+	 * @return the settings
+	 */
+	public Settings getSettings(int gameId) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet settingsResultSet = statement
+					.executeQuery("SELECT settings FROM settings WHERE game_id = " + gameId + ";");
+
+			if (settingsResultSet.next()) {
+				return gson.fromJson(settingsResultSet.getString("settings"), Settings.class);
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+
+		return null;
+	}
+
+
+	/**
+	 * Creates the settings.
+	 *
+	 * @param settings the settings
+	 * @param gameId   the game id
+	 */
+	public void createSettings(Settings settings, int gameId) {
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate(
+					"INSERT INTO settings (game_id, settings) VALUES(" + gameId + ",'" + gson.toJson(settings) + "')");
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
+	/**
+	 * Sets the settings.
+	 *
+	 * @param settings the settings
+	 * @param gameId   the game id
+	 */
+	public void setSettings(Settings settings, int gameId) {
+		try {
+			Statement statement = connection.createStatement();
+			statement.executeUpdate("UPDATE settings SET settings= '" + gson.toJson(settings) + "' WHERE game_id=" + gameId);
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+	
 }

@@ -10,10 +10,19 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum MessageType {
 
-	@SerializedName("request")
-	REQUEST,
-
 	@SerializedName("game")
-	GAME
+	GAME,
+
+	@SerializedName("request-game")
+	REQUEST_GAME,
+
+	@SerializedName("settings")
+	SETTINGS,
+
+	@SerializedName("request-settings")
+	REQUEST_SETTINGS,
+	
+	@SerializedName("error")
+	ERROR,
 
 }
