@@ -30,6 +30,8 @@ public class Settings {
 	@Required
 	private ArrayList<String> editionDataUrls = new ArrayList<String>();
 	@Required
+	private ArrayList<String> excludeEditionDataUrls = new ArrayList<String>();
+	@Required
 	private ArrayList<String> spoilers = new ArrayList<String>();
 	private String serverUrl;
 	private int serverPort;
@@ -198,6 +200,24 @@ public class Settings {
 	 */
 	public void setEditionDataUrls(ArrayList<String> editionDataUrls) {
 		this.editionDataUrls = editionDataUrls;
+	}
+
+	/**
+	 * Gets the exclude edition data urls.
+	 *
+	 * @return the exclude edition data urls
+	 */
+	public ArrayList<String> getExcludeEditionDataUrls() {
+		return excludeEditionDataUrls;
+	}
+
+	/**
+	 * Sets the exclude edition data urls.
+	 *
+	 * @param excludeEditionDataUrls the new exclude edition data urls
+	 */
+	public void setExcludeEditionDataUrls(ArrayList<String> excludeEditionDataUrls) {
+		this.excludeEditionDataUrls = excludeEditionDataUrls;
 	}
 
 	/**

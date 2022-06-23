@@ -37,5 +37,32 @@ public enum Condition {
 	CURSE,
 
 	@SerializedName("bless")
-	BLESS
+	BLESS,
+
+	@SerializedName("regenerate")
+	REGENERATE,
+
+	@SerializedName("chill")
+	CHILL,
+
+	@SerializedName("infect")
+	INFECT,
+
+	@SerializedName("ward")
+	WARD,
+
+	@SerializedName("bane")
+	BANE,
+
+	@SerializedName("brittle")
+	BRITTLE,
+
+	@SerializedName("impair")
+	IMPAIR,
+
+	@SerializedName("poison_upgrade")
+	POISON_UPGRADE,
+
+	@SerializedName("wound_upgrade")
+	WOUND_UPGRADE
 }
