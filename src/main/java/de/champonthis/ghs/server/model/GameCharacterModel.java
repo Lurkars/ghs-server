@@ -10,7 +10,7 @@ import de.champonthis.ghs.server.util.Required;
 /**
  * The Class Character.
  */
-public class Character {
+public class GameCharacterModel {
 
 	@Required
 	private String name;
@@ -40,11 +40,11 @@ public class Character {
 	@Required
 	private ArrayList<Condition> turnConditions = new ArrayList<Condition>();
 	@Required
-	private ArrayList<Summon> summons = new ArrayList<Summon>();
+	private ArrayList<String> markers = new ArrayList<String>();
+	@Required
+	private ArrayList<GameSummonModel> summons = new ArrayList<GameSummonModel>();
 
 	/**
-	 * Gets the name.
-	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -52,17 +52,13 @@ public class Character {
 	}
 
 	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * Gets the edition.
-	 *
 	 * @return the edition
 	 */
 	public String getEdition() {
@@ -70,17 +66,13 @@ public class Character {
 	}
 
 	/**
-	 * Sets the edition.
-	 *
-	 * @param edition the new edition
+	 * @param edition the edition to set
 	 */
 	public void setEdition(String edition) {
 		this.edition = edition;
 	}
 
 	/**
-	 * Gets the title.
-	 *
 	 * @return the title
 	 */
 	public String getTitle() {
@@ -88,17 +80,13 @@ public class Character {
 	}
 
 	/**
-	 * Sets the title.
-	 *
-	 * @param title the new title
+	 * @param title the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	/**
-	 * Gets the initiative.
-	 *
 	 * @return the initiative
 	 */
 	public int getInitiative() {
@@ -106,17 +94,13 @@ public class Character {
 	}
 
 	/**
-	 * Sets the initiative.
-	 *
-	 * @param initiative the new initiative
+	 * @param initiative the initiative to set
 	 */
 	public void setInitiative(int initiative) {
 		this.initiative = initiative;
 	}
 
 	/**
-	 * Gets the experience.
-	 *
 	 * @return the experience
 	 */
 	public int getExperience() {
@@ -124,17 +108,13 @@ public class Character {
 	}
 
 	/**
-	 * Sets the experience.
-	 *
-	 * @param experience the new experience
+	 * @param experience the experience to set
 	 */
 	public void setExperience(int experience) {
 		this.experience = experience;
 	}
 
 	/**
-	 * Gets the loot.
-	 *
 	 * @return the loot
 	 */
 	public int getLoot() {
@@ -142,35 +122,27 @@ public class Character {
 	}
 
 	/**
-	 * Sets the loot.
-	 *
-	 * @param loot the new loot
+	 * @param loot the loot to set
 	 */
 	public void setLoot(int loot) {
 		this.loot = loot;
 	}
 
 	/**
-	 * Checks if is exhausted.
-	 *
-	 * @return true, if is exhausted
+	 * @return the exhausted
 	 */
 	public boolean isExhausted() {
 		return exhausted;
 	}
 
 	/**
-	 * Sets the exhausted.
-	 *
-	 * @param exhausted the new exhausted
+	 * @param exhausted the exhausted to set
 	 */
 	public void setExhausted(boolean exhausted) {
 		this.exhausted = exhausted;
 	}
 
 	/**
-	 * Gets the level.
-	 *
 	 * @return the level
 	 */
 	public int getLevel() {
@@ -178,53 +150,41 @@ public class Character {
 	}
 
 	/**
-	 * Sets the level.
-	 *
-	 * @param level the new level
+	 * @param level the level to set
 	 */
 	public void setLevel(int level) {
 		this.level = level;
 	}
 
 	/**
-	 * Checks if is off.
-	 *
-	 * @return true, if is off
+	 * @return the off
 	 */
 	public boolean isOff() {
 		return off;
 	}
 
 	/**
-	 * Sets the off.
-	 *
-	 * @param off the new off
+	 * @param off the off to set
 	 */
 	public void setOff(boolean off) {
 		this.off = off;
 	}
 
 	/**
-	 * Checks if is active.
-	 *
-	 * @return true, if is active
+	 * @return the active
 	 */
 	public boolean isActive() {
 		return active;
 	}
 
 	/**
-	 * Sets the active.
-	 *
-	 * @param active the new active
+	 * @param active the active to set
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 
 	/**
-	 * Gets the health.
-	 *
 	 * @return the health
 	 */
 	public int getHealth() {
@@ -232,35 +192,27 @@ public class Character {
 	}
 
 	/**
-	 * Sets the health.
-	 *
-	 * @param health the new health
+	 * @param health the health to set
 	 */
 	public void setHealth(int health) {
 		this.health = health;
 	}
 
 	/**
-	 * Gets the max health.
-	 *
-	 * @return the max health
+	 * @return the maxHealth
 	 */
 	public int getMaxHealth() {
 		return maxHealth;
 	}
 
 	/**
-	 * Sets the max health.
-	 *
-	 * @param maxHealth the new max health
+	 * @param maxHealth the maxHealth to set
 	 */
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 	}
 
 	/**
-	 * Gets the conditions.
-	 *
 	 * @return the conditions
 	 */
 	public ArrayList<Condition> getConditions() {
@@ -268,47 +220,51 @@ public class Character {
 	}
 
 	/**
-	 * Sets the conditions.
-	 *
-	 * @param conditions the new conditions
+	 * @param conditions the conditions to set
 	 */
 	public void setConditions(ArrayList<Condition> conditions) {
 		this.conditions = conditions;
 	}
 
 	/**
-	 * Gets the turn conditions.
-	 *
-	 * @return the turn conditions
+	 * @return the turnConditions
 	 */
 	public ArrayList<Condition> getTurnConditions() {
 		return turnConditions;
 	}
 
 	/**
-	 * Sets the turn conditions.
-	 *
-	 * @param turnConditions the new turn conditions
+	 * @param turnConditions the turnConditions to set
 	 */
 	public void setTurnConditions(ArrayList<Condition> turnConditions) {
 		this.turnConditions = turnConditions;
 	}
 
 	/**
-	 * Gets the summons.
-	 *
+	 * @return the markers
+	 */
+	public ArrayList<String> getMarkers() {
+		return markers;
+	}
+
+	/**
+	 * @param markers the markers to set
+	 */
+	public void setMarkers(ArrayList<String> markers) {
+		this.markers = markers;
+	}
+
+	/**
 	 * @return the summons
 	 */
-	public ArrayList<Summon> getSummons() {
+	public ArrayList<GameSummonModel> getSummons() {
 		return summons;
 	}
 
 	/**
-	 * Sets the summons.
-	 *
-	 * @param summons the new summons
+	 * @param summons the summons to set
 	 */
-	public void setSummons(ArrayList<Summon> summons) {
+	public void setSummons(ArrayList<GameSummonModel> summons) {
 		this.summons = summons;
 	}
 

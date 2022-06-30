@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
 
-import de.champonthis.ghs.server.model.Game;
+import de.champonthis.ghs.server.model.GameModel;
 import de.champonthis.ghs.server.model.Settings;
 
 /**
@@ -142,13 +142,13 @@ public class GameManager implements SmartInitializingSingleton {
 	 * @param id the id
 	 * @return the game
 	 */
-	public Game getGame(int id) {
+	public GameModel getGame(int id) {
 		try {
 			Statement statement = connection.createStatement();
 			ResultSet gameResultSet = statement.executeQuery("SELECT game FROM games WHERE id = " + id + ";");
 
 			if (gameResultSet.next()) {
-				return gson.fromJson(gameResultSet.getString("game"), Game.class);
+				return gson.fromJson(gameResultSet.getString("game"), GameModel.class);
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -163,7 +163,7 @@ public class GameManager implements SmartInitializingSingleton {
 	 * @param game the game
 	 * @return the integer
 	 */
-	public Integer createGame(Game game) {
+	public Integer createGame(GameModel game) {
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("INSERT INTO games (game) VALUES('" + gson.toJson(game) + "')");
@@ -182,7 +182,7 @@ public class GameManager implements SmartInitializingSingleton {
 	 * @param id   the id
 	 * @param game the game
 	 */
-	public void setGame(int id, Game game) {
+	public void setGame(int id, GameModel game) {
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("UPDATE games SET game= '" + gson.toJson(game) + "' WHERE id=" + id);

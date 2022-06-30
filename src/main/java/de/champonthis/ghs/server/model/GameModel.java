@@ -10,20 +10,22 @@ import de.champonthis.ghs.server.util.Required;
 /**
  * The Class Game.
  */
-public class Game {
+public class GameModel {
 
 	private String edition;
 	@Required
 	private ArrayList<String> figures = new ArrayList<String>();
 	@Required
-	private ArrayList<Character> characters = new ArrayList<Character>();
+	private ArrayList<GameCharacterModel> characters = new ArrayList<GameCharacterModel>();
 	@Required
-	private ArrayList<Monster> monsters = new ArrayList<Monster>();
+	private ArrayList<GameMonsterModel> monsters = new ArrayList<GameMonsterModel>();
 	@Required
-	private ArrayList<Objective> objectives = new ArrayList<Objective>();
+	private ArrayList<GameObjectiveModel> objectives = new ArrayList<GameObjectiveModel>();
 	@Required
 	private GameState state = GameState.DRAW;
 	private Scenario scenario;
+	@Required
+	private ArrayList<SectionData> sections = new ArrayList<SectionData>();
 	@Required
 	private int level = 1;
 	@Required
@@ -80,7 +82,7 @@ public class Game {
 	 *
 	 * @return the characters
 	 */
-	public ArrayList<Character> getCharacters() {
+	public ArrayList<GameCharacterModel> getCharacters() {
 		return characters;
 	}
 
@@ -89,7 +91,7 @@ public class Game {
 	 *
 	 * @param characters the new characters
 	 */
-	public void setCharacters(ArrayList<Character> characters) {
+	public void setCharacters(ArrayList<GameCharacterModel> characters) {
 		this.characters = characters;
 	}
 
@@ -98,7 +100,7 @@ public class Game {
 	 *
 	 * @return the monsters
 	 */
-	public ArrayList<Monster> getMonsters() {
+	public ArrayList<GameMonsterModel> getMonsters() {
 		return monsters;
 	}
 
@@ -107,7 +109,7 @@ public class Game {
 	 *
 	 * @param monsters the new monsters
 	 */
-	public void setMonsters(ArrayList<Monster> monsters) {
+	public void setMonsters(ArrayList<GameMonsterModel> monsters) {
 		this.monsters = monsters;
 	}
 
@@ -116,7 +118,7 @@ public class Game {
 	 *
 	 * @return the objectives
 	 */
-	public ArrayList<Objective> getObjectives() {
+	public ArrayList<GameObjectiveModel> getObjectives() {
 		return objectives;
 	}
 
@@ -125,7 +127,7 @@ public class Game {
 	 *
 	 * @param objectives the new objectives
 	 */
-	public void setObjectives(ArrayList<Objective> objectives) {
+	public void setObjectives(ArrayList<GameObjectiveModel> objectives) {
 		this.objectives = objectives;
 	}
 

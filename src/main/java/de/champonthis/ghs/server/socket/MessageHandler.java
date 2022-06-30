@@ -22,7 +22,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import de.champonthis.ghs.server.businesslogic.GameManager;
-import de.champonthis.ghs.server.model.Game;
+import de.champonthis.ghs.server.model.GameModel;
 import de.champonthis.ghs.server.model.Settings;
 import de.champonthis.ghs.server.socket.exception.SendErrorException;
 import de.champonthis.ghs.server.socket.model.MessageType;
@@ -89,14 +89,14 @@ public class MessageHandler extends TextWebSocketHandler {
 				if (gameId == null) {
 					// if first password or public create new game for password
 					if (gameManager.countPasswords() == 0 || isPublic) {
-						gameId = gameManager.createGame(new Game());
+						gameId = gameManager.createGame(new GameModel());
 						gameManager.createPassword(password, gameId);
 					} else {
 						sendError(session, "Invalid password '" + password + "'");
 					}
 				}
 
-				Game game = gameManager.getGame(gameId);
+				GameModel game = gameManager.getGame(gameId);
 
 				if (game == null) {
 					sendError(session, "No game found for 'id=" + gameId + "'");
@@ -121,7 +121,7 @@ public class MessageHandler extends TextWebSocketHandler {
 						sendError(session, "'payload' missing");
 					}
 
-					Game gameUpdate = gson.fromJson(messageObject.get("payload"), Game.class);
+					GameModel gameUpdate = gson.fromJson(messageObject.get("payload"), GameModel.class);
 
 					if (gameUpdate == null) {
 						sendError(session, "invalid game payload");

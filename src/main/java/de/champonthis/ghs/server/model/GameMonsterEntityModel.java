@@ -10,7 +10,7 @@ import de.champonthis.ghs.server.util.Required;
 /**
  * The Class MonsterEntity.
  */
-public class MonsterEntity {
+public class GameMonsterEntityModel {
 
 	@Required
 	private int number;
@@ -28,6 +28,8 @@ public class MonsterEntity {
 	private ArrayList<Condition> conditions = new ArrayList<Condition>();
 	@Required
 	private ArrayList<Condition> turnConditions = new ArrayList<Condition>();
+	@Required
+	private ArrayList<String> markers = new ArrayList<String>();
 
 	/**
 	 * Gets the number.

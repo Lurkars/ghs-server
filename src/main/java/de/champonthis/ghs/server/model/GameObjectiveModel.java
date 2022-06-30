@@ -10,28 +10,31 @@ import de.champonthis.ghs.server.util.Required;
 /**
  * The Class Objective.
  */
-public class Objective {
+public class GameObjectiveModel {
 
 	@Required
 	private int id;
+	private String title;
 	@Required
 	private String name;
-	private String title;
-	private Integer initiative;
-	private Boolean exhausted;
+	private Boolean escort;
 	private Integer level;
+	private Boolean exhausted;
 	private Boolean off;
 	private Boolean active;
 	@Required
 	private int health;
 	@Required
-	private int maxHealth;
+	private String maxHealth;
+	@Required
 	private ArrayList<Condition> conditions = new ArrayList<Condition>();
+	@Required
 	private ArrayList<Condition> turnConditions = new ArrayList<Condition>();
+	@Required
+	private ArrayList<String> markers = new ArrayList<String>();
+	private Integer initiative;
 
 	/**
-	 * Gets the id.
-	 *
 	 * @return the id
 	 */
 	public int getId() {
@@ -39,35 +42,13 @@ public class Objective {
 	}
 
 	/**
-	 * Sets the id.
-	 *
-	 * @param id the new id
+	 * @param id the id to set
 	 */
 	public void setId(int id) {
 		this.id = id;
 	}
 
 	/**
-	 * Gets the name.
-	 *
-	 * @return the name
-	 */
-	public String getName() {
-		return name;
-	}
-
-	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
-	 */
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	/**
-	 * Gets the title.
-	 *
 	 * @return the title
 	 */
 	public String getTitle() {
@@ -75,53 +56,41 @@ public class Objective {
 	}
 
 	/**
-	 * Sets the title.
-	 *
-	 * @param title the new title
+	 * @param title the title to set
 	 */
 	public void setTitle(String title) {
 		this.title = title;
 	}
 
 	/**
-	 * Gets the initiative.
-	 *
-	 * @return the initiative
+	 * @return the name
 	 */
-	public Integer getInitiative() {
-		return initiative;
+	public String getName() {
+		return name;
 	}
 
 	/**
-	 * Sets the initiative.
-	 *
-	 * @param initiative the new initiative
+	 * @param name the name to set
 	 */
-	public void setInitiative(Integer initiative) {
-		this.initiative = initiative;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	/**
-	 * Gets the exhausted.
-	 *
-	 * @return the exhausted
+	 * @return the escort
 	 */
-	public Boolean getExhausted() {
-		return exhausted;
+	public Boolean getEscort() {
+		return escort;
 	}
 
 	/**
-	 * Sets the exhausted.
-	 *
-	 * @param exhausted the new exhausted
+	 * @param escort the escort to set
 	 */
-	public void setExhausted(Boolean exhausted) {
-		this.exhausted = exhausted;
+	public void setEscort(Boolean escort) {
+		this.escort = escort;
 	}
 
 	/**
-	 * Gets the level.
-	 *
 	 * @return the level
 	 */
 	public Integer getLevel() {
@@ -129,17 +98,27 @@ public class Objective {
 	}
 
 	/**
-	 * Sets the level.
-	 *
-	 * @param level the new level
+	 * @param level the level to set
 	 */
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
 
 	/**
-	 * Gets the off.
-	 *
+	 * @return the exhausted
+	 */
+	public Boolean getExhausted() {
+		return exhausted;
+	}
+
+	/**
+	 * @param exhausted the exhausted to set
+	 */
+	public void setExhausted(Boolean exhausted) {
+		this.exhausted = exhausted;
+	}
+
+	/**
 	 * @return the off
 	 */
 	public Boolean getOff() {
@@ -147,17 +126,13 @@ public class Objective {
 	}
 
 	/**
-	 * Sets the off.
-	 *
-	 * @param off the new off
+	 * @param off the off to set
 	 */
 	public void setOff(Boolean off) {
 		this.off = off;
 	}
 
 	/**
-	 * Gets the active.
-	 *
 	 * @return the active
 	 */
 	public Boolean getActive() {
@@ -165,17 +140,13 @@ public class Objective {
 	}
 
 	/**
-	 * Sets the active.
-	 *
-	 * @param active the new active
+	 * @param active the active to set
 	 */
 	public void setActive(Boolean active) {
 		this.active = active;
 	}
 
 	/**
-	 * Gets the health.
-	 *
 	 * @return the health
 	 */
 	public int getHealth() {
@@ -183,35 +154,27 @@ public class Objective {
 	}
 
 	/**
-	 * Sets the health.
-	 *
-	 * @param health the new health
+	 * @param health the health to set
 	 */
 	public void setHealth(int health) {
 		this.health = health;
 	}
 
 	/**
-	 * Gets the max health.
-	 *
-	 * @return the max health
+	 * @return the maxHealth
 	 */
-	public int getMaxHealth() {
+	public String getMaxHealth() {
 		return maxHealth;
 	}
 
 	/**
-	 * Sets the max health.
-	 *
-	 * @param maxHealth the new max health
+	 * @param maxHealth the maxHealth to set
 	 */
-	public void setMaxHealth(int maxHealth) {
+	public void setMaxHealth(String maxHealth) {
 		this.maxHealth = maxHealth;
 	}
 
 	/**
-	 * Gets the conditions.
-	 *
 	 * @return the conditions
 	 */
 	public ArrayList<Condition> getConditions() {
@@ -219,30 +182,52 @@ public class Objective {
 	}
 
 	/**
-	 * Sets the conditions.
-	 *
-	 * @param conditions the new conditions
+	 * @param conditions the conditions to set
 	 */
 	public void setConditions(ArrayList<Condition> conditions) {
 		this.conditions = conditions;
 	}
 
 	/**
-	 * Gets the turn conditions.
-	 *
-	 * @return the turn conditions
+	 * @return the turnConditions
 	 */
 	public ArrayList<Condition> getTurnConditions() {
 		return turnConditions;
 	}
 
 	/**
-	 * Sets the turn conditions.
-	 *
-	 * @param turnConditions the new turn conditions
+	 * @param turnConditions the turnConditions to set
 	 */
 	public void setTurnConditions(ArrayList<Condition> turnConditions) {
 		this.turnConditions = turnConditions;
+	}
+
+	/**
+	 * @return the markers
+	 */
+	public ArrayList<String> getMarkers() {
+		return markers;
+	}
+
+	/**
+	 * @param markers the markers to set
+	 */
+	public void setMarkers(ArrayList<String> markers) {
+		this.markers = markers;
+	}
+
+	/**
+	 * @return the initiative
+	 */
+	public Integer getInitiative() {
+		return initiative;
+	}
+
+	/**
+	 * @param initiative the initiative to set
+	 */
+	public void setInitiative(Integer initiative) {
+		this.initiative = initiative;
 	}
 
 }

@@ -10,7 +10,7 @@ import de.champonthis.ghs.server.util.Required;
 /**
  * The Class Monster.
  */
-public class Monster {
+public class GameMonsterModel {
 
 	@Required
 	private String name;
@@ -27,7 +27,7 @@ public class Monster {
 	@Required
 	private ArrayList<Integer> abilities = new ArrayList<Integer>();
 	@Required
-	private ArrayList<MonsterEntity> entities = new ArrayList<MonsterEntity>();
+	private ArrayList<GameMonsterEntityModel> entities = new ArrayList<GameMonsterEntityModel>();
 
 	/**
 	 * Gets the name.
@@ -160,7 +160,7 @@ public class Monster {
 	 *
 	 * @return the entities
 	 */
-	public ArrayList<MonsterEntity> getEntities() {
+	public ArrayList<GameMonsterEntityModel> getEntities() {
 		return entities;
 	}
 
@@ -169,7 +169,7 @@ public class Monster {
 	 *
 	 * @param entities the new entities
 	 */
-	public void setEntities(ArrayList<MonsterEntity> entities) {
+	public void setEntities(ArrayList<GameMonsterEntityModel> entities) {
 		this.entities = entities;
 	}
 
