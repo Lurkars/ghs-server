@@ -33,11 +33,12 @@ public class Settings {
 	private ArrayList<String> excludeEditionDataUrls = new ArrayList<String>();
 	@Required
 	private ArrayList<String> spoilers = new ArrayList<String>();
+	private boolean browserNavigation = false;
 	private String serverUrl;
 	private int serverPort;
 	private String serverPassword;
 	private boolean serverAutoconnect = true;
-	private boolean serverSettings = true;
+	private boolean serverSettings = false;
 	private boolean serverWss = false;
 
 	/**
@@ -236,6 +237,20 @@ public class Settings {
 	 */
 	public void setSpoilers(ArrayList<String> spoilers) {
 		this.spoilers = spoilers;
+	}
+
+	/**
+	 * @return the browserNavigation
+	 */
+	public boolean isBrowserNavigation() {
+		return browserNavigation;
+	}
+
+	/**
+	 * @param browserNavigation the browserNavigation to set
+	 */
+	public void setBrowserNavigation(boolean browserNavigation) {
+		this.browserNavigation = browserNavigation;
 	}
 
 	/**

@@ -40,6 +40,8 @@ public class GameCharacterModel {
 	@Required
 	private ArrayList<Condition> turnConditions = new ArrayList<Condition>();
 	@Required
+	private ArrayList<Condition> expiredConditions = new ArrayList<Condition>();
+	@Required
 	private ArrayList<String> markers = new ArrayList<String>();
 	@Required
 	private ArrayList<GameSummonModel> summons = new ArrayList<GameSummonModel>();
@@ -238,6 +240,20 @@ public class GameCharacterModel {
 	 */
 	public void setTurnConditions(ArrayList<Condition> turnConditions) {
 		this.turnConditions = turnConditions;
+	}
+
+	/**
+	 * @return the expiredConditions
+	 */
+	public ArrayList<Condition> getExpiredConditions() {
+		return expiredConditions;
+	}
+
+	/**
+	 * @param expiredConditions the expiredConditions to set
+	 */
+	public void setExpiredConditions(ArrayList<Condition> expiredConditions) {
+		this.expiredConditions = expiredConditions;
 	}
 
 	/**

@@ -29,6 +29,8 @@ public class GameMonsterEntityModel {
 	@Required
 	private ArrayList<Condition> turnConditions = new ArrayList<Condition>();
 	@Required
+	private ArrayList<Condition> expiredConditions = new ArrayList<Condition>();
+	@Required
 	private ArrayList<String> markers = new ArrayList<String>();
 
 	/**
@@ -173,6 +175,34 @@ public class GameMonsterEntityModel {
 	 */
 	public void setTurnConditions(ArrayList<Condition> turnConditions) {
 		this.turnConditions = turnConditions;
+	}
+
+	/**
+	 * @return the expiredConditions
+	 */
+	public ArrayList<Condition> getExpiredConditions() {
+		return expiredConditions;
+	}
+
+	/**
+	 * @param expiredConditions the expiredConditions to set
+	 */
+	public void setExpiredConditions(ArrayList<Condition> expiredConditions) {
+		this.expiredConditions = expiredConditions;
+	}
+
+	/**
+	 * @return the markers
+	 */
+	public ArrayList<String> getMarkers() {
+		return markers;
+	}
+
+	/**
+	 * @param markers the markers to set
+	 */
+	public void setMarkers(ArrayList<String> markers) {
+		this.markers = markers;
 	}
 
 }

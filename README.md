@@ -16,6 +16,10 @@ Download the corresponding latest `jar`-executable from the [latest release](htt
 
 Execute the `jar`-file with your Java Runtime Environment or run `java -jar ghs-server-*.jar` in your terminal.
 
+### Serve client
+
+The server is also capable of serving the client. To do so, just download zip file of [Gloomhaven Secretary Release](https://github.com/Lurkars/gloomhavensecretary/releases) and extract next to the `jar`-executable in folder `gloomhavensecretary`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}/index.html` (`http://localhost:8080/index.html` with default values).
+
 ### Run headless
 
 To run the server in headless mode, just set `-Djava.awt.headless=true` parameter for execution. For example  `java -jar ghs-server-*.jar -Djava.awt.headless=true`.
@@ -29,6 +33,18 @@ Replace `9999` with the port of your choice.
 ### Run public
 
 A public server accepts any password and creates a game for it. So the password is more an identifier for an individual game than a protection. To make a public server place/edit the `application.properties`-file next to the `jar`-executable and add the following line: `ghs-server.public=true`.
+
+### Enable SSL
+
+If you want to connect to the server from a client using HTTPS the websocket connection is upgraded to wss by any modern browser. Therefore a connection to a server in local network is only possible when enabling SSL. A self-signed certificate is already shipped within (yes, inlcuding hardcoded password visible for everyone). So to simple enable SSL, just place/edit the `application.properties`-file next to the `jar`-executable and add the following line: `server.ssl.enabled==true`. Because self-signed certificate is used, it is untrusted by all modern browsers. To be able to connect, just call `https://{your-ip}:{server-port}` (`https://localhost:8080` with default values) and accept the security warnings. Afterwards you should be able to connect via SSL. (This has to be done for each client.)
+
+To serve with your own certificate, overwrite the following properties in your `application.properties`-file:
+```
+server.ssl.key-store-type=
+server.ssl.key-store=
+server.ssl.key-store-password=
+server.ssl.key-alias=
+```
 
 ## How to use with GHS
 

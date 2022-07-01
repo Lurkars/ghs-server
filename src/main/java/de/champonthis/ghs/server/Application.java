@@ -7,11 +7,13 @@ import java.util.Arrays;
 
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * The Class Application.
  */
 @SpringBootApplication
+@PropertySource("classpath:default.properties")
 public class Application {
 
 	/**

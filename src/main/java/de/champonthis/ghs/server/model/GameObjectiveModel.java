@@ -31,6 +31,8 @@ public class GameObjectiveModel {
 	@Required
 	private ArrayList<Condition> turnConditions = new ArrayList<Condition>();
 	@Required
+	private ArrayList<Condition> expiredConditions = new ArrayList<Condition>();
+	@Required
 	private ArrayList<String> markers = new ArrayList<String>();
 	private Integer initiative;
 
@@ -200,6 +202,20 @@ public class GameObjectiveModel {
 	 */
 	public void setTurnConditions(ArrayList<Condition> turnConditions) {
 		this.turnConditions = turnConditions;
+	}
+
+	/**
+	 * @return the expiredConditions
+	 */
+	public ArrayList<Condition> getExpiredConditions() {
+		return expiredConditions;
+	}
+
+	/**
+	 * @param expiredConditions the expiredConditions to set
+	 */
+	public void setExpiredConditions(ArrayList<Condition> expiredConditions) {
+		this.expiredConditions = expiredConditions;
 	}
 
 	/**

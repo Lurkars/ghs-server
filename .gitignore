@@ -7,3 +7,4 @@ config/
 hs_err*.log
 application.properties
 ghs.sqlite
+./gloomhavensecretary
