@@ -23,6 +23,8 @@ public class GameMonsterModel {
 	@Required
 	private boolean active = false;
 	@Required
+	private boolean drawExtra = false;
+	@Required
 	private int ability = -1;
 	@Required
 	private ArrayList<Integer> abilities = new ArrayList<Integer>();
@@ -117,6 +119,20 @@ public class GameMonsterModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * @return the drawExtra
+	 */
+	public boolean isDrawExtra() {
+		return drawExtra;
+	}
+
+	/**
+	 * @param drawExtra the drawExtra to set
+	 */
+	public void setDrawExtra(boolean drawExtra) {
+		this.drawExtra = drawExtra;
 	}
 
 	/**
