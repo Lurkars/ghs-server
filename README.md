@@ -6,6 +6,10 @@ It's a java application to run on most systems the old [Gloomhaven Helper](http:
 
 A public server is available under `152.70.60.220` port `8080`. If the browser enforces a secure connection, use proxy under `ghs.champonthis.de/server` port `443`.
 
+## Support
+
+☕ [Buy me a coffee?](https://www.buymeacoffee.com/Lurkars)
+
 ## How to run
 
 Prerequisite:

@@ -6,9 +6,9 @@ package de.champonthis.ghs.server.model;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * The Enum Condition.
+ * The Enum ConditionName.
  */
-public enum Condition {
+public enum ConditionName {
 	@SerializedName("stun")
 	STUN,
 
@@ -60,9 +60,12 @@ public enum Condition {
 	@SerializedName("impair")
 	IMPAIR,
 
-	@SerializedName("poison_upgrade")
-	POISON_UPGRADE,
+	@SerializedName("rupture")
+	RUPTURE,
 
-	@SerializedName("wound_upgrade")
-	WOUND_UPGRADE
+	@SerializedName("poison_x")
+	POISON_X,
+
+	@SerializedName("wound_x")
+	WOUND_X
 }

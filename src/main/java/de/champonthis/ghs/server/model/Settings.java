@@ -18,6 +18,8 @@ public class Settings {
 	@Required
 	private boolean expireConditions = true;
 	@Required
+	private boolean applyConditions = true;
+	@Required
 	private boolean moveElements = true;
 	@Required
 	private boolean randomStandees = false;
@@ -93,6 +95,24 @@ public class Settings {
 	 */
 	public void setExpireConditions(boolean expireConditions) {
 		this.expireConditions = expireConditions;
+	}
+
+	/**
+	 * Checks if is apply conditions.
+	 *
+	 * @return true, if is apply conditions
+	 */
+	public boolean isApplyConditions() {
+		return applyConditions;
+	}
+
+	/**
+	 * Sets the apply conditions.
+	 *
+	 * @param applyConditions the new apply conditions
+	 */
+	public void setApplyConditions(boolean applyConditions) {
+		this.applyConditions = applyConditions;
 	}
 
 	/**
@@ -240,14 +260,18 @@ public class Settings {
 	}
 
 	/**
-	 * @return the browserNavigation
+	 * Checks if is browser navigation.
+	 *
+	 * @return true, if is browser navigation
 	 */
 	public boolean isBrowserNavigation() {
 		return browserNavigation;
 	}
 
 	/**
-	 * @param browserNavigation the browserNavigation to set
+	 * Sets the browser navigation.
+	 *
+	 * @param browserNavigation the new browser navigation
 	 */
 	public void setBrowserNavigation(boolean browserNavigation) {
 		this.browserNavigation = browserNavigation;

@@ -8,14 +8,15 @@ import java.util.ArrayList;
 import de.champonthis.ghs.server.util.Required;
 
 /**
- * 
+ * The Class SectionData.
  */
 public class SectionData {
 
 	@Required
 	private String name;
 	@Required
-	private Integer index;
+	private String index;
+	private String group;
 	@Required
 	private ArrayList<String> monsters = new ArrayList<String>();
 	@Required
@@ -25,6 +26,8 @@ public class SectionData {
 	private Boolean spoiler;
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -32,27 +35,53 @@ public class SectionData {
 	}
 
 	/**
-	 * @param name the name to set
+	 * Sets the name.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
+	 * Gets the index.
+	 *
 	 * @return the index
 	 */
-	public Integer getIndex() {
+	public String getIndex() {
 		return index;
 	}
 
 	/**
-	 * @param index the index to set
+	 * Sets the index.
+	 *
+	 * @param index the new index
 	 */
-	public void setIndex(Integer index) {
+	public void setIndex(String index) {
 		this.index = index;
 	}
 
 	/**
+	 * Gets the group.
+	 *
+	 * @return the group
+	 */
+	public String getGroup() {
+		return group;
+	}
+
+	/**
+	 * Sets the group.
+	 *
+	 * @param group the new group
+	 */
+	public void setGroup(String group) {
+		this.group = group;
+	}
+
+	/**
+	 * Gets the monsters.
+	 *
 	 * @return the monsters
 	 */
 	public ArrayList<String> getMonsters() {
@@ -60,13 +89,17 @@ public class SectionData {
 	}
 
 	/**
-	 * @param monsters the monsters to set
+	 * Sets the monsters.
+	 *
+	 * @param monsters the new monsters
 	 */
 	public void setMonsters(ArrayList<String> monsters) {
 		this.monsters = monsters;
 	}
 
 	/**
+	 * Gets the objectives.
+	 *
 	 * @return the objectives
 	 */
 	public ArrayList<ObjectiveData> getObjectives() {
@@ -74,13 +107,17 @@ public class SectionData {
 	}
 
 	/**
-	 * @param objectives the objectives to set
+	 * Sets the objectives.
+	 *
+	 * @param objectives the new objectives
 	 */
 	public void setObjectives(ArrayList<ObjectiveData> objectives) {
 		this.objectives = objectives;
 	}
 
 	/**
+	 * Gets the edition.
+	 *
 	 * @return the edition
 	 */
 	public String getEdition() {
@@ -88,13 +125,17 @@ public class SectionData {
 	}
 
 	/**
-	 * @param edition the edition to set
+	 * Sets the edition.
+	 *
+	 * @param edition the new edition
 	 */
 	public void setEdition(String edition) {
 		this.edition = edition;
 	}
 
 	/**
+	 * Gets the spoiler.
+	 *
 	 * @return the spoiler
 	 */
 	public Boolean getSpoiler() {
@@ -102,7 +143,9 @@ public class SectionData {
 	}
 
 	/**
-	 * @param spoiler the spoiler to set
+	 * Sets the spoiler.
+	 *
+	 * @param spoiler the new spoiler
 	 */
 	public void setSpoiler(Boolean spoiler) {
 		this.spoiler = spoiler;

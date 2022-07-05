@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import de.champonthis.ghs.server.util.Required;
 
 /**
- * The Class Monster.
+ * The Class GameMonsterModel.
  */
 public class GameMonsterModel {
 
@@ -122,14 +122,18 @@ public class GameMonsterModel {
 	}
 
 	/**
-	 * @return the drawExtra
+	 * Checks if is draw extra.
+	 *
+	 * @return true, if is draw extra
 	 */
 	public boolean isDrawExtra() {
 		return drawExtra;
 	}
 
 	/**
-	 * @param drawExtra the drawExtra to set
+	 * Sets the draw extra.
+	 *
+	 * @param drawExtra the new draw extra
 	 */
 	public void setDrawExtra(boolean drawExtra) {
 		this.drawExtra = drawExtra;

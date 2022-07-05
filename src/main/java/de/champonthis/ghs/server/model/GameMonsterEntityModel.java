@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import de.champonthis.ghs.server.util.Required;
 
 /**
- * The Class MonsterEntity.
+ * The Class GameMonsterEntityModel.
  */
 public class GameMonsterEntityModel {
 
@@ -25,11 +25,16 @@ public class GameMonsterEntityModel {
 	@Required
 	private int maxHealth;
 	@Required
-	private ArrayList<Condition> conditions = new ArrayList<Condition>();
+	private ArrayList<GameEntityConditionModel> entityConditions = new ArrayList<GameEntityConditionModel>();
 	@Required
-	private ArrayList<Condition> turnConditions = new ArrayList<Condition>();
+	@Deprecated
+	private ArrayList<ConditionName> conditions = new ArrayList<ConditionName>();
 	@Required
-	private ArrayList<Condition> expiredConditions = new ArrayList<Condition>();
+	@Deprecated
+	private ArrayList<ConditionName> turnConditions = new ArrayList<ConditionName>();
+	@Required
+	@Deprecated
+	private ArrayList<ConditionName> expiredConditions = new ArrayList<ConditionName>();
 	@Required
 	private ArrayList<String> markers = new ArrayList<String>();
 
@@ -142,11 +147,29 @@ public class GameMonsterEntityModel {
 	}
 
 	/**
+	 * Gets the entity conditions.
+	 *
+	 * @return the entity conditions
+	 */
+	public ArrayList<GameEntityConditionModel> getEntityConditions() {
+		return entityConditions;
+	}
+
+	/**
+	 * Sets the entity conditions.
+	 *
+	 * @param entityConditions the new entity conditions
+	 */
+	public void setEntityConditions(ArrayList<GameEntityConditionModel> entityConditions) {
+		this.entityConditions = entityConditions;
+	}
+
+	/**
 	 * Gets the conditions.
 	 *
 	 * @return the conditions
 	 */
-	public ArrayList<Condition> getConditions() {
+	public ArrayList<ConditionName> getConditions() {
 		return conditions;
 	}
 
@@ -155,7 +178,7 @@ public class GameMonsterEntityModel {
 	 *
 	 * @param conditions the new conditions
 	 */
-	public void setConditions(ArrayList<Condition> conditions) {
+	public void setConditions(ArrayList<ConditionName> conditions) {
 		this.conditions = conditions;
 	}
 
@@ -164,7 +187,7 @@ public class GameMonsterEntityModel {
 	 *
 	 * @return the turn conditions
 	 */
-	public ArrayList<Condition> getTurnConditions() {
+	public ArrayList<ConditionName> getTurnConditions() {
 		return turnConditions;
 	}
 
@@ -173,25 +196,31 @@ public class GameMonsterEntityModel {
 	 *
 	 * @param turnConditions the new turn conditions
 	 */
-	public void setTurnConditions(ArrayList<Condition> turnConditions) {
+	public void setTurnConditions(ArrayList<ConditionName> turnConditions) {
 		this.turnConditions = turnConditions;
 	}
 
 	/**
-	 * @return the expiredConditions
+	 * Gets the expired conditions.
+	 *
+	 * @return the expired conditions
 	 */
-	public ArrayList<Condition> getExpiredConditions() {
+	public ArrayList<ConditionName> getExpiredConditions() {
 		return expiredConditions;
 	}
 
 	/**
-	 * @param expiredConditions the expiredConditions to set
+	 * Sets the expired conditions.
+	 *
+	 * @param expiredConditions the new expired conditions
 	 */
-	public void setExpiredConditions(ArrayList<Condition> expiredConditions) {
+	public void setExpiredConditions(ArrayList<ConditionName> expiredConditions) {
 		this.expiredConditions = expiredConditions;
 	}
 
 	/**
+	 * Gets the markers.
+	 *
 	 * @return the markers
 	 */
 	public ArrayList<String> getMarkers() {
@@ -199,7 +228,9 @@ public class GameMonsterEntityModel {
 	}
 
 	/**
-	 * @param markers the markers to set
+	 * Sets the markers.
+	 *
+	 * @param markers the new markers
 	 */
 	public void setMarkers(ArrayList<String> markers) {
 		this.markers = markers;

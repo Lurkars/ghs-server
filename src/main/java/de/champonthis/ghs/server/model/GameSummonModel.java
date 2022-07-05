@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import de.champonthis.ghs.server.util.Required;
 
 /**
- * The Class Summon.
+ * The Class GameSummonModel.
  */
 public class GameSummonModel {
 
@@ -28,15 +28,22 @@ public class GameSummonModel {
 	@Required
 	private int maxHealth;
 	@Required
-	private ArrayList<Condition> conditions = new ArrayList<Condition>();
+	private ArrayList<GameEntityConditionModel> entityConditions = new ArrayList<GameEntityConditionModel>();
 	@Required
-	private ArrayList<Condition> turnConditions = new ArrayList<Condition>();
+	@Deprecated
+	private ArrayList<ConditionName> conditions = new ArrayList<ConditionName>();
 	@Required
-	private ArrayList<Condition> expiredConditions = new ArrayList<Condition>();
+	@Deprecated
+	private ArrayList<ConditionName> turnConditions = new ArrayList<ConditionName>();
+	@Required
+	@Deprecated
+	private ArrayList<ConditionName> expiredConditions = new ArrayList<ConditionName>();
 	@Required
 	private ArrayList<String> markers = new ArrayList<String>();
 
 	/**
+	 * Gets the number.
+	 *
 	 * @return the number
 	 */
 	public int getNumber() {
@@ -44,13 +51,17 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param number the number to set
+	 * Sets the number.
+	 *
+	 * @param number the new number
 	 */
 	public void setNumber(int number) {
 		this.number = number;
 	}
 
 	/**
+	 * Gets the color.
+	 *
 	 * @return the color
 	 */
 	public SummonColor getColor() {
@@ -58,13 +69,17 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param color the color to set
+	 * Sets the color.
+	 *
+	 * @param color the new color
 	 */
 	public void setColor(SummonColor color) {
 		this.color = color;
 	}
 
 	/**
+	 * Gets the attack.
+	 *
 	 * @return the attack
 	 */
 	public Integer getAttack() {
@@ -72,13 +87,17 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param attack the attack to set
+	 * Sets the attack.
+	 *
+	 * @param attack the new attack
 	 */
 	public void setAttack(Integer attack) {
 		this.attack = attack;
 	}
 
 	/**
+	 * Gets the movement.
+	 *
 	 * @return the movement
 	 */
 	public Integer getMovement() {
@@ -86,13 +105,17 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param movement the movement to set
+	 * Sets the movement.
+	 *
+	 * @param movement the new movement
 	 */
 	public void setMovement(Integer movement) {
 		this.movement = movement;
 	}
 
 	/**
+	 * Gets the range.
+	 *
 	 * @return the range
 	 */
 	public Integer getRange() {
@@ -100,13 +123,17 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param range the range to set
+	 * Sets the range.
+	 *
+	 * @param range the new range
 	 */
 	public void setRange(Integer range) {
 		this.range = range;
 	}
 
 	/**
+	 * Gets the dead.
+	 *
 	 * @return the dead
 	 */
 	public Boolean getDead() {
@@ -114,13 +141,17 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param dead the dead to set
+	 * Sets the dead.
+	 *
+	 * @param dead the new dead
 	 */
 	public void setDead(Boolean dead) {
 		this.dead = dead;
 	}
 
 	/**
+	 * Gets the state.
+	 *
 	 * @return the state
 	 */
 	public SummonState getState() {
@@ -128,13 +159,17 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param state the state to set
+	 * Sets the state.
+	 *
+	 * @param state the new state
 	 */
 	public void setState(SummonState state) {
 		this.state = state;
 	}
 
 	/**
+	 * Gets the level.
+	 *
 	 * @return the level
 	 */
 	public Integer getLevel() {
@@ -142,13 +177,17 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param level the level to set
+	 * Sets the level.
+	 *
+	 * @param level the new level
 	 */
 	public void setLevel(Integer level) {
 		this.level = level;
 	}
 
 	/**
+	 * Gets the health.
+	 *
 	 * @return the health
 	 */
 	public int getHealth() {
@@ -156,69 +195,107 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param health the health to set
+	 * Sets the health.
+	 *
+	 * @param health the new health
 	 */
 	public void setHealth(int health) {
 		this.health = health;
 	}
 
 	/**
-	 * @return the maxHealth
+	 * Gets the max health.
+	 *
+	 * @return the max health
 	 */
 	public int getMaxHealth() {
 		return maxHealth;
 	}
 
 	/**
-	 * @param maxHealth the maxHealth to set
+	 * Sets the max health.
+	 *
+	 * @param maxHealth the new max health
 	 */
 	public void setMaxHealth(int maxHealth) {
 		this.maxHealth = maxHealth;
 	}
 
 	/**
+	 * Gets the entity conditions.
+	 *
+	 * @return the entity conditions
+	 */
+	public ArrayList<GameEntityConditionModel> getEntityConditions() {
+		return entityConditions;
+	}
+
+	/**
+	 * Sets the entity conditions.
+	 *
+	 * @param entityConditions the new entity conditions
+	 */
+	public void setEntityConditions(ArrayList<GameEntityConditionModel> entityConditions) {
+		this.entityConditions = entityConditions;
+	}
+
+	/**
+	 * Gets the conditions.
+	 *
 	 * @return the conditions
 	 */
-	public ArrayList<Condition> getConditions() {
+	public ArrayList<ConditionName> getConditions() {
 		return conditions;
 	}
 
 	/**
-	 * @param conditions the conditions to set
+	 * Sets the conditions.
+	 *
+	 * @param conditions the new conditions
 	 */
-	public void setConditions(ArrayList<Condition> conditions) {
+	public void setConditions(ArrayList<ConditionName> conditions) {
 		this.conditions = conditions;
 	}
 
 	/**
-	 * @return the turnConditions
+	 * Gets the turn conditions.
+	 *
+	 * @return the turn conditions
 	 */
-	public ArrayList<Condition> getTurnConditions() {
+	public ArrayList<ConditionName> getTurnConditions() {
 		return turnConditions;
 	}
 
 	/**
-	 * @param turnConditions the turnConditions to set
+	 * Sets the turn conditions.
+	 *
+	 * @param turnConditions the new turn conditions
 	 */
-	public void setTurnConditions(ArrayList<Condition> turnConditions) {
+	public void setTurnConditions(ArrayList<ConditionName> turnConditions) {
 		this.turnConditions = turnConditions;
 	}
 
 	/**
-	 * @return the expiredConditions
+	 * Gets the expired conditions.
+	 *
+	 * @return the expired conditions
 	 */
-	public ArrayList<Condition> getExpiredConditions() {
+	public ArrayList<ConditionName> getExpiredConditions() {
 		return expiredConditions;
 	}
 
 	/**
-	 * @param expiredConditions the expiredConditions to set
+	 * Sets the expired conditions.
+	 *
+	 * @param expiredConditions the new expired conditions
 	 */
-	public void setExpiredConditions(ArrayList<Condition> expiredConditions) {
+	public void setExpiredConditions(ArrayList<ConditionName> expiredConditions) {
 		this.expiredConditions = expiredConditions;
 	}
 
 	/**
+	 * Gets the markers.
+	 *
 	 * @return the markers
 	 */
 	public ArrayList<String> getMarkers() {
@@ -226,7 +303,9 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param markers the markers to set
+	 * Sets the markers.
+	 *
+	 * @param markers the new markers
 	 */
 	public void setMarkers(ArrayList<String> markers) {
 		this.markers = markers;

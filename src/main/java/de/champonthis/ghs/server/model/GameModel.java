@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import de.champonthis.ghs.server.util.Required;
 
 /**
- * The Class Game.
+ * The Class GameModel.
  */
 public class GameModel {
 
@@ -30,6 +30,10 @@ public class GameModel {
 	private int level = 1;
 	@Required
 	private int round = 0;
+	@Required
+	private long playSeconds = 0;
+	@Required
+	private long totalSeconds = 0;
 	@Required
 	private int attackModifier = -1;
 	@Required
@@ -168,6 +172,24 @@ public class GameModel {
 	}
 
 	/**
+	 * Gets the sections.
+	 *
+	 * @return the sections
+	 */
+	public ArrayList<SectionData> getSections() {
+		return sections;
+	}
+
+	/**
+	 * Sets the sections.
+	 *
+	 * @param sections the new sections
+	 */
+	public void setSections(ArrayList<SectionData> sections) {
+		this.sections = sections;
+	}
+
+	/**
 	 * Gets the level.
 	 *
 	 * @return the level
@@ -201,6 +223,42 @@ public class GameModel {
 	 */
 	public void setRound(int round) {
 		this.round = round;
+	}
+
+	/**
+	 * Gets the play seconds.
+	 *
+	 * @return the play seconds
+	 */
+	public long getPlaySeconds() {
+		return playSeconds;
+	}
+
+	/**
+	 * Sets the play seconds.
+	 *
+	 * @param playSeconds the new play seconds
+	 */
+	public void setPlaySeconds(long playSeconds) {
+		this.playSeconds = playSeconds;
+	}
+
+	/**
+	 * Gets the total seconds.
+	 *
+	 * @return the total seconds
+	 */
+	public long getTotalSeconds() {
+		return totalSeconds;
+	}
+
+	/**
+	 * Sets the total seconds.
+	 *
+	 * @param totalSeconds the new total seconds
+	 */
+	public void setTotalSeconds(long totalSeconds) {
+		this.totalSeconds = totalSeconds;
 	}
 
 	/**
