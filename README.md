@@ -8,7 +8,7 @@ A public server is available under `152.70.60.220` port `8080`. If the browser e
 
 ## Support
 
-☕ [Buy me a coffee?](https://www.buymeacoffee.com/Lurkars)
+☕ [Buy me a coffee?](https://ko-fi.com/lurkars)
 
 ## How to run
 
