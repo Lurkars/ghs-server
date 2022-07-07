@@ -22,6 +22,8 @@ public class GameEntityConditionModel {
 	private boolean highlight;
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public ConditionName getName() {
@@ -29,13 +31,17 @@ public class GameEntityConditionModel {
 	}
 
 	/**
-	 * @param name the name to set
+	 * Sets the name.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(ConditionName name) {
 		this.name = name;
 	}
 
 	/**
+	 * Gets the value.
+	 *
 	 * @return the value
 	 */
 	public int getValue() {
@@ -43,13 +49,17 @@ public class GameEntityConditionModel {
 	}
 
 	/**
-	 * @param value the value to set
+	 * Sets the value.
+	 *
+	 * @param value the new value
 	 */
 	public void setValue(int value) {
 		this.value = value;
 	}
 
 	/**
+	 * Gets the state.
+	 *
 	 * @return the state
 	 */
 	public EntityConditionState getState() {
@@ -57,35 +67,45 @@ public class GameEntityConditionModel {
 	}
 
 	/**
-	 * @param state the state to set
+	 * Sets the state.
+	 *
+	 * @param state the new state
 	 */
 	public void setState(EntityConditionState state) {
 		this.state = state;
 	}
 
 	/**
-	 * @return the expired
+	 * Checks if is expired.
+	 *
+	 * @return true, if is expired
 	 */
 	public boolean isExpired() {
 		return expired;
 	}
 
 	/**
-	 * @param expired the expired to set
+	 * Sets the expired.
+	 *
+	 * @param expired the new expired
 	 */
 	public void setExpired(boolean expired) {
 		this.expired = expired;
 	}
 
 	/**
-	 * @return the highlight
+	 * Checks if is highlight.
+	 *
+	 * @return true, if is highlight
 	 */
 	public boolean isHighlight() {
 		return highlight;
 	}
 
 	/**
-	 * @param highlight the highlight to set
+	 * Sets the highlight.
+	 *
+	 * @param highlight the new highlight
 	 */
 	public void setHighlight(boolean highlight) {
 		this.highlight = highlight;

@@ -387,14 +387,18 @@ public class Settings {
 	}
 
 	/**
-	 * @return the maxUndo
+	 * Gets the max undo.
+	 *
+	 * @return the max undo
 	 */
 	public int getMaxUndo() {
 		return maxUndo;
 	}
 
 	/**
-	 * @param maxUndo the maxUndo to set
+	 * Sets the max undo.
+	 *
+	 * @param maxUndo the new max undo
 	 */
 	public void setMaxUndo(int maxUndo) {
 		this.maxUndo = maxUndo;
