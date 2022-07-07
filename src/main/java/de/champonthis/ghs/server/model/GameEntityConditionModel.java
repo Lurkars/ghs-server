@@ -15,15 +15,13 @@ public class GameEntityConditionModel {
 	@Required
 	private int value = 1;
 	@Required
-	private int count = 0;
-	@Required
 	private EntityConditionState state;
 	@Required
-	private boolean applied;
+	private boolean expired;
+	@Required
+	private boolean highlight;
 
 	/**
-	 * Gets the name.
-	 *
 	 * @return the name
 	 */
 	public ConditionName getName() {
@@ -31,17 +29,13 @@ public class GameEntityConditionModel {
 	}
 
 	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
+	 * @param name the name to set
 	 */
 	public void setName(ConditionName name) {
 		this.name = name;
 	}
 
 	/**
-	 * Gets the value.
-	 *
 	 * @return the value
 	 */
 	public int getValue() {
@@ -49,35 +43,13 @@ public class GameEntityConditionModel {
 	}
 
 	/**
-	 * Sets the value.
-	 *
-	 * @param value the new value
+	 * @param value the value to set
 	 */
 	public void setValue(int value) {
 		this.value = value;
 	}
 
 	/**
-	 * Gets the count.
-	 *
-	 * @return the count
-	 */
-	public int getCount() {
-		return count;
-	}
-
-	/**
-	 * Sets the count.
-	 *
-	 * @param count the new count
-	 */
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-	/**
-	 * Gets the state.
-	 *
 	 * @return the state
 	 */
 	public EntityConditionState getState() {
@@ -85,30 +57,38 @@ public class GameEntityConditionModel {
 	}
 
 	/**
-	 * Sets the state.
-	 *
-	 * @param state the new state
+	 * @param state the state to set
 	 */
 	public void setState(EntityConditionState state) {
 		this.state = state;
 	}
 
 	/**
-	 * Checks if is applied.
-	 *
-	 * @return true, if is applied
+	 * @return the expired
 	 */
-	public boolean isApplied() {
-		return applied;
+	public boolean isExpired() {
+		return expired;
 	}
 
 	/**
-	 * Sets the applied.
-	 *
-	 * @param applied the new applied
+	 * @param expired the expired to set
 	 */
-	public void setApplied(boolean applied) {
-		this.applied = applied;
+	public void setExpired(boolean expired) {
+		this.expired = expired;
+	}
+
+	/**
+	 * @return the highlight
+	 */
+	public boolean isHighlight() {
+		return highlight;
+	}
+
+	/**
+	 * @param highlight the highlight to set
+	 */
+	public void setHighlight(boolean highlight) {
+		this.highlight = highlight;
 	}
 
 }

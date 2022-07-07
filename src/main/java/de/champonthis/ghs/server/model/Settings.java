@@ -42,6 +42,7 @@ public class Settings {
 	private boolean serverAutoconnect = true;
 	private boolean serverSettings = false;
 	private boolean serverWss = false;
+	private int maxUndo = 50;
 
 	/**
 	 * Checks if is calculate.
@@ -383,6 +384,20 @@ public class Settings {
 	 */
 	public void setServerWss(boolean serverWss) {
 		this.serverWss = serverWss;
+	}
+
+	/**
+	 * @return the maxUndo
+	 */
+	public int getMaxUndo() {
+		return maxUndo;
+	}
+
+	/**
+	 * @param maxUndo the maxUndo to set
+	 */
+	public void setMaxUndo(int maxUndo) {
+		this.maxUndo = maxUndo;
 	}
 
 }
