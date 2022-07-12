@@ -22,6 +22,8 @@ public class Settings {
 	@Required
 	private boolean moveElements = true;
 	@Required
+	private boolean hideStats = true;
+	@Required
 	private boolean randomStandees = false;
 	@Required
 	private boolean fullscreen = false;
@@ -132,6 +134,24 @@ public class Settings {
 	 */
 	public void setMoveElements(boolean moveElements) {
 		this.moveElements = moveElements;
+	}
+
+	/**
+	 * Checks if is hide stats.
+	 *
+	 * @return true, if is hide stats
+	 */
+	public boolean isHideStats() {
+		return hideStats;
+	}
+
+	/**
+	 * Sets the hide stats.
+	 *
+	 * @param hideStats the new hide stats
+	 */
+	public void setHideStats(boolean hideStats) {
+		this.hideStats = hideStats;
 	}
 
 	/**
