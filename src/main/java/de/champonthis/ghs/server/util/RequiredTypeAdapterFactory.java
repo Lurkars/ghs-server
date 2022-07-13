@@ -5,7 +5,7 @@ package de.champonthis.ghs.server.util;
 
 import java.io.IOException;
 import java.lang.reflect.Field;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import com.google.gson.Gson;
@@ -59,8 +59,8 @@ public class RequiredTypeAdapterFactory implements TypeAdapterFactory {
 					throw new IllegalArgumentException(field.getName() + " is null");
 				}
 
-				if (List.class.isAssignableFrom(t) && !((ArrayList<?>) v).isEmpty()) {
-					for (Object item : ((ArrayList<?>) v)) {
+				if (List.class.isAssignableFrom(t) && !((LinkedList<?>) v).isEmpty()) {
+					for (Object item : ((LinkedList<?>) v)) {
 						if (item == null) {
 							throw new IllegalArgumentException(field.getName() + " has null item");
 						}

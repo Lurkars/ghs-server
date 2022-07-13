@@ -3,7 +3,7 @@
  */
 package de.champonthis.ghs.server.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import de.champonthis.ghs.server.util.Required;
 
@@ -14,18 +14,18 @@ public class GameModel {
 
 	private String edition;
 	@Required
-	private ArrayList<String> figures = new ArrayList<String>();
+	private LinkedList<String> figures = new LinkedList<String>();
 	@Required
-	private ArrayList<GameCharacterModel> characters = new ArrayList<GameCharacterModel>();
+	private LinkedList<GameCharacterModel> characters = new LinkedList<GameCharacterModel>();
 	@Required
-	private ArrayList<GameMonsterModel> monsters = new ArrayList<GameMonsterModel>();
+	private LinkedList<GameMonsterModel> monsters = new LinkedList<GameMonsterModel>();
 	@Required
-	private ArrayList<GameObjectiveModel> objectives = new ArrayList<GameObjectiveModel>();
+	private LinkedList<GameObjectiveModel> objectives = new LinkedList<GameObjectiveModel>();
 	@Required
 	private GameState state = GameState.DRAW;
 	private Scenario scenario;
 	@Required
-	private ArrayList<SectionData> sections = new ArrayList<SectionData>();
+	private LinkedList<SectionData> sections = new LinkedList<SectionData>();
 	@Required
 	private int level = 1;
 	@Required
@@ -37,13 +37,13 @@ public class GameModel {
 	@Required
 	private int attackModifier = -1;
 	@Required
-	private ArrayList<AttackModifierType> attackModifiers = new ArrayList<AttackModifierType>();
+	private LinkedList<AttackModifierType> attackModifiers = new LinkedList<AttackModifierType>();
 	@Required
-	private ArrayList<Element> newElements = new ArrayList<Element>();
+	private LinkedList<Element> newElements = new LinkedList<Element>();
 	@Required
-	private ArrayList<Element> strongElements = new ArrayList<Element>();
+	private LinkedList<Element> strongElements = new LinkedList<Element>();
 	@Required
-	private ArrayList<Element> elements = new ArrayList<Element>();
+	private LinkedList<Element> elements = new LinkedList<Element>();
 
 	/**
 	 * Gets the edition.
@@ -68,7 +68,7 @@ public class GameModel {
 	 *
 	 * @return the figures
 	 */
-	public ArrayList<String> getFigures() {
+	public LinkedList<String> getFigures() {
 		return figures;
 	}
 
@@ -77,7 +77,7 @@ public class GameModel {
 	 *
 	 * @param figures the new figures
 	 */
-	public void setFigures(ArrayList<String> figures) {
+	public void setFigures(LinkedList<String> figures) {
 		this.figures = figures;
 	}
 
@@ -86,7 +86,7 @@ public class GameModel {
 	 *
 	 * @return the characters
 	 */
-	public ArrayList<GameCharacterModel> getCharacters() {
+	public LinkedList<GameCharacterModel> getCharacters() {
 		return characters;
 	}
 
@@ -95,7 +95,7 @@ public class GameModel {
 	 *
 	 * @param characters the new characters
 	 */
-	public void setCharacters(ArrayList<GameCharacterModel> characters) {
+	public void setCharacters(LinkedList<GameCharacterModel> characters) {
 		this.characters = characters;
 	}
 
@@ -104,7 +104,7 @@ public class GameModel {
 	 *
 	 * @return the monsters
 	 */
-	public ArrayList<GameMonsterModel> getMonsters() {
+	public LinkedList<GameMonsterModel> getMonsters() {
 		return monsters;
 	}
 
@@ -113,7 +113,7 @@ public class GameModel {
 	 *
 	 * @param monsters the new monsters
 	 */
-	public void setMonsters(ArrayList<GameMonsterModel> monsters) {
+	public void setMonsters(LinkedList<GameMonsterModel> monsters) {
 		this.monsters = monsters;
 	}
 
@@ -122,7 +122,7 @@ public class GameModel {
 	 *
 	 * @return the objectives
 	 */
-	public ArrayList<GameObjectiveModel> getObjectives() {
+	public LinkedList<GameObjectiveModel> getObjectives() {
 		return objectives;
 	}
 
@@ -131,7 +131,7 @@ public class GameModel {
 	 *
 	 * @param objectives the new objectives
 	 */
-	public void setObjectives(ArrayList<GameObjectiveModel> objectives) {
+	public void setObjectives(LinkedList<GameObjectiveModel> objectives) {
 		this.objectives = objectives;
 	}
 
@@ -176,7 +176,7 @@ public class GameModel {
 	 *
 	 * @return the sections
 	 */
-	public ArrayList<SectionData> getSections() {
+	public LinkedList<SectionData> getSections() {
 		return sections;
 	}
 
@@ -185,7 +185,7 @@ public class GameModel {
 	 *
 	 * @param sections the new sections
 	 */
-	public void setSections(ArrayList<SectionData> sections) {
+	public void setSections(LinkedList<SectionData> sections) {
 		this.sections = sections;
 	}
 
@@ -284,7 +284,7 @@ public class GameModel {
 	 *
 	 * @return the attack modifiers
 	 */
-	public ArrayList<AttackModifierType> getAttackModifiers() {
+	public LinkedList<AttackModifierType> getAttackModifiers() {
 		return attackModifiers;
 	}
 
@@ -293,7 +293,7 @@ public class GameModel {
 	 *
 	 * @param attackModifiers the new attack modifiers
 	 */
-	public void setAttackModifiers(ArrayList<AttackModifierType> attackModifiers) {
+	public void setAttackModifiers(LinkedList<AttackModifierType> attackModifiers) {
 		this.attackModifiers = attackModifiers;
 	}
 
@@ -302,7 +302,7 @@ public class GameModel {
 	 *
 	 * @return the new elements
 	 */
-	public ArrayList<Element> getNewElements() {
+	public LinkedList<Element> getNewElements() {
 		return newElements;
 	}
 
@@ -311,7 +311,7 @@ public class GameModel {
 	 *
 	 * @param newElements the new new elements
 	 */
-	public void setNewElements(ArrayList<Element> newElements) {
+	public void setNewElements(LinkedList<Element> newElements) {
 		this.newElements = newElements;
 	}
 
@@ -320,7 +320,7 @@ public class GameModel {
 	 *
 	 * @return the strong elements
 	 */
-	public ArrayList<Element> getStrongElements() {
+	public LinkedList<Element> getStrongElements() {
 		return strongElements;
 	}
 
@@ -329,7 +329,7 @@ public class GameModel {
 	 *
 	 * @param strongElements the new strong elements
 	 */
-	public void setStrongElements(ArrayList<Element> strongElements) {
+	public void setStrongElements(LinkedList<Element> strongElements) {
 		this.strongElements = strongElements;
 	}
 
@@ -338,7 +338,7 @@ public class GameModel {
 	 *
 	 * @return the elements
 	 */
-	public ArrayList<Element> getElements() {
+	public LinkedList<Element> getElements() {
 		return elements;
 	}
 
@@ -347,7 +347,7 @@ public class GameModel {
 	 *
 	 * @param elements the new elements
 	 */
-	public void setElements(ArrayList<Element> elements) {
+	public void setElements(LinkedList<Element> elements) {
 		this.elements = elements;
 	}
 

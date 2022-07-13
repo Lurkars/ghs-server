@@ -3,7 +3,7 @@
  */
 package de.champonthis.ghs.server.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import de.champonthis.ghs.server.util.Required;
 
@@ -28,18 +28,18 @@ public class GameSummonModel {
 	@Required
 	private int maxHealth;
 	@Required
-	private ArrayList<GameEntityConditionModel> entityConditions = new ArrayList<GameEntityConditionModel>();
+	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<GameEntityConditionModel>();
 	@Required
 	@Deprecated
-	private ArrayList<ConditionName> conditions = new ArrayList<ConditionName>();
+	private LinkedList<ConditionName> conditions = new LinkedList<ConditionName>();
 	@Required
 	@Deprecated
-	private ArrayList<ConditionName> turnConditions = new ArrayList<ConditionName>();
+	private LinkedList<ConditionName> turnConditions = new LinkedList<ConditionName>();
 	@Required
 	@Deprecated
-	private ArrayList<ConditionName> expiredConditions = new ArrayList<ConditionName>();
+	private LinkedList<ConditionName> expiredConditions = new LinkedList<ConditionName>();
 	@Required
-	private ArrayList<String> markers = new ArrayList<String>();
+	private LinkedList<String> markers = new LinkedList<String>();
 
 	/**
 	 * Gets the number.
@@ -226,7 +226,7 @@ public class GameSummonModel {
 	 *
 	 * @return the entity conditions
 	 */
-	public ArrayList<GameEntityConditionModel> getEntityConditions() {
+	public LinkedList<GameEntityConditionModel> getEntityConditions() {
 		return entityConditions;
 	}
 
@@ -235,7 +235,7 @@ public class GameSummonModel {
 	 *
 	 * @param entityConditions the new entity conditions
 	 */
-	public void setEntityConditions(ArrayList<GameEntityConditionModel> entityConditions) {
+	public void setEntityConditions(LinkedList<GameEntityConditionModel> entityConditions) {
 		this.entityConditions = entityConditions;
 	}
 
@@ -244,7 +244,7 @@ public class GameSummonModel {
 	 *
 	 * @return the conditions
 	 */
-	public ArrayList<ConditionName> getConditions() {
+	public LinkedList<ConditionName> getConditions() {
 		return conditions;
 	}
 
@@ -253,7 +253,7 @@ public class GameSummonModel {
 	 *
 	 * @param conditions the new conditions
 	 */
-	public void setConditions(ArrayList<ConditionName> conditions) {
+	public void setConditions(LinkedList<ConditionName> conditions) {
 		this.conditions = conditions;
 	}
 
@@ -262,7 +262,7 @@ public class GameSummonModel {
 	 *
 	 * @return the turn conditions
 	 */
-	public ArrayList<ConditionName> getTurnConditions() {
+	public LinkedList<ConditionName> getTurnConditions() {
 		return turnConditions;
 	}
 
@@ -271,7 +271,7 @@ public class GameSummonModel {
 	 *
 	 * @param turnConditions the new turn conditions
 	 */
-	public void setTurnConditions(ArrayList<ConditionName> turnConditions) {
+	public void setTurnConditions(LinkedList<ConditionName> turnConditions) {
 		this.turnConditions = turnConditions;
 	}
 
@@ -280,7 +280,7 @@ public class GameSummonModel {
 	 *
 	 * @return the expired conditions
 	 */
-	public ArrayList<ConditionName> getExpiredConditions() {
+	public LinkedList<ConditionName> getExpiredConditions() {
 		return expiredConditions;
 	}
 
@@ -289,7 +289,7 @@ public class GameSummonModel {
 	 *
 	 * @param expiredConditions the new expired conditions
 	 */
-	public void setExpiredConditions(ArrayList<ConditionName> expiredConditions) {
+	public void setExpiredConditions(LinkedList<ConditionName> expiredConditions) {
 		this.expiredConditions = expiredConditions;
 	}
 
@@ -298,7 +298,7 @@ public class GameSummonModel {
 	 *
 	 * @return the markers
 	 */
-	public ArrayList<String> getMarkers() {
+	public LinkedList<String> getMarkers() {
 		return markers;
 	}
 
@@ -307,7 +307,7 @@ public class GameSummonModel {
 	 *
 	 * @param markers the new markers
 	 */
-	public void setMarkers(ArrayList<String> markers) {
+	public void setMarkers(LinkedList<String> markers) {
 		this.markers = markers;
 	}
 

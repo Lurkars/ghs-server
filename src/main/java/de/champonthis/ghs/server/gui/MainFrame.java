@@ -6,7 +6,7 @@ package de.champonthis.ghs.server.gui;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.sql.ResultSet;
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import javax.swing.JButton;
@@ -79,7 +79,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 
 			ResultSet passwordResultSet = gameManager.passwords();
 
-			List<Object[]> dataList = new ArrayList<Object[]>();
+			List<Object[]> dataList = new LinkedList<Object[]>();
 			if (passwordResultSet != null) {
 				while (passwordResultSet.next()) {
 					Object[] result = new Object[3];

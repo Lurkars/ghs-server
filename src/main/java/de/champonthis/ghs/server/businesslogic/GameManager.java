@@ -213,7 +213,6 @@ public class GameManager implements SmartInitializingSingleton {
 		return null;
 	}
 
-
 	/**
 	 * Creates the settings.
 	 *
@@ -239,10 +238,11 @@ public class GameManager implements SmartInitializingSingleton {
 	public void setSettings(Settings settings, int gameId) {
 		try {
 			Statement statement = connection.createStatement();
-			statement.executeUpdate("UPDATE settings SET settings= '" + gson.toJson(settings) + "' WHERE game_id=" + gameId);
+			statement.executeUpdate(
+					"UPDATE settings SET settings= '" + gson.toJson(settings) + "' WHERE game_id=" + gameId);
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
 	}
-	
+
 }

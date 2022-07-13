@@ -3,7 +3,7 @@
  */
 package de.champonthis.ghs.server.socket;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.Collections;
 import java.util.List;
 
@@ -34,7 +34,7 @@ import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 @Component
 public class MessageHandler extends TextWebSocketHandler {
 
-	List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new ArrayList<>());
+	List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
 
 	@Autowired
 	private GameManager gameManager;
@@ -130,7 +130,8 @@ public class MessageHandler extends TextWebSocketHandler {
 					gameManager.setGame(gameId, gameUpdate);
 
 					for (WebSocketSessionContainer container : webSocketSessions) {
-						if (container.getSession() != session && container.getGameId() == gameId) {
+						if (!container.getSession().getId().equals(session.getId())
+								&& container.getGameId() == gameId) {
 							JsonObject gameResponse = new JsonObject();
 							gameResponse.addProperty("type", "game");
 							gameResponse.add("payload", gson.toJsonTree(gameUpdate));

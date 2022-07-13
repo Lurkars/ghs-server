@@ -3,7 +3,7 @@
  */
 package de.champonthis.ghs.server.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import de.champonthis.ghs.server.util.Required;
 
@@ -27,9 +27,9 @@ public class GameMonsterModel {
 	@Required
 	private int ability = -1;
 	@Required
-	private ArrayList<Integer> abilities = new ArrayList<Integer>();
+	private LinkedList<Integer> abilities = new LinkedList<Integer>();
 	@Required
-	private ArrayList<GameMonsterEntityModel> entities = new ArrayList<GameMonsterEntityModel>();
+	private LinkedList<GameMonsterEntityModel> entities = new LinkedList<GameMonsterEntityModel>();
 
 	/**
 	 * Gets the name.
@@ -162,7 +162,7 @@ public class GameMonsterModel {
 	 *
 	 * @return the abilities
 	 */
-	public ArrayList<Integer> getAbilities() {
+	public LinkedList<Integer> getAbilities() {
 		return abilities;
 	}
 
@@ -171,7 +171,7 @@ public class GameMonsterModel {
 	 *
 	 * @param abilities the new abilities
 	 */
-	public void setAbilities(ArrayList<Integer> abilities) {
+	public void setAbilities(LinkedList<Integer> abilities) {
 		this.abilities = abilities;
 	}
 
@@ -180,7 +180,7 @@ public class GameMonsterModel {
 	 *
 	 * @return the entities
 	 */
-	public ArrayList<GameMonsterEntityModel> getEntities() {
+	public LinkedList<GameMonsterEntityModel> getEntities() {
 		return entities;
 	}
 
@@ -189,7 +189,7 @@ public class GameMonsterModel {
 	 *
 	 * @param entities the new entities
 	 */
-	public void setEntities(ArrayList<GameMonsterEntityModel> entities) {
+	public void setEntities(LinkedList<GameMonsterEntityModel> entities) {
 		this.entities = entities;
 	}
 

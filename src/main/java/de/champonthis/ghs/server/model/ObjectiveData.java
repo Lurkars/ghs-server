@@ -3,18 +3,21 @@
  */
 package de.champonthis.ghs.server.model;
 
+import de.champonthis.ghs.server.util.Required;
+
 /**
  * The Class ObjectiveData.
  */
 public class ObjectiveData {
 
+	@Required
 	private String name;
-	private String maxHealth;
+	@Required
+	private String health;
 	private boolean escort;
+	private int initiative;
 
 	/**
-	 * Gets the name.
-	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -22,48 +25,52 @@ public class ObjectiveData {
 	}
 
 	/**
-	 * Sets the name.
-	 *
-	 * @param name the new name
+	 * @param name the name to set
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
-	 * Gets the max health.
-	 *
-	 * @return the max health
+	 * @return the health
 	 */
-	public String getMaxHealth() {
-		return maxHealth;
+	public String getHealth() {
+		return health;
 	}
 
 	/**
-	 * Sets the max health.
-	 *
-	 * @param maxHealth the new max health
+	 * @param health the health to set
 	 */
-	public void setMaxHealth(String maxHealth) {
-		this.maxHealth = maxHealth;
+	public void setHealth(String health) {
+		this.health = health;
 	}
 
 	/**
-	 * Checks if is escort.
-	 *
-	 * @return true, if is escort
+	 * @return the escort
 	 */
 	public boolean isEscort() {
 		return escort;
 	}
 
 	/**
-	 * Sets the escort.
-	 *
-	 * @param escort the new escort
+	 * @param escort the escort to set
 	 */
 	public void setEscort(boolean escort) {
 		this.escort = escort;
+	}
+
+	/**
+	 * @return the initiative
+	 */
+	public int getInitiative() {
+		return initiative;
+	}
+
+	/**
+	 * @param initiative the initiative to set
+	 */
+	public void setInitiative(int initiative) {
+		this.initiative = initiative;
 	}
 
 }

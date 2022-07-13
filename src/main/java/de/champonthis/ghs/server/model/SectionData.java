@@ -3,7 +3,7 @@
  */
 package de.champonthis.ghs.server.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import de.champonthis.ghs.server.util.Required;
 
@@ -18,9 +18,9 @@ public class SectionData {
 	private String index;
 	private String group;
 	@Required
-	private ArrayList<String> monsters = new ArrayList<String>();
+	private LinkedList<String> monsters = new LinkedList<String>();
 	@Required
-	private ArrayList<ObjectiveData> objectives = new ArrayList<ObjectiveData>();
+	private LinkedList<ObjectiveData> objectives = new LinkedList<ObjectiveData>();
 	@Required
 	private String edition;
 	private Boolean spoiler;
@@ -84,7 +84,7 @@ public class SectionData {
 	 *
 	 * @return the monsters
 	 */
-	public ArrayList<String> getMonsters() {
+	public LinkedList<String> getMonsters() {
 		return monsters;
 	}
 
@@ -93,7 +93,7 @@ public class SectionData {
 	 *
 	 * @param monsters the new monsters
 	 */
-	public void setMonsters(ArrayList<String> monsters) {
+	public void setMonsters(LinkedList<String> monsters) {
 		this.monsters = monsters;
 	}
 
@@ -102,7 +102,7 @@ public class SectionData {
 	 *
 	 * @return the objectives
 	 */
-	public ArrayList<ObjectiveData> getObjectives() {
+	public LinkedList<ObjectiveData> getObjectives() {
 		return objectives;
 	}
 
@@ -111,7 +111,7 @@ public class SectionData {
 	 *
 	 * @param objectives the new objectives
 	 */
-	public void setObjectives(ArrayList<ObjectiveData> objectives) {
+	public void setObjectives(LinkedList<ObjectiveData> objectives) {
 		this.objectives = objectives;
 	}
 

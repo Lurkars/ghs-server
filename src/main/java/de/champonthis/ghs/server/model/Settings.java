@@ -3,7 +3,7 @@
  */
 package de.champonthis.ghs.server.model;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 
 import de.champonthis.ghs.server.util.Required;
 
@@ -32,11 +32,11 @@ public class Settings {
 	@Required
 	private String locale = "en";
 	@Required
-	private ArrayList<String> editionDataUrls = new ArrayList<String>();
+	private LinkedList<String> editionDataUrls = new LinkedList<String>();
 	@Required
-	private ArrayList<String> excludeEditionDataUrls = new ArrayList<String>();
+	private LinkedList<String> excludeEditionDataUrls = new LinkedList<String>();
 	@Required
-	private ArrayList<String> spoilers = new ArrayList<String>();
+	private LinkedList<String> spoilers = new LinkedList<String>();
 	private boolean browserNavigation = false;
 	private String serverUrl;
 	private int serverPort;
@@ -231,7 +231,7 @@ public class Settings {
 	 *
 	 * @return the edition data urls
 	 */
-	public ArrayList<String> getEditionDataUrls() {
+	public LinkedList<String> getEditionDataUrls() {
 		return editionDataUrls;
 	}
 
@@ -240,7 +240,7 @@ public class Settings {
 	 *
 	 * @param editionDataUrls the new edition data urls
 	 */
-	public void setEditionDataUrls(ArrayList<String> editionDataUrls) {
+	public void setEditionDataUrls(LinkedList<String> editionDataUrls) {
 		this.editionDataUrls = editionDataUrls;
 	}
 
@@ -249,7 +249,7 @@ public class Settings {
 	 *
 	 * @return the exclude edition data urls
 	 */
-	public ArrayList<String> getExcludeEditionDataUrls() {
+	public LinkedList<String> getExcludeEditionDataUrls() {
 		return excludeEditionDataUrls;
 	}
 
@@ -258,7 +258,7 @@ public class Settings {
 	 *
 	 * @param excludeEditionDataUrls the new exclude edition data urls
 	 */
-	public void setExcludeEditionDataUrls(ArrayList<String> excludeEditionDataUrls) {
+	public void setExcludeEditionDataUrls(LinkedList<String> excludeEditionDataUrls) {
 		this.excludeEditionDataUrls = excludeEditionDataUrls;
 	}
 
@@ -267,7 +267,7 @@ public class Settings {
 	 *
 	 * @return the spoilers
 	 */
-	public ArrayList<String> getSpoilers() {
+	public LinkedList<String> getSpoilers() {
 		return spoilers;
 	}
 
@@ -276,7 +276,7 @@ public class Settings {
 	 *
 	 * @param spoilers the new spoilers
 	 */
-	public void setSpoilers(ArrayList<String> spoilers) {
+	public void setSpoilers(LinkedList<String> spoilers) {
 		this.spoilers = spoilers;
 	}
 
