@@ -14,6 +14,8 @@ public class Settings {
 	@Required
 	private boolean calculate = true;
 	@Required
+	private boolean calculateStats = true;
+	@Required
 	private boolean eliteFirst = true;
 	@Required
 	private boolean expireConditions = true;
@@ -62,6 +64,20 @@ public class Settings {
 	 */
 	public void setCalculate(boolean calculate) {
 		this.calculate = calculate;
+	}
+
+	/**
+	 * @return the calculateStats
+	 */
+	public boolean isCalculateStats() {
+		return calculateStats;
+	}
+
+	/**
+	 * @param calculateStats the calculateStats to set
+	 */
+	public void setCalculateStats(boolean calculateStats) {
+		this.calculateStats = calculateStats;
 	}
 
 	/**
