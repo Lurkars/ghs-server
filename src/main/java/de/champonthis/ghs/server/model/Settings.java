@@ -28,6 +28,8 @@ public class Settings {
 	@Required
 	private boolean randomStandees = false;
 	@Required
+	private boolean initiativeRequired = true;
+	@Required
 	private boolean fullscreen = false;
 	@Required
 	private boolean hints = true;
@@ -192,6 +194,24 @@ public class Settings {
 	 */
 	public void setRandomStandees(boolean randomStandees) {
 		this.randomStandees = randomStandees;
+	}
+
+	/**
+	 * Checks if is initiative required.
+	 *
+	 * @return true, if is initiative required
+	 */
+	public boolean isInitiativeRequired() {
+		return initiativeRequired;
+	}
+
+	/**
+	 * Sets the initiative required.
+	 *
+	 * @param initiativeRequired the new initiative required
+	 */
+	public void setInitiativeRequired(boolean initiativeRequired) {
+		this.initiativeRequired = initiativeRequired;
 	}
 
 	/**
