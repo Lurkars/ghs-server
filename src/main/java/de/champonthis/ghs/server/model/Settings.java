@@ -30,6 +30,8 @@ public class Settings {
 	@Required
 	private boolean fullscreen = false;
 	@Required
+	private boolean hints = true;
+	@Required
 	private int zoom = 100;
 	@Required
 	private String locale = "en";
@@ -67,14 +69,18 @@ public class Settings {
 	}
 
 	/**
-	 * @return the calculateStats
+	 * Checks if is calculate stats.
+	 *
+	 * @return true, if is calculate stats
 	 */
 	public boolean isCalculateStats() {
 		return calculateStats;
 	}
 
 	/**
-	 * @param calculateStats the calculateStats to set
+	 * Sets the calculate stats.
+	 *
+	 * @param calculateStats the new calculate stats
 	 */
 	public void setCalculateStats(boolean calculateStats) {
 		this.calculateStats = calculateStats;
@@ -204,6 +210,24 @@ public class Settings {
 	 */
 	public void setFullscreen(boolean fullscreen) {
 		this.fullscreen = fullscreen;
+	}
+
+	/**
+	 * Checks if is hints.
+	 *
+	 * @return true, if is hints
+	 */
+	public boolean isHints() {
+		return hints;
+	}
+
+	/**
+	 * Sets the hints.
+	 *
+	 * @param hints the new hints
+	 */
+	public void setHints(boolean hints) {
+		this.hints = hints;
 	}
 
 	/**

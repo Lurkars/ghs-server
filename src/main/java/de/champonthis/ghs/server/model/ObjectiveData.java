@@ -18,6 +18,8 @@ public class ObjectiveData {
 	private int initiative;
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -25,13 +27,17 @@ public class ObjectiveData {
 	}
 
 	/**
-	 * @param name the name to set
+	 * Sets the name.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
+	 * Gets the health.
+	 *
 	 * @return the health
 	 */
 	public String getHealth() {
@@ -39,27 +45,35 @@ public class ObjectiveData {
 	}
 
 	/**
-	 * @param health the health to set
+	 * Sets the health.
+	 *
+	 * @param health the new health
 	 */
 	public void setHealth(String health) {
 		this.health = health;
 	}
 
 	/**
-	 * @return the escort
+	 * Checks if is escort.
+	 *
+	 * @return true, if is escort
 	 */
 	public boolean isEscort() {
 		return escort;
 	}
 
 	/**
-	 * @param escort the escort to set
+	 * Sets the escort.
+	 *
+	 * @param escort the new escort
 	 */
 	public void setEscort(boolean escort) {
 		this.escort = escort;
 	}
 
 	/**
+	 * Gets the initiative.
+	 *
 	 * @return the initiative
 	 */
 	public int getInitiative() {
@@ -67,7 +81,9 @@ public class ObjectiveData {
 	}
 
 	/**
-	 * @param initiative the initiative to set
+	 * Sets the initiative.
+	 *
+	 * @param initiative the new initiative
 	 */
 	public void setInitiative(int initiative) {
 		this.initiative = initiative;
