@@ -22,7 +22,7 @@ Execute the `jar`-file with your Java Runtime Environment or run `java -jar ghs-
 
 ### Serve client
 
-The server is also capable of serving the client. To do so, just download zip file of [Gloomhaven Secretary Release](https://github.com/Lurkars/gloomhavensecretary/releases) and extract next to the `jar`-executable in folder `gloomhavensecretary`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}/index.html` (`http://localhost:8080/index.html` with default values).
+The server is also capable of serving the client. To do so, just download zip file (NOT source code!) of [Gloomhaven Secretary Release](https://github.com/Lurkars/gloomhavensecretary/releases) and extract next to the `jar`-executable in folder `gloomhavensecretary`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}/index.html` (`http://localhost:8080/index.html` with default values).
 
 ### Run headless
 
