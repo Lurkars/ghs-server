@@ -21,7 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
-import de.champonthis.ghs.server.businesslogic.GameManager;
+import de.champonthis.ghs.server.businesslogic.Manager;
 import de.champonthis.ghs.server.model.GameModel;
 import de.champonthis.ghs.server.model.Settings;
 import de.champonthis.ghs.server.socket.exception.SendErrorException;
@@ -37,7 +37,7 @@ public class MessageHandler extends TextWebSocketHandler {
 	List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
 
 	@Autowired
-	private GameManager gameManager;
+	private Manager manager;
 	@Autowired
 	private Gson gson;
 
@@ -84,19 +84,19 @@ public class MessageHandler extends TextWebSocketHandler {
 					sendError(session, "empty 'password'");
 				}
 
-				Integer gameId = gameManager.getGameIdByPassword(password);
+				Integer gameId = manager.getGameIdByPassword(password);
 
 				if (gameId == null) {
 					// if first password or public create new game for password
-					if (gameManager.countPasswords() == 0 || isPublic) {
-						gameId = gameManager.createGame(new GameModel());
-						gameManager.createPassword(password, gameId);
+					if (manager.countPasswords() == 0 || isPublic) {
+						gameId = manager.createGame(new GameModel());
+						manager.createPassword(password, gameId);
 					} else {
 						sendError(session, "Invalid password '" + password + "'");
 					}
 				}
 
-				GameModel game = gameManager.getGame(gameId);
+				GameModel game = manager.getGame(gameId);
 
 				if (game == null) {
 					sendError(session, "No game found for 'id=" + gameId + "'");
@@ -127,7 +127,7 @@ public class MessageHandler extends TextWebSocketHandler {
 						sendError(session, "invalid game payload");
 					}
 
-					gameManager.setGame(gameId, gameUpdate);
+					manager.setGame(gameId, gameUpdate);
 
 					for (WebSocketSessionContainer container : webSocketSessions) {
 						if (!container.getSession().getId().equals(session.getId())
@@ -146,10 +146,10 @@ public class MessageHandler extends TextWebSocketHandler {
 					session.sendMessage(new TextMessage(gson.toJson(gameResponse)));
 					break;
 				case REQUEST_SETTINGS:
-					Settings settings = gameManager.getSettings(gameId);
+					Settings settings = manager.getSettings(gameId);
 					if (settings == null) {
 						settings = new Settings();
-						gameManager.createSettings(settings, gameId);
+						manager.createSettings(settings, gameId);
 					}
 
 					JsonObject settingsRequestResponse = new JsonObject();
@@ -168,10 +168,10 @@ public class MessageHandler extends TextWebSocketHandler {
 						sendError(session, "invalid settings payload");
 					}
 
-					if (gameManager.getSettings(gameId) == null) {
-						gameManager.createSettings(settingsUpdate, gameId);
+					if (manager.getSettings(gameId) == null) {
+						manager.createSettings(settingsUpdate, gameId);
 					} else {
-						gameManager.setSettings(settingsUpdate, gameId);
+						manager.setSettings(settingsUpdate, gameId);
 					}
 
 					for (WebSocketSessionContainer container : webSocketSessions) {

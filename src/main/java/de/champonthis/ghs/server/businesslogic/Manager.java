@@ -3,13 +3,26 @@
  */
 package de.champonthis.ghs.server.businesslogic;
 
+import java.io.BufferedOutputStream;
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
-import org.springframework.beans.factory.SmartInitializingSingleton;
+import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -19,24 +32,34 @@ import de.champonthis.ghs.server.model.GameModel;
 import de.champonthis.ghs.server.model.Settings;
 
 /**
- * The Class GameManager.
+ * The Class Manager.
  */
 @Component
-public class GameManager implements SmartInitializingSingleton {
+public class Manager {
 
 	@Autowired
 	private Gson gson;
 
 	private Connection connection = null;
 
-	/*
-	 * @see org.springframework.beans.factory.SmartInitializingSingleton#
-	 * afterSingletonsInstantiated()
+	/**
+	 * Instantiates a new manager.
 	 */
-	@Override
-	public void afterSingletonsInstantiated() {
+	public Manager() {
 		try {
-			connection = DriverManager.getConnection("jdbc:sqlite:ghs.sqlite");
+			File ghsFolder = new File(System.getProperty("user.home"), ".ghs");
+			if (!ghsFolder.exists()) {
+				ghsFolder.mkdirs();
+			} else if (ghsFolder.isFile()) {
+				System.err.println("ghs folder is file!");
+			}
+
+			File dbFile = new File(System.getProperty("user.home"), ".ghs" + File.separator + "ghs.sqlite");
+
+			// migration
+			migrateToUserDir(dbFile);
+
+			connection = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("PRAGMA foreign_keys = ON");
 			statement.executeUpdate(
@@ -62,6 +85,34 @@ public class GameManager implements SmartInitializingSingleton {
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
+		}
+	}
+
+	/**
+	 * Migrate to user dir.
+	 *
+	 * @param dbFile the db file
+	 */
+	private void migrateToUserDir(File dbFile) {
+		File oldDbFile = new File("ghs.sqlite");
+		if (oldDbFile.exists()) {
+			try {
+				Files.move(oldDbFile.toPath(), dbFile.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+
+		File clientFolder = new File("gloomhavensecretary");
+
+		if (clientFolder.exists() && clientFolder.isDirectory()) {
+			try {
+				Files.move(clientFolder.toPath(),
+						new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretary")
+								.toPath());
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
 		}
 	}
 
@@ -243,6 +294,87 @@ public class GameManager implements SmartInitializingSingleton {
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
+	}
+
+	/**
+	 * Install latest client.
+	 *
+	 * @return true, if successful
+	 */
+	public boolean installLatestClient() {
+		try {
+			HttpURLConnection connection = (HttpURLConnection) new URL(
+					"https://api.github.com/repos/Lurkars/gloomhavensecretary/releases/latest").openConnection();
+			connection.setRequestMethod("GET");
+			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
+			String inputLine;
+			StringBuffer content = new StringBuffer();
+			while ((inputLine = in.readLine()) != null) {
+				content.append(inputLine);
+			}
+			in.close();
+			connection.disconnect();
+
+			Pattern re = Pattern.compile(".*(https\\:\\/\\/(\\w+|\\.|\\/)+gloomhavensecretary-v(\\w+|\\.)+\\.zip).*");
+			String value = content.toString();
+			Matcher matcher = re.matcher(value);
+
+			if (matcher.matches()) {
+				connection = (HttpURLConnection) new URL(matcher.group(1)).openConnection();
+				connection.setRequestMethod("GET");
+				ZipInputStream zipIn = new ZipInputStream(connection.getInputStream());
+				ZipEntry entry = zipIn.getNextEntry();
+
+				File outputPath = new File(System.getProperty("user.home"),
+						".ghs" + File.separator + "gloomhavensecretary");
+				// clear old files
+				if (outputPath.exists()) {
+					if (outputPath.isDirectory()) {
+						FileUtils.deleteDirectory(outputPath);
+					} else {
+						outputPath.delete();
+					}
+				}
+
+				outputPath.mkdirs();
+
+				// unzip
+				while (entry != null) {
+					String filePath = outputPath.getAbsolutePath() + File.separator + entry.getName();
+					if (!entry.isDirectory()) {
+						BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
+						byte[] bytesIn = new byte[4096];
+						int read = 0;
+						while ((read = zipIn.read(bytesIn)) != -1) {
+							bos.write(bytesIn, 0, read);
+						}
+						bos.close();
+					} else {
+						// if the entry is a directory, make the directory
+						File dir = new File(filePath);
+						dir.mkdirs();
+					}
+					zipIn.closeEntry();
+					entry = zipIn.getNextEntry();
+				}
+				zipIn.close();
+
+				File defaultSettingsFile = new File(System.getProperty("user.home"),
+						".ghs" + File.separator + "ghs-settings-default.json");
+
+				if (defaultSettingsFile.exists() && defaultSettingsFile.isFile()) {
+					Files.copy(defaultSettingsFile.toPath(),
+							new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretary"
+									+ File.separator + "ghs-settings-default.json").toPath());
+				}
+
+				return true;
+			}
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+
+		return false;
 	}
 
 }

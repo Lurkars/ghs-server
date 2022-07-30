@@ -22,7 +22,7 @@ Execute the `jar`-file with your Java Runtime Environment or run `java -jar ghs-
 
 ### Serve client
 
-The server is also capable of serving the client. To do so, just download zip file (NOT source code!) of [Gloomhaven Secretary Release](https://github.com/Lurkars/gloomhavensecretary/releases) and extract next to the `jar`-executable in folder `gloomhavensecretary`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}/index.html` (`http://localhost:8080/index.html` with default values).
+The server is also capable of serving the client. Simple click the "Install latest Client" button in GUI. If you run headless, just download zip file (NOT source code!) of [Gloomhaven Secretary Release](https://github.com/Lurkars/gloomhavensecretary/releases) and extract in folder `<your-home-folder>/.ghs/gloomhavensecretary`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}/index.html` (`http://localhost:8080/index.html` with default values).
 
 ### Run headless
 
@@ -30,19 +30,20 @@ To run the server in headless mode, just set `-Djava.awt.headless=true` paramete
 
 ### Change port
 
-To run the server on a different port (default: 8080), place/edit the `application.properties`-file next to the `jar`-executable and add the following line: `server.port=9999`.
+To run the server on a different port (default: 8080), place/edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.port=9999`.
 
 Replace `9999` with the port of your choice.
 
 ### Run public
 
-A public server accepts any password and creates a game for it. So the password is more an identifier for an individual game than a protection. To make a public server place/edit the `application.properties`-file next to the `jar`-executable and add the following line: `ghs-server.public=true`.
+A public server accepts any password and creates a game for it. So the password is more an identifier for an individual game than a protection. To make a public server place/edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
 
 ### Enable SSL
 
-If you want to connect to the server from a client using HTTPS the websocket connection is upgraded to wss by any modern browser. Therefore a connection to a server in local network is only possible when enabling SSL. A self-signed certificate is already shipped within (yes, inlcuding hardcoded password visible for everyone). So to simple enable SSL, just place/edit the `application.properties`-file next to the `jar`-executable and add the following line: `server.ssl.enabled=true`. Because self-signed certificate is used, it is untrusted by all modern browsers. To be able to connect, just call `https://{your-ip}:{server-port}` (`https://localhost:8080` with default values) and accept the security warnings. Afterwards you should be able to connect via SSL. (This has to be done for each client.)
+If you want to connect to the server from a client using HTTPS the websocket connection is upgraded to wss by any modern browser. Therefore a connection to a server in local network is only possible when enabling SSL. A self-signed certificate is already shipped within (yes, inlcuding hardcoded password visible for everyone). So to simple enable SSL, just place/edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.ssl.enabled=true`. Because self-signed certificate is used, it is untrusted by all modern browsers. To be able to connect, just call `https://{your-ip}:{server-port}` (`https://localhost:8080` with default values) and accept the security warnings. Afterwards you should be able to connect via SSL. (This has to be done for each client.)
 
 To serve with your own certificate, overwrite the following properties in your `application.properties`-file:
+
 ```
 server.ssl.key-store-type=
 server.ssl.key-store=
@@ -54,7 +55,7 @@ server.ssl.key-alias=
 
 Go to the main menu in Gloomhaven Secretary (GHS) and click on **Connect to Server**. Enter the server's IP/Hostname into **Host** (on same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
 
-On the first time, just choose the **Password** of your choice. This will create a new Game with this password. Afterwards, any connection to the server will need the same password to be set (It is not changeable by now!).
+On the first time, just choose the **Password** of your choice. This will create a new Game with this password. Afterwards, any connection to the server will need the same password to be set (It is not changeable by now!). Alternatively make the instance [public](#run-public) to allow multiple games/passwords. 
 
 ## Missing / Upcoming
 
@@ -69,8 +70,8 @@ On the first time, just choose the **Password** of your choice. This will create
 ## Workarounds
 
 - on first time initialization, a new game is created for your password. If you want to have your latest local game synced, simple use the **Undo**-function directly after first connection established. This will sync your last state to the server.
-- The database is a simple `ghs.sqlite`-file next to the `jar`-executable. You can manipulate the file directly with `Sqlite`. To reset the database, simple delete the `sqlite`-file.
-- on startup, the passwords are written into syslog in plaintext.
+- The database is a simple `ghs.sqlite`-file in GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simple delete the `sqlite`-file.
+- on startup, all passwords are written into syslog in plaintext.
 
 ## Copyright / License
 
