@@ -25,10 +25,12 @@ import java.util.zip.ZipInputStream;
 import org.apache.tomcat.util.http.fileupload.FileUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 import com.google.gson.Gson;
 
 import de.champonthis.ghs.server.model.GameModel;
+import de.champonthis.ghs.server.model.Permissions;
 import de.champonthis.ghs.server.model.Settings;
 
 /**
@@ -167,6 +169,28 @@ public class Manager {
 	}
 
 	/**
+	 * Save password.
+	 *
+	 * @param password    the password
+	 * @param permissions the permissions
+	 * @param gameId      the game id
+	 */
+	public void savePassword(String password, String permissions, int gameId) {
+		try {
+			Statement statement = connection.createStatement();
+			if (getGameIdByPassword(password) == null) {
+				statement.executeUpdate("INSERT INTO passwords (game_id,json_path,password) VALUES(" + gameId + ",'"
+						+ permissions + "','" + password + "')");
+			} else {
+				statement.executeUpdate(
+						"UPDATE passwords SET json_path = '" + permissions + "' where password = '" + password + "'");
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+	}
+
+	/**
 	 * Gets the game id by password.
 	 *
 	 * @param password the password
@@ -179,6 +203,31 @@ public class Manager {
 					.executeQuery("SELECT game_id FROM passwords WHERE password = '" + password + "';");
 			if (gameIdResultSet.next()) {
 				return gameIdResultSet.getInt("game_id");
+			}
+		} catch (SQLException e) {
+			System.err.println(e.getMessage());
+		}
+
+		return null;
+	}
+
+	/**
+	 * Gets the permissions by password.
+	 *
+	 * @param password the password
+	 * @return the permissions by password
+	 */
+	public Permissions getPermissionsByPassword(String password) {
+		try {
+			Statement statement = connection.createStatement();
+			ResultSet gameIdResultSet = statement
+					.executeQuery("SELECT json_path FROM passwords WHERE password = '" + password + "';");
+			if (gameIdResultSet.next()) {
+				String json_path = gameIdResultSet.getString("json_path");
+				if (StringUtils.hasText(json_path)) {
+
+					return gson.fromJson(json_path, Permissions.class);
+				}
 			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());

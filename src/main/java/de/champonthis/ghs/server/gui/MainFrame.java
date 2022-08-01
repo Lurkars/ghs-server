@@ -139,7 +139,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	 */
 	protected void auhtKeyTable() {
 		try {
-			String[] columns = new String[] { "Password", "JSON Path", "Game ID" };
+			String[] columns = new String[] { "Password", "Permissions", "Game ID" };
 
 			ResultSet passwordResultSet = manager.passwords();
 

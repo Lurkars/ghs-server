@@ -18,11 +18,16 @@ import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import de.champonthis.ghs.server.businesslogic.Manager;
+import de.champonthis.ghs.server.model.FigureIdentifier;
+import de.champonthis.ghs.server.model.GameCharacterModel;
 import de.champonthis.ghs.server.model.GameModel;
+import de.champonthis.ghs.server.model.GameMonsterModel;
+import de.champonthis.ghs.server.model.Permissions;
 import de.champonthis.ghs.server.model.Settings;
 import de.champonthis.ghs.server.socket.exception.SendErrorException;
 import de.champonthis.ghs.server.socket.model.MessageType;
@@ -102,6 +107,8 @@ public class MessageHandler extends TextWebSocketHandler {
 					sendError(session, "No game found for 'id=" + gameId + "'");
 				}
 
+				Permissions permissions = manager.getPermissionsByPassword(password);
+
 				for (WebSocketSessionContainer container : webSocketSessions) {
 					if (container.getSession() == session) {
 						container.setGameId(gameId);
@@ -127,6 +134,86 @@ public class MessageHandler extends TextWebSocketHandler {
 						sendError(session, "invalid game payload");
 					}
 
+					if (permissions != null) {
+
+						if (!permissions.isScenario()
+								&& !gson.toJson(gameUpdate.getScenario()).equals(gson.toJson(game.getScenario()))) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isScenario()
+								&& !gson.toJson(gameUpdate.getSections()).equals(gson.toJson(game.getSections()))) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isScenario() && !gameUpdate.getEdition().equals(game.getEdition())) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isElements()
+								&& !gson.toJson(gameUpdate.getElements()).equals(gson.toJson(game.getElements()))) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isRound() && gameUpdate.getRound() != game.getRound()) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isRound() && !gameUpdate.getState().equals(game.getState())) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isLevel() && gameUpdate.getLevel() != game.getLevel()) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isCharacters()) {
+							for (GameCharacterModel updateCharacter : gameUpdate.getCharacters()) {
+								boolean characterPermission = false;
+								for (GameCharacterModel character : game.getCharacters()) {
+									if (updateCharacter.getName().equals(character.getName())
+											&& updateCharacter.getEdition().equals(character.getEdition())) {
+										for (FigureIdentifier characterFigure : permissions.getCharacter()) {
+											if (characterFigure.getName().equals(character.getName())
+													&& characterFigure.getEdition().equals(character.getEdition())) {
+												characterPermission = true;
+												break;
+											}
+										}
+										if (characterPermission) {
+											break;
+										} else if (gson.toJson(updateCharacter).equals(gson.toJson(character))) {
+											characterPermission = true;
+											break;
+										}
+									}
+								}
+								if (!characterPermission) {
+									sendError(session, "Permission(s) missing");
+								}
+							}
+						}
+						if (!permissions.isMonsters()) {
+							for (GameMonsterModel updateMonster : gameUpdate.getMonsters()) {
+								boolean monsterPermission = false;
+								for (GameMonsterModel monster : game.getMonsters()) {
+									if (updateMonster.getName().equals(monster.getName())
+											&& updateMonster.getEdition().equals(monster.getEdition())) {
+										for (FigureIdentifier monsterFigure : permissions.getMonster()) {
+											if (monsterFigure.getName().equals(monster.getName())
+													&& monsterFigure.getEdition().equals(monster.getEdition())) {
+												monsterPermission = true;
+												break;
+											}
+										}
+										if (monsterPermission) {
+											break;
+										} else if (gson.toJson(updateMonster).equals(gson.toJson(monster))) {
+											monsterPermission = true;
+											break;
+										}
+									}
+								}
+								if (!monsterPermission) {
+									sendError(session, "Permission(s) missing");
+								}
+							}
+						}
+					}
+
 					manager.setGame(gameId, gameUpdate);
 
 					for (WebSocketSessionContainer container : webSocketSessions) {
@@ -139,11 +226,57 @@ public class MessageHandler extends TextWebSocketHandler {
 						}
 					}
 					break;
+				case PERMISSIONS:
+					if (permissions != null) {
+						sendError(session, "Cannot create permissions!");
+					}
+
+					if (messageObject.get("payload") == null || messageObject.get("payload").isJsonNull()) {
+						sendError(session, "'payload' missing");
+					}
+
+					JsonElement payload = messageObject.get("payload");
+					if (!payload.isJsonObject() || !payload.getAsJsonObject().has("password")
+							|| !payload.getAsJsonObject().has("permissions")) {
+						sendError(session, "invalid 'payload'");
+					}
+
+					String permissionPassword = payload.getAsJsonObject().get("password").getAsString();
+
+					Integer permissionGameId = manager.getGameIdByPassword(permissionPassword);
+
+					if (permissionGameId != null && permissionGameId != gameId) {
+						sendError(session, "password already in use");
+					}
+
+					if (permissionGameId != null && manager.getPermissionsByPassword(permissionPassword) == null) {
+						sendError(session, "cannot overwrite root permissions");
+					}
+
+					Permissions permissionPermissions = gson.fromJson(payload.getAsJsonObject().get("permissions"),
+							Permissions.class);
+
+					if (permissionPermissions.isCharacters()) {
+						permissionPermissions.setCharacter(new LinkedList<FigureIdentifier>());
+					}
+					
+					if (permissionPermissions.isMonsters()) {
+						permissionPermissions.setMonster(new LinkedList<FigureIdentifier>());
+					}
+
+					manager.savePassword(permissionPassword, gson.toJson(permissionPermissions), gameId);
+					break;
 				case REQUEST_GAME:
 					JsonObject gameResponse = new JsonObject();
 					gameResponse.addProperty("type", "game");
 					gameResponse.add("payload", gson.toJsonTree(game));
 					session.sendMessage(new TextMessage(gson.toJson(gameResponse)));
+
+					JsonObject permissionsResponse = new JsonObject();
+					permissionsResponse.addProperty("type", "permissions");
+					permissionsResponse.add("payload", gson.toJsonTree(permissions));
+					session.sendMessage(new TextMessage(gson.toJson(permissionsResponse)));
+
 					break;
 				case REQUEST_SETTINGS:
 					Settings settings = manager.getSettings(gameId);

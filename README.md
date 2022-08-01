@@ -30,17 +30,17 @@ To run the server in headless mode, just set `-Djava.awt.headless=true` paramete
 
 ### Change port
 
-To run the server on a different port (default: 8080), place/edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.port=9999`.
+To run the server on a different port (default: 8080), edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.port=9999`.
 
 Replace `9999` with the port of your choice.
 
 ### Run public
 
-A public server accepts any password and creates a game for it. So the password is more an identifier for an individual game than a protection. To make a public server place/edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
+A public server accepts any password and creates a game for it. So the password is more an identifier for an individual game than a protection. To make a public server edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
 
 ### Enable SSL
 
-If you want to connect to the server from a client using HTTPS the websocket connection is upgraded to wss by any modern browser. Therefore a connection to a server in local network is only possible when enabling SSL. A self-signed certificate is already shipped within (yes, inlcuding hardcoded password visible for everyone). So to simple enable SSL, just place/edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.ssl.enabled=true`. Because self-signed certificate is used, it is untrusted by all modern browsers. To be able to connect, just call `https://{your-ip}:{server-port}` (`https://localhost:8080` with default values) and accept the security warnings. Afterwards you should be able to connect via SSL. (This has to be done for each client.)
+If you want to connect to the server from a client using HTTPS the websocket connection is upgraded to wss by any modern browser. Therefore a connection to a server in local network is only possible when enabling SSL. A self-signed certificate is already shipped within (yes, inlcuding hardcoded password visible for everyone). So to simple enable SSL, just edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.ssl.enabled=true`. Because self-signed certificate is used, it is untrusted by all modern browsers. To be able to connect, just call `https://{your-ip}:{server-port}` (`https://localhost:8080` with default values) and accept the security warnings. Afterwards you should be able to connect via SSL. (This has to be done for each client.)
 
 To serve with your own certificate, overwrite the following properties in your `application.properties`-file:
 
@@ -59,12 +59,12 @@ On the first time, just choose the **Password** of your choice. This will create
 
 ## Missing / Upcoming
 
-- Adding/Changing passwords with specific permissions
-	- for example grant clients only updating a special character, so each player can only change it's own values
-	- allow different games on same server (for public servers for example)
+- ~~Adding/Changing passwords with specific permissions~~
+  - ~~for example grant clients only updating a special character, so each player can only change it's own values~~
+  - ~~allow different games on same server (for public servers for example)~~
 - updated GUI (it's more a placeholder by now)
-	- show available IPs/Hostnames + port for easier connection
-	- add/change/update password/permissions
+  - ~~show available IPs/Hostnames + port for easier connection~~
+  - add/change/update password/permissions
 - optional: track Undo/Redo also on server
 
 ## Workarounds

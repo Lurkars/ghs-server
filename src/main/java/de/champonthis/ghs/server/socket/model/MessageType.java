@@ -13,6 +13,9 @@ public enum MessageType {
 	@SerializedName("game")
 	GAME,
 
+	@SerializedName("permissions")
+	PERMISSIONS,
+
 	@SerializedName("request-game")
 	REQUEST_GAME,
 
