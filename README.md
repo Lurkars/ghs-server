@@ -51,6 +51,10 @@ server.ssl.key-store-password=
 server.ssl.key-alias=
 ```
 
+#### Automatic HTTP
+
+When running with SSL, a non-SSL server will be automatically available at port `8081`. To change this port, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.http.port=<YOUR HTTP PORT>`.
+
 ## How to use with GHS
 
 Go to the main menu in Gloomhaven Secretary (GHS) and click on **Connect to Server**. Enter the server's IP/Hostname into **Host** (on same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
