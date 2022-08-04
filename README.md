@@ -30,9 +30,9 @@ To run the server in headless mode, just set `-Djava.awt.headless=true` paramete
 
 ### Change port
 
-To run the server on a different port (default: 8080), edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.port=9999`.
+To run the server on a different port (default: 8080), edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.port=<NEW PORT>`.
 
-Replace `9999` with the port of your choice.
+Replace `<NEW PORT>` with the port of your choice.
 
 ### Run public
 
@@ -53,7 +53,7 @@ server.ssl.key-alias=
 
 #### Automatic HTTP
 
-When running with SSL, a non-SSL server will be automatically available at port `8081`. To change this port, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.http.port=<YOUR HTTP PORT>`.
+When running with SSL, a non-SSL server will be automatically available at port `8081`. To change this port, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.http.port=<HTTP PORT>`.
 
 ## How to use with GHS
 
