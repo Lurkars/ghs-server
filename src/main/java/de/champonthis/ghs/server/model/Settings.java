@@ -32,6 +32,8 @@ public class Settings {
 	@Required
 	private boolean fullscreen = false;
 	@Required
+	private boolean disableColumns = false;
+	@Required
 	private boolean hints = true;
 	@Required
 	private int zoom = 100;
@@ -230,6 +232,24 @@ public class Settings {
 	 */
 	public void setFullscreen(boolean fullscreen) {
 		this.fullscreen = fullscreen;
+	}
+
+	/**
+	 * Checks if is disable columns.
+	 *
+	 * @return true, if is disable columns
+	 */
+	public boolean isDisableColumns() {
+		return disableColumns;
+	}
+
+	/**
+	 * Sets the disable columns.
+	 *
+	 * @param disableColumns the new disable columns
+	 */
+	public void setDisableColumns(boolean disableColumns) {
+		this.disableColumns = disableColumns;
 	}
 
 	/**
