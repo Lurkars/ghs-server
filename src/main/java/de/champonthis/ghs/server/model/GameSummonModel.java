@@ -13,6 +13,8 @@ import de.champonthis.ghs.server.util.Required;
 public class GameSummonModel {
 
 	@Required
+	private String name;
+	@Required
 	private int number;
 	@Required
 	private SummonColor color;
@@ -40,6 +42,24 @@ public class GameSummonModel {
 	private LinkedList<ConditionName> expiredConditions = new LinkedList<ConditionName>();
 	@Required
 	private LinkedList<String> markers = new LinkedList<String>();
+
+	/**
+	 * Gets the name.
+	 *
+	 * @return the name
+	 */
+	public String getName() {
+		return name;
+	}
+
+	/**
+	 * Sets the name.
+	 *
+	 * @param name the new name
+	 */
+	public void setName(String name) {
+		this.name = name;
+	}
 
 	/**
 	 * Gets the number.
