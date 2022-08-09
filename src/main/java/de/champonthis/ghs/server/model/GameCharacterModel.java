@@ -50,6 +50,7 @@ public class GameCharacterModel {
 	private LinkedList<String> markers = new LinkedList<String>();
 	@Required
 	private LinkedList<GameSummonModel> summons = new LinkedList<GameSummonModel>();
+	private CharacterProgress progress;
 
 	/**
 	 * Gets the name.
@@ -373,6 +374,24 @@ public class GameCharacterModel {
 	 */
 	public void setSummons(LinkedList<GameSummonModel> summons) {
 		this.summons = summons;
+	}
+
+	/**
+	 * Gets the progress.
+	 *
+	 * @return the progress
+	 */
+	public CharacterProgress getProgress() {
+		return progress;
+	}
+
+	/**
+	 * Sets the progress.
+	 *
+	 * @param progress the new progress
+	 */
+	public void setProgress(CharacterProgress progress) {
+		this.progress = progress;
 	}
 
 }

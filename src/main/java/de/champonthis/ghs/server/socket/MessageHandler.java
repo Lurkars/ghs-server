@@ -23,7 +23,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import de.champonthis.ghs.server.businesslogic.Manager;
-import de.champonthis.ghs.server.model.FigureIdentifier;
+import de.champonthis.ghs.server.model.Identifier;
 import de.champonthis.ghs.server.model.GameCharacterModel;
 import de.champonthis.ghs.server.model.GameModel;
 import de.champonthis.ghs.server.model.GameMonsterModel;
@@ -166,7 +166,7 @@ public class MessageHandler extends TextWebSocketHandler {
 								for (GameCharacterModel character : game.getCharacters()) {
 									if (updateCharacter.getName().equals(character.getName())
 											&& updateCharacter.getEdition().equals(character.getEdition())) {
-										for (FigureIdentifier characterFigure : permissions.getCharacter()) {
+										for (Identifier characterFigure : permissions.getCharacter()) {
 											if (characterFigure.getName().equals(character.getName())
 													&& characterFigure.getEdition().equals(character.getEdition())) {
 												characterPermission = true;
@@ -192,7 +192,7 @@ public class MessageHandler extends TextWebSocketHandler {
 								for (GameMonsterModel monster : game.getMonsters()) {
 									if (updateMonster.getName().equals(monster.getName())
 											&& updateMonster.getEdition().equals(monster.getEdition())) {
-										for (FigureIdentifier monsterFigure : permissions.getMonster()) {
+										for (Identifier monsterFigure : permissions.getMonster()) {
 											if (monsterFigure.getName().equals(monster.getName())
 													&& monsterFigure.getEdition().equals(monster.getEdition())) {
 												monsterPermission = true;
@@ -257,11 +257,11 @@ public class MessageHandler extends TextWebSocketHandler {
 							Permissions.class);
 
 					if (permissionPermissions.isCharacters()) {
-						permissionPermissions.setCharacter(new LinkedList<FigureIdentifier>());
+						permissionPermissions.setCharacter(new LinkedList<Identifier>());
 					}
 					
 					if (permissionPermissions.isMonsters()) {
-						permissionPermissions.setMonster(new LinkedList<FigureIdentifier>());
+						permissionPermissions.setMonster(new LinkedList<Identifier>());
 					}
 
 					manager.savePassword(permissionPassword, gson.toJson(permissionPermissions), gameId);

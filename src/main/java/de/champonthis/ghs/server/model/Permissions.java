@@ -15,11 +15,11 @@ public class Permissions {
 	@Required
 	private boolean characters = false;
 	@Required
-	private LinkedList<FigureIdentifier> character = new LinkedList<FigureIdentifier>();
+	private LinkedList<Identifier> character = new LinkedList<Identifier>();
 	@Required
 	private boolean monsters = false;
 	@Required
-	private LinkedList<FigureIdentifier> monster = new LinkedList<FigureIdentifier>();
+	private LinkedList<Identifier> monster = new LinkedList<Identifier>();
 	@Required
 	private boolean scenario = false;
 	@Required
@@ -54,7 +54,7 @@ public class Permissions {
 	 *
 	 * @return the character
 	 */
-	public LinkedList<FigureIdentifier> getCharacter() {
+	public LinkedList<Identifier> getCharacter() {
 		return character;
 	}
 
@@ -63,7 +63,7 @@ public class Permissions {
 	 *
 	 * @param character the new character
 	 */
-	public void setCharacter(LinkedList<FigureIdentifier> character) {
+	public void setCharacter(LinkedList<Identifier> character) {
 		this.character = character;
 	}
 
@@ -90,7 +90,7 @@ public class Permissions {
 	 *
 	 * @return the monster
 	 */
-	public LinkedList<FigureIdentifier> getMonster() {
+	public LinkedList<Identifier> getMonster() {
 		return monster;
 	}
 
@@ -99,7 +99,7 @@ public class Permissions {
 	 *
 	 * @param monster the new monster
 	 */
-	public void setMonster(LinkedList<FigureIdentifier> monster) {
+	public void setMonster(LinkedList<Identifier> monster) {
 		this.monster = monster;
 	}
 

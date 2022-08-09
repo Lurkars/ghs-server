@@ -44,6 +44,8 @@ public class GameModel {
 	private LinkedList<Element> strongElements = new LinkedList<Element>();
 	@Required
 	private LinkedList<Element> elements = new LinkedList<Element>();
+	@Required
+	private boolean solo = false;
 
 	/**
 	 * Gets the edition.
@@ -349,6 +351,24 @@ public class GameModel {
 	 */
 	public void setElements(LinkedList<Element> elements) {
 		this.elements = elements;
+	}
+
+	/**
+	 * Checks if is solo.
+	 *
+	 * @return true, if is solo
+	 */
+	public boolean isSolo() {
+		return solo;
+	}
+
+	/**
+	 * Sets the solo.
+	 *
+	 * @param solo the new solo
+	 */
+	public void setSolo(boolean solo) {
+		this.solo = solo;
 	}
 
 }

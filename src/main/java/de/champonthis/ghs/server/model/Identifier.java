@@ -6,9 +6,9 @@ package de.champonthis.ghs.server.model;
 import de.champonthis.ghs.server.util.Required;
 
 /**
- * The Class FigureIdentifier.
+ * The Class Identifier.
  */
-public class FigureIdentifier {
+public class Identifier {
 
 	@Required
 	private String name;
