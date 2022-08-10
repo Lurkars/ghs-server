@@ -46,6 +46,7 @@ public class GameModel {
 	private LinkedList<Element> elements = new LinkedList<Element>();
 	@Required
 	private boolean solo = false;
+	private Party party;
 
 	/**
 	 * Gets the edition.
@@ -369,6 +370,20 @@ public class GameModel {
 	 */
 	public void setSolo(boolean solo) {
 		this.solo = solo;
+	}
+
+	/**
+	 * @return the party
+	 */
+	public Party getParty() {
+		return party;
+	}
+
+	/**
+	 * @param party the party to set
+	 */
+	public void setParty(Party party) {
+		this.party = party;
 	}
 
 }

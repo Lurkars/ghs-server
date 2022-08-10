@@ -16,6 +16,8 @@ public class Settings {
 	@Required
 	private boolean calculateStats = true;
 	@Required
+	private boolean abilityNumbers = true;
+	@Required
 	private boolean eliteFirst = true;
 	@Required
 	private boolean expireConditions = true;
@@ -29,6 +31,12 @@ public class Settings {
 	private boolean randomStandees = false;
 	@Required
 	private boolean initiativeRequired = true;
+	@Required
+	private boolean levelCalculation = true;
+	@Required
+	private int levelAdjustment = 0;
+	@Required
+	private boolean disableStandees = false;
 	@Required
 	private boolean fullscreen = false;
 	@Required
@@ -88,6 +96,20 @@ public class Settings {
 	 */
 	public void setCalculateStats(boolean calculateStats) {
 		this.calculateStats = calculateStats;
+	}
+
+	/**
+	 * @return the abilityNumbers
+	 */
+	public boolean isAbilityNumbers() {
+		return abilityNumbers;
+	}
+
+	/**
+	 * @param abilityNumbers the abilityNumbers to set
+	 */
+	public void setAbilityNumbers(boolean abilityNumbers) {
+		this.abilityNumbers = abilityNumbers;
 	}
 
 	/**
@@ -214,6 +236,48 @@ public class Settings {
 	 */
 	public void setInitiativeRequired(boolean initiativeRequired) {
 		this.initiativeRequired = initiativeRequired;
+	}
+
+	/**
+	 * @return the levelCalculation
+	 */
+	public boolean isLevelCalculation() {
+		return levelCalculation;
+	}
+
+	/**
+	 * @param levelCalculation the levelCalculation to set
+	 */
+	public void setLevelCalculation(boolean levelCalculation) {
+		this.levelCalculation = levelCalculation;
+	}
+
+	/**
+	 * @return the levelAdjustment
+	 */
+	public int getLevelAdjustment() {
+		return levelAdjustment;
+	}
+
+	/**
+	 * @param levelAdjustment the levelAdjustment to set
+	 */
+	public void setLevelAdjustment(int levelAdjustment) {
+		this.levelAdjustment = levelAdjustment;
+	}
+
+	/**
+	 * @return the disableStandees
+	 */
+	public boolean isDisableStandees() {
+		return disableStandees;
+	}
+
+	/**
+	 * @param disableStandees the disableStandees to set
+	 */
+	public void setDisableStandees(boolean disableStandees) {
+		this.disableStandees = disableStandees;
 	}
 
 	/**
