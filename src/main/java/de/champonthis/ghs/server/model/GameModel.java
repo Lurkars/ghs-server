@@ -373,6 +373,8 @@ public class GameModel {
 	}
 
 	/**
+	 * Gets the party.
+	 *
 	 * @return the party
 	 */
 	public Party getParty() {
@@ -380,7 +382,9 @@ public class GameModel {
 	}
 
 	/**
-	 * @param party the party to set
+	 * Sets the party.
+	 *
+	 * @param party the new party
 	 */
 	public void setParty(Party party) {
 		this.party = party;

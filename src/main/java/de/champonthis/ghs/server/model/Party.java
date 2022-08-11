@@ -4,7 +4,7 @@
 package de.champonthis.ghs.server.model;
 
 /**
- * 
+ * The Class Party.
  */
 public class Party {
 
@@ -15,6 +15,8 @@ public class Party {
 	private int reputation = 0;
 
 	/**
+	 * Gets the name.
+	 *
 	 * @return the name
 	 */
 	public String getName() {
@@ -22,13 +24,17 @@ public class Party {
 	}
 
 	/**
-	 * @param name the name to set
+	 * Sets the name.
+	 *
+	 * @param name the new name
 	 */
 	public void setName(String name) {
 		this.name = name;
 	}
 
 	/**
+	 * Gets the location.
+	 *
 	 * @return the location
 	 */
 	public String getLocation() {
@@ -36,13 +42,17 @@ public class Party {
 	}
 
 	/**
-	 * @param location the location to set
+	 * Sets the location.
+	 *
+	 * @param location the new location
 	 */
 	public void setLocation(String location) {
 		this.location = location;
 	}
 
 	/**
+	 * Gets the notes.
+	 *
 	 * @return the notes
 	 */
 	public String getNotes() {
@@ -50,13 +60,17 @@ public class Party {
 	}
 
 	/**
-	 * @param notes the notes to set
+	 * Sets the notes.
+	 *
+	 * @param notes the new notes
 	 */
 	public void setNotes(String notes) {
 		this.notes = notes;
 	}
 
 	/**
+	 * Gets the achievements.
+	 *
 	 * @return the achievements
 	 */
 	public String getAchievements() {
@@ -64,13 +78,17 @@ public class Party {
 	}
 
 	/**
-	 * @param achievements the achievements to set
+	 * Sets the achievements.
+	 *
+	 * @param achievements the new achievements
 	 */
 	public void setAchievements(String achievements) {
 		this.achievements = achievements;
 	}
 
 	/**
+	 * Gets the reputation.
+	 *
 	 * @return the reputation
 	 */
 	public int getReputation() {
@@ -78,7 +96,9 @@ public class Party {
 	}
 
 	/**
-	 * @param reputation the reputation to set
+	 * Sets the reputation.
+	 *
+	 * @param reputation the new reputation
 	 */
 	public void setReputation(int reputation) {
 		this.reputation = reputation;

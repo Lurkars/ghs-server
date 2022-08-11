@@ -42,6 +42,10 @@ public class Settings {
 	@Required
 	private boolean disableColumns = false;
 	@Required
+	private boolean dragInitiative = true;
+	@Required
+	private boolean dragHealth = true;
+	@Required
 	private boolean hints = true;
 	@Required
 	private int zoom = 100;
@@ -99,14 +103,18 @@ public class Settings {
 	}
 
 	/**
-	 * @return the abilityNumbers
+	 * Checks if is ability numbers.
+	 *
+	 * @return true, if is ability numbers
 	 */
 	public boolean isAbilityNumbers() {
 		return abilityNumbers;
 	}
 
 	/**
-	 * @param abilityNumbers the abilityNumbers to set
+	 * Sets the ability numbers.
+	 *
+	 * @param abilityNumbers the new ability numbers
 	 */
 	public void setAbilityNumbers(boolean abilityNumbers) {
 		this.abilityNumbers = abilityNumbers;
@@ -239,42 +247,54 @@ public class Settings {
 	}
 
 	/**
-	 * @return the levelCalculation
+	 * Checks if is level calculation.
+	 *
+	 * @return true, if is level calculation
 	 */
 	public boolean isLevelCalculation() {
 		return levelCalculation;
 	}
 
 	/**
-	 * @param levelCalculation the levelCalculation to set
+	 * Sets the level calculation.
+	 *
+	 * @param levelCalculation the new level calculation
 	 */
 	public void setLevelCalculation(boolean levelCalculation) {
 		this.levelCalculation = levelCalculation;
 	}
 
 	/**
-	 * @return the levelAdjustment
+	 * Gets the level adjustment.
+	 *
+	 * @return the level adjustment
 	 */
 	public int getLevelAdjustment() {
 		return levelAdjustment;
 	}
 
 	/**
-	 * @param levelAdjustment the levelAdjustment to set
+	 * Sets the level adjustment.
+	 *
+	 * @param levelAdjustment the new level adjustment
 	 */
 	public void setLevelAdjustment(int levelAdjustment) {
 		this.levelAdjustment = levelAdjustment;
 	}
 
 	/**
-	 * @return the disableStandees
+	 * Checks if is disable standees.
+	 *
+	 * @return true, if is disable standees
 	 */
 	public boolean isDisableStandees() {
 		return disableStandees;
 	}
 
 	/**
-	 * @param disableStandees the disableStandees to set
+	 * Sets the disable standees.
+	 *
+	 * @param disableStandees the new disable standees
 	 */
 	public void setDisableStandees(boolean disableStandees) {
 		this.disableStandees = disableStandees;
@@ -314,6 +334,42 @@ public class Settings {
 	 */
 	public void setDisableColumns(boolean disableColumns) {
 		this.disableColumns = disableColumns;
+	}
+
+	/**
+	 * Checks if is drag initiative.
+	 *
+	 * @return true, if is drag initiative
+	 */
+	public boolean isDragInitiative() {
+		return dragInitiative;
+	}
+
+	/**
+	 * Sets the drag initiative.
+	 *
+	 * @param dragInitiative the new drag initiative
+	 */
+	public void setDragInitiative(boolean dragInitiative) {
+		this.dragInitiative = dragInitiative;
+	}
+
+	/**
+	 * Checks if is drag health.
+	 *
+	 * @return true, if is drag health
+	 */
+	public boolean isDragHealth() {
+		return dragHealth;
+	}
+
+	/**
+	 * Sets the drag health.
+	 *
+	 * @param dragHealth the new drag health
+	 */
+	public void setDragHealth(boolean dragHealth) {
+		this.dragHealth = dragHealth;
 	}
 
 	/**
