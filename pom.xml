@@ -8,7 +8,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
-		<revision>0.12.2</revision>
+		<revision>0.12.3</revision>
 	</properties>
 
 	<parent>

@@ -40,6 +40,8 @@ public class Settings {
 	@Required
 	private boolean fullscreen = false;
 	@Required
+	private boolean autoscroll = true;
+	@Required
 	private boolean disableColumns = false;
 	@Required
 	private boolean dragInitiative = true;
@@ -316,6 +318,24 @@ public class Settings {
 	 */
 	public void setFullscreen(boolean fullscreen) {
 		this.fullscreen = fullscreen;
+	}
+
+	/**
+	 * Checks if is autoscroll.
+	 *
+	 * @return true, if is autoscroll
+	 */
+	public boolean isAutoscroll() {
+		return autoscroll;
+	}
+
+	/**
+	 * Sets the autoscroll.
+	 *
+	 * @param autoscroll the new autoscroll
+	 */
+	public void setAutoscroll(boolean autoscroll) {
+		this.autoscroll = autoscroll;
 	}
 
 	/**
