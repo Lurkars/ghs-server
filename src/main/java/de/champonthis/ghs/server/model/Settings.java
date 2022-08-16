@@ -36,6 +36,8 @@ public class Settings {
 	@Required
 	private int levelAdjustment = 0;
 	@Required
+	private boolean ge5Player = true;
+	@Required
 	private boolean disableStandees = false;
 	@Required
 	private boolean fullscreen = false;
@@ -51,6 +53,8 @@ public class Settings {
 	private boolean hints = true;
 	@Required
 	private int zoom = 100;
+	@Required
+	private int barSize = 1;
 	@Required
 	private String locale = "en";
 	@Required
@@ -285,6 +289,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is ge 5 player.
+	 *
+	 * @return true, if is ge 5 player
+	 */
+	public boolean isGe5Player() {
+		return ge5Player;
+	}
+
+	/**
+	 * Sets the ge 5 player.
+	 *
+	 * @param ge5Player the new ge 5 player
+	 */
+	public void setGe5Player(boolean ge5Player) {
+		this.ge5Player = ge5Player;
+	}
+
+	/**
 	 * Checks if is disable standees.
 	 *
 	 * @return true, if is disable standees
@@ -426,6 +448,24 @@ public class Settings {
 	 */
 	public void setZoom(int zoom) {
 		this.zoom = zoom;
+	}
+
+	/**
+	 * Gets the bar size.
+	 *
+	 * @return the bar size
+	 */
+	public int getBarSize() {
+		return barSize;
+	}
+
+	/**
+	 * Sets the bar size.
+	 *
+	 * @param barSize the new bar size
+	 */
+	public void setBarSize(int barSize) {
+		this.barSize = barSize;
 	}
 
 	/**

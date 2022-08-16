@@ -26,7 +26,7 @@ public enum Element {
 	EARTH,
 
 	@SerializedName("light")
-	LIGHT, 
+	LIGHT,
 
 	@SerializedName("dark")
 	DARK

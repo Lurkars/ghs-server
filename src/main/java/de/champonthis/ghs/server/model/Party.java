@@ -3,6 +3,8 @@
  */
 package de.champonthis.ghs.server.model;
 
+import java.util.LinkedList;
+
 /**
  * The Class Party.
  */
@@ -13,6 +15,7 @@ public class Party {
 	private String notes;
 	private String achievements;
 	private int reputation = 0;
+	private LinkedList<Identifier> scenarios;
 
 	/**
 	 * Gets the name.
@@ -102,6 +105,24 @@ public class Party {
 	 */
 	public void setReputation(int reputation) {
 		this.reputation = reputation;
+	}
+
+	/**
+	 * Gets the scenarios.
+	 *
+	 * @return the scenarios
+	 */
+	public LinkedList<Identifier> getScenarios() {
+		return scenarios;
+	}
+
+	/**
+	 * Sets the scenarios.
+	 *
+	 * @param scenarios the new scenarios
+	 */
+	public void setScenarios(LinkedList<Identifier> scenarios) {
+		this.scenarios = scenarios;
 	}
 
 }

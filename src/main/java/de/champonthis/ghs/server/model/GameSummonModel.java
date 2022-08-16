@@ -32,15 +32,6 @@ public class GameSummonModel {
 	@Required
 	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<GameEntityConditionModel>();
 	@Required
-	@Deprecated
-	private LinkedList<ConditionName> conditions = new LinkedList<ConditionName>();
-	@Required
-	@Deprecated
-	private LinkedList<ConditionName> turnConditions = new LinkedList<ConditionName>();
-	@Required
-	@Deprecated
-	private LinkedList<ConditionName> expiredConditions = new LinkedList<ConditionName>();
-	@Required
 	private LinkedList<String> markers = new LinkedList<String>();
 
 	/**
@@ -257,60 +248,6 @@ public class GameSummonModel {
 	 */
 	public void setEntityConditions(LinkedList<GameEntityConditionModel> entityConditions) {
 		this.entityConditions = entityConditions;
-	}
-
-	/**
-	 * Gets the conditions.
-	 *
-	 * @return the conditions
-	 */
-	public LinkedList<ConditionName> getConditions() {
-		return conditions;
-	}
-
-	/**
-	 * Sets the conditions.
-	 *
-	 * @param conditions the new conditions
-	 */
-	public void setConditions(LinkedList<ConditionName> conditions) {
-		this.conditions = conditions;
-	}
-
-	/**
-	 * Gets the turn conditions.
-	 *
-	 * @return the turn conditions
-	 */
-	public LinkedList<ConditionName> getTurnConditions() {
-		return turnConditions;
-	}
-
-	/**
-	 * Sets the turn conditions.
-	 *
-	 * @param turnConditions the new turn conditions
-	 */
-	public void setTurnConditions(LinkedList<ConditionName> turnConditions) {
-		this.turnConditions = turnConditions;
-	}
-
-	/**
-	 * Gets the expired conditions.
-	 *
-	 * @return the expired conditions
-	 */
-	public LinkedList<ConditionName> getExpiredConditions() {
-		return expiredConditions;
-	}
-
-	/**
-	 * Sets the expired conditions.
-	 *
-	 * @param expiredConditions the new expired conditions
-	 */
-	public void setExpiredConditions(LinkedList<ConditionName> expiredConditions) {
-		this.expiredConditions = expiredConditions;
 	}
 
 	/**

@@ -11,7 +11,7 @@ import com.google.gson.annotations.SerializedName;
 public enum GameState {
 
 	@SerializedName("draw")
-	DRAW, 
+	DRAW,
 
 	@SerializedName("next")
 	NEXT
