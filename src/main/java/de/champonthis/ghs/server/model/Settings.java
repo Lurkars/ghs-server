@@ -36,6 +36,8 @@ public class Settings {
 	@Required
 	private int levelAdjustment = 0;
 	@Required
+	private int bonusAdjustment = 0;
+	@Required
 	private boolean ge5Player = true;
 	@Required
 	private boolean disableStandees = false;
@@ -286,6 +288,24 @@ public class Settings {
 	 */
 	public void setLevelAdjustment(int levelAdjustment) {
 		this.levelAdjustment = levelAdjustment;
+	}
+
+	/**
+	 * Gets the bonus adjustment.
+	 *
+	 * @return the bonus adjustment
+	 */
+	public int getBonusAdjustment() {
+		return bonusAdjustment;
+	}
+
+	/**
+	 * Sets the bonus adjustment.
+	 *
+	 * @param bonusAdjustment the new bonus adjustment
+	 */
+	public void setBonusAdjustment(int bonusAdjustment) {
+		this.bonusAdjustment = bonusAdjustment;
 	}
 
 	/**
