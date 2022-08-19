@@ -42,6 +42,8 @@ public class GameCharacterModel {
 	@Required
 	private LinkedList<GameSummonModel> summons = new LinkedList<GameSummonModel>();
 	private CharacterProgress progress;
+	@Required
+	private int number;
 
 	/**
 	 * Gets the name.
@@ -329,6 +331,24 @@ public class GameCharacterModel {
 	 */
 	public void setProgress(CharacterProgress progress) {
 		this.progress = progress;
+	}
+
+	/**
+	 * Gets the number.
+	 *
+	 * @return the number
+	 */
+	public int getNumber() {
+		return number;
+	}
+
+	/**
+	 * Sets the number.
+	 *
+	 * @param number the new number
+	 */
+	public void setNumber(int number) {
+		this.number = number;
 	}
 
 }
