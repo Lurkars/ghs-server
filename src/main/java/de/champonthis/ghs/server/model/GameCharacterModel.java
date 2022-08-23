@@ -44,6 +44,8 @@ public class GameCharacterModel {
 	private CharacterProgress progress;
 	@Required
 	private int number;
+	@Required
+	private GameAttackModifierDeckModel attackModifierDeck = new GameAttackModifierDeckModel();
 
 	/**
 	 * Gets the name.
@@ -349,6 +351,24 @@ public class GameCharacterModel {
 	 */
 	public void setNumber(int number) {
 		this.number = number;
+	}
+
+	/**
+	 * Gets the attack modifier deck.
+	 *
+	 * @return the attack modifier deck
+	 */
+	public GameAttackModifierDeckModel getAttackModifierDeck() {
+		return attackModifierDeck;
+	}
+
+	/**
+	 * Sets the attack modifier deck.
+	 *
+	 * @param attackModifierDeck the new attack modifier deck
+	 */
+	public void setAttackModifierDeck(GameAttackModifierDeckModel attackModifierDeck) {
+		this.attackModifierDeck = attackModifierDeck;
 	}
 
 }

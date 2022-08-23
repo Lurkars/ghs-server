@@ -35,9 +35,7 @@ public class GameModel {
 	@Required
 	private long totalSeconds = 0;
 	@Required
-	private int attackModifier = -1;
-	@Required
-	private LinkedList<AttackModifierType> attackModifiers = new LinkedList<AttackModifierType>();
+	private GameAttackModifierDeckModel monsterAttackModifierDeck = new GameAttackModifierDeckModel();
 	@Required
 	private LinkedList<Element> newElements = new LinkedList<Element>();
 	@Required
@@ -265,39 +263,21 @@ public class GameModel {
 	}
 
 	/**
-	 * Gets the attack modifier.
+	 * Gets the monster attack modifier deck.
 	 *
-	 * @return the attack modifier
+	 * @return the monster attack modifier deck
 	 */
-	public int getAttackModifier() {
-		return attackModifier;
+	public GameAttackModifierDeckModel getMonsterAttackModifierDeck() {
+		return monsterAttackModifierDeck;
 	}
 
 	/**
-	 * Sets the attack modifier.
+	 * Sets the monster attack modifier deck.
 	 *
-	 * @param attackModifier the new attack modifier
+	 * @param monsterAttackModifierDeck the new monster attack modifier deck
 	 */
-	public void setAttackModifier(int attackModifier) {
-		this.attackModifier = attackModifier;
-	}
-
-	/**
-	 * Gets the attack modifiers.
-	 *
-	 * @return the attack modifiers
-	 */
-	public LinkedList<AttackModifierType> getAttackModifiers() {
-		return attackModifiers;
-	}
-
-	/**
-	 * Sets the attack modifiers.
-	 *
-	 * @param attackModifiers the new attack modifiers
-	 */
-	public void setAttackModifiers(LinkedList<AttackModifierType> attackModifiers) {
-		this.attackModifiers = attackModifiers;
+	public void setMonsterAttackModifierDeck(GameAttackModifierDeckModel monsterAttackModifierDeck) {
+		this.monsterAttackModifierDeck = monsterAttackModifierDeck;
 	}
 
 	/**

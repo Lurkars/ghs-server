@@ -15,6 +15,7 @@ public class Party {
 	private String notes;
 	private String achievements;
 	private int reputation = 0;
+	private int prosperity = 0;
 	private LinkedList<Identifier> scenarios;
 
 	/**
@@ -105,6 +106,24 @@ public class Party {
 	 */
 	public void setReputation(int reputation) {
 		this.reputation = reputation;
+	}
+
+	/**
+	 * Gets the prosperity.
+	 *
+	 * @return the prosperity
+	 */
+	public int getProsperity() {
+		return prosperity;
+	}
+
+	/**
+	 * Sets the prosperity.
+	 *
+	 * @param prosperity the new prosperity
+	 */
+	public void setProsperity(int prosperity) {
+		this.prosperity = prosperity;
 	}
 
 	/**

@@ -13,7 +13,7 @@ import de.champonthis.ghs.server.util.Required;
 public class CharacterProgress {
 
 	private int experience = 0;
-	private int loot = 0;
+	private int gold = 0;
 	@Required
 	private LinkedList<Identifier> items = new LinkedList<Identifier>();
 	private int personalQuest = 0;
@@ -42,21 +42,21 @@ public class CharacterProgress {
 	}
 
 	/**
-	 * Gets the loot.
+	 * Gets the gold.
 	 *
-	 * @return the loot
+	 * @return the gold
 	 */
-	public int getLoot() {
-		return loot;
+	public int getGold() {
+		return gold;
 	}
 
 	/**
-	 * Sets the loot.
+	 * Sets the gold.
 	 *
-	 * @param loot the new loot
+	 * @param gold the new gold
 	 */
-	public void setLoot(int loot) {
-		this.loot = loot;
+	public void setGold(int gold) {
+		this.gold = gold;
 	}
 
 	/**
