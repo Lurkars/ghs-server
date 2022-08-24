@@ -21,6 +21,8 @@ public class GameMonsterEntityModel {
 	@Required
 	private SummonState summon;
 	@Required
+	private boolean active = false;
+	@Required
 	private int health;
 	@Required
 	private int maxHealth;
@@ -99,6 +101,24 @@ public class GameMonsterEntityModel {
 	 */
 	public void setSummon(SummonState summon) {
 		this.summon = summon;
+	}
+
+	/**
+	 * Checks if is active.
+	 *
+	 * @return true, if is active
+	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * Sets the active.
+	 *
+	 * @param active the new active
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 	/**

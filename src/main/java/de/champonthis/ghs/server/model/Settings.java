@@ -30,6 +30,8 @@ public class Settings {
 	@Required
 	private boolean randomStandees = false;
 	@Required
+	private boolean activeStandees = true;
+	@Required
 	private boolean initiativeRequired = true;
 	@Required
 	private boolean levelCalculation = true;
@@ -234,6 +236,24 @@ public class Settings {
 	 */
 	public void setRandomStandees(boolean randomStandees) {
 		this.randomStandees = randomStandees;
+	}
+
+	/**
+	 * Checks if is active standees.
+	 *
+	 * @return true, if is active standees
+	 */
+	public boolean isActiveStandees() {
+		return activeStandees;
+	}
+
+	/**
+	 * Sets the active standees.
+	 *
+	 * @param activeStandees the new active standees
+	 */
+	public void setActiveStandees(boolean activeStandees) {
+		this.activeStandees = activeStandees;
 	}
 
 	/**

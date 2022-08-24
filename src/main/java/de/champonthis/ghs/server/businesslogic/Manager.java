@@ -23,7 +23,9 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import org.apache.tomcat.util.http.fileupload.FileUtils;
+import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
@@ -37,10 +39,12 @@ import de.champonthis.ghs.server.model.Settings;
  * The Class Manager.
  */
 @Component
-public class Manager {
+public class Manager implements SmartInitializingSingleton {
 
 	@Autowired
 	private Gson gson;
+	@Value("${ghs-server.lastestClientOnStartup:false}")
+	private boolean lastestClientOnStartup;
 
 	private Connection connection = null;
 
@@ -345,6 +349,17 @@ public class Manager {
 		}
 	}
 
+	/*
+	 * @see org.springframework.beans.factory.SmartInitializingSingleton#
+	 * afterSingletonsInstantiated()
+	 */
+	@Override
+	public void afterSingletonsInstantiated() {
+		if (lastestClientOnStartup) {
+			installLatestClient();
+		}
+	}
+
 	/**
 	 * Install latest client.
 	 *
@@ -369,6 +384,7 @@ public class Manager {
 			Matcher matcher = re.matcher(value);
 
 			if (matcher.matches()) {
+				System.out.println("Download latest client from : " + matcher.group(1));
 				connection = (HttpURLConnection) new URL(matcher.group(1)).openConnection();
 				connection.setRequestMethod("GET");
 				ZipInputStream zipIn = new ZipInputStream(connection.getInputStream());
@@ -417,6 +433,7 @@ public class Manager {
 									+ File.separator + "ghs-settings-default.json").toPath());
 				}
 
+				System.out.println("Latest client installed!");
 				return true;
 			}
 		} catch (IOException e) {
