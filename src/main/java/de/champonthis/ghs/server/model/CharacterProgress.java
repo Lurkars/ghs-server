@@ -20,6 +20,7 @@ public class CharacterProgress {
 	private int battleGoals = 0;
 	private String notes = "";
 	private boolean retired = false;
+	private int retirements = 0;
 	@Required
 	private LinkedList<Integer> perks = new LinkedList<Integer>();
 
@@ -147,6 +148,24 @@ public class CharacterProgress {
 	 */
 	public void setRetired(boolean retired) {
 		this.retired = retired;
+	}
+
+	/**
+	 * Gets the retirements.
+	 *
+	 * @return the retirements
+	 */
+	public int getRetirements() {
+		return retirements;
+	}
+
+	/**
+	 * Sets the retirements.
+	 *
+	 * @param retirements the new retirements
+	 */
+	public void setRetirements(int retirements) {
+		this.retirements = retirements;
 	}
 
 	/**

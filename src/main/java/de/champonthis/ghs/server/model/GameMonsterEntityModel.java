@@ -23,6 +23,8 @@ public class GameMonsterEntityModel {
 	@Required
 	private boolean active = false;
 	@Required
+	private boolean off = false;
+	@Required
 	private int health;
 	@Required
 	private int maxHealth;
@@ -119,6 +121,24 @@ public class GameMonsterEntityModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * Checks if is off.
+	 *
+	 * @return true, if is off
+	 */
+	public boolean isOff() {
+		return off;
+	}
+
+	/**
+	 * Sets the off.
+	 *
+	 * @param off the new off
+	 */
+	public void setOff(boolean off) {
+		this.off = off;
 	}
 
 	/**

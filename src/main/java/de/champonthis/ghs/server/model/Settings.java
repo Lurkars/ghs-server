@@ -24,6 +24,8 @@ public class Settings {
 	@Required
 	private boolean applyConditions = true;
 	@Required
+	private boolean activeApplyConditions = true;
+	@Required
 	private boolean moveElements = true;
 	@Required
 	private boolean hideStats = true;
@@ -33,13 +35,9 @@ public class Settings {
 	private boolean activeStandees = true;
 	@Required
 	private boolean initiativeRequired = true;
-	@Required
 	private boolean levelCalculation = true;
-	@Required
 	private int levelAdjustment = 0;
-	@Required
 	private int bonusAdjustment = 0;
-	@Required
 	private boolean ge5Player = true;
 	@Required
 	private boolean disableStandees = false;
@@ -182,6 +180,24 @@ public class Settings {
 	 */
 	public void setApplyConditions(boolean applyConditions) {
 		this.applyConditions = applyConditions;
+	}
+
+	/**
+	 * Checks if is active apply conditions.
+	 *
+	 * @return true, if is active apply conditions
+	 */
+	public boolean isActiveApplyConditions() {
+		return activeApplyConditions;
+	}
+
+	/**
+	 * Sets the active apply conditions.
+	 *
+	 * @param activeApplyConditions the new active apply conditions
+	 */
+	public void setActiveApplyConditions(boolean activeApplyConditions) {
+		this.activeApplyConditions = activeApplyConditions;
 	}
 
 	/**
