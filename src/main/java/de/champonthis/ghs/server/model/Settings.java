@@ -48,9 +48,7 @@ public class Settings {
 	@Required
 	private boolean disableColumns = false;
 	@Required
-	private boolean dragInitiative = true;
-	@Required
-	private boolean dragHealth = true;
+	private boolean dragValues = true;
 	@Required
 	private boolean hints = true;
 	@Required
@@ -435,39 +433,17 @@ public class Settings {
 	}
 
 	/**
-	 * Checks if is drag initiative.
-	 *
-	 * @return true, if is drag initiative
+	 * @return the dragValues
 	 */
-	public boolean isDragInitiative() {
-		return dragInitiative;
+	public boolean isDragValues() {
+		return dragValues;
 	}
 
 	/**
-	 * Sets the drag initiative.
-	 *
-	 * @param dragInitiative the new drag initiative
+	 * @param dragValues the dragValues to set
 	 */
-	public void setDragInitiative(boolean dragInitiative) {
-		this.dragInitiative = dragInitiative;
-	}
-
-	/**
-	 * Checks if is drag health.
-	 *
-	 * @return true, if is drag health
-	 */
-	public boolean isDragHealth() {
-		return dragHealth;
-	}
-
-	/**
-	 * Sets the drag health.
-	 *
-	 * @param dragHealth the new drag health
-	 */
-	public void setDragHealth(boolean dragHealth) {
-		this.dragHealth = dragHealth;
+	public void setDragValues(boolean dragValues) {
+		this.dragValues = dragValues;
 	}
 
 	/**
