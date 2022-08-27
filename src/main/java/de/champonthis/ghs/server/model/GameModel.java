@@ -45,6 +45,8 @@ public class GameModel {
 	@Required
 	private GameAttackModifierDeckModel monsterAttackModifierDeck = new GameAttackModifierDeckModel();
 	@Required
+	private GameAttackModifierDeckModel allyAttackModifierDeck = new GameAttackModifierDeckModel();
+	@Required
 	private LinkedList<Element> newElements = new LinkedList<Element>();
 	@Required
 	private LinkedList<Element> strongElements = new LinkedList<Element>();
@@ -358,6 +360,24 @@ public class GameModel {
 	 */
 	public void setMonsterAttackModifierDeck(GameAttackModifierDeckModel monsterAttackModifierDeck) {
 		this.monsterAttackModifierDeck = monsterAttackModifierDeck;
+	}
+
+	/**
+	 * Gets the ally attack modifier deck.
+	 *
+	 * @return the ally attack modifier deck
+	 */
+	public GameAttackModifierDeckModel getAllyAttackModifierDeck() {
+		return allyAttackModifierDeck;
+	}
+
+	/**
+	 * Sets the ally attack modifier deck.
+	 *
+	 * @param allyAttackModifierDeck the new ally attack modifier deck
+	 */
+	public void setAllyAttackModifierDeck(GameAttackModifierDeckModel allyAttackModifierDeck) {
+		this.allyAttackModifierDeck = allyAttackModifierDeck;
 	}
 
 	/**

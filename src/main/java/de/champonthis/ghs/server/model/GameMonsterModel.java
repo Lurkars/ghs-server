@@ -30,6 +30,8 @@ public class GameMonsterModel {
 	private LinkedList<Integer> abilities = new LinkedList<Integer>();
 	@Required
 	private LinkedList<GameMonsterEntityModel> entities = new LinkedList<GameMonsterEntityModel>();
+	@Required
+	private boolean isAlly = false;
 
 	/**
 	 * Gets the name.
@@ -191,6 +193,24 @@ public class GameMonsterModel {
 	 */
 	public void setEntities(LinkedList<GameMonsterEntityModel> entities) {
 		this.entities = entities;
+	}
+
+	/**
+	 * Checks if is ally.
+	 *
+	 * @return true, if is ally
+	 */
+	public boolean isAlly() {
+		return isAlly;
+	}
+
+	/**
+	 * Sets the ally.
+	 *
+	 * @param isAlly the new ally
+	 */
+	public void setAlly(boolean isAlly) {
+		this.isAlly = isAlly;
 	}
 
 }

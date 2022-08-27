@@ -54,7 +54,9 @@ public class Settings {
 	@Required
 	private int zoom = 100;
 	@Required
-	private int barSize = 1;
+	private int barsize = 1;
+	@Required
+	private int fontsize = 1;
 	@Required
 	private String locale = "en";
 	@Required
@@ -433,14 +435,18 @@ public class Settings {
 	}
 
 	/**
-	 * @return the dragValues
+	 * Checks if is drag values.
+	 *
+	 * @return true, if is drag values
 	 */
 	public boolean isDragValues() {
 		return dragValues;
 	}
 
 	/**
-	 * @param dragValues the dragValues to set
+	 * Sets the drag values.
+	 *
+	 * @param dragValues the new drag values
 	 */
 	public void setDragValues(boolean dragValues) {
 		this.dragValues = dragValues;
@@ -483,21 +489,39 @@ public class Settings {
 	}
 
 	/**
-	 * Gets the bar size.
+	 * Gets the barsize.
 	 *
-	 * @return the bar size
+	 * @return the barsize
 	 */
-	public int getBarSize() {
-		return barSize;
+	public int getBarsize() {
+		return barsize;
 	}
 
 	/**
-	 * Sets the bar size.
+	 * Sets the barsize.
 	 *
-	 * @param barSize the new bar size
+	 * @param barsize the new barsize
 	 */
-	public void setBarSize(int barSize) {
-		this.barSize = barSize;
+	public void setBarsize(int barsize) {
+		this.barsize = barsize;
+	}
+
+	/**
+	 * Gets the fontsize.
+	 *
+	 * @return the fontsize
+	 */
+	public int getFontsize() {
+		return fontsize;
+	}
+
+	/**
+	 * Sets the fontsize.
+	 *
+	 * @param fontsize the new fontsize
+	 */
+	public void setFontsize(int fontsize) {
+		this.fontsize = fontsize;
 	}
 
 	/**
