@@ -4,11 +4,9 @@
 package de.champonthis.ghs.server.gui;
 
 import java.awt.BorderLayout;
+import java.awt.Desktop;
 import java.awt.event.ActionEvent;
-import java.io.IOException;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
-import java.net.Socket;
+import java.net.URI;
 import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,6 +17,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.SwingWorker;
 
 import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,7 +26,9 @@ import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Conditional;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
+import de.champonthis.ghs.server.businesslogic.ClientManager;
 import de.champonthis.ghs.server.businesslogic.Manager;
 
 /**
@@ -41,8 +42,11 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 
 	@Autowired
 	private Manager manager;
+	@Autowired
+	private ClientManager clientManager;
 	@Value("${server.port:8080}")
 	private int port;
+	private String clientUrl = null;
 
 	private JPanel topPanel = new JPanel();
 	private JPanel bottomPanel = new JPanel();
@@ -50,6 +54,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	private JLabel portLabel = new JLabel();
 	private JButton quitButton = new JButton("Quit");
 	private JButton installButton = new JButton("Install latest Client");
+	private JButton openClientButton = new JButton("Open Client");
 
 	/**
 	 * Instantiates a new main frame.
@@ -74,12 +79,40 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 		this.add(topPanel, BorderLayout.PAGE_START);
 
 		installButton.addActionListener((ActionEvent event) -> {
+			SwingWorker<Void, Void> swingWorker = new SwingWorker<Void, Void>() {
+				@Override
+				protected Void doInBackground() throws Exception {
+					clientManager.installLatestClient();
+					return null;
+				}
+				@Override
+				protected void done() {
+					installButton.setEnabled(true);
+					checkClient();
+				}
+			};
+
+			openClientButton.setVisible(false);
 			installButton.setEnabled(false);
-			manager.installLatestClient();
-			installButton.setEnabled(true);
+			swingWorker.execute();
+
 		});
 
 		bottomPanel.add(installButton, BorderLayout.WEST);
+
+		openClientButton.addActionListener((ActionEvent event) -> {
+			if (StringUtils.hasText(clientUrl)) {
+				try {
+					Desktop.getDesktop().browse(new URI(clientUrl));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+			}
+		});
+
+		bottomPanel.add(openClientButton, BorderLayout.CENTER);
+
+		openClientButton.setVisible(false);
 
 		quitButton.addActionListener((ActionEvent event) -> {
 			System.exit(0);
@@ -112,26 +145,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	@EventListener(ApplicationReadyEvent.class)
 	public void setLabel() {
 		portLabel.setText("Port: " + port);
-
-		LinkedList<String> ips = new LinkedList<String>();
-		ips.push("localhost");
-		try {
-			InetAddress localhost = InetAddress.getLocalHost();
-			Socket socket = new Socket();
-			socket.connect(new InetSocketAddress(localhost, port));
-			ips.push(socket.getLocalAddress().getHostAddress());
-			socket.close();
-
-			socket = new Socket();
-			socket.connect(new InetSocketAddress("champonthis.de", 443));
-			ips.push(socket.getLocalAddress().getHostAddress());
-			socket.close();
-
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-
-		ipLabel.setText("IPs: " + String.join(", ", ips.toArray(new String[] {})));
+		ipLabel.setText("IPs: " + String.join(", ", clientManager.getHosts().toArray(new String[] {})));
 	}
 
 	/**
@@ -158,6 +172,38 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
+		}
+	}
+
+	/**
+	 * Check client on startup.
+	 *
+	 * @param event the event
+	 */
+	@EventListener
+	void checkClientOnStartup(ApplicationReadyEvent event) {
+		checkClient();
+	}
+
+	/**
+	 * Check client.
+	 */
+	void checkClient() {
+
+		openClientButton.setVisible(false);
+		List<String> hosts = clientManager.getHosts();
+		int index = 0;
+		boolean running = false;
+
+		while (hosts.size() > index && !running) {
+			if (clientManager.checkClientRunning(hosts.get(index))) {
+				clientUrl = clientManager.getClientUrl(hosts.get(0));
+				openClientButton.setText("Open Client: " + clientUrl);
+				running = true;
+				openClientButton.setVisible(true);
+			} else {
+				index++;
+			}
 		}
 	}
 
