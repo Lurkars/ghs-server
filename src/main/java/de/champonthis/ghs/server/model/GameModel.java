@@ -47,7 +47,7 @@ public class GameModel {
 	@Required
 	private GameAttackModifierDeckModel allyAttackModifierDeck = new GameAttackModifierDeckModel();
 	@Required
-	private LinkedList<ElementState> elementBoard = new LinkedList<ElementState>();
+	private LinkedList<ElementModel> elementBoard = new LinkedList<ElementModel>();
 	@Required
 	private LinkedList<Element> newElements = new LinkedList<Element>();
 	@Required
@@ -387,7 +387,7 @@ public class GameModel {
 	 *
 	 * @return the element board
 	 */
-	public LinkedList<ElementState> getElementBoard() {
+	public LinkedList<ElementModel> getElementBoard() {
 		return elementBoard;
 	}
 
@@ -396,7 +396,7 @@ public class GameModel {
 	 *
 	 * @param elementBoard the new element board
 	 */
-	public void setElementBoard(LinkedList<ElementState> elementBoard) {
+	public void setElementBoard(LinkedList<ElementModel> elementBoard) {
 		this.elementBoard = elementBoard;
 	}
 
