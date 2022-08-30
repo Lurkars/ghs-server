@@ -20,6 +20,8 @@ public class SectionData {
 	@Required
 	private LinkedList<String> monsters = new LinkedList<String>();
 	@Required
+	private LinkedList<String> allies = new LinkedList<String>();
+	@Required
 	private LinkedList<ObjectiveData> objectives = new LinkedList<ObjectiveData>();
 	@Required
 	private String edition;
@@ -95,6 +97,24 @@ public class SectionData {
 	 */
 	public void setMonsters(LinkedList<String> monsters) {
 		this.monsters = monsters;
+	}
+
+	/**
+	 * Gets the allies.
+	 *
+	 * @return the allies
+	 */
+	public LinkedList<String> getAllies() {
+		return allies;
+	}
+
+	/**
+	 * Sets the allies.
+	 *
+	 * @param allies the new allies
+	 */
+	public void setAllies(LinkedList<String> allies) {
+		this.allies = allies;
 	}
 
 	/**

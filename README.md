@@ -77,6 +77,10 @@ On the first time, just choose the **Password** of your choice. This will create
 - The database is a simple `ghs.sqlite`-file in GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simple delete the `sqlite`-file.
 - on startup, all passwords are written into syslog in plaintext.
 
+## Privacy
+
+This application does NOT collect ANY personal data besides the GHS game state, authentication and permission data. Please keep in mind that this data is NOT ENCRYPTED. Take care that you need to trust any third party provider of a server component to not collect any more data like IP addresses.
+
 ## Copyright / License
 
 Gloomhaven and all related properties, images and text are owned by [Cephalofair Games](https://cephalofair.com).

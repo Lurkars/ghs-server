@@ -34,6 +34,8 @@ public class Settings {
 	@Required
 	private boolean activeStandees = true;
 	@Required
+	private boolean allyAttackModifierDeck = true;
+	@Required
 	private boolean initiativeRequired = true;
 	private boolean levelCalculation = true;
 	private int levelAdjustment = 0;
@@ -270,6 +272,24 @@ public class Settings {
 	 */
 	public void setActiveStandees(boolean activeStandees) {
 		this.activeStandees = activeStandees;
+	}
+
+	/**
+	 * Checks if is ally attack modifier deck.
+	 *
+	 * @return true, if is ally attack modifier deck
+	 */
+	public boolean isAllyAttackModifierDeck() {
+		return allyAttackModifierDeck;
+	}
+
+	/**
+	 * Sets the ally attack modifier deck.
+	 *
+	 * @param allyAttackModifierDeck the new ally attack modifier deck
+	 */
+	public void setAllyAttackModifierDeck(boolean allyAttackModifierDeck) {
+		this.allyAttackModifierDeck = allyAttackModifierDeck;
 	}
 
 	/**
