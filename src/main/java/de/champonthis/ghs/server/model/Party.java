@@ -16,7 +16,9 @@ public class Party {
 	private String achievements;
 	private int reputation = 0;
 	private int prosperity = 0;
-	private LinkedList<Identifier> scenarios;
+	private LinkedList<GameScenarioModel> scenarios = new LinkedList<GameScenarioModel>();
+	private LinkedList<GameScenarioModel> manualScenarios = new LinkedList<GameScenarioModel>();
+	private boolean campaignMode = false;
 
 	/**
 	 * Gets the name.
@@ -131,7 +133,7 @@ public class Party {
 	 *
 	 * @return the scenarios
 	 */
-	public LinkedList<Identifier> getScenarios() {
+	public LinkedList<GameScenarioModel> getScenarios() {
 		return scenarios;
 	}
 
@@ -140,8 +142,44 @@ public class Party {
 	 *
 	 * @param scenarios the new scenarios
 	 */
-	public void setScenarios(LinkedList<Identifier> scenarios) {
+	public void setScenarios(LinkedList<GameScenarioModel> scenarios) {
 		this.scenarios = scenarios;
+	}
+
+	/**
+	 * Gets the manual scenarios.
+	 *
+	 * @return the manual scenarios
+	 */
+	public LinkedList<GameScenarioModel> getManualScenarios() {
+		return manualScenarios;
+	}
+
+	/**
+	 * Sets the manual scenarios.
+	 *
+	 * @param manualScenarios the new manual scenarios
+	 */
+	public void setManualScenarios(LinkedList<GameScenarioModel> manualScenarios) {
+		this.manualScenarios = manualScenarios;
+	}
+
+	/**
+	 * Checks if is campaign mode.
+	 *
+	 * @return true, if is campaign mode
+	 */
+	public boolean isCampaignMode() {
+		return campaignMode;
+	}
+
+	/**
+	 * Sets the campaign mode.
+	 *
+	 * @param campaignMode the new campaign mode
+	 */
+	public void setCampaignMode(boolean campaignMode) {
+		this.campaignMode = campaignMode;
 	}
 
 }

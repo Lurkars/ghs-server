@@ -23,9 +23,9 @@ public class GameModel {
 	private LinkedList<GameObjectiveModel> objectives = new LinkedList<GameObjectiveModel>();
 	@Required
 	private GameState state = GameState.DRAW;
-	private Scenario scenario;
+	private GameScenarioModel scenario;
 	@Required
-	private LinkedList<SectionData> sections = new LinkedList<SectionData>();
+	private LinkedList<GameScenarioModel> sections = new LinkedList<GameScenarioModel>();
 	@Required
 	private int level = 1;
 	@Required
@@ -171,7 +171,7 @@ public class GameModel {
 	 *
 	 * @return the scenario
 	 */
-	public Scenario getScenario() {
+	public GameScenarioModel getScenario() {
 		return scenario;
 	}
 
@@ -180,7 +180,7 @@ public class GameModel {
 	 *
 	 * @param scenario the new scenario
 	 */
-	public void setScenario(Scenario scenario) {
+	public void setScenario(GameScenarioModel scenario) {
 		this.scenario = scenario;
 	}
 
@@ -189,7 +189,7 @@ public class GameModel {
 	 *
 	 * @return the sections
 	 */
-	public LinkedList<SectionData> getSections() {
+	public LinkedList<GameScenarioModel> getSections() {
 		return sections;
 	}
 
@@ -198,7 +198,7 @@ public class GameModel {
 	 *
 	 * @param sections the new sections
 	 */
-	public void setSections(LinkedList<SectionData> sections) {
+	public void setSections(LinkedList<GameScenarioModel> sections) {
 		this.sections = sections;
 	}
 

@@ -222,6 +222,7 @@ public class MessageHandler extends TextWebSocketHandler {
 							JsonObject gameResponse = new JsonObject();
 							gameResponse.addProperty("type", "game");
 							gameResponse.add("payload", gson.toJsonTree(gameUpdate));
+							gameResponse.add("undoinfo", messageObject.get("undoinfo"));
 							container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
 						}
 					}
