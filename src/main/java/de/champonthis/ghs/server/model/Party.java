@@ -19,6 +19,7 @@ public class Party {
 	private LinkedList<GameScenarioModel> scenarios = new LinkedList<GameScenarioModel>();
 	private LinkedList<GameScenarioModel> manualScenarios = new LinkedList<GameScenarioModel>();
 	private boolean campaignMode = false;
+	private String globalAchievements;
 
 	/**
 	 * Gets the name.
@@ -180,6 +181,24 @@ public class Party {
 	 */
 	public void setCampaignMode(boolean campaignMode) {
 		this.campaignMode = campaignMode;
+	}
+
+	/**
+	 * Gets the global achievements.
+	 *
+	 * @return the global achievements
+	 */
+	public String getGlobalAchievements() {
+		return globalAchievements;
+	}
+
+	/**
+	 * Sets the global achievements.
+	 *
+	 * @param globalAchievements the new global achievements
+	 */
+	public void setGlobalAchievements(String globalAchievements) {
+		this.globalAchievements = globalAchievements;
 	}
 
 }

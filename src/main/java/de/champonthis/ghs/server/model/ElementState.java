@@ -20,5 +20,5 @@ public enum ElementState {
 	INERT,
 
 	@SerializedName("new")
-	NEW	
+	NEW
 }
