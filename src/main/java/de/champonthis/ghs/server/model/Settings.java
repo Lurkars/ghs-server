@@ -46,6 +46,8 @@ public class Settings {
 	@Required
 	private boolean fullscreen = false;
 	@Required
+	private boolean fhStyle = false;
+	@Required
 	private boolean autoscroll = true;
 	@Required
 	private boolean disableColumns = false;
@@ -416,6 +418,24 @@ public class Settings {
 	 */
 	public void setFullscreen(boolean fullscreen) {
 		this.fullscreen = fullscreen;
+	}
+
+	/**
+	 * Checks if is fh style.
+	 *
+	 * @return true, if is fh style
+	 */
+	public boolean isFhStyle() {
+		return fhStyle;
+	}
+
+	/**
+	 * Sets the fh style.
+	 *
+	 * @param fhStyle the new fh style
+	 */
+	public void setFhStyle(boolean fhStyle) {
+		this.fhStyle = fhStyle;
 	}
 
 	/**
