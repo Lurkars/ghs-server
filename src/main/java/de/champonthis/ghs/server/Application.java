@@ -13,6 +13,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
+import org.springframework.context.annotation.PropertySources;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.FileSystemResource;
 
@@ -20,7 +21,8 @@ import org.springframework.core.io.FileSystemResource;
  * The Class Application.
  */
 @SpringBootApplication
-@PropertySource("classpath:default.properties")
+@PropertySources({ @PropertySource("classpath:default.properties"),
+		@PropertySource(value = "file:///${user.home}/.ghs/application.properties", ignoreResourceNotFound = true) })
 public class Application {
 
 	/**
