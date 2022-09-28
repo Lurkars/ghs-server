@@ -28,6 +28,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
+import org.springframework.util.StringUtils;
 
 /**
  * The Class ClientManager.
@@ -41,6 +42,10 @@ public class ClientManager implements SmartInitializingSingleton {
 	private boolean ssl;
 	@Value("${server.port:8080}")
 	private int port;
+	@Value("${server.http.port:8081}")
+	private int httpPort;
+	@Value("${ghs-server.externalHost:}")
+	private String externalHost;
 
 	/*
 	 * @see org.springframework.beans.factory.SmartInitializingSingleton#
@@ -152,6 +157,27 @@ public class ClientManager implements SmartInitializingSingleton {
 			return responseCode == 200;
 		} catch (IOException e) {
 			System.err.println("Connection failed to: " + getClientUrl(host));
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check client running http only.
+	 *
+	 * @param host the host
+	 * @return true, if successful
+	 */
+	public boolean checkClientRunningHttpOnly(String host) {
+		try {
+			HttpURLConnection connection = (HttpURLConnection) new URL(getClientUrl(host, true)).openConnection();
+			connection.setRequestMethod("GET");
+			connection.connect();
+			int responseCode = connection.getResponseCode();
+			connection.disconnect();
+			return responseCode == 200;
+		} catch (IOException e) {
+			System.err.println("Connection failed to: " + getClientUrl(host, true));
 			e.printStackTrace();
 		}
 
@@ -165,7 +191,24 @@ public class ClientManager implements SmartInitializingSingleton {
 	 * @return the client url
 	 */
 	public String getClientUrl(String host) {
-		return (ssl ? "https://" : "http://") + host + ":" + port + "/index.html";
+		return getClientUrl(host, false);
+	}
+
+	/**
+	 * Gets the client url.
+	 *
+	 * @param host     the host
+	 * @param httpOnly the http only
+	 * @return the client url
+	 */
+	public String getClientUrl(String host, boolean httpOnly) {
+		if (ssl && !httpOnly) {
+			return "https://" + host + ":" + port + "/index.html";
+		} else if (ssl && httpOnly) {
+			return "http://" + host + ":" + httpPort + "/index.html";
+		}
+
+		return "http://" + host + ":" + port + "/index.html";
 	}
 
 	/**
@@ -175,6 +218,11 @@ public class ClientManager implements SmartInitializingSingleton {
 	 */
 	public List<String> getHosts() {
 		LinkedList<String> hosts = new LinkedList<String>();
+
+		if (StringUtils.hasText(externalHost)) {
+			hosts.push(externalHost);
+		}
+
 		hosts.push("localhost");
 		try {
 			InetAddress localhost = InetAddress.getLocalHost();

@@ -1,10 +1,10 @@
 # Gloomhaven Secretary Server (ghs-server)
 
-This is a server component for [Gloomhaven Secretary](https://ghs.champonthis.de) ([Source](https://github.com/Lurkars/gloomhavensecretary)). It synchronizes the game state between all clients via websockets. Access is controlled by providing a password in all messages.
+This is a server component for [Gloomhaven Secretary](https://gloomhaven-secretaryde.) ([Source](https://github.com/Lurkars/gloomhavensecretary)). It synchronizes the game state between all clients via websockets. Access is controlled by providing a password in all messages.
 
 It's a java application to run on most systems the old [Gloomhaven Helper](http://esotericsoftware.com/gloomhaven-helper) (by [Esoteric Software®](http://esotericsoftware.com)) Desktop version run. Besides an headless mode is integrated.
 
-A public server is available under `152.70.60.220` port `8080`. If the browser enforces a secure connection, use proxy under `ghs.champonthis.de/server` port `443`.
+A public server is available under `gloomhaven-secretary.de` port `8443` with `secure` option.
 
 ## Support
 
@@ -50,6 +50,15 @@ server.ssl.key-store=
 server.ssl.key-store-password=
 server.ssl.key-alias=
 ```
+
+To create a cert file from your [Let's Encrypt](https://letsencrypt.org/)-certificate, use 
+
+```
+openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -CAfile chain.pem -caname root -name ghs-server -out ghs-server.p12
+```
+
+This will ask for a password and afterwards create a `ghs-server.p12`-file to be referenced as `server.ssl.key-store`.
+
 
 #### Automatic HTTP
 

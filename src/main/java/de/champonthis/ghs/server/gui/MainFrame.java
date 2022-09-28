@@ -46,6 +46,8 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	private ClientManager clientManager;
 	@Value("${server.port:8080}")
 	private int port;
+	@Value("${server.ssl.enabled:false}")
+	private boolean ssl;
 	private String clientUrl = null;
 
 	private JPanel topPanel = new JPanel();
@@ -85,6 +87,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 					clientManager.installLatestClient();
 					return null;
 				}
+
 				@Override
 				protected void done() {
 					installButton.setEnabled(true);
@@ -198,6 +201,11 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 		while (hosts.size() > index && !running) {
 			if (clientManager.checkClientRunning(hosts.get(index))) {
 				clientUrl = clientManager.getClientUrl(hosts.get(0));
+				openClientButton.setText("Open Client: " + clientUrl);
+				running = true;
+				openClientButton.setVisible(true);
+			} else if (ssl && clientManager.checkClientRunningHttpOnly(hosts.get(index))) {
+				clientUrl = clientManager.getClientUrl(hosts.get(0), true);
 				openClientButton.setText("Open Client: " + clientUrl);
 				running = true;
 				openClientButton.setVisible(true);
