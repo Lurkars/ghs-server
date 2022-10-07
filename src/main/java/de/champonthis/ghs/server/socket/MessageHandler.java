@@ -23,10 +23,11 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
 import de.champonthis.ghs.server.businesslogic.Manager;
-import de.champonthis.ghs.server.model.Identifier;
 import de.champonthis.ghs.server.model.GameCharacterModel;
 import de.champonthis.ghs.server.model.GameModel;
 import de.champonthis.ghs.server.model.GameMonsterModel;
+import de.champonthis.ghs.server.model.Identifier;
+import de.champonthis.ghs.server.model.Party;
 import de.champonthis.ghs.server.model.Permissions;
 import de.champonthis.ghs.server.model.Settings;
 import de.champonthis.ghs.server.socket.exception.SendErrorException;
@@ -105,6 +106,10 @@ public class MessageHandler extends TextWebSocketHandler {
 
 				if (game == null) {
 					sendError(session, "No game found for 'id=" + gameId + "'");
+				}
+
+				if (game.getParty() == null) {
+					game.setParty(new Party());
 				}
 
 				Permissions permissions = manager.getPermissionsByPassword(password);
@@ -260,7 +265,7 @@ public class MessageHandler extends TextWebSocketHandler {
 					if (permissionPermissions.isCharacters()) {
 						permissionPermissions.setCharacter(new LinkedList<Identifier>());
 					}
-					
+
 					if (permissionPermissions.isMonsters()) {
 						permissionPermissions.setMonster(new LinkedList<Identifier>());
 					}

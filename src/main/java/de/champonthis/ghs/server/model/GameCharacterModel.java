@@ -5,6 +5,8 @@ package de.champonthis.ghs.server.model;
 
 import java.util.LinkedList;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import de.champonthis.ghs.server.util.Required;
 
 /**
@@ -16,6 +18,8 @@ public class GameCharacterModel {
 	private String name;
 	@Required
 	private String edition;
+	@Required
+	private boolean marker;
 	private String title;
 	@Required
 	private int initiative;
@@ -42,10 +46,20 @@ public class GameCharacterModel {
 	@Required
 	private LinkedList<GameSummonModel> summons = new LinkedList<GameSummonModel>();
 	private CharacterProgress progress;
+	@JsonIgnore
+	private boolean initiativeVisible;
+	@JsonIgnore
+	private boolean attackModifierDeckVisible;
+	@JsonIgnore
+	private boolean fullview;
 	@Required
 	private int number;
 	@Required
 	private GameAttackModifierDeckModel attackModifierDeck = new GameAttackModifierDeckModel();
+	@Required
+	private int donations;
+	@Required
+	private boolean absent;
 
 	/**
 	 * Gets the name.
@@ -81,6 +95,24 @@ public class GameCharacterModel {
 	 */
 	public void setEdition(String edition) {
 		this.edition = edition;
+	}
+
+	/**
+	 * Checks if is marker.
+	 *
+	 * @return true, if is marker
+	 */
+	public boolean isMarker() {
+		return marker;
+	}
+
+	/**
+	 * Sets the marker.
+	 *
+	 * @param marker the new marker
+	 */
+	public void setMarker(boolean marker) {
+		this.marker = marker;
 	}
 
 	/**
@@ -336,6 +368,60 @@ public class GameCharacterModel {
 	}
 
 	/**
+	 * Checks if is initiative visible.
+	 *
+	 * @return true, if is initiative visible
+	 */
+	public boolean isInitiativeVisible() {
+		return initiativeVisible;
+	}
+
+	/**
+	 * Sets the initiative visible.
+	 *
+	 * @param initiativeVisible the new initiative visible
+	 */
+	public void setInitiativeVisible(boolean initiativeVisible) {
+		this.initiativeVisible = initiativeVisible;
+	}
+
+	/**
+	 * Checks if is attack modifier deck visible.
+	 *
+	 * @return true, if is attack modifier deck visible
+	 */
+	public boolean isAttackModifierDeckVisible() {
+		return attackModifierDeckVisible;
+	}
+
+	/**
+	 * Sets the attack modifier deck visible.
+	 *
+	 * @param attackModifierDeckVisible the new attack modifier deck visible
+	 */
+	public void setAttackModifierDeckVisible(boolean attackModifierDeckVisible) {
+		this.attackModifierDeckVisible = attackModifierDeckVisible;
+	}
+
+	/**
+	 * Checks if is fullview.
+	 *
+	 * @return true, if is fullview
+	 */
+	public boolean isFullview() {
+		return fullview;
+	}
+
+	/**
+	 * Sets the fullview.
+	 *
+	 * @param fullview the new fullview
+	 */
+	public void setFullview(boolean fullview) {
+		this.fullview = fullview;
+	}
+
+	/**
 	 * Gets the number.
 	 *
 	 * @return the number
@@ -369,6 +455,42 @@ public class GameCharacterModel {
 	 */
 	public void setAttackModifierDeck(GameAttackModifierDeckModel attackModifierDeck) {
 		this.attackModifierDeck = attackModifierDeck;
+	}
+
+	/**
+	 * Gets the donations.
+	 *
+	 * @return the donations
+	 */
+	public int getDonations() {
+		return donations;
+	}
+
+	/**
+	 * Sets the donations.
+	 *
+	 * @param donations the new donations
+	 */
+	public void setDonations(int donations) {
+		this.donations = donations;
+	}
+
+	/**
+	 * Checks if is absent.
+	 *
+	 * @return true, if is absent
+	 */
+	public boolean isAbsent() {
+		return absent;
+	}
+
+	/**
+	 * Sets the absent.
+	 *
+	 * @param absent the new absent
+	 */
+	public void setAbsent(boolean absent) {
+		this.absent = absent;
 	}
 
 }

@@ -15,6 +15,7 @@ public class GameScenarioModel {
 	private String group;
 	@Required
 	private String edition;
+	private boolean isCustom = false;
 	private String custom;
 
 	/**
@@ -74,9 +75,27 @@ public class GameScenarioModel {
 	/**
 	 * Checks if is custom.
 	 *
-	 * @return the string
+	 * @return true, if is custom
 	 */
-	public String isCustom() {
+	public boolean isCustom() {
+		return isCustom;
+	}
+
+	/**
+	 * Sets the custom.
+	 *
+	 * @param isCustom the new custom
+	 */
+	public void setCustom(boolean isCustom) {
+		this.isCustom = isCustom;
+	}
+
+	/**
+	 * Gets the custom.
+	 *
+	 * @return the custom
+	 */
+	public String getCustom() {
 		return custom;
 	}
 

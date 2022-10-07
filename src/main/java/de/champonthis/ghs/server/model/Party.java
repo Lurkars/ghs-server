@@ -5,21 +5,48 @@ package de.champonthis.ghs.server.model;
 
 import java.util.LinkedList;
 
+import de.champonthis.ghs.server.util.Required;
+
 /**
  * The Class Party.
  */
 public class Party {
 
+	private int id = 0;
 	private String name;
+	private String edition;
 	private String location;
 	private String notes;
 	private String achievements;
 	private int reputation = 0;
 	private int prosperity = 0;
+	@Required
 	private LinkedList<GameScenarioModel> scenarios = new LinkedList<GameScenarioModel>();
+	@Required
 	private LinkedList<GameScenarioModel> manualScenarios = new LinkedList<GameScenarioModel>();
 	private boolean campaignMode = false;
 	private String globalAchievements;
+	private int donations = 0;
+	@Required
+	private LinkedList<GameCharacterModel> characters = new LinkedList<GameCharacterModel>();
+
+	/**
+	 * Gets the id.
+	 *
+	 * @return the id
+	 */
+	public int getId() {
+		return id;
+	}
+
+	/**
+	 * Sets the id.
+	 *
+	 * @param id the new id
+	 */
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	/**
 	 * Gets the name.
@@ -37,6 +64,24 @@ public class Party {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Gets the edition.
+	 *
+	 * @return the edition
+	 */
+	public String getEdition() {
+		return edition;
+	}
+
+	/**
+	 * Sets the edition.
+	 *
+	 * @param edition the new edition
+	 */
+	public void setEdition(String edition) {
+		this.edition = edition;
 	}
 
 	/**
@@ -199,6 +244,42 @@ public class Party {
 	 */
 	public void setGlobalAchievements(String globalAchievements) {
 		this.globalAchievements = globalAchievements;
+	}
+
+	/**
+	 * Gets the donations.
+	 *
+	 * @return the donations
+	 */
+	public int getDonations() {
+		return donations;
+	}
+
+	/**
+	 * Sets the donations.
+	 *
+	 * @param donations the new donations
+	 */
+	public void setDonations(int donations) {
+		this.donations = donations;
+	}
+
+	/**
+	 * Gets the characters.
+	 *
+	 * @return the characters
+	 */
+	public LinkedList<GameCharacterModel> getCharacters() {
+		return characters;
+	}
+
+	/**
+	 * Sets the characters.
+	 *
+	 * @param characters the new characters
+	 */
+	public void setCharacters(LinkedList<GameCharacterModel> characters) {
+		this.characters = characters;
 	}
 
 }

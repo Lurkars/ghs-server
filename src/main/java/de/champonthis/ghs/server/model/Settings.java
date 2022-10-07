@@ -54,6 +54,8 @@ public class Settings {
 	@Required
 	private boolean dragValues = true;
 	@Required
+	private boolean hideAbsent = false;
+	@Required
 	private boolean hints = true;
 	@Required
 	private int zoom = 100;
@@ -490,6 +492,24 @@ public class Settings {
 	 */
 	public void setDragValues(boolean dragValues) {
 		this.dragValues = dragValues;
+	}
+
+	/**
+	 * Checks if is hide absent.
+	 *
+	 * @return true, if is hide absent
+	 */
+	public boolean isHideAbsent() {
+		return hideAbsent;
+	}
+
+	/**
+	 * Sets the hide absent.
+	 *
+	 * @param hideAbsent the new hide absent
+	 */
+	public void setHideAbsent(boolean hideAbsent) {
+		this.hideAbsent = hideAbsent;
 	}
 
 	/**

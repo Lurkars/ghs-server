@@ -56,7 +56,10 @@ public class GameModel {
 	private LinkedList<Element> elements = new LinkedList<Element>();
 	@Required
 	private boolean solo = false;
-	private Party party;
+	@Required
+	private Party party = new Party();
+	@Required
+	private LinkedList<Party> parties = new LinkedList<Party>();
 
 	/**
 	 * Gets the edition.
@@ -488,6 +491,24 @@ public class GameModel {
 	 */
 	public void setParty(Party party) {
 		this.party = party;
+	}
+
+	/**
+	 * Gets the parties.
+	 *
+	 * @return the parties
+	 */
+	public LinkedList<Party> getParties() {
+		return parties;
+	}
+
+	/**
+	 * Sets the parties.
+	 *
+	 * @param parties the new parties
+	 */
+	public void setParties(LinkedList<Party> parties) {
+		this.parties = parties;
 	}
 
 }
