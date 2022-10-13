@@ -26,6 +26,8 @@ public class Party {
 	private LinkedList<GameScenarioModel> manualScenarios = new LinkedList<GameScenarioModel>();
 	private boolean campaignMode = false;
 	private String globalAchievements;
+	@Required
+	private LinkedList<Identifier> treasures = new LinkedList<Identifier>();
 	private int donations = 0;
 	@Required
 	private LinkedList<GameCharacterModel> characters = new LinkedList<GameCharacterModel>();
@@ -244,6 +246,24 @@ public class Party {
 	 */
 	public void setGlobalAchievements(String globalAchievements) {
 		this.globalAchievements = globalAchievements;
+	}
+
+	/**
+	 * Gets the treasures.
+	 *
+	 * @return the treasures
+	 */
+	public LinkedList<Identifier> getTreasures() {
+		return treasures;
+	}
+
+	/**
+	 * Sets the treasures.
+	 *
+	 * @param treasures the new treasures
+	 */
+	public void setTreasures(LinkedList<Identifier> treasures) {
+		this.treasures = treasures;
 	}
 
 	/**
