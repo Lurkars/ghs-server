@@ -66,6 +66,8 @@ public class Settings {
 	@Required
 	private String locale = "en";
 	@Required
+	private LinkedList<String> editions = new LinkedList<String>();
+	@Required
 	private LinkedList<String> editionDataUrls = new LinkedList<String>();
 	@Required
 	private LinkedList<String> excludeEditionDataUrls = new LinkedList<String>();
@@ -600,6 +602,24 @@ public class Settings {
 	 */
 	public void setLocale(String locale) {
 		this.locale = locale;
+	}
+
+	/**
+	 * Gets the editions.
+	 *
+	 * @return the editions
+	 */
+	public LinkedList<String> getEditions() {
+		return editions;
+	}
+
+	/**
+	 * Sets the editions.
+	 *
+	 * @param editions the new editions
+	 */
+	public void setEditions(LinkedList<String> editions) {
+		this.editions = editions;
 	}
 
 	/**

@@ -20,6 +20,17 @@ Download the corresponding latest `jar`-executable from the [latest release](htt
 
 Execute the `jar`-file with your Java Runtime Environment or run `java -jar ghs-server-*.jar` in your terminal.
 
+### Build and run using Docker
+
+If you want to use docker for running on port 8080 execute following:
+
+```shell
+docker build -t ghs-server .
+docker run --rm -p 8080:8080 ghs-server
+```
+
+For usage with docker compose, simple run `docker compose up -d`.
+
 ### Serve client
 
 The server is also capable of serving the client. Simple click the "Install latest Client" button in GUI. If you run headless, just download zip file (NOT source code!) of [Gloomhaven Secretary Release](https://github.com/Lurkars/gloomhavensecretary/releases) and extract in folder `<your-home-folder>/.ghs/gloomhavensecretary`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}/index.html` (`http://localhost:8080/index.html` with default values). To automatic install latest client on startup, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.lastestClientOnStartup=true`.
