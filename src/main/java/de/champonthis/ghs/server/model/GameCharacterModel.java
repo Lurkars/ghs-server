@@ -47,10 +47,6 @@ public class GameCharacterModel {
 	private LinkedList<GameSummonModel> summons = new LinkedList<GameSummonModel>();
 	private CharacterProgress progress;
 	@JsonIgnore
-	private boolean initiativeVisible;
-	@JsonIgnore
-	private boolean attackModifierDeckVisible;
-	@JsonIgnore
 	private boolean fullview;
 	@Required
 	private int number;
@@ -365,42 +361,6 @@ public class GameCharacterModel {
 	 */
 	public void setProgress(CharacterProgress progress) {
 		this.progress = progress;
-	}
-
-	/**
-	 * Checks if is initiative visible.
-	 *
-	 * @return true, if is initiative visible
-	 */
-	public boolean isInitiativeVisible() {
-		return initiativeVisible;
-	}
-
-	/**
-	 * Sets the initiative visible.
-	 *
-	 * @param initiativeVisible the new initiative visible
-	 */
-	public void setInitiativeVisible(boolean initiativeVisible) {
-		this.initiativeVisible = initiativeVisible;
-	}
-
-	/**
-	 * Checks if is attack modifier deck visible.
-	 *
-	 * @return true, if is attack modifier deck visible
-	 */
-	public boolean isAttackModifierDeckVisible() {
-		return attackModifierDeckVisible;
-	}
-
-	/**
-	 * Sets the attack modifier deck visible.
-	 *
-	 * @param attackModifierDeckVisible the new attack modifier deck visible
-	 */
-	public void setAttackModifierDeckVisible(boolean attackModifierDeckVisible) {
-		this.attackModifierDeckVisible = attackModifierDeckVisible;
 	}
 
 	/**
