@@ -50,6 +50,10 @@ public class Settings {
 	@Required
 	private boolean autoscroll = true;
 	@Required
+	private boolean scenarioRules = true;
+	@Required
+	private boolean scenarioNumberInput = false;
+	@Required
 	private boolean disableColumns = false;
 	@Required
 	private boolean dragValues = true;
@@ -458,6 +462,42 @@ public class Settings {
 	 */
 	public void setAutoscroll(boolean autoscroll) {
 		this.autoscroll = autoscroll;
+	}
+
+	/**
+	 * Checks if is scenario rules.
+	 *
+	 * @return true, if is scenario rules
+	 */
+	public boolean isScenarioRules() {
+		return scenarioRules;
+	}
+
+	/**
+	 * Sets the scenario rules.
+	 *
+	 * @param scenarioRules the new scenario rules
+	 */
+	public void setScenarioRules(boolean scenarioRules) {
+		this.scenarioRules = scenarioRules;
+	}
+
+	/**
+	 * Checks if is scenario number input.
+	 *
+	 * @return true, if is scenario number input
+	 */
+	public boolean isScenarioNumberInput() {
+		return scenarioNumberInput;
+	}
+
+	/**
+	 * Sets the scenario number input.
+	 *
+	 * @param scenarioNumberInput the new scenario number input
+	 */
+	public void setScenarioNumberInput(boolean scenarioNumberInput) {
+		this.scenarioNumberInput = scenarioNumberInput;
 	}
 
 	/**

@@ -27,6 +27,8 @@ public class GameModel {
 	@Required
 	private LinkedList<GameScenarioModel> sections = new LinkedList<GameScenarioModel>();
 	@Required
+	private LinkedList<ScenarioRuleIdentifier> scenarioRules = new LinkedList<ScenarioRuleIdentifier>();
+	@Required
 	private int level = 1;
 	@Required
 	private boolean levelCalculation = true;
@@ -203,6 +205,24 @@ public class GameModel {
 	 */
 	public void setSections(LinkedList<GameScenarioModel> sections) {
 		this.sections = sections;
+	}
+
+	/**
+	 * Gets the scenario rules.
+	 *
+	 * @return the scenario rules
+	 */
+	public LinkedList<ScenarioRuleIdentifier> getScenarioRules() {
+		return scenarioRules;
+	}
+
+	/**
+	 * Sets the scenario rules.
+	 *
+	 * @param scenarioRules the new scenario rules
+	 */
+	public void setScenarioRules(LinkedList<ScenarioRuleIdentifier> scenarioRules) {
+		this.scenarioRules = scenarioRules;
 	}
 
 	/**
