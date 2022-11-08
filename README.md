@@ -4,11 +4,11 @@ This is a server component for [Gloomhaven Secretary](https://gloomhaven-secreta
 
 It's a java application to run on most systems the old [Gloomhaven Helper](http://esotericsoftware.com/gloomhaven-helper) (by [Esoteric Software®](http://esotericsoftware.com)) Desktop version run. Besides an headless mode is integrated.
 
-A public server is available under `gloomhaven-secretary.de` port `8443` with `secure` option.
+A public server is available under `gloomhaven-secretary.de` port `8443` with `secure` option. I also manage a public server list, so please contact me, if you're running a public instance yourself.
 
 ## Support
 
-☕ [Buy me a coffee?](https://ko-fi.com/lurkars)
+☕ [Buy me a coffee?](https://ko-fi.com/lurkars) (or [Direct Donation via PayPal](https://paypal.me/Lurkars))
 
 ## How to run
 

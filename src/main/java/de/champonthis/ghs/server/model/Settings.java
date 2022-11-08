@@ -44,6 +44,8 @@ public class Settings {
 	@Required
 	private boolean disableStandees = false;
 	@Required
+	private boolean abilityReveal = true;
+	@Required
 	private boolean fullscreen = false;
 	@Required
 	private boolean fhStyle = false;
@@ -408,6 +410,24 @@ public class Settings {
 	 */
 	public void setDisableStandees(boolean disableStandees) {
 		this.disableStandees = disableStandees;
+	}
+
+	/**
+	 * Checks if is ability reveal.
+	 *
+	 * @return true, if is ability reveal
+	 */
+	public boolean isAbilityReveal() {
+		return abilityReveal;
+	}
+
+	/**
+	 * Sets the ability reveal.
+	 *
+	 * @param abilityReveal the new ability reveal
+	 */
+	public void setAbilityReveal(boolean abilityReveal) {
+		this.abilityReveal = abilityReveal;
 	}
 
 	/**
