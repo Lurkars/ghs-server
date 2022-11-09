@@ -15,7 +15,7 @@ jobs:
           java-version: "11"
           distribution: "adopt"
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots clean package
+        run: mvn --batch-mode --update-snapshots clean package -P melody
       - uses: mdallasanta/ssh-scp-deploy@v1.2.0
         with:
           local: "./target/ghs-server-${{github.ref_name}}.jar"

@@ -33,7 +33,7 @@ For usage with docker compose, simple run `docker compose up -d`.
 
 ### Serve client
 
-The server is also capable of serving the client. Simple click the "Install latest Client" button in GUI. If you run headless, just download zip file (NOT source code!) of [Gloomhaven Secretary Release](https://github.com/Lurkars/gloomhavensecretary/releases) and extract in folder `<your-home-folder>/.ghs/gloomhavensecretary`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}/index.html` (`http://localhost:8080/index.html` with default values). To automatic install latest client on startup, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.lastestClientOnStartup=true`.
+The server is also capable of serving the client. Simple click the "Install latest Client" button in GUI. If you run headless, just download zip file (NOT source code!) of [Gloomhaven Secretary Release](https://github.com/Lurkars/gloomhavensecretary/releases) and extract in folder `<your-home-folder>/.ghs/gloomhavensecretary`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}` (`http://localhost:8080` with default values). To automatic install latest client on startup, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.lastestClientOnStartup=true`.
 
 ### Run headless
 
@@ -83,11 +83,7 @@ On the first time, just choose the **Password** of your choice. This will create
 
 ## Missing / Upcoming
 
-- ~~Adding/Changing passwords with specific permissions~~
-  - ~~for example grant clients only updating a special character, so each player can only change it's own values~~
-  - ~~allow different games on same server (for public servers for example)~~
 - updated GUI (it's more a placeholder by now)
-  - ~~show available IPs/Hostnames + port for easier connection~~
   - add/change/update password/permissions
 - optional: track Undo/Redo also on server
 

@@ -8,7 +8,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>11</java.version>
-		<revision>0.24.3</revision>
+		<revision>0.24.4</revision>
 	</properties>
 
 	<parent>
@@ -54,6 +54,24 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 	</dependencies>
+
+	<profiles>
+		<profile>
+			<id>melody</id>
+			<dependencies>
+				<dependency>
+					<groupId>net.bull.javamelody</groupId>
+					<artifactId>javamelody-spring-boot-starter</artifactId>
+					<version>1.91.0</version>
+				</dependency>
+
+				<dependency>
+					<groupId>org.springframework.boot</groupId>
+					<artifactId>spring-boot-starter-actuator</artifactId>
+				</dependency>
+			</dependencies>
+		</profile>
+	</profiles>
 
 	<build>
 		<plugins>
