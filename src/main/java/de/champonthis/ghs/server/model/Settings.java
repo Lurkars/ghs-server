@@ -66,6 +66,8 @@ public class Settings {
 	@Required
 	private int zoom = 100;
 	@Required
+	private boolean automaticAttackModifierFullscreen = true;
+	@Required
 	private int barsize = 1;
 	@Required
 	private int fontsize = 1;
@@ -608,6 +610,25 @@ public class Settings {
 	 */
 	public void setZoom(int zoom) {
 		this.zoom = zoom;
+	}
+
+	/**
+	 * Checks if is automatic attack modifier fullscreen.
+	 *
+	 * @return true, if is automatic attack modifier fullscreen
+	 */
+	public boolean isAutomaticAttackModifierFullscreen() {
+		return automaticAttackModifierFullscreen;
+	}
+
+	/**
+	 * Sets the automatic attack modifier fullscreen.
+	 *
+	 * @param automaticAttackModifierFullscreen the new automatic attack modifier
+	 *                                          fullscreen
+	 */
+	public void setAutomaticAttackModifierFullscreen(boolean automaticAttackModifierFullscreen) {
+		this.automaticAttackModifierFullscreen = automaticAttackModifierFullscreen;
 	}
 
 	/**
