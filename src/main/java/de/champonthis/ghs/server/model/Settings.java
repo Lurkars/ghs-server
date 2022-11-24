@@ -46,6 +46,8 @@ public class Settings {
 	@Required
 	private boolean abilityReveal = true;
 	@Required
+	private boolean alwaysLootDeck = false;
+	@Required
 	private boolean fullscreen = false;
 	@Required
 	private boolean fhStyle = false;
@@ -430,6 +432,24 @@ public class Settings {
 	 */
 	public void setAbilityReveal(boolean abilityReveal) {
 		this.abilityReveal = abilityReveal;
+	}
+
+	/**
+	 * Checks if is always loot deck.
+	 *
+	 * @return true, if is always loot deck
+	 */
+	public boolean isAlwaysLootDeck() {
+		return alwaysLootDeck;
+	}
+
+	/**
+	 * Sets the always loot deck.
+	 *
+	 * @param alwaysLootDeck the new always loot deck
+	 */
+	public void setAlwaysLootDeck(boolean alwaysLootDeck) {
+		this.alwaysLootDeck = alwaysLootDeck;
 	}
 
 	/**
