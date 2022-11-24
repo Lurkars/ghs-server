@@ -30,6 +30,8 @@ public class Permissions {
 	private boolean level = false;
 	@Required
 	private boolean attackModifiers = false;
+	@Required
+	private boolean lootDeck = false;
 
 	/**
 	 * Checks if is characters.
@@ -191,6 +193,24 @@ public class Permissions {
 	 */
 	public void setAttackModifiers(boolean attackModifiers) {
 		this.attackModifiers = attackModifiers;
+	}
+
+	/**
+	 * Checks if is loot deck.
+	 *
+	 * @return true, if is loot deck
+	 */
+	public boolean isLootDeck() {
+		return lootDeck;
+	}
+
+	/**
+	 * Sets the loot deck.
+	 *
+	 * @param lootDeck the new loot deck
+	 */
+	public void setLootDeck(boolean lootDeck) {
+		this.lootDeck = lootDeck;
 	}
 
 }

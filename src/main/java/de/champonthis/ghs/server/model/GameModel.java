@@ -62,6 +62,8 @@ public class GameModel {
 	private Party party = new Party();
 	@Required
 	private LinkedList<Party> parties = new LinkedList<Party>();
+	@Required
+	private LootDeck lootDeck = new LootDeck();
 
 	/**
 	 * Gets the edition.
@@ -529,6 +531,24 @@ public class GameModel {
 	 */
 	public void setParties(LinkedList<Party> parties) {
 		this.parties = parties;
+	}
+
+	/**
+	 * Gets the loot deck.
+	 *
+	 * @return the loot deck
+	 */
+	public LootDeck getLootDeck() {
+		return lootDeck;
+	}
+
+	/**
+	 * Sets the loot deck.
+	 *
+	 * @param lootDeck the new loot deck
+	 */
+	public void setLootDeck(LootDeck lootDeck) {
+		this.lootDeck = lootDeck;
 	}
 
 }
