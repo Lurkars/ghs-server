@@ -14,6 +14,8 @@ public class Loot {
 	private LootType type;
 	@Required
 	private String value;
+	@Required
+	private int enhancements = 0;
 
 	/**
 	 * Gets the type.
@@ -49,6 +51,24 @@ public class Loot {
 	 */
 	public void setValue(String value) {
 		this.value = value;
+	}
+
+	/**
+	 * Gets the enhancements.
+	 *
+	 * @return the enhancements
+	 */
+	public int getEnhancements() {
+		return enhancements;
+	}
+
+	/**
+	 * Sets the enhancements.
+	 *
+	 * @param enhancements the new enhancements
+	 */
+	public void setEnhancements(int enhancements) {
+		this.enhancements = enhancements;
 	}
 
 }
