@@ -52,6 +52,8 @@ public class Settings {
 	@Required
 	private boolean fhStyle = false;
 	@Required
+	private String theme = "default";
+	@Required
 	private boolean autoscroll = true;
 	@Required
 	private boolean scenarioRules = true;
@@ -486,6 +488,24 @@ public class Settings {
 	 */
 	public void setFhStyle(boolean fhStyle) {
 		this.fhStyle = fhStyle;
+	}
+
+	/**
+	 * Gets the theme.
+	 *
+	 * @return the theme
+	 */
+	public String getTheme() {
+		return theme;
+	}
+
+	/**
+	 * Sets the theme.
+	 *
+	 * @param theme the new theme
+	 */
+	public void setTheme(String theme) {
+		this.theme = theme;
 	}
 
 	/**
