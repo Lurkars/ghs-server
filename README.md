@@ -1,6 +1,6 @@
 # Gloomhaven Secretariat Server (ghs-server)
 
-This is a server component for [Gloomhaven Secretariat](https://gloomhaven-secretaryde.) ([Source](https://github.com/Lurkars/gloomhavensecretariat)). It synchronizes the game state between all clients via websockets. Access is controlled by providing a password in all messages.
+This is a server component for [Gloomhaven Secretariat](https://gloomhaven-secretary.de) ([Source](https://github.com/Lurkars/gloomhavensecretariat)). It synchronizes the game state between all clients via websockets. Access is controlled by providing a password in all messages.
 
 It's a java application to run on most systems the old [Gloomhaven Helper](http://esotericsoftware.com/gloomhaven-helper) (by [Esoteric Software®](http://esotericsoftware.com)) Desktop version run. Besides an headless mode is integrated.
 
