@@ -22,7 +22,7 @@ public class WebConfig implements WebMvcConfigurer {
 		registry.addResourceHandler("/noclient.html").addResourceLocations("classpath:/public/noclient.html");
 
 		registry.addResourceHandler("/**").addResourceLocations(
-				"file:" + new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretary")
+				"file:" + new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretariat")
 						.getAbsolutePath() + File.separator);
 	}
 

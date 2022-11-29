@@ -30,7 +30,7 @@ public class ClientRedirectController {
 			"Connection!=keep-alive, Upgrade" })
 	public RedirectView redirectWithUsingRedirectView() {
 		Resource resource = resourceLoader.getResource(
-				"file:" + new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretary")
+				"file:" + new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretariat")
 						.getAbsolutePath() + File.separator + "index.html");
 
 		if (resource.exists()) {
