@@ -89,7 +89,7 @@ public class ClientManager implements SmartInitializingSingleton {
 				ZipEntry entry = zipIn.getNextEntry();
 
 				File outputPath = new File(System.getProperty("user.home"),
-						".ghs" + File.separator + "gloomhavensecretariat);
+						".ghs" + File.separator + "gloomhavensecretariat");
 				// clear old files
 				if (outputPath.exists()) {
 					if (outputPath.isDirectory()) {
