@@ -1,6 +1,6 @@
-# Gloomhaven Secretary Server (ghs-server)
+# Gloomhaven Secretariat Server (ghs-server)
 
-This is a server component for [Gloomhaven Secretary](https://gloomhaven-secretaryde.) ([Source](https://github.com/Lurkars/gloomhavensecretary)). It synchronizes the game state between all clients via websockets. Access is controlled by providing a password in all messages.
+This is a server component for [Gloomhaven Secretariat](https://gloomhaven-secretaryde.) ([Source](https://github.com/Lurkars/gloomhavensecretariat)). It synchronizes the game state between all clients via websockets. Access is controlled by providing a password in all messages.
 
 It's a java application to run on most systems the old [Gloomhaven Helper](http://esotericsoftware.com/gloomhaven-helper) (by [Esoteric Software®](http://esotericsoftware.com)) Desktop version run. Besides an headless mode is integrated.
 
@@ -33,7 +33,7 @@ For usage with docker compose, simple run `docker compose up -d`.
 
 ### Serve client
 
-The server is also capable of serving the client. Simple click the "Install latest Client" button in GUI. If you run headless, just download zip file (NOT source code!) of [Gloomhaven Secretary Release](https://github.com/Lurkars/gloomhavensecretary/releases) and extract in folder `<your-home-folder>/.ghs/gloomhavensecretary`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}` (`http://localhost:8080` with default values). To automatic install latest client on startup, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.lastestClientOnStartup=true`.
+The server is also capable of serving the client. Simple click the "Install latest Client" button in GUI. If you run headless, just download zip file (NOT source code!) of [Gloomhaven Secretariat Release](https://github.com/Lurkars/gloomhavensecretariat/releases) and extract in folder `<your-home-folder>/.ghs/gloomhavensecretariat`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}` (`http://localhost:8080` with default values). To automatic install latest client on startup, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.lastestClientOnStartup=true`.
 
 ### Run headless
 
@@ -77,7 +77,7 @@ When running with SSL, a non-SSL server will be automatically available at port 
 
 ## How to use with GHS
 
-Go to the main menu in Gloomhaven Secretary (GHS) and click on **Connect to Server**. Enter the server's IP/Hostname into **Host** (on same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
+Go to the main menu in Gloomhaven Secretariat (GHS) and click on **Connect to Server**. Enter the server's IP/Hostname into **Host** (on same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
 
 On the first time, just choose the **Password** of your choice. This will create a new Game with this password. Afterwards, any connection to the server will need the same password to be set (It is not changeable by now!). Alternatively make the instance [public](#run-public) to allow multiple games/passwords. 
 
