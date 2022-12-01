@@ -51,12 +51,6 @@ public class GameModel {
 	@Required
 	private LinkedList<ElementModel> elementBoard = new LinkedList<ElementModel>();
 	@Required
-	private LinkedList<Element> newElements = new LinkedList<Element>();
-	@Required
-	private LinkedList<Element> strongElements = new LinkedList<Element>();
-	@Required
-	private LinkedList<Element> elements = new LinkedList<Element>();
-	@Required
 	private boolean solo = false;
 	@Required
 	private Party party = new Party();
@@ -425,60 +419,6 @@ public class GameModel {
 	 */
 	public void setElementBoard(LinkedList<ElementModel> elementBoard) {
 		this.elementBoard = elementBoard;
-	}
-
-	/**
-	 * Gets the new elements.
-	 *
-	 * @return the new elements
-	 */
-	public LinkedList<Element> getNewElements() {
-		return newElements;
-	}
-
-	/**
-	 * Sets the new elements.
-	 *
-	 * @param newElements the new new elements
-	 */
-	public void setNewElements(LinkedList<Element> newElements) {
-		this.newElements = newElements;
-	}
-
-	/**
-	 * Gets the strong elements.
-	 *
-	 * @return the strong elements
-	 */
-	public LinkedList<Element> getStrongElements() {
-		return strongElements;
-	}
-
-	/**
-	 * Sets the strong elements.
-	 *
-	 * @param strongElements the new strong elements
-	 */
-	public void setStrongElements(LinkedList<Element> strongElements) {
-		this.strongElements = strongElements;
-	}
-
-	/**
-	 * Gets the elements.
-	 *
-	 * @return the elements
-	 */
-	public LinkedList<Element> getElements() {
-		return elements;
-	}
-
-	/**
-	 * Sets the elements.
-	 *
-	 * @param elements the new elements
-	 */
-	public void setElements(LinkedList<Element> elements) {
-		this.elements = elements;
 	}
 
 	/**

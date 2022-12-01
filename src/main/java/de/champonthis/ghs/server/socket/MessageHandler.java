@@ -152,8 +152,12 @@ public class MessageHandler extends TextWebSocketHandler {
 						if (!permissions.isScenario() && !gameUpdate.getEdition().equals(game.getEdition())) {
 							sendError(session, "Permission(s) missing");
 						}
-						if (!permissions.isElements()
-								&& !gson.toJson(gameUpdate.getElements()).equals(gson.toJson(game.getElements()))) {
+						if (!permissions.isElements() && !gson.toJson(gameUpdate.getElementBoard())
+								.equals(gson.toJson(game.getElementBoard()))) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isLootDeck()
+								&& !gson.toJson(gameUpdate.getLootDeck()).equals(gson.toJson(game.getLootDeck()))) {
 							sendError(session, "Permission(s) missing");
 						}
 						if (!permissions.isRound() && gameUpdate.getRound() != game.getRound()) {
@@ -163,6 +167,14 @@ public class MessageHandler extends TextWebSocketHandler {
 							sendError(session, "Permission(s) missing");
 						}
 						if (!permissions.isLevel() && gameUpdate.getLevel() != game.getLevel()) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isAttackModifiers() && !gson.toJson(gameUpdate.getMonsterAttackModifierDeck())
+								.equals(gson.toJson(game.getMonsterAttackModifierDeck()))) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isAttackModifiers() && !gson.toJson(gameUpdate.getAllyAttackModifierDeck())
+								.equals(gson.toJson(game.getAllyAttackModifierDeck()))) {
 							sendError(session, "Permission(s) missing");
 						}
 						if (!permissions.isCharacters()) {

@@ -37,10 +37,6 @@ public class Settings {
 	private boolean allyAttackModifierDeck = true;
 	@Required
 	private boolean initiativeRequired = true;
-	private boolean levelCalculation = true;
-	private int levelAdjustment = 0;
-	private int bonusAdjustment = 0;
-	private boolean ge5Player = true;
 	@Required
 	private boolean disableStandees = false;
 	@Required
@@ -326,78 +322,6 @@ public class Settings {
 	 */
 	public void setInitiativeRequired(boolean initiativeRequired) {
 		this.initiativeRequired = initiativeRequired;
-	}
-
-	/**
-	 * Checks if is level calculation.
-	 *
-	 * @return true, if is level calculation
-	 */
-	public boolean isLevelCalculation() {
-		return levelCalculation;
-	}
-
-	/**
-	 * Sets the level calculation.
-	 *
-	 * @param levelCalculation the new level calculation
-	 */
-	public void setLevelCalculation(boolean levelCalculation) {
-		this.levelCalculation = levelCalculation;
-	}
-
-	/**
-	 * Gets the level adjustment.
-	 *
-	 * @return the level adjustment
-	 */
-	public int getLevelAdjustment() {
-		return levelAdjustment;
-	}
-
-	/**
-	 * Sets the level adjustment.
-	 *
-	 * @param levelAdjustment the new level adjustment
-	 */
-	public void setLevelAdjustment(int levelAdjustment) {
-		this.levelAdjustment = levelAdjustment;
-	}
-
-	/**
-	 * Gets the bonus adjustment.
-	 *
-	 * @return the bonus adjustment
-	 */
-	public int getBonusAdjustment() {
-		return bonusAdjustment;
-	}
-
-	/**
-	 * Sets the bonus adjustment.
-	 *
-	 * @param bonusAdjustment the new bonus adjustment
-	 */
-	public void setBonusAdjustment(int bonusAdjustment) {
-		this.bonusAdjustment = bonusAdjustment;
-	}
-
-	/**
-	 * Checks if is ge 5 player.
-	 *
-	 * @return true, if is ge 5 player
-	 */
-	public boolean isGe5Player() {
-		return ge5Player;
-	}
-
-	/**
-	 * Sets the ge 5 player.
-	 *
-	 * @param ge5Player the new ge 5 player
-	 */
-	public void setGe5Player(boolean ge5Player) {
-		this.ge5Player = ge5Player;
 	}
 
 	/**
