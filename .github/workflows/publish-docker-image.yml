@@ -60,5 +60,8 @@ jobs:
         run: |
           docker pull "${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}"
           docker image inspect "${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}"
-          docker pull "ghcr.io/lurkars/ghs-server:v0.30.2"
-          docker image inspect "ghcr.io/Lurkars/ghs-server:v0.30.2"
+        -
+        name: Test for GHCR
+        run: |
+          docker pull "ghcr.io/Lurkars/ghs-server:v0.30.2"
+          docker image inspect "ghcr.io/lurkars/ghs-server:v0.30.2"
