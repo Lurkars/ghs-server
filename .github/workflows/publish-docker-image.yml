@@ -51,14 +51,18 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
       -
-        name: Inspect image
+        name: Inspect Image published to Docker
         if: github.event_name != 'pull_request'
         run: |
           docker pull "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
           docker image inspect "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
-          docker pull "${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}"
-          docker image inspect "${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}"
           docker pull "gloomhavensecretariat/ghs-server"
           docker image inspect "gloomhavensecretariat/ghs-server"
-          docker pull "ghcr.io/Lurkars/ghs-server:v0.30.2"
+      -
+        name: Inspect Image published to GHCR
+        if: github.event_name != 'pull_request'
+        run: |
+          docker pull "${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}"
+          docker image inspect "${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}"
+          docker pull "ghcr.io/lurkars/ghs-server:v0.30.2"
           docker image inspect "ghcr.io/Lurkars/ghs-server:v0.30.2"
