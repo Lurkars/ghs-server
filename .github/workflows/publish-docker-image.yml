@@ -54,7 +54,11 @@ jobs:
         name: Inspect image
         if: github.event_name != 'pull_request'
         run: |
-          docker pull ${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}
-          docker image inspect ${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}
-          docker pull ${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}
-          docker image inspect ${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}
+          docker pull "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
+          docker image inspect "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
+          docker pull "${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}"
+          docker image inspect "${{ env.SLUG_GHCR }}:${{ steps.meta.outputs.version }}"
+          docker pull "gloomhavensecretariat/ghs-server"
+          docker image inspect "gloomhavensecretariat/ghs-server"
+          docker pull "ghcr.io/Lurkars/ghs-server:v0.30.2"
+          docker image inspect "ghcr.io/Lurkars/ghs-server:v0.30.2"
