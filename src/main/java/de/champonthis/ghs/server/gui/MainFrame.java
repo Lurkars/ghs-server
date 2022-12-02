@@ -125,7 +125,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 
 		this.add(bottomPanel, BorderLayout.PAGE_END);
 
-		setTitle("Gloomhaven Secretary Server");
+		setTitle("Gloomhaven Secretariat Server");
 		setSize(500, 300);
 		setLocationRelativeTo(null);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);

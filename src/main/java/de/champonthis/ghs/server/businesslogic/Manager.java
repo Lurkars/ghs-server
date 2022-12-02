@@ -94,12 +94,12 @@ public class Manager {
 			}
 		}
 
-		File clientFolder = new File("gloomhavensecretary");
+		File clientFolder = new File("gloomhavensecretariat");
 
 		if (clientFolder.exists() && clientFolder.isDirectory()) {
 			try {
 				Files.move(clientFolder.toPath(),
-						new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretary")
+						new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretariat")
 								.toPath());
 			} catch (IOException e) {
 				e.printStackTrace();

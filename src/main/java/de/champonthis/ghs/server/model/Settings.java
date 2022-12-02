@@ -37,18 +37,18 @@ public class Settings {
 	private boolean allyAttackModifierDeck = true;
 	@Required
 	private boolean initiativeRequired = true;
-	private boolean levelCalculation = true;
-	private int levelAdjustment = 0;
-	private int bonusAdjustment = 0;
-	private boolean ge5Player = true;
 	@Required
 	private boolean disableStandees = false;
 	@Required
 	private boolean abilityReveal = true;
 	@Required
+	private boolean alwaysLootDeck = false;
+	@Required
 	private boolean fullscreen = false;
 	@Required
 	private boolean fhStyle = false;
+	@Required
+	private String theme = "default";
 	@Required
 	private boolean autoscroll = true;
 	@Required
@@ -65,6 +65,8 @@ public class Settings {
 	private boolean hints = true;
 	@Required
 	private int zoom = 100;
+	@Required
+	private boolean automaticAttackModifierFullscreen = true;
 	@Required
 	private int barsize = 1;
 	@Required
@@ -323,78 +325,6 @@ public class Settings {
 	}
 
 	/**
-	 * Checks if is level calculation.
-	 *
-	 * @return true, if is level calculation
-	 */
-	public boolean isLevelCalculation() {
-		return levelCalculation;
-	}
-
-	/**
-	 * Sets the level calculation.
-	 *
-	 * @param levelCalculation the new level calculation
-	 */
-	public void setLevelCalculation(boolean levelCalculation) {
-		this.levelCalculation = levelCalculation;
-	}
-
-	/**
-	 * Gets the level adjustment.
-	 *
-	 * @return the level adjustment
-	 */
-	public int getLevelAdjustment() {
-		return levelAdjustment;
-	}
-
-	/**
-	 * Sets the level adjustment.
-	 *
-	 * @param levelAdjustment the new level adjustment
-	 */
-	public void setLevelAdjustment(int levelAdjustment) {
-		this.levelAdjustment = levelAdjustment;
-	}
-
-	/**
-	 * Gets the bonus adjustment.
-	 *
-	 * @return the bonus adjustment
-	 */
-	public int getBonusAdjustment() {
-		return bonusAdjustment;
-	}
-
-	/**
-	 * Sets the bonus adjustment.
-	 *
-	 * @param bonusAdjustment the new bonus adjustment
-	 */
-	public void setBonusAdjustment(int bonusAdjustment) {
-		this.bonusAdjustment = bonusAdjustment;
-	}
-
-	/**
-	 * Checks if is ge 5 player.
-	 *
-	 * @return true, if is ge 5 player
-	 */
-	public boolean isGe5Player() {
-		return ge5Player;
-	}
-
-	/**
-	 * Sets the ge 5 player.
-	 *
-	 * @param ge5Player the new ge 5 player
-	 */
-	public void setGe5Player(boolean ge5Player) {
-		this.ge5Player = ge5Player;
-	}
-
-	/**
 	 * Checks if is disable standees.
 	 *
 	 * @return true, if is disable standees
@@ -431,6 +361,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is always loot deck.
+	 *
+	 * @return true, if is always loot deck
+	 */
+	public boolean isAlwaysLootDeck() {
+		return alwaysLootDeck;
+	}
+
+	/**
+	 * Sets the always loot deck.
+	 *
+	 * @param alwaysLootDeck the new always loot deck
+	 */
+	public void setAlwaysLootDeck(boolean alwaysLootDeck) {
+		this.alwaysLootDeck = alwaysLootDeck;
+	}
+
+	/**
 	 * Checks if is fullscreen.
 	 *
 	 * @return true, if is fullscreen
@@ -464,6 +412,24 @@ public class Settings {
 	 */
 	public void setFhStyle(boolean fhStyle) {
 		this.fhStyle = fhStyle;
+	}
+
+	/**
+	 * Gets the theme.
+	 *
+	 * @return the theme
+	 */
+	public String getTheme() {
+		return theme;
+	}
+
+	/**
+	 * Sets the theme.
+	 *
+	 * @param theme the new theme
+	 */
+	public void setTheme(String theme) {
+		this.theme = theme;
 	}
 
 	/**
@@ -608,6 +574,25 @@ public class Settings {
 	 */
 	public void setZoom(int zoom) {
 		this.zoom = zoom;
+	}
+
+	/**
+	 * Checks if is automatic attack modifier fullscreen.
+	 *
+	 * @return true, if is automatic attack modifier fullscreen
+	 */
+	public boolean isAutomaticAttackModifierFullscreen() {
+		return automaticAttackModifierFullscreen;
+	}
+
+	/**
+	 * Sets the automatic attack modifier fullscreen.
+	 *
+	 * @param automaticAttackModifierFullscreen the new automatic attack modifier
+	 *                                          fullscreen
+	 */
+	public void setAutomaticAttackModifierFullscreen(boolean automaticAttackModifierFullscreen) {
+		this.automaticAttackModifierFullscreen = automaticAttackModifierFullscreen;
 	}
 
 	/**

@@ -66,7 +66,7 @@ public class ClientManager implements SmartInitializingSingleton {
 	public boolean installLatestClient() {
 		try {
 			HttpURLConnection connection = (HttpURLConnection) new URL(
-					"https://api.github.com/repos/Lurkars/gloomhavensecretary/releases/latest").openConnection();
+					"https://api.github.com/repos/Lurkars/gloomhavensecretariat/releases/latest").openConnection();
 			connection.setRequestMethod("GET");
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String inputLine;
@@ -77,7 +77,7 @@ public class ClientManager implements SmartInitializingSingleton {
 			in.close();
 			connection.disconnect();
 
-			Pattern re = Pattern.compile(".*(https\\:\\/\\/(\\w+|\\.|\\/)+gloomhavensecretary-v(\\w+|\\.)+\\.zip).*");
+			Pattern re = Pattern.compile(".*(https\\:\\/\\/(\\w+|\\.|\\/)+gloomhavensecretariat-v(\\w+|\\.)+\\.zip).*");
 			String value = content.toString();
 			Matcher matcher = re.matcher(value);
 
@@ -89,7 +89,7 @@ public class ClientManager implements SmartInitializingSingleton {
 				ZipEntry entry = zipIn.getNextEntry();
 
 				File outputPath = new File(System.getProperty("user.home"),
-						".ghs" + File.separator + "gloomhavensecretary");
+						".ghs" + File.separator + "gloomhavensecretariat");
 				// clear old files
 				if (outputPath.exists()) {
 					if (outputPath.isDirectory()) {
@@ -127,7 +127,7 @@ public class ClientManager implements SmartInitializingSingleton {
 
 				if (defaultSettingsFile.exists() && defaultSettingsFile.isFile()) {
 					Files.copy(defaultSettingsFile.toPath(),
-							new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretary"
+							new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretariat"
 									+ File.separator + "ghs-settings-default.json").toPath());
 				}
 

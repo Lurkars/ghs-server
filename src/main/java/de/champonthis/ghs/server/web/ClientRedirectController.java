@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.servlet.view.RedirectView;
 
 /**
- * 
+ * The Class ClientRedirectController.
  */
 @Controller
 public class ClientRedirectController {
@@ -21,11 +21,16 @@ public class ClientRedirectController {
 	@Autowired
 	private ResourceLoader resourceLoader;
 
+	/**
+	 * Redirect with using redirect view.
+	 *
+	 * @return the redirect view
+	 */
 	@GetMapping(value = "/", headers = { "Connection!=upgrade", "Connection!=Upgrade", "Connection!=keep-alive, upgrade",
 			"Connection!=keep-alive, Upgrade" })
 	public RedirectView redirectWithUsingRedirectView() {
 		Resource resource = resourceLoader.getResource(
-				"file:" + new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretary")
+				"file:" + new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretariat")
 						.getAbsolutePath() + File.separator + "index.html");
 
 		if (resource.exists()) {

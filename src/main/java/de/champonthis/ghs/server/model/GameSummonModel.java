@@ -33,6 +33,8 @@ public class GameSummonModel {
 	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<GameEntityConditionModel>();
 	@Required
 	private LinkedList<String> markers = new LinkedList<String>();
+	private String action;
+	private String additionalAction;
 
 	/**
 	 * Gets the name.
@@ -266,6 +268,42 @@ public class GameSummonModel {
 	 */
 	public void setMarkers(LinkedList<String> markers) {
 		this.markers = markers;
+	}
+
+	/**
+	 * Gets the action.
+	 *
+	 * @return the action
+	 */
+	public String getAction() {
+		return action;
+	}
+
+	/**
+	 * Sets the action.
+	 *
+	 * @param action the new action
+	 */
+	public void setAction(String action) {
+		this.action = action;
+	}
+
+	/**
+	 * Gets the additional action.
+	 *
+	 * @return the additional action
+	 */
+	public String getAdditionalAction() {
+		return additionalAction;
+	}
+
+	/**
+	 * Sets the additional action.
+	 *
+	 * @param additionalAction the new additional action
+	 */
+	public void setAdditionalAction(String additionalAction) {
+		this.additionalAction = additionalAction;
 	}
 
 }
