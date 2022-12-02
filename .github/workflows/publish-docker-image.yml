@@ -74,5 +74,5 @@ jobs:
       -
         name: Test for GHCR
         run: |
-          docker pull ${{ SLUG_TEST_LC }}
-          docker image inspect ${{ SLUG_TEST_LC }}
+          docker pull ${{ env.SLUG_TEST_LC }}
+          docker image inspect ${{ env.SLUG_TEST_LC }}
