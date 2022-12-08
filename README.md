@@ -27,8 +27,8 @@ Execute the `jar`-file with your Java Runtime Environment or run `java -jar ghs-
 If you want to use docker for running on port 8080 execute following:
 
 ```shell
-docker pull ghcr.io/lurkars/ghs-server
-docker run --rm -p 8080:8080 ghcr.io/lurkars/ghs-server
+docker pull gloomhavensecretariat/ghs-server
+docker run --rm -p 8080:8080  gloomhavensecretariat/ghs-server
 ```
 
 For usage with docker compose, simple run `docker compose up -d`.
