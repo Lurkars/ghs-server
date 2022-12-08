@@ -22,11 +22,13 @@ Execute the `jar`-file with your Java Runtime Environment or run `java -jar ghs-
 
 ### Build and run using Docker
 
+[![Publish Docker Image](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml)
+
 If you want to use docker for running on port 8080 execute following:
 
 ```shell
-docker build -t ghs-server .
-docker run --rm -p 8080:8080 ghs-server
+docker pull ghcr.io/lurkars/ghs-server
+docker run --rm -p 8080:8080 ghcr.io/lurkars/ghs-server
 ```
 
 For usage with docker compose, simple run `docker compose up -d`.

@@ -1,8 +1,8 @@
 version: "3.8"
 services:
   ghs-server:
-    build:
-      context: ./
-      dockerfile: Dockerfile
+    container_name: ghs-server
+    image: ghcr.io/Lurkars/ghs-server
+
     ports:
       - "8080:8080"
