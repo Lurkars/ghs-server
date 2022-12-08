@@ -28,8 +28,16 @@ If you want to use docker for running on port 8080 execute following:
 
 ```shell
 docker pull gloomhavensecretariat/ghs-server
-docker run --rm -p 8080:8080  gloomhavensecretariat/ghs-server
+docker run --rm -p 8080:8080 --name ghs-server gloomhavensecretariat/ghs-server
 ```
+
+If you want to configure the `application.properties` file, replace the `docker run` command with
+
+```shell
+docker run --rm -p 8080:8080 -v {local_path}:/root/.ghs --name ghs-server gloomhavensecretariat/ghs-server
+```
+
+The `.ghs` folder is now accessible from your `{local_path}`.
 
 For usage with docker compose, simple run `docker compose up -d`.
 
