@@ -1,8 +1,11 @@
+name: Build and deploy release
+
 on:
+  workflow_dispatch:
   push:
     tags:
-      - "*"
-name: Build and deploy release
+      - "v*"
+
 jobs:
   build_public:
     name: Build and deploy
