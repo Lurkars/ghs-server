@@ -66,6 +66,8 @@ public class GameModel {
 	private LootDeck lootDeck = new LootDeck();
 	@Required
 	private LinkedList<Loot> lootDeckEnhancements = new LinkedList<Loot>();
+	@Required
+	private boolean server = false;
 
 	/**
 	 * Gets the edition.
@@ -569,6 +571,24 @@ public class GameModel {
 	 */
 	public void setLootDeckEnhancements(LinkedList<Loot> lootDeckEnhancements) {
 		this.lootDeckEnhancements = lootDeckEnhancements;
+	}
+
+	/**
+	 * Checks if is server.
+	 *
+	 * @return true, if is server
+	 */
+	public boolean isServer() {
+		return server;
+	}
+
+	/**
+	 * Sets the server.
+	 *
+	 * @param server the new server
+	 */
+	public void setServer(boolean server) {
+		this.server = server;
 	}
 
 }

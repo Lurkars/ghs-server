@@ -26,8 +26,8 @@ public class ClientRedirectController {
 	 *
 	 * @return the redirect view
 	 */
-	@GetMapping(value = "/", headers = { "Connection!=upgrade", "Connection!=Upgrade", "Connection!=keep-alive, upgrade",
-			"Connection!=keep-alive, Upgrade" })
+	@GetMapping(value = "/", headers = { "Connection!=upgrade", "Connection!=Upgrade",
+			"Connection!=keep-alive, upgrade", "Connection!=keep-alive, Upgrade" })
 	public RedirectView redirectWithUsingRedirectView() {
 		Resource resource = resourceLoader.getResource(
 				"file:" + new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretariat")

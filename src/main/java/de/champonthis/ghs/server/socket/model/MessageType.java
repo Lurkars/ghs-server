@@ -24,7 +24,7 @@ public enum MessageType {
 
 	@SerializedName("request-settings")
 	REQUEST_SETTINGS,
-	
+
 	@SerializedName("error")
 	ERROR,
 

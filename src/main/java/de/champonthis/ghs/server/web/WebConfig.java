@@ -17,6 +17,11 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {
 
+	/*
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#
+	 * addResourceHandlers(org.springframework.web.servlet.config.annotation.
+	 * ResourceHandlerRegistry)
+	 */
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
 		registry.addResourceHandler("/noclient.html").addResourceLocations("classpath:/public/noclient.html");

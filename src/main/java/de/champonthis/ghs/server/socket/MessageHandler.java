@@ -50,12 +50,21 @@ public class MessageHandler extends TextWebSocketHandler {
 	@Value("${ghs-server.public:false}")
 	private boolean isPublic;
 
+	/*
+	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
+	 * afterConnectionEstablished(org.springframework.web.socket.WebSocketSession)
+	 */
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
 		webSocketSessions.add(new WebSocketSessionContainer(-1, session));
 	}
 
+	/*
+	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
+	 * afterConnectionClosed(org.springframework.web.socket.WebSocketSession,
+	 * org.springframework.web.socket.CloseStatus)
+	 */
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);
@@ -68,9 +77,31 @@ public class MessageHandler extends TextWebSocketHandler {
 		}
 		if (webSocketSessionContainer != null) {
 			webSocketSessions.remove(webSocketSessionContainer);
+			int gameId = webSocketSessionContainer.getGameId();
+
+			for (WebSocketSessionContainer container : webSocketSessions) {
+				if (container.getGameId() == gameId) {
+					GameModel game = manager.getGame(gameId);
+					if (game == null) {
+						sendError(container.getSession(), "No game found for 'id=" + gameId + "'");
+					} else {
+						game.setServer(isServerSession(container.getSession(), gameId));
+						JsonObject gameResponse = new JsonObject();
+						gameResponse.addProperty("type", "game");
+						gameResponse.add("payload", gson.toJsonTree(game));
+						container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+					}
+				}
+			}
 		}
 	}
 
+	/*
+	 * @see
+	 * org.springframework.web.socket.handler.AbstractWebSocketHandler#handleMessage
+	 * (org.springframework.web.socket.WebSocketSession,
+	 * org.springframework.web.socket.WebSocketMessage)
+	 */
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
 		super.handleMessage(session, message);
@@ -114,12 +145,7 @@ public class MessageHandler extends TextWebSocketHandler {
 
 				Permissions permissions = manager.getPermissionsByPassword(password);
 
-				for (WebSocketSessionContainer container : webSocketSessions) {
-					if (container.getSession() == session) {
-						container.setGameId(gameId);
-						break;
-					}
-				}
+				game.setServer(isServerSession(session, gameId));
 
 				MessageType type = MessageType
 						.valueOf(messageObject.get("type").getAsString().toUpperCase().replace("-", "_"));
@@ -231,12 +257,16 @@ public class MessageHandler extends TextWebSocketHandler {
 						}
 					}
 
+					gameUpdate.setServer(false);
 					manager.setGame(gameId, gameUpdate);
 
 					for (WebSocketSessionContainer container : webSocketSessions) {
 						if (!container.getSession().getId().equals(session.getId())
 								&& container.getGameId() == gameId) {
 							JsonObject gameResponse = new JsonObject();
+							if (!game.isServer()) {
+								gameUpdate.setServer(isServerSession(container.getSession(), gameId));
+							}
 							gameResponse.addProperty("type", "game");
 							gameResponse.add("payload", gson.toJsonTree(gameUpdate));
 							gameResponse.add("undoinfo", messageObject.get("undoinfo"));
@@ -344,6 +374,33 @@ public class MessageHandler extends TextWebSocketHandler {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Checks if is server session.
+	 *
+	 * @param session the session
+	 * @param gameId  the game id
+	 * @return true, if is server session
+	 */
+	protected boolean isServerSession(WebSocketSession session, int gameId) {
+		int serverSessionIndex = Integer.MAX_VALUE;
+		boolean isServer = false;
+		for (WebSocketSessionContainer container : webSocketSessions) {
+			int containerIndex = webSocketSessions.indexOf(container);
+			if (container.getSession() == session) {
+				if (containerIndex < serverSessionIndex) {
+					serverSessionIndex = containerIndex;
+					isServer = true;
+				}
+				container.setGameId(gameId);
+				break;
+			} else if (container.getGameId() == gameId && containerIndex < serverSessionIndex) {
+				serverSessionIndex = containerIndex;
+				isServer = false;
+			}
+		}
+		return isServer;
 	}
 
 	/**
