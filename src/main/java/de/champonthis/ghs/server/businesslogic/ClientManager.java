@@ -48,6 +48,9 @@ public class ClientManager implements SmartInitializingSingleton {
 	private String externalHost;
 
 	/*
+	 * @see org.springframework.beans.factory.SmartInitializingSingleton#afterSingletonsInstantiated()
+	 */
+	/*
 	 * @see org.springframework.beans.factory.SmartInitializingSingleton#
 	 * afterSingletonsInstantiated()
 	 */

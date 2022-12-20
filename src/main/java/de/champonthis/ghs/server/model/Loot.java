@@ -12,7 +12,9 @@ public class Loot {
 
 	@Required
 	private LootType type;
-	@Required
+	private Integer value4P;
+	private Integer value3P;
+	private Integer value2P;
 	private String value;
 	@Required
 	private int enhancements = 0;
@@ -33,6 +35,60 @@ public class Loot {
 	 */
 	public void setType(LootType type) {
 		this.type = type;
+	}
+
+	/**
+	 * Gets the value 4 P.
+	 *
+	 * @return the value 4 P
+	 */
+	public Integer getValue4P() {
+		return value4P;
+	}
+
+	/**
+	 * Sets the value 4 P.
+	 *
+	 * @param value4p the new value 4 P
+	 */
+	public void setValue4P(Integer value4p) {
+		value4P = value4p;
+	}
+
+	/**
+	 * Gets the value 3 P.
+	 *
+	 * @return the value 3 P
+	 */
+	public Integer getValue3P() {
+		return value3P;
+	}
+
+	/**
+	 * Sets the value 3 P.
+	 *
+	 * @param value3p the new value 3 P
+	 */
+	public void setValue3P(Integer value3p) {
+		value3P = value3p;
+	}
+
+	/**
+	 * Gets the value 2 P.
+	 *
+	 * @return the value 2 P
+	 */
+	public Integer getValue2P() {
+		return value2P;
+	}
+
+	/**
+	 * Sets the value 2 P.
+	 *
+	 * @param value2p the new value 2 P
+	 */
+	public void setValue2P(Integer value2p) {
+		value2P = value2p;
 	}
 
 	/**

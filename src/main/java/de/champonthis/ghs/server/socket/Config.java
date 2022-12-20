@@ -22,6 +22,9 @@ public class Config implements WebSocketConfigurer {
 	private MessageHandler messageHandler;
 
 	/*
+	 * @see org.springframework.web.socket.config.annotation.WebSocketConfigurer#registerWebSocketHandlers(org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry)
+	 */
+	/*
 	 * @see org.springframework.web.socket.config.annotation.WebSocketConfigurer#
 	 * registerWebSocketHandlers(org.springframework.web.socket.config.annotation.
 	 * WebSocketHandlerRegistry)

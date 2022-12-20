@@ -17,6 +17,9 @@ public class HttpServerCondition implements Condition {
 	private boolean ssl;
 
 	/*
+	 * @see org.springframework.context.annotation.Condition#matches(org.springframework.context.annotation.ConditionContext, org.springframework.core.type.AnnotatedTypeMetadata)
+	 */
+	/*
 	 * @see
 	 * org.springframework.context.annotation.Condition#matches(org.springframework.
 	 * context.annotation.ConditionContext,

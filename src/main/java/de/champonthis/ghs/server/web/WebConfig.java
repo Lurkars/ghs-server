@@ -18,6 +18,9 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class WebConfig implements WebMvcConfigurer {
 
 	/*
+	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#addResourceHandlers(org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry)
+	 */
+	/*
 	 * @see org.springframework.web.servlet.config.annotation.WebMvcConfigurer#
 	 * addResourceHandlers(org.springframework.web.servlet.config.annotation.
 	 * ResourceHandlerRegistry)

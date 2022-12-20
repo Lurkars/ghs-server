@@ -42,6 +42,10 @@ public class Settings {
 	@Required
 	private boolean abilityReveal = true;
 	@Required
+	private boolean applyLoot = true;
+	@Required
+	private boolean alwaysLootApplyDialog = false;
+	@Required
 	private boolean alwaysLootDeck = false;
 	@Required
 	private boolean fullscreen = false;
@@ -358,6 +362,42 @@ public class Settings {
 	 */
 	public void setAbilityReveal(boolean abilityReveal) {
 		this.abilityReveal = abilityReveal;
+	}
+
+	/**
+	 * Checks if is apply loot.
+	 *
+	 * @return true, if is apply loot
+	 */
+	public boolean isApplyLoot() {
+		return applyLoot;
+	}
+
+	/**
+	 * Sets the apply loot.
+	 *
+	 * @param applyLoot the new apply loot
+	 */
+	public void setApplyLoot(boolean applyLoot) {
+		this.applyLoot = applyLoot;
+	}
+
+	/**
+	 * Checks if is always loot apply dialog.
+	 *
+	 * @return true, if is always loot apply dialog
+	 */
+	public boolean isAlwaysLootApplyDialog() {
+		return alwaysLootApplyDialog;
+	}
+
+	/**
+	 * Sets the always loot apply dialog.
+	 *
+	 * @param alwaysLootApplyDialog the new always loot apply dialog
+	 */
+	public void setAlwaysLootApplyDialog(boolean alwaysLootApplyDialog) {
+		this.alwaysLootApplyDialog = alwaysLootApplyDialog;
 	}
 
 	/**

@@ -51,6 +51,9 @@ public class MessageHandler extends TextWebSocketHandler {
 	private boolean isPublic;
 
 	/*
+	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#afterConnectionEstablished(org.springframework.web.socket.WebSocketSession)
+	 */
+	/*
 	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
 	 * afterConnectionEstablished(org.springframework.web.socket.WebSocketSession)
 	 */
@@ -60,6 +63,9 @@ public class MessageHandler extends TextWebSocketHandler {
 		webSocketSessions.add(new WebSocketSessionContainer(-1, session));
 	}
 
+	/*
+	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#afterConnectionClosed(org.springframework.web.socket.WebSocketSession, org.springframework.web.socket.CloseStatus)
+	 */
 	/*
 	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
 	 * afterConnectionClosed(org.springframework.web.socket.WebSocketSession,
@@ -96,6 +102,9 @@ public class MessageHandler extends TextWebSocketHandler {
 		}
 	}
 
+	/*
+	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#handleMessage(org.springframework.web.socket.WebSocketSession, org.springframework.web.socket.WebSocketMessage)
+	 */
 	/*
 	 * @see
 	 * org.springframework.web.socket.handler.AbstractWebSocketHandler#handleMessage

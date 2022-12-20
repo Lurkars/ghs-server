@@ -132,6 +132,9 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	}
 
 	/*
+	 * @see org.springframework.beans.factory.SmartInitializingSingleton#afterSingletonsInstantiated()
+	 */
+	/*
 	 * @see org.springframework.beans.factory.SmartInitializingSingleton#
 	 * afterSingletonsInstantiated()
 	 */
