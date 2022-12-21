@@ -51,7 +51,8 @@ public class MessageHandler extends TextWebSocketHandler {
 	private boolean isPublic;
 
 	/*
-	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#afterConnectionEstablished(org.springframework.web.socket.WebSocketSession)
+	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
+	 * afterConnectionEstablished(org.springframework.web.socket.WebSocketSession)
 	 */
 	/*
 	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
@@ -64,7 +65,9 @@ public class MessageHandler extends TextWebSocketHandler {
 	}
 
 	/*
-	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#afterConnectionClosed(org.springframework.web.socket.WebSocketSession, org.springframework.web.socket.CloseStatus)
+	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
+	 * afterConnectionClosed(org.springframework.web.socket.WebSocketSession,
+	 * org.springframework.web.socket.CloseStatus)
 	 */
 	/*
 	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
@@ -103,7 +106,10 @@ public class MessageHandler extends TextWebSocketHandler {
 	}
 
 	/*
-	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#handleMessage(org.springframework.web.socket.WebSocketSession, org.springframework.web.socket.WebSocketMessage)
+	 * @see
+	 * org.springframework.web.socket.handler.AbstractWebSocketHandler#handleMessage
+	 * (org.springframework.web.socket.WebSocketSession,
+	 * org.springframework.web.socket.WebSocketMessage)
 	 */
 	/*
 	 * @see
@@ -324,6 +330,8 @@ public class MessageHandler extends TextWebSocketHandler {
 					manager.savePassword(permissionPassword, gson.toJson(permissionPermissions), gameId);
 					break;
 				case REQUEST_GAME:
+					game.setServer(isServerSession(session, gameId));
+
 					JsonObject gameResponse = new JsonObject();
 					gameResponse.addProperty("type", "game");
 					gameResponse.add("payload", gson.toJsonTree(game));
@@ -333,6 +341,17 @@ public class MessageHandler extends TextWebSocketHandler {
 					permissionsResponse.addProperty("type", "permissions");
 					permissionsResponse.add("payload", gson.toJsonTree(permissions));
 					session.sendMessage(new TextMessage(gson.toJson(permissionsResponse)));
+
+					if (!game.isServer()) {
+						for (WebSocketSessionContainer container : webSocketSessions) {
+							if (container.getGameId() == gameId) {
+								JsonObject updateResponse = new JsonObject();
+								updateResponse.addProperty("type", "requestUpdate");
+								container.getSession().sendMessage(new TextMessage(gson.toJson(updateResponse)));
+								break;
+							}
+						}
+					}
 
 					break;
 				case REQUEST_SETTINGS:
