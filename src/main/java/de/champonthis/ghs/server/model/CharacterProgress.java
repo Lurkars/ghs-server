@@ -3,7 +3,9 @@
  */
 package de.champonthis.ghs.server.model;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import de.champonthis.ghs.server.util.Required;
 
@@ -15,6 +17,8 @@ public class CharacterProgress {
 	private int experience = 0;
 	private int gold = 0;
 	@Required
+	private Map<LootType, Integer> loot = new HashMap<LootType, Integer>();
+	@Required
 	private LinkedList<Identifier> items = new LinkedList<Identifier>();
 	private int personalQuest = 0;
 	private int battleGoals = 0;
@@ -23,6 +27,9 @@ public class CharacterProgress {
 	private int retirements = 0;
 	@Required
 	private LinkedList<Integer> perks = new LinkedList<Integer>();
+	@Required
+	private LinkedList<Integer> masteries = new LinkedList<Integer>();
+	private int donations = 0;
 
 	/**
 	 * Gets the experience.
@@ -58,6 +65,24 @@ public class CharacterProgress {
 	 */
 	public void setGold(int gold) {
 		this.gold = gold;
+	}
+
+	/**
+	 * Gets the loot.
+	 *
+	 * @return the loot
+	 */
+	public Map<LootType, Integer> getLoot() {
+		return loot;
+	}
+
+	/**
+	 * Sets the loot.
+	 *
+	 * @param loot the loot
+	 */
+	public void setLoot(Map<LootType, Integer> loot) {
+		this.loot = loot;
 	}
 
 	/**
@@ -184,6 +209,42 @@ public class CharacterProgress {
 	 */
 	public void setPerks(LinkedList<Integer> perks) {
 		this.perks = perks;
+	}
+
+	/**
+	 * Gets the masteries.
+	 *
+	 * @return the masteries
+	 */
+	public LinkedList<Integer> getMasteries() {
+		return masteries;
+	}
+
+	/**
+	 * Sets the masteries.
+	 *
+	 * @param masteries the new masteries
+	 */
+	public void setMasteries(LinkedList<Integer> masteries) {
+		this.masteries = masteries;
+	}
+
+	/**
+	 * Gets the donations.
+	 *
+	 * @return the donations
+	 */
+	public int getDonations() {
+		return donations;
+	}
+
+	/**
+	 * Sets the donations.
+	 *
+	 * @param donations the new donations
+	 */
+	public void setDonations(int donations) {
+		this.donations = donations;
 	}
 
 }
