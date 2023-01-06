@@ -58,6 +58,10 @@ public class Settings {
 	@Required
 	private boolean scenarioRules = true;
 	@Required
+	private boolean scenarioRooms = true;
+	@Required
+	private boolean automaticStandees = true;
+	@Required
 	private boolean scenarioNumberInput = false;
 	@Required
 	private boolean disableColumns = false;
@@ -506,6 +510,42 @@ public class Settings {
 	 */
 	public void setScenarioRules(boolean scenarioRules) {
 		this.scenarioRules = scenarioRules;
+	}
+
+	/**
+	 * Checks if is scenario rooms.
+	 *
+	 * @return true, if is scenario rooms
+	 */
+	public boolean isScenarioRooms() {
+		return scenarioRooms;
+	}
+
+	/**
+	 * Sets the scenario rooms.
+	 *
+	 * @param scenarioRooms the new scenario rooms
+	 */
+	public void setScenarioRooms(boolean scenarioRooms) {
+		this.scenarioRooms = scenarioRooms;
+	}
+
+	/**
+	 * Checks if is automatic standees.
+	 *
+	 * @return true, if is automatic standees
+	 */
+	public boolean isAutomaticStandees() {
+		return automaticStandees;
+	}
+
+	/**
+	 * Sets the automatic standees.
+	 *
+	 * @param automaticStandees the new automatic standees
+	 */
+	public void setAutomaticStandees(boolean automaticStandees) {
+		this.automaticStandees = automaticStandees;
 	}
 
 	/**

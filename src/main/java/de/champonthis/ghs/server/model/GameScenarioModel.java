@@ -3,6 +3,8 @@
  */
 package de.champonthis.ghs.server.model;
 
+import java.util.LinkedList;
+
 import de.champonthis.ghs.server.util.Required;
 
 /**
@@ -17,6 +19,8 @@ public class GameScenarioModel {
 	private String edition;
 	private boolean isCustom = false;
 	private String custom;
+	@Required
+	private LinkedList<Integer> revealedRooms = new LinkedList<Integer>();
 
 	/**
 	 * Gets the index.
@@ -106,6 +110,24 @@ public class GameScenarioModel {
 	 */
 	public void setCustom(String custom) {
 		this.custom = custom;
+	}
+
+	/**
+	 * Gets the revealed rooms.
+	 *
+	 * @return the revealed rooms
+	 */
+	public LinkedList<Integer> getRevealedRooms() {
+		return revealedRooms;
+	}
+
+	/**
+	 * Sets the revealed rooms.
+	 *
+	 * @param revealedRooms the new revealed rooms
+	 */
+	public void setRevealedRooms(LinkedList<Integer> revealedRooms) {
+		this.revealedRooms = revealedRooms;
 	}
 
 }
