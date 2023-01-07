@@ -25,6 +25,8 @@ public class GameMonsterModel {
 	@Required
 	private boolean drawExtra = false;
 	@Required
+	private int lastDraw = -1;
+	@Required
 	private int ability = -1;
 	@Required
 	private LinkedList<Integer> abilities = new LinkedList<Integer>();
@@ -139,6 +141,24 @@ public class GameMonsterModel {
 	 */
 	public void setDrawExtra(boolean drawExtra) {
 		this.drawExtra = drawExtra;
+	}
+
+	/**
+	 * Gets the last draw.
+	 *
+	 * @return the last draw
+	 */
+	public int getLastDraw() {
+		return lastDraw;
+	}
+
+	/**
+	 * Sets the last draw.
+	 *
+	 * @param lastDraw the new last draw
+	 */
+	public void setLastDraw(int lastDraw) {
+		this.lastDraw = lastDraw;
 	}
 
 	/**
