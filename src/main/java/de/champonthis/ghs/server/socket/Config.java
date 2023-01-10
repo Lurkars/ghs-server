@@ -21,14 +21,6 @@ public class Config implements WebSocketConfigurer {
 	@Autowired
 	private MessageHandler messageHandler;
 
-	/*
-	 * @see org.springframework.web.socket.config.annotation.WebSocketConfigurer#registerWebSocketHandlers(org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry)
-	 */
-	/*
-	 * @see org.springframework.web.socket.config.annotation.WebSocketConfigurer#
-	 * registerWebSocketHandlers(org.springframework.web.socket.config.annotation.
-	 * WebSocketHandlerRegistry)
-	 */
 	@Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
 		webSocketHandlerRegistry.addHandler(messageHandler, "/").setAllowedOrigins("*");

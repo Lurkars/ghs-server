@@ -131,13 +131,6 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 	}
 
-	/*
-	 * @see org.springframework.beans.factory.SmartInitializingSingleton#afterSingletonsInstantiated()
-	 */
-	/*
-	 * @see org.springframework.beans.factory.SmartInitializingSingleton#
-	 * afterSingletonsInstantiated()
-	 */
 	@Override
 	public void afterSingletonsInstantiated() {
 		this.auhtKeyTable();

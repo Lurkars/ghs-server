@@ -50,30 +50,12 @@ public class MessageHandler extends TextWebSocketHandler {
 	@Value("${ghs-server.public:false}")
 	private boolean isPublic;
 
-	/*
-	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
-	 * afterConnectionEstablished(org.springframework.web.socket.WebSocketSession)
-	 */
-	/*
-	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
-	 * afterConnectionEstablished(org.springframework.web.socket.WebSocketSession)
-	 */
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
 		webSocketSessions.add(new WebSocketSessionContainer(-1, session));
 	}
 
-	/*
-	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
-	 * afterConnectionClosed(org.springframework.web.socket.WebSocketSession,
-	 * org.springframework.web.socket.CloseStatus)
-	 */
-	/*
-	 * @see org.springframework.web.socket.handler.AbstractWebSocketHandler#
-	 * afterConnectionClosed(org.springframework.web.socket.WebSocketSession,
-	 * org.springframework.web.socket.CloseStatus)
-	 */
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);
@@ -105,18 +87,6 @@ public class MessageHandler extends TextWebSocketHandler {
 		}
 	}
 
-	/*
-	 * @see
-	 * org.springframework.web.socket.handler.AbstractWebSocketHandler#handleMessage
-	 * (org.springframework.web.socket.WebSocketSession,
-	 * org.springframework.web.socket.WebSocketMessage)
-	 */
-	/*
-	 * @see
-	 * org.springframework.web.socket.handler.AbstractWebSocketHandler#handleMessage
-	 * (org.springframework.web.socket.WebSocketSession,
-	 * org.springframework.web.socket.WebSocketMessage)
-	 */
 	@Override
 	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
 		super.handleMessage(session, message);

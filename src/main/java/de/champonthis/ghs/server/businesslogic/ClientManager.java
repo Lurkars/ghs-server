@@ -47,13 +47,6 @@ public class ClientManager implements SmartInitializingSingleton {
 	@Value("${ghs-server.externalHost:}")
 	private String externalHost;
 
-	/*
-	 * @see org.springframework.beans.factory.SmartInitializingSingleton#afterSingletonsInstantiated()
-	 */
-	/*
-	 * @see org.springframework.beans.factory.SmartInitializingSingleton#
-	 * afterSingletonsInstantiated()
-	 */
 	@Override
 	public void afterSingletonsInstantiated() {
 		if (lastestClientOnStartup) {

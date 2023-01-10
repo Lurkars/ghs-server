@@ -29,6 +29,8 @@ public class GameModel {
 	@Required
 	private LinkedList<ScenarioRuleIdentifier> scenarioRules = new LinkedList<ScenarioRuleIdentifier>();
 	@Required
+	private LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules = new LinkedList<ScenarioRuleIdentifier>();
+	@Required
 	private int level = 1;
 	@Required
 	private boolean levelCalculation = true;
@@ -40,6 +42,8 @@ public class GameModel {
 	private boolean ge5Player = true;
 	@Required
 	private int round = 0;
+	@Required
+	private LinkedList<Integer> roundResets = new LinkedList<Integer>();
 	@Required
 	private long playSeconds = 0;
 	@Required
@@ -232,6 +236,24 @@ public class GameModel {
 	}
 
 	/**
+	 * Gets the disgarded scenario rules.
+	 *
+	 * @return the disgarded scenario rules
+	 */
+	public LinkedList<ScenarioRuleIdentifier> getDisgardedScenarioRules() {
+		return disgardedScenarioRules;
+	}
+
+	/**
+	 * Sets the disgarded scenario rules.
+	 *
+	 * @param disgardedScenarioRules the new disgarded scenario rules
+	 */
+	public void setDisgardedScenarioRules(LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules) {
+		this.disgardedScenarioRules = disgardedScenarioRules;
+	}
+
+	/**
 	 * Gets the level.
 	 *
 	 * @return the level
@@ -337,6 +359,24 @@ public class GameModel {
 	 */
 	public void setRound(int round) {
 		this.round = round;
+	}
+
+	/**
+	 * Gets the round resets.
+	 *
+	 * @return the round resets
+	 */
+	public LinkedList<Integer> getRoundResets() {
+		return roundResets;
+	}
+
+	/**
+	 * Sets the round resets.
+	 *
+	 * @param roundResets the new round resets
+	 */
+	public void setRoundResets(LinkedList<Integer> roundResets) {
+		this.roundResets = roundResets;
 	}
 
 	/**

@@ -16,15 +16,6 @@ public class HttpServerCondition implements Condition {
 	@Value("${server.ssl.enabled:false}")
 	private boolean ssl;
 
-	/*
-	 * @see org.springframework.context.annotation.Condition#matches(org.springframework.context.annotation.ConditionContext, org.springframework.core.type.AnnotatedTypeMetadata)
-	 */
-	/*
-	 * @see
-	 * org.springframework.context.annotation.Condition#matches(org.springframework.
-	 * context.annotation.ConditionContext,
-	 * org.springframework.core.type.AnnotatedTypeMetadata)
-	 */
 	@Override
 	public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
 		return this.ssl || context.getEnvironment().getProperty("server.ssl.enabled", Boolean.class);
