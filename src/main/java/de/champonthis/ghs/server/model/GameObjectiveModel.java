@@ -14,6 +14,7 @@ public class GameObjectiveModel {
 
 	@Required
 	private int id;
+	private String marker;
 	private String title;
 	@Required
 	private String name;
@@ -48,6 +49,24 @@ public class GameObjectiveModel {
 	 */
 	public void setId(int id) {
 		this.id = id;
+	}
+
+	/**
+	 * Gets the marker.
+	 *
+	 * @return the marker
+	 */
+	public String getMarker() {
+		return marker;
+	}
+
+	/**
+	 * Sets the marker.
+	 *
+	 * @param marker the new marker
+	 */
+	public void setMarker(String marker) {
+		this.marker = marker;
 	}
 
 	/**
