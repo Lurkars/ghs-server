@@ -66,7 +66,7 @@ public class ClientManager implements SmartInitializingSingleton {
 			connection.setRequestMethod("GET");
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String inputLine;
-			StringBuffer content = new StringBuffer();
+			StringBuilder content = new StringBuilder();
 			while ((inputLine = in.readLine()) != null) {
 				content.append(inputLine);
 			}

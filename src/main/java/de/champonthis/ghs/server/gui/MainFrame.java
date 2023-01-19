@@ -117,9 +117,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 
 		openClientButton.setVisible(false);
 
-		quitButton.addActionListener((ActionEvent event) -> {
-			System.exit(0);
-		});
+		quitButton.addActionListener((ActionEvent event) -> System.exit(0));
 
 		bottomPanel.add(BorderLayout.EAST, quitButton);
 

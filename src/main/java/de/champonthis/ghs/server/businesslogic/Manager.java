@@ -51,14 +51,15 @@ public class Manager {
 			migrateToUserDir(dbFile);
 
 			connection = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("PRAGMA foreign_keys = ON");
-			statement.executeUpdate(
-					"CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY AUTOINCREMENT, game STRING)");
-			statement.executeUpdate(
-					"CREATE TABLE IF NOT EXISTS passwords (password STRING PRIMARY KEY, game_id INTEGER, json_path STRING, FOREIGN KEY(game_id) REFERENCES games(id))");
-			statement.executeUpdate(
-					"CREATE TABLE IF NOT EXISTS settings (game_id INTEGER PRIMARY KEY, settings STRING, FOREIGN KEY(game_id) REFERENCES games(id))");
+			try (Statement statement = connection.createStatement()) {
+				statement.executeUpdate("PRAGMA foreign_keys = ON");
+				statement.executeUpdate(
+						"CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY AUTOINCREMENT, game STRING)");
+				statement.executeUpdate(
+						"CREATE TABLE IF NOT EXISTS passwords (password STRING PRIMARY KEY, game_id INTEGER, json_path STRING, FOREIGN KEY(game_id) REFERENCES games(id))");
+				statement.executeUpdate(
+						"CREATE TABLE IF NOT EXISTS settings (game_id INTEGER PRIMARY KEY, settings STRING, FOREIGN KEY(game_id) REFERENCES games(id))");
+			}
 
 			ResultSet passwordResultSet = passwords();
 
@@ -113,8 +114,9 @@ public class Manager {
 	 * @return the result set
 	 */
 	public ResultSet passwords() {
-		try {
-			return connection.createStatement().executeQuery("SELECT game_id,password,json_path FROM passwords");
+		try (Statement statement = connection.createStatement()) {
+			return statement.executeQuery("SELECT game_id,password,json_path FROM passwords");
+
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}

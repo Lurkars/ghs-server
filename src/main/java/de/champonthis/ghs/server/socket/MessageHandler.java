@@ -278,7 +278,7 @@ public class MessageHandler extends TextWebSocketHandler {
 
 					Integer permissionGameId = manager.getGameIdByPassword(permissionPassword);
 
-					if (permissionGameId != null && permissionGameId != gameId || permissionPassword.equals(password)) {
+					if (permissionGameId != null && !permissionGameId.equals(gameId) || permissionPassword.equals(password)) {
 						sendError(session, "password already in use");
 					}
 
