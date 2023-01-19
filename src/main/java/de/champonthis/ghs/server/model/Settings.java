@@ -82,13 +82,13 @@ public class Settings {
 	@Required
 	private String locale = "en";
 	@Required
-	private LinkedList<String> editions = new LinkedList<String>();
+	private LinkedList<String> editions = new LinkedList<>();
 	@Required
-	private LinkedList<String> editionDataUrls = new LinkedList<String>();
+	private LinkedList<String> editionDataUrls = new LinkedList<>();
 	@Required
-	private LinkedList<String> excludeEditionDataUrls = new LinkedList<String>();
+	private LinkedList<String> excludeEditionDataUrls = new LinkedList<>();
 	@Required
-	private LinkedList<String> spoilers = new LinkedList<String>();
+	private LinkedList<String> spoilers = new LinkedList<>();
 	private boolean browserNavigation = false;
 	private String serverUrl;
 	private int serverPort;

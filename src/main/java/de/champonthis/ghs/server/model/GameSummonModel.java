@@ -30,9 +30,9 @@ public class GameSummonModel {
 	@Required
 	private int maxHealth;
 	@Required
-	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<GameEntityConditionModel>();
+	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<>();
 	@Required
-	private LinkedList<String> markers = new LinkedList<String>();
+	private LinkedList<String> markers = new LinkedList<>();
 	private String action;
 	private String additionalAction;
 

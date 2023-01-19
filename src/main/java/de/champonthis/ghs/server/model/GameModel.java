@@ -14,22 +14,22 @@ public class GameModel {
 
 	private String edition;
 	@Required
-	private LinkedList<String> figures = new LinkedList<String>();
+	private LinkedList<String> figures = new LinkedList<>();
 	@Required
-	private LinkedList<GameCharacterModel> characters = new LinkedList<GameCharacterModel>();
+	private LinkedList<GameCharacterModel> characters = new LinkedList<>();
 	@Required
-	private LinkedList<GameMonsterModel> monsters = new LinkedList<GameMonsterModel>();
+	private LinkedList<GameMonsterModel> monsters = new LinkedList<>();
 	@Required
-	private LinkedList<GameObjectiveModel> objectives = new LinkedList<GameObjectiveModel>();
+	private LinkedList<GameObjectiveModel> objectives = new LinkedList<>();
 	@Required
 	private GameState state = GameState.DRAW;
 	private GameScenarioModel scenario;
 	@Required
-	private LinkedList<GameScenarioModel> sections = new LinkedList<GameScenarioModel>();
+	private LinkedList<GameScenarioModel> sections = new LinkedList<>();
 	@Required
-	private LinkedList<ScenarioRuleIdentifier> scenarioRules = new LinkedList<ScenarioRuleIdentifier>();
+	private LinkedList<ScenarioRuleIdentifier> scenarioRules = new LinkedList<>();
 	@Required
-	private LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules = new LinkedList<ScenarioRuleIdentifier>();
+	private LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules = new LinkedList<>();
 	@Required
 	private int level = 1;
 	@Required
@@ -43,7 +43,7 @@ public class GameModel {
 	@Required
 	private int round = 0;
 	@Required
-	private LinkedList<Integer> roundResets = new LinkedList<Integer>();
+	private LinkedList<Integer> roundResets = new LinkedList<>();
 	@Required
 	private long playSeconds = 0;
 	@Required
@@ -53,23 +53,23 @@ public class GameModel {
 	@Required
 	private GameAttackModifierDeckModel allyAttackModifierDeck = new GameAttackModifierDeckModel();
 	@Required
-	private LinkedList<ElementModel> elementBoard = new LinkedList<ElementModel>();
+	private LinkedList<ElementModel> elementBoard = new LinkedList<>();
 	@Required
-	private LinkedList<Element> newElements = new LinkedList<Element>();
+	private LinkedList<Element> newElements = new LinkedList<>();
 	@Required
-	private LinkedList<Element> strongElements = new LinkedList<Element>();
+	private LinkedList<Element> strongElements = new LinkedList<>();
 	@Required
-	private LinkedList<Element> elements = new LinkedList<Element>();
+	private LinkedList<Element> elements = new LinkedList<>();
 	@Required
 	private boolean solo = false;
 	@Required
 	private Party party = new Party();
 	@Required
-	private LinkedList<Party> parties = new LinkedList<Party>();
+	private LinkedList<Party> parties = new LinkedList<>();
 	@Required
 	private LootDeck lootDeck = new LootDeck();
 	@Required
-	private LinkedList<Loot> lootDeckEnhancements = new LinkedList<Loot>();
+	private LinkedList<Loot> lootDeckEnhancements = new LinkedList<>();
 	@Required
 	private boolean server = false;
 

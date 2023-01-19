@@ -15,7 +15,7 @@ public class LootDeck {
 	@Required
 	private int current = -1;
 	@Required
-	private LinkedList<Loot> cards = new LinkedList<Loot>();
+	private LinkedList<Loot> cards = new LinkedList<>();
 	@Required
 	private boolean active = false;
 

@@ -15,7 +15,7 @@ public class GameAttackModifierDeckModel {
 	@Required
 	private int current;
 	@Required
-	private LinkedList<String> cards = new LinkedList<String>();
+	private LinkedList<String> cards = new LinkedList<>();
 
 	/**
 	 * Gets the current.

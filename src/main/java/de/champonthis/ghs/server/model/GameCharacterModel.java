@@ -40,11 +40,11 @@ public class GameCharacterModel {
 	@Required
 	private int maxHealth;
 	@Required
-	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<GameEntityConditionModel>();
+	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<>();
 	@Required
-	private LinkedList<String> markers = new LinkedList<String>();
+	private LinkedList<String> markers = new LinkedList<>();
 	@Required
-	private LinkedList<GameSummonModel> summons = new LinkedList<GameSummonModel>();
+	private LinkedList<GameSummonModel> summons = new LinkedList<>();
 	private CharacterProgress progress;
 	@JsonIgnore
 	private boolean fullview;

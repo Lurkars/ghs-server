@@ -36,9 +36,9 @@ public class RequiredTypeAdapterFactory implements TypeAdapterFactory {
 
 					Field[] fields = value.getClass().getDeclaredFields();
 
-					for (int i = 0; i < fields.length; i++) {
-						if (fields[i].isAnnotationPresent(Required.class)) {
-							validateNullValue(value, fields[i]);
+					for (Field field : fields) {
+						if (field.isAnnotationPresent(Required.class)) {
+							validateNullValue(value, field);
 						}
 
 					}

@@ -117,9 +117,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 
 		openClientButton.setVisible(false);
 
-		quitButton.addActionListener((ActionEvent event) -> {
-			System.exit(0);
-		});
+		quitButton.addActionListener((ActionEvent event) -> System.exit(0));
 
 		bottomPanel.add(BorderLayout.EAST, quitButton);
 
@@ -156,7 +154,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 
 			ResultSet passwordResultSet = manager.passwords();
 
-			List<Object[]> dataList = new LinkedList<Object[]>();
+			List<Object[]> dataList = new LinkedList<>();
 			if (passwordResultSet != null) {
 				while (passwordResultSet.next()) {
 					Object[] result = new Object[3];

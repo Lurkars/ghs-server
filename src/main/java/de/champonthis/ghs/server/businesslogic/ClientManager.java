@@ -66,7 +66,7 @@ public class ClientManager implements SmartInitializingSingleton {
 			connection.setRequestMethod("GET");
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String inputLine;
-			StringBuffer content = new StringBuffer();
+			StringBuilder content = new StringBuilder();
 			while ((inputLine = in.readLine()) != null) {
 				content.append(inputLine);
 			}
@@ -101,13 +101,14 @@ public class ClientManager implements SmartInitializingSingleton {
 				while (entry != null) {
 					String filePath = outputPath.getAbsolutePath() + File.separator + entry.getName();
 					if (!entry.isDirectory()) {
-						BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath));
-						byte[] bytesIn = new byte[4096];
-						int read = 0;
-						while ((read = zipIn.read(bytesIn)) != -1) {
-							bos.write(bytesIn, 0, read);
+						try (BufferedOutputStream bos = new BufferedOutputStream(
+								new FileOutputStream(filePath))) {
+							byte[] bytesIn = new byte[4096];
+							int read = 0;
+							while ((read = zipIn.read(bytesIn)) != -1) {
+								bos.write(bytesIn, 0, read);
+							}
 						}
-						bos.close();
 					} else {
 						// if the entry is a directory, make the directory
 						File dir = new File(filePath);
@@ -213,7 +214,7 @@ public class ClientManager implements SmartInitializingSingleton {
 	 * @return the hosts
 	 */
 	public List<String> getHosts() {
-		LinkedList<String> hosts = new LinkedList<String>();
+		LinkedList<String> hosts = new LinkedList<>();
 
 		if (StringUtils.hasText(externalHost)) {
 			hosts.push(externalHost);

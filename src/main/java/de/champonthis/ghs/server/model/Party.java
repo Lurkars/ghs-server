@@ -21,16 +21,16 @@ public class Party {
 	private int reputation = 0;
 	private int prosperity = 0;
 	@Required
-	private LinkedList<GameScenarioModel> scenarios = new LinkedList<GameScenarioModel>();
+	private LinkedList<GameScenarioModel> scenarios = new LinkedList<>();
 	@Required
-	private LinkedList<GameScenarioModel> manualScenarios = new LinkedList<GameScenarioModel>();
+	private LinkedList<GameScenarioModel> manualScenarios = new LinkedList<>();
 	private boolean campaignMode = false;
 	private String globalAchievements;
 	@Required
-	private LinkedList<Identifier> treasures = new LinkedList<Identifier>();
+	private LinkedList<Identifier> treasures = new LinkedList<>();
 	private int donations = 0;
 	@Required
-	private LinkedList<GameCharacterModel> characters = new LinkedList<GameCharacterModel>();
+	private LinkedList<GameCharacterModel> characters = new LinkedList<>();
 
 	/**
 	 * Gets the id.
