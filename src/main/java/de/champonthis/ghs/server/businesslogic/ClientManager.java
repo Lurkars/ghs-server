@@ -213,7 +213,7 @@ public class ClientManager implements SmartInitializingSingleton {
 	 * @return the hosts
 	 */
 	public List<String> getHosts() {
-		LinkedList<String> hosts = new LinkedList<String>();
+		LinkedList<String> hosts = new LinkedList<>();
 
 		if (StringUtils.hasText(externalHost)) {
 			hosts.push(externalHost);

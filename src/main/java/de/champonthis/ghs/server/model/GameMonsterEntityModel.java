@@ -16,7 +16,7 @@ public class GameMonsterEntityModel {
 	private int number;
 	private String marker;
 	@Required
-	private LinkedList<String> tags = new LinkedList<String>();
+	private LinkedList<String> tags = new LinkedList<>();
 	@Required
 	private MonsterType type;
 	@Required
@@ -32,9 +32,9 @@ public class GameMonsterEntityModel {
 	@Required
 	private int maxHealth;
 	@Required
-	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<GameEntityConditionModel>();
+	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<>();
 	@Required
-	private LinkedList<String> markers = new LinkedList<String>();
+	private LinkedList<String> markers = new LinkedList<>();
 
 	/**
 	 * Gets the number.

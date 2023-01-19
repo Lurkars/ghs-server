@@ -17,18 +17,18 @@ public class CharacterProgress {
 	private int experience = 0;
 	private int gold = 0;
 	@Required
-	private Map<LootType, Integer> loot = new HashMap<LootType, Integer>();
+	private Map<LootType, Integer> loot = new HashMap<>();
 	@Required
-	private LinkedList<Identifier> items = new LinkedList<Identifier>();
+	private LinkedList<Identifier> items = new LinkedList<>();
 	private int personalQuest = 0;
 	private int battleGoals = 0;
 	private String notes = "";
 	private boolean retired = false;
 	private int retirements = 0;
 	@Required
-	private LinkedList<Integer> perks = new LinkedList<Integer>();
+	private LinkedList<Integer> perks = new LinkedList<>();
 	@Required
-	private LinkedList<Integer> masteries = new LinkedList<Integer>();
+	private LinkedList<Integer> masteries = new LinkedList<>();
 	private int donations = 0;
 
 	/**

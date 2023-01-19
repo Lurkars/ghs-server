@@ -20,7 +20,7 @@ public class GameScenarioModel {
 	private boolean isCustom = false;
 	private String custom;
 	@Required
-	private LinkedList<Integer> revealedRooms = new LinkedList<Integer>();
+	private LinkedList<Integer> revealedRooms = new LinkedList<>();
 
 	/**
 	 * Gets the index.

@@ -15,11 +15,11 @@ public class Permissions {
 	@Required
 	private boolean characters = false;
 	@Required
-	private LinkedList<Identifier> character = new LinkedList<Identifier>();
+	private LinkedList<Identifier> character = new LinkedList<>();
 	@Required
 	private boolean monsters = false;
 	@Required
-	private LinkedList<Identifier> monster = new LinkedList<Identifier>();
+	private LinkedList<Identifier> monster = new LinkedList<>();
 	@Required
 	private boolean scenario = false;
 	@Required
