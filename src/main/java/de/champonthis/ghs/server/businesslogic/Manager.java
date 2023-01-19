@@ -127,8 +127,7 @@ public class Manager {
 	 * @return the int
 	 */
 	public int countPasswords() {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			ResultSet passwordCountResultSet = statement.executeQuery("SELECT count(*) FROM passwords;");
 
 			if (passwordCountResultSet.next()) {
@@ -148,8 +147,7 @@ public class Manager {
 	 * @param gameId   the game id
 	 */
 	public void createPassword(String password, int gameId) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			statement.executeUpdate(
 					"INSERT INTO passwords (game_id, password) VALUES(" + gameId + ",'" + password + "')");
 		} catch (SQLException e) {
@@ -165,8 +163,7 @@ public class Manager {
 	 * @param gameId      the game id
 	 */
 	public void savePassword(String password, String permissions, int gameId) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			if (getGameIdByPassword(password) == null) {
 				statement.executeUpdate("INSERT INTO passwords (game_id,json_path,password) VALUES(" + gameId + ",'"
 						+ permissions + "','" + password + "')");
@@ -186,8 +183,7 @@ public class Manager {
 	 * @return the game id by password
 	 */
 	public Integer getGameIdByPassword(String password) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			ResultSet gameIdResultSet = statement
 					.executeQuery("SELECT game_id FROM passwords WHERE password = '" + password + "';");
 			if (gameIdResultSet.next()) {
@@ -207,8 +203,7 @@ public class Manager {
 	 * @return the permissions by password
 	 */
 	public Permissions getPermissionsByPassword(String password) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			ResultSet gameIdResultSet = statement
 					.executeQuery("SELECT json_path FROM passwords WHERE password = '" + password + "';");
 			if (gameIdResultSet.next()) {
@@ -232,8 +227,7 @@ public class Manager {
 	 * @return the game
 	 */
 	public GameModel getGame(int id) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			ResultSet gameResultSet = statement.executeQuery("SELECT game FROM games WHERE id = " + id + ";");
 
 			if (gameResultSet.next()) {
@@ -253,8 +247,7 @@ public class Manager {
 	 * @return the integer
 	 */
 	public Integer createGame(GameModel game) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			statement.executeUpdate("INSERT INTO games (game) VALUES('" + gson.toJson(game) + "')");
 			ResultSet resultSet = statement.getGeneratedKeys();
 			return resultSet.getInt(1);
@@ -272,8 +265,7 @@ public class Manager {
 	 * @param game the game
 	 */
 	public void setGame(int id, GameModel game) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			statement.executeUpdate("UPDATE games SET game= '" + gson.toJson(game) + "' WHERE id=" + id);
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
@@ -287,8 +279,7 @@ public class Manager {
 	 * @return the settings
 	 */
 	public Settings getSettings(int gameId) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			ResultSet settingsResultSet = statement
 					.executeQuery("SELECT settings FROM settings WHERE game_id = " + gameId + ";");
 
@@ -309,8 +300,7 @@ public class Manager {
 	 * @param gameId   the game id
 	 */
 	public void createSettings(Settings settings, int gameId) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			statement.executeUpdate(
 					"INSERT INTO settings (game_id, settings) VALUES(" + gameId + ",'" + gson.toJson(settings) + "')");
 		} catch (SQLException e) {
@@ -325,8 +315,7 @@ public class Manager {
 	 * @param gameId   the game id
 	 */
 	public void setSettings(Settings settings, int gameId) {
-		try {
-			Statement statement = connection.createStatement();
+		try (Statement statement = connection.createStatement()) {
 			statement.executeUpdate(
 					"UPDATE settings SET settings= '" + gson.toJson(settings) + "' WHERE game_id=" + gameId);
 		} catch (SQLException e) {
