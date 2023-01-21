@@ -32,6 +32,7 @@ public class GameObjectiveModel {
 	@Required
 	private LinkedList<String> markers = new LinkedList<>();
 	private Integer initiative;
+	private ScenarioObjectiveIdentifier objectiveId;
 
 	/**
 	 * Gets the id.
@@ -283,6 +284,24 @@ public class GameObjectiveModel {
 	 */
 	public void setInitiative(Integer initiative) {
 		this.initiative = initiative;
+	}
+
+	/**
+	 * Gets the objective id.
+	 *
+	 * @return the objective id
+	 */
+	public ScenarioObjectiveIdentifier getObjectiveId() {
+		return objectiveId;
+	}
+
+	/**
+	 * Sets the objective id.
+	 *
+	 * @param objectiveId the new objective id
+	 */
+	public void setObjectiveId(ScenarioObjectiveIdentifier objectiveId) {
+		this.objectiveId = objectiveId;
 	}
 
 }

@@ -101,8 +101,7 @@ public class ClientManager implements SmartInitializingSingleton {
 				while (entry != null) {
 					String filePath = outputPath.getAbsolutePath() + File.separator + entry.getName();
 					if (!entry.isDirectory()) {
-						try (BufferedOutputStream bos = new BufferedOutputStream(
-								new FileOutputStream(filePath))) {
+						try (BufferedOutputStream bos = new BufferedOutputStream(new FileOutputStream(filePath))) {
 							byte[] bytesIn = new byte[4096];
 							int read = 0;
 							while ((read = zipIn.read(bytesIn)) != -1) {
