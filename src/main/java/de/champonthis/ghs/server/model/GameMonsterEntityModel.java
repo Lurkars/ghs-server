@@ -16,8 +16,6 @@ public class GameMonsterEntityModel {
 	private int number;
 	private String marker;
 	@Required
-	private LinkedList<String> tags = new LinkedList<>();
-	@Required
 	private MonsterType type;
 	@Required
 	private boolean dead;
@@ -35,6 +33,8 @@ public class GameMonsterEntityModel {
 	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<>();
 	@Required
 	private LinkedList<String> markers = new LinkedList<>();
+	@Required
+	private LinkedList<String> tags = new LinkedList<>();
 
 	/**
 	 * Gets the number.
@@ -70,24 +70,6 @@ public class GameMonsterEntityModel {
 	 */
 	public void setMarker(String marker) {
 		this.marker = marker;
-	}
-
-	/**
-	 * Gets the tags.
-	 *
-	 * @return the tags
-	 */
-	public LinkedList<String> getTags() {
-		return tags;
-	}
-
-	/**
-	 * Sets the tags.
-	 *
-	 * @param tags the new tags
-	 */
-	public void setTags(LinkedList<String> tags) {
-		this.tags = tags;
 	}
 
 	/**
@@ -250,6 +232,24 @@ public class GameMonsterEntityModel {
 	 */
 	public void setMarkers(LinkedList<String> markers) {
 		this.markers = markers;
+	}
+
+	/**
+	 * Gets the tags.
+	 *
+	 * @return the tags
+	 */
+	public LinkedList<String> getTags() {
+		return tags;
+	}
+
+	/**
+	 * Sets the tags.
+	 *
+	 * @param tags the new tags
+	 */
+	public void setTags(LinkedList<String> tags) {
+		this.tags = tags;
 	}
 
 }

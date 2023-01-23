@@ -44,6 +44,8 @@ public class GameCharacterModel {
 	@Required
 	private LinkedList<String> markers = new LinkedList<>();
 	@Required
+	private LinkedList<String> tags = new LinkedList<>();
+	@Required
 	private LinkedList<GameSummonModel> summons = new LinkedList<>();
 	private CharacterProgress progress;
 	@JsonIgnore
@@ -325,6 +327,24 @@ public class GameCharacterModel {
 	 */
 	public void setMarkers(LinkedList<String> markers) {
 		this.markers = markers;
+	}
+
+	/**
+	 * Gets the tags.
+	 *
+	 * @return the tags
+	 */
+	public LinkedList<String> getTags() {
+		return tags;
+	}
+
+	/**
+	 * Sets the tags.
+	 *
+	 * @param tags the new tags
+	 */
+	public void setTags(LinkedList<String> tags) {
+		this.tags = tags;
 	}
 
 	/**
