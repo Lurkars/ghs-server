@@ -58,6 +58,8 @@ public class GameCharacterModel {
 	private int donations;
 	@Required
 	private boolean absent;
+	@Required
+	private boolean longRest;
 
 	/**
 	 * Gets the name.
@@ -471,6 +473,24 @@ public class GameCharacterModel {
 	 */
 	public void setAbsent(boolean absent) {
 		this.absent = absent;
+	}
+
+	/**
+	 * Checks if is long rest.
+	 *
+	 * @return true, if is long rest
+	 */
+	public boolean isLongRest() {
+		return longRest;
+	}
+
+	/**
+	 * Sets the long rest.
+	 *
+	 * @param longRest the new long rest
+	 */
+	public void setLongRest(boolean longRest) {
+		this.longRest = longRest;
 	}
 
 }

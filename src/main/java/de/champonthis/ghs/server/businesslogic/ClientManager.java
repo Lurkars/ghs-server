@@ -250,6 +250,10 @@ public class ClientManager implements SmartInitializingSingleton {
 			if (checkClientRunning(host)) {
 				System.out.println("Client running at: " + getClientUrl(host));
 			}
+
+			if (ssl && checkClientRunningHttpOnly(host)) {
+				System.out.println("Client running at: " + getClientUrl(host, true));
+			}
 		}
 	}
 }
