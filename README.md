@@ -14,7 +14,7 @@ A public server is available under `gloomhaven-secretary.de` port `8443` with `s
 
 Prerequisite:
 
-- Java 17 (or higher) Runtime Environment
+- Java 11 (or higher) Runtime Environment
 
 Download the corresponding latest `jar`-executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
 
