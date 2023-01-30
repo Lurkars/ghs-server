@@ -111,7 +111,11 @@ public class MessageHandler extends TextWebSocketHandler {
 				if (gameId == null) {
 					// if first password or public create new game for password
 					if (manager.countPasswords() == 0 || isPublic) {
-						gameId = manager.createGame(new GameModel());
+						GameModel game = new GameModel();
+						if (messageObject.get("payload") != null && !messageObject.get("payload").isJsonNull()) {
+							game = gson.fromJson(messageObject.get("payload"), GameModel.class);
+						}
+						gameId = manager.createGame(game);
 						manager.createPassword(password, gameId);
 					} else {
 						sendError(session, "Invalid password '" + password + "'");

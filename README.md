@@ -99,7 +99,6 @@ On the first time, just choose the **Password** of your choice. This will create
 
 ## Workarounds
 
-- on first time initialization, a new game is created for your password. If you want to have your latest local game synced, simple use the **Undo**-function directly after first connection established. This will sync your last state to the server.
 - The database is a simple `ghs.sqlite`-file in GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simple delete the `sqlite`-file.
 - on startup, all passwords are written into syslog in plaintext.
 
