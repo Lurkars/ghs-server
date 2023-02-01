@@ -42,6 +42,8 @@ public class Settings {
 	@Required
 	private boolean abilityReveal = true;
 	@Required
+	private boolean showFullAbilityCard = false;
+	@Required
 	private boolean applyLoot = true;
 	@Required
 	private boolean alwaysLootApplyDialog = false;
@@ -366,6 +368,20 @@ public class Settings {
 	 */
 	public void setAbilityReveal(boolean abilityReveal) {
 		this.abilityReveal = abilityReveal;
+	}
+
+	/**
+	 * @return the showFullAbilityCard
+	 */
+	public boolean isShowFullAbilityCard() {
+		return showFullAbilityCard;
+	}
+
+	/**
+	 * @param showFullAbilityCard the showFullAbilityCard to set
+	 */
+	public void setShowFullAbilityCard(boolean showFullAbilityCard) {
+		this.showFullAbilityCard = showFullAbilityCard;
 	}
 
 	/**
