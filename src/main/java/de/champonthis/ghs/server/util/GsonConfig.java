@@ -9,6 +9,10 @@ import org.springframework.context.annotation.Configuration;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import de.champonthis.ghs.server.businesslogic.json.CharacterProgressDeserializer;
+import de.champonthis.ghs.server.businesslogic.json.CharacterProgressSerializer;
+import de.champonthis.ghs.server.model.CharacterProgress;
+
 /**
  * The Class GsonConfig.
  */
@@ -22,6 +26,8 @@ public class GsonConfig {
 	 */
 	@Bean
 	public Gson gson() {
-		return new GsonBuilder().registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
+		return new GsonBuilder().registerTypeAdapter(CharacterProgress.class, new CharacterProgressDeserializer())
+				.registerTypeAdapter(CharacterProgress.class, new CharacterProgressSerializer())
+				.registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
 	}
 }
