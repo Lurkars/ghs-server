@@ -34,7 +34,11 @@ public class Settings {
 	@Required
 	private boolean activeStandees = true;
 	@Required
-	private boolean allyAttackModifierDeck = true;
+	private boolean alwaysAllyAttackModifierDeck = true;
+	@Required
+	private boolean alwaysHazardousTerrain = true;
+	@Required
+	private boolean alwaysFhSolo = true;
 	@Required
 	private boolean initiativeRequired = true;
 	@Required
@@ -67,6 +71,8 @@ public class Settings {
 	private boolean scenarioNumberInput = false;
 	@Required
 	private boolean disableColumns = false;
+	@Required
+	private boolean disableAnimations = false;
 	@Required
 	private boolean dragValues = true;
 	@Required
@@ -299,21 +305,57 @@ public class Settings {
 	}
 
 	/**
-	 * Checks if is ally attack modifier deck.
+	 * Checks if is always ally attack modifier deck.
 	 *
-	 * @return true, if is ally attack modifier deck
+	 * @return true, if is always ally attack modifier deck
 	 */
-	public boolean isAllyAttackModifierDeck() {
-		return allyAttackModifierDeck;
+	public boolean isAlwaysAllyAttackModifierDeck() {
+		return alwaysAllyAttackModifierDeck;
 	}
 
 	/**
-	 * Sets the ally attack modifier deck.
+	 * Sets the always ally attack modifier deck.
 	 *
-	 * @param allyAttackModifierDeck the new ally attack modifier deck
+	 * @param alwaysAllyAttackModifierDeck the new always ally attack modifier deck
 	 */
-	public void setAllyAttackModifierDeck(boolean allyAttackModifierDeck) {
-		this.allyAttackModifierDeck = allyAttackModifierDeck;
+	public void setAlwaysAllyAttackModifierDeck(boolean alwaysAllyAttackModifierDeck) {
+		this.alwaysAllyAttackModifierDeck = alwaysAllyAttackModifierDeck;
+	}
+
+	/**
+	 * Checks if is always hazardous terrain.
+	 *
+	 * @return true, if is always hazardous terrain
+	 */
+	public boolean isAlwaysHazardousTerrain() {
+		return alwaysHazardousTerrain;
+	}
+
+	/**
+	 * Sets the always hazardous terrain.
+	 *
+	 * @param alwaysHazardousTerrain the new always hazardous terrain
+	 */
+	public void setAlwaysHazardousTerrain(boolean alwaysHazardousTerrain) {
+		this.alwaysHazardousTerrain = alwaysHazardousTerrain;
+	}
+
+	/**
+	 * Checks if is always fh solo.
+	 *
+	 * @return true, if is always fh solo
+	 */
+	public boolean isAlwaysFhSolo() {
+		return alwaysFhSolo;
+	}
+
+	/**
+	 * Sets the always fh solo.
+	 *
+	 * @param alwaysFhSolo the new always fh solo
+	 */
+	public void setAlwaysFhSolo(boolean alwaysFhSolo) {
+		this.alwaysFhSolo = alwaysFhSolo;
 	}
 
 	/**
@@ -371,14 +413,18 @@ public class Settings {
 	}
 
 	/**
-	 * @return the showFullAbilityCard
+	 * Checks if is show full ability card.
+	 *
+	 * @return true, if is show full ability card
 	 */
 	public boolean isShowFullAbilityCard() {
 		return showFullAbilityCard;
 	}
 
 	/**
-	 * @param showFullAbilityCard the showFullAbilityCard to set
+	 * Sets the show full ability card.
+	 *
+	 * @param showFullAbilityCard the new show full ability card
 	 */
 	public void setShowFullAbilityCard(boolean showFullAbilityCard) {
 		this.showFullAbilityCard = showFullAbilityCard;
@@ -598,6 +644,24 @@ public class Settings {
 	 */
 	public void setDisableColumns(boolean disableColumns) {
 		this.disableColumns = disableColumns;
+	}
+
+	/**
+	 * Checks if is disable animations.
+	 *
+	 * @return true, if is disable animations
+	 */
+	public boolean isDisableAnimations() {
+		return disableAnimations;
+	}
+
+	/**
+	 * Sets the disable animations.
+	 *
+	 * @param disableAnimations the new disable animations
+	 */
+	public void setDisableAnimations(boolean disableAnimations) {
+		this.disableAnimations = disableAnimations;
 	}
 
 	/**

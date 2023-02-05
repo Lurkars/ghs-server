@@ -3,7 +3,9 @@
  */
 package de.champonthis.ghs.server.model;
 
+import java.util.HashMap;
 import java.util.LinkedList;
+import java.util.Map;
 
 import de.champonthis.ghs.server.util.Required;
 
@@ -31,6 +33,17 @@ public class Party {
 	private int donations = 0;
 	@Required
 	private LinkedList<GameCharacterModel> characters = new LinkedList<>();
+
+	private int weeks = 0;
+	@Required
+	private Map<LootType, Integer> loot = new HashMap<>();
+	private int inspiration = 0;
+	private int defense = 0;
+	private int soldiers = 0;
+	private int morale = 0;
+	private int townGuardPerks = 0;
+	@Required
+	private LinkedList<GameCharacterModel> retirements = new LinkedList<>();
 
 	/**
 	 * Gets the id.
@@ -300,6 +313,150 @@ public class Party {
 	 */
 	public void setCharacters(LinkedList<GameCharacterModel> characters) {
 		this.characters = characters;
+	}
+
+	/**
+	 * Gets the weeks.
+	 *
+	 * @return the weeks
+	 */
+	public int getWeeks() {
+		return weeks;
+	}
+
+	/**
+	 * Sets the weeks.
+	 *
+	 * @param weeks the new weeks
+	 */
+	public void setWeeks(int weeks) {
+		this.weeks = weeks;
+	}
+
+	/**
+	 * Gets the loot.
+	 *
+	 * @return the loot
+	 */
+	public Map<LootType, Integer> getLoot() {
+		return loot;
+	}
+
+	/**
+	 * Sets the loot.
+	 *
+	 * @param loot the loot
+	 */
+	public void setLoot(Map<LootType, Integer> loot) {
+		this.loot = loot;
+	}
+
+	/**
+	 * Gets the inspiration.
+	 *
+	 * @return the inspiration
+	 */
+	public int getInspiration() {
+		return inspiration;
+	}
+
+	/**
+	 * Sets the inspiration.
+	 *
+	 * @param inspiration the new inspiration
+	 */
+	public void setInspiration(int inspiration) {
+		this.inspiration = inspiration;
+	}
+
+	/**
+	 * Gets the defense.
+	 *
+	 * @return the defense
+	 */
+	public int getDefense() {
+		return defense;
+	}
+
+	/**
+	 * Sets the defense.
+	 *
+	 * @param defense the new defense
+	 */
+	public void setDefense(int defense) {
+		this.defense = defense;
+	}
+
+	/**
+	 * Gets the soldiers.
+	 *
+	 * @return the soldiers
+	 */
+	public int getSoldiers() {
+		return soldiers;
+	}
+
+	/**
+	 * Sets the soldiers.
+	 *
+	 * @param soldiers the new soldiers
+	 */
+	public void setSoldiers(int soldiers) {
+		this.soldiers = soldiers;
+	}
+
+	/**
+	 * Gets the morale.
+	 *
+	 * @return the morale
+	 */
+	public int getMorale() {
+		return morale;
+	}
+
+	/**
+	 * Sets the morale.
+	 *
+	 * @param morale the new morale
+	 */
+	public void setMorale(int morale) {
+		this.morale = morale;
+	}
+
+	/**
+	 * Gets the town guard perks.
+	 *
+	 * @return the town guard perks
+	 */
+	public int getTownGuardPerks() {
+		return townGuardPerks;
+	}
+
+	/**
+	 * Sets the town guard perks.
+	 *
+	 * @param townGuardPerks the new town guard perks
+	 */
+	public void setTownGuardPerks(int townGuardPerks) {
+		this.townGuardPerks = townGuardPerks;
+	}
+
+	/**
+	 * Gets the retirements.
+	 *
+	 * @return the retirements
+	 */
+	public LinkedList<GameCharacterModel> getRetirements() {
+		return retirements;
+	}
+
+	/**
+	 * Sets the retirements.
+	 *
+	 * @param retirements the new retirements
+	 */
+	public void setRetirements(LinkedList<GameCharacterModel> retirements) {
+		this.retirements = retirements;
 	}
 
 }
