@@ -18,6 +18,7 @@ public class Loot {
 	private String value;
 	@Required
 	private int enhancements = 0;
+	private Integer cardId;
 
 	/**
 	 * Gets the type.
@@ -125,6 +126,24 @@ public class Loot {
 	 */
 	public void setEnhancements(int enhancements) {
 		this.enhancements = enhancements;
+	}
+
+	/**
+	 * Gets the card id.
+	 *
+	 * @return the card id
+	 */
+	public Integer getCardId() {
+		return cardId;
+	}
+
+	/**
+	 * Sets the card id.
+	 *
+	 * @param cardId the new card id
+	 */
+	public void setCardId(Integer cardId) {
+		this.cardId = cardId;
 	}
 
 }

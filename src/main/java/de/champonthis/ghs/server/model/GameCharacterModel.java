@@ -28,6 +28,8 @@ public class GameCharacterModel {
 	@Required
 	private int loot;
 	@Required
+	private LinkedList<Integer> lootCards = new LinkedList<>();
+	@Required
 	private boolean exhausted;
 	@Required
 	private int level;
@@ -185,6 +187,24 @@ public class GameCharacterModel {
 	 */
 	public void setLoot(int loot) {
 		this.loot = loot;
+	}
+
+	/**
+	 * Gets the loot cards.
+	 *
+	 * @return the loot cards
+	 */
+	public LinkedList<Integer> getLootCards() {
+		return lootCards;
+	}
+
+	/**
+	 * Sets the loot cards.
+	 *
+	 * @param lootCards the new loot cards
+	 */
+	public void setLootCards(LinkedList<Integer> lootCards) {
+		this.lootCards = lootCards;
 	}
 
 	/**
