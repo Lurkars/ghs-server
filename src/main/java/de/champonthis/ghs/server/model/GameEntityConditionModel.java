@@ -17,6 +17,8 @@ public class GameEntityConditionModel {
 	@Required
 	private EntityConditionState state;
 	@Required
+	private EntityConditionState lastState;
+	@Required
 	private boolean expired;
 	@Required
 	private boolean highlight;
@@ -73,6 +75,24 @@ public class GameEntityConditionModel {
 	 */
 	public void setState(EntityConditionState state) {
 		this.state = state;
+	}
+
+	/**
+	 * Gets the last state.
+	 *
+	 * @return the last state
+	 */
+	public EntityConditionState getLastState() {
+		return lastState;
+	}
+
+	/**
+	 * Sets the last state.
+	 *
+	 * @param lastState the new last state
+	 */
+	public void setLastState(EntityConditionState lastState) {
+		this.lastState = lastState;
 	}
 
 	/**

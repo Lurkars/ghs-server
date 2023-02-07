@@ -50,6 +50,9 @@ public class MessageHandler extends TextWebSocketHandler {
 	@Value("${ghs-server.public:false}")
 	private boolean isPublic;
 
+	@Value("${ghs-server.debug:false}")
+	private boolean debug;
+
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
@@ -164,7 +167,9 @@ public class MessageHandler extends TextWebSocketHandler {
 								&& !gson.toJson(gameUpdate.getSections()).equals(gson.toJson(game.getSections()))) {
 							sendError(session, "Permission(s) missing");
 						}
-						if (!permissions.isScenario() && !gameUpdate.getEdition().equals(game.getEdition())) {
+						if (!permissions.isScenario() && (gameUpdate.getEdition() != null
+								&& !gameUpdate.getEdition().equals(game.getEdition())
+								|| game.getEdition() != null && !game.getEdition().equals(gameUpdate.getEdition()))) {
 							sendError(session, "Permission(s) missing");
 						}
 						if (!permissions.isElements() && !gson.toJson(gameUpdate.getElementBoard())
@@ -190,6 +195,11 @@ public class MessageHandler extends TextWebSocketHandler {
 						}
 						if (!permissions.isAttackModifiers() && !gson.toJson(gameUpdate.getAllyAttackModifierDeck())
 								.equals(gson.toJson(game.getAllyAttackModifierDeck()))) {
+							sendError(session, "Permission(s) missing");
+						}
+						if (!permissions.isParty()
+								&& (!gson.toJson(gameUpdate.getParty()).equals(gson.toJson(game.getParty())) || !gson
+										.toJson(gameUpdate.getParties()).equals(gson.toJson(game.getParties())))) {
 							sendError(session, "Permission(s) missing");
 						}
 						if (!permissions.isCharacters()) {
@@ -374,6 +384,9 @@ public class MessageHandler extends TextWebSocketHandler {
 			} catch (Exception e) {
 				if (!(e instanceof SendErrorException)) {
 					sendError(session, e.getMessage(), false);
+					if (debug) {
+						e.printStackTrace();
+					}
 				}
 			}
 		}

@@ -32,6 +32,8 @@ public class Permissions {
 	private boolean attackModifiers = false;
 	@Required
 	private boolean lootDeck = false;
+	@Required
+	private boolean party = false;
 
 	/**
 	 * Checks if is characters.
@@ -211,6 +213,24 @@ public class Permissions {
 	 */
 	public void setLootDeck(boolean lootDeck) {
 		this.lootDeck = lootDeck;
+	}
+
+	/**
+	 * Checks if is party.
+	 *
+	 * @return true, if is party
+	 */
+	public boolean isParty() {
+		return party;
+	}
+
+	/**
+	 * Sets the party.
+	 *
+	 * @param party the new party
+	 */
+	public void setParty(boolean party) {
+		this.party = party;
 	}
 
 }

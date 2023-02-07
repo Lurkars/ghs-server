@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName;
  * The Enum EntityConditionState.
  */
 public enum EntityConditionState {
-	
+
 	@SerializedName("new")
 	NEW,
 

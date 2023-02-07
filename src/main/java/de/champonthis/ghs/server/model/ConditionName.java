@@ -67,5 +67,8 @@ public enum ConditionName {
 	POISON_X,
 
 	@SerializedName("wound_x")
-	WOUND_X
+	WOUND_X,
+
+	@SerializedName("heal")
+	HEAL
 }
