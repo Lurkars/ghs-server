@@ -33,6 +33,8 @@ public class Party {
 	private int donations = 0;
 	@Required
 	private LinkedList<GameCharacterModel> characters = new LinkedList<>();
+	@Required
+	private LinkedList<GameCharacterModel> retirements = new LinkedList<>();
 
 	private int weeks = 0;
 	@Required
@@ -43,7 +45,9 @@ public class Party {
 	private int morale = 0;
 	private int townGuardPerks = 0;
 	@Required
-	private LinkedList<GameCharacterModel> retirements = new LinkedList<>();
+	private LinkedList<String> townGuardPerkSections = new LinkedList<>();
+	@Required
+	private LinkedList<String> campaignStickers = new LinkedList<>();
 
 	/**
 	 * Gets the id.
@@ -457,6 +461,42 @@ public class Party {
 	 */
 	public void setRetirements(LinkedList<GameCharacterModel> retirements) {
 		this.retirements = retirements;
+	}
+
+	/**
+	 * Gets the town guard perk sections.
+	 *
+	 * @return the town guard perk sections
+	 */
+	public LinkedList<String> getTownGuardPerkSections() {
+		return townGuardPerkSections;
+	}
+
+	/**
+	 * Sets the town guard perk sections.
+	 *
+	 * @param townGuardPerkSections the new town guard perk sections
+	 */
+	public void setTownGuardPerkSections(LinkedList<String> townGuardPerkSections) {
+		this.townGuardPerkSections = townGuardPerkSections;
+	}
+
+	/**
+	 * Gets the campaign stickers.
+	 *
+	 * @return the campaign stickers
+	 */
+	public LinkedList<String> getCampaignStickers() {
+		return campaignStickers;
+	}
+
+	/**
+	 * Sets the campaign stickers.
+	 *
+	 * @param campaignStickers the new campaign stickers
+	 */
+	public void setCampaignStickers(LinkedList<String> campaignStickers) {
+		this.campaignStickers = campaignStickers;
 	}
 
 }

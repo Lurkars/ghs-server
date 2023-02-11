@@ -11,7 +11,10 @@ import com.google.gson.GsonBuilder;
 
 import de.champonthis.ghs.server.businesslogic.json.CharacterProgressDeserializer;
 import de.champonthis.ghs.server.businesslogic.json.CharacterProgressSerializer;
+import de.champonthis.ghs.server.businesslogic.json.PartyDeserializer;
+import de.champonthis.ghs.server.businesslogic.json.PartySerializer;
 import de.champonthis.ghs.server.model.CharacterProgress;
+import de.champonthis.ghs.server.model.Party;
 
 /**
  * The Class GsonConfig.
@@ -28,6 +31,8 @@ public class GsonConfig {
 	public Gson gson() {
 		return new GsonBuilder().registerTypeAdapter(CharacterProgress.class, new CharacterProgressDeserializer())
 				.registerTypeAdapter(CharacterProgress.class, new CharacterProgressSerializer())
+				.registerTypeAdapter(Party.class, new PartyDeserializer())
+				.registerTypeAdapter(Party.class, new PartySerializer())
 				.registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
 	}
 }

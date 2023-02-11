@@ -12,6 +12,8 @@ import de.champonthis.ghs.server.util.Required;
  */
 public class GameModel {
 
+	// @Required // Migration
+	private Long revision;
 	private String edition;
 	@Required
 	private LinkedList<String> figures = new LinkedList<>();
@@ -72,6 +74,24 @@ public class GameModel {
 	private LinkedList<Loot> lootDeckEnhancements = new LinkedList<>();
 	@Required
 	private boolean server = false;
+
+	/**
+	 * Gets the revision.
+	 *
+	 * @return the revision
+	 */
+	public Long getRevision() {
+		return revision;
+	}
+
+	/**
+	 * Sets the revision.
+	 *
+	 * @param revision the new revision
+	 */
+	public void setRevision(Long revision) {
+		this.revision = revision;
+	}
 
 	/**
 	 * Gets the edition.
