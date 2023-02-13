@@ -38,6 +38,8 @@ public class Party {
 
 	private int weeks = 0;
 	@Required
+	private Map<Integer, LinkedList<String>> weekSections = new HashMap<>();
+	@Required
 	private Map<LootType, Integer> loot = new HashMap<>();
 	private int inspiration = 0;
 	private int defense = 0;
@@ -335,6 +337,24 @@ public class Party {
 	 */
 	public void setWeeks(int weeks) {
 		this.weeks = weeks;
+	}
+
+	/**
+	 * Gets the week sections.
+	 *
+	 * @return the week sections
+	 */
+	public Map<Integer, LinkedList<String>> getWeekSections() {
+		return weekSections;
+	}
+
+	/**
+	 * Sets the week sections.
+	 *
+	 * @param weekSections the week sections
+	 */
+	public void setWeekSections(Map<Integer, LinkedList<String>> weekSections) {
+		this.weekSections = weekSections;
 	}
 
 	/**
