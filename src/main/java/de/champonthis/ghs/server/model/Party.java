@@ -50,6 +50,8 @@ public class Party {
 	private LinkedList<String> townGuardPerkSections = new LinkedList<>();
 	@Required
 	private LinkedList<String> campaignStickers = new LinkedList<>();
+	@Required
+	private GameAttackModifierDeckModel townGuardDeck = new GameAttackModifierDeckModel();
 
 	/**
 	 * Gets the id.
@@ -517,6 +519,24 @@ public class Party {
 	 */
 	public void setCampaignStickers(LinkedList<String> campaignStickers) {
 		this.campaignStickers = campaignStickers;
+	}
+
+	/**
+	 * Gets the town guard deck.
+	 *
+	 * @return the town guard deck
+	 */
+	public GameAttackModifierDeckModel getTownGuardDeck() {
+		return townGuardDeck;
+	}
+
+	/**
+	 * Sets the town guard deck.
+	 *
+	 * @param townGuardDeck the new town guard deck
+	 */
+	public void setTownGuardDeck(GameAttackModifierDeckModel townGuardDeck) {
+		this.townGuardDeck = townGuardDeck;
 	}
 
 }
