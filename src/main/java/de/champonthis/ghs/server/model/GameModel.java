@@ -47,6 +47,8 @@ public class GameModel {
 	@Required
 	private LinkedList<Integer> roundResets = new LinkedList<>();
 	@Required
+	private LinkedList<Integer> roundResetsHidden = new LinkedList<>();
+	@Required
 	private long playSeconds = 0;
 	@Required
 	private long totalSeconds = 0;
@@ -57,12 +59,6 @@ public class GameModel {
 	@Required
 	private LinkedList<ElementModel> elementBoard = new LinkedList<>();
 	@Required
-	private LinkedList<Element> newElements = new LinkedList<>();
-	@Required
-	private LinkedList<Element> strongElements = new LinkedList<>();
-	@Required
-	private LinkedList<Element> elements = new LinkedList<>();
-	@Required
 	private boolean solo = false;
 	@Required
 	private Party party = new Party();
@@ -72,6 +68,10 @@ public class GameModel {
 	private LootDeck lootDeck = new LootDeck();
 	@Required
 	private LinkedList<Loot> lootDeckEnhancements = new LinkedList<>();
+	@Required
+	private LinkedList<LootType> lootDeckFixed = new LinkedList<>();
+	@Required
+	private LinkedList<String> lootDeckSections = new LinkedList<>();
 	@Required
 	private boolean server = false;
 
@@ -400,6 +400,24 @@ public class GameModel {
 	}
 
 	/**
+	 * Gets the round resets hidden.
+	 *
+	 * @return the round resets hidden
+	 */
+	public LinkedList<Integer> getRoundResetsHidden() {
+		return roundResetsHidden;
+	}
+
+	/**
+	 * Sets the round resets hidden.
+	 *
+	 * @param roundResetsHidden the new round resets hidden
+	 */
+	public void setRoundResetsHidden(LinkedList<Integer> roundResetsHidden) {
+		this.roundResetsHidden = roundResetsHidden;
+	}
+
+	/**
 	 * Gets the play seconds.
 	 *
 	 * @return the play seconds
@@ -490,60 +508,6 @@ public class GameModel {
 	}
 
 	/**
-	 * Gets the new elements.
-	 *
-	 * @return the new elements
-	 */
-	public LinkedList<Element> getNewElements() {
-		return newElements;
-	}
-
-	/**
-	 * Sets the new elements.
-	 *
-	 * @param newElements the new new elements
-	 */
-	public void setNewElements(LinkedList<Element> newElements) {
-		this.newElements = newElements;
-	}
-
-	/**
-	 * Gets the strong elements.
-	 *
-	 * @return the strong elements
-	 */
-	public LinkedList<Element> getStrongElements() {
-		return strongElements;
-	}
-
-	/**
-	 * Sets the strong elements.
-	 *
-	 * @param strongElements the new strong elements
-	 */
-	public void setStrongElements(LinkedList<Element> strongElements) {
-		this.strongElements = strongElements;
-	}
-
-	/**
-	 * Gets the elements.
-	 *
-	 * @return the elements
-	 */
-	public LinkedList<Element> getElements() {
-		return elements;
-	}
-
-	/**
-	 * Sets the elements.
-	 *
-	 * @param elements the new elements
-	 */
-	public void setElements(LinkedList<Element> elements) {
-		this.elements = elements;
-	}
-
-	/**
 	 * Checks if is solo.
 	 *
 	 * @return true, if is solo
@@ -631,6 +595,42 @@ public class GameModel {
 	 */
 	public void setLootDeckEnhancements(LinkedList<Loot> lootDeckEnhancements) {
 		this.lootDeckEnhancements = lootDeckEnhancements;
+	}
+
+	/**
+	 * Gets the loot deck fixed.
+	 *
+	 * @return the loot deck fixed
+	 */
+	public LinkedList<LootType> getLootDeckFixed() {
+		return lootDeckFixed;
+	}
+
+	/**
+	 * Sets the loot deck fixed.
+	 *
+	 * @param lootDeckFixed the new loot deck fixed
+	 */
+	public void setLootDeckFixed(LinkedList<LootType> lootDeckFixed) {
+		this.lootDeckFixed = lootDeckFixed;
+	}
+
+	/**
+	 * Gets the loot deck sections.
+	 *
+	 * @return the loot deck sections
+	 */
+	public LinkedList<String> getLootDeckSections() {
+		return lootDeckSections;
+	}
+
+	/**
+	 * Sets the loot deck sections.
+	 *
+	 * @param lootDeckSections the new loot deck sections
+	 */
+	public void setLootDeckSections(LinkedList<String> lootDeckSections) {
+		this.lootDeckSections = lootDeckSections;
 	}
 
 	/**
