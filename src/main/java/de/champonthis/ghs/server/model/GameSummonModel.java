@@ -37,6 +37,7 @@ public class GameSummonModel {
 	private LinkedList<String> tags = new LinkedList<>();
 	private String action;
 	private String additionalAction;
+	private boolean active = false;
 
 	/**
 	 * Gets the name.
@@ -324,6 +325,24 @@ public class GameSummonModel {
 	 */
 	public void setAdditionalAction(String additionalAction) {
 		this.additionalAction = additionalAction;
+	}
+
+	/**
+	 * Checks if is active.
+	 *
+	 * @return true, if is active
+	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * Sets the active.
+	 *
+	 * @param active the new active
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }

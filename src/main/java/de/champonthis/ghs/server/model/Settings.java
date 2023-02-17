@@ -34,6 +34,8 @@ public class Settings {
 	@Required
 	private boolean activeStandees = true;
 	@Required
+	private boolean activeSummons = true;
+	@Required
 	private boolean alwaysAllyAttackModifierDeck = true;
 	@Required
 	private boolean alwaysHazardousTerrain = true;
@@ -302,6 +304,24 @@ public class Settings {
 	 */
 	public void setActiveStandees(boolean activeStandees) {
 		this.activeStandees = activeStandees;
+	}
+
+	/**
+	 * Checks if is active summons.
+	 *
+	 * @return true, if is active summons
+	 */
+	public boolean isActiveSummons() {
+		return activeSummons;
+	}
+
+	/**
+	 * Sets the active summons.
+	 *
+	 * @param activeSummons the new active summons
+	 */
+	public void setActiveSummons(boolean activeSummons) {
+		this.activeSummons = activeSummons;
 	}
 
 	/**
