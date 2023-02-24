@@ -43,6 +43,8 @@ public class GameModel {
 	@Required
 	private boolean ge5Player = true;
 	@Required
+	private int playerCount = 0;
+	@Required
 	private int round = 0;
 	@Required
 	private LinkedList<Integer> roundResets = new LinkedList<>();
@@ -361,6 +363,24 @@ public class GameModel {
 	 */
 	public void setGe5Player(boolean ge5Player) {
 		this.ge5Player = ge5Player;
+	}
+
+	/**
+	 * Gets the player count.
+	 *
+	 * @return the player count
+	 */
+	public int getPlayerCount() {
+		return playerCount;
+	}
+
+	/**
+	 * Sets the player count.
+	 *
+	 * @param playerCount the new player count
+	 */
+	public void setPlayerCount(int playerCount) {
+		this.playerCount = playerCount;
 	}
 
 	/**

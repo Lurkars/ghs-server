@@ -14,6 +14,7 @@ public class GameSummonModel {
 
 	@Required
 	private String name;
+	private String cardId;
 	@Required
 	private int number;
 	@Required
@@ -21,6 +22,7 @@ public class GameSummonModel {
 	private Integer attack;
 	private Integer movement;
 	private Integer range;
+	private Boolean flying;
 	private Boolean dead;
 	@Required
 	private SummonState state;
@@ -55,6 +57,24 @@ public class GameSummonModel {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Gets the card id.
+	 *
+	 * @return the card id
+	 */
+	public String getCardId() {
+		return cardId;
+	}
+
+	/**
+	 * Sets the card id.
+	 *
+	 * @param cardId the new card id
+	 */
+	public void setCardId(String cardId) {
+		this.cardId = cardId;
 	}
 
 	/**
@@ -145,6 +165,24 @@ public class GameSummonModel {
 	 */
 	public void setRange(Integer range) {
 		this.range = range;
+	}
+
+	/**
+	 * Gets the flying.
+	 *
+	 * @return the flying
+	 */
+	public Boolean getFlying() {
+		return flying;
+	}
+
+	/**
+	 * Sets the flying.
+	 *
+	 * @param flying the new flying
+	 */
+	public void setFlying(Boolean flying) {
+		this.flying = flying;
 	}
 
 	/**
