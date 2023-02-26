@@ -34,7 +34,7 @@ public class GameController {
 	private boolean debug;
 
 	@GetMapping
-	public GameModel getGame(@RequestHeader(HttpHeaders.AUTHORIZATION) String password) {
+	public GameModel getGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION, required = false) String password) {
 
 		if (!StringUtils.hasText(password)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);

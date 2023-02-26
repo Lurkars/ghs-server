@@ -84,6 +84,8 @@ public class Settings {
 	@Required
 	private int zoom = 100;
 	@Required
+	private boolean pressDoubleClick = true;
+	@Required
 	private boolean automaticAttackModifierFullscreen = true;
 	@Required
 	private int barsize = 1;
@@ -754,6 +756,24 @@ public class Settings {
 	 */
 	public void setZoom(int zoom) {
 		this.zoom = zoom;
+	}
+
+	/**
+	 * Checks if is press double click.
+	 *
+	 * @return true, if is press double click
+	 */
+	public boolean isPressDoubleClick() {
+		return pressDoubleClick;
+	}
+
+	/**
+	 * Sets the press double click.
+	 *
+	 * @param pressDoubleClick the new press double click
+	 */
+	public void setPressDoubleClick(boolean pressDoubleClick) {
+		this.pressDoubleClick = pressDoubleClick;
 	}
 
 	/**
