@@ -74,6 +74,8 @@ public class Settings {
 	@Required
 	private boolean disableColumns = false;
 	@Required
+	private boolean disableDragFigures = false;
+	@Required
 	private boolean disableAnimations = false;
 	@Required
 	private boolean dragValues = true;
@@ -666,6 +668,24 @@ public class Settings {
 	 */
 	public void setDisableColumns(boolean disableColumns) {
 		this.disableColumns = disableColumns;
+	}
+
+	/**
+	 * Checks if is disable drag figures.
+	 *
+	 * @return true, if is disable drag figures
+	 */
+	public boolean isDisableDragFigures() {
+		return disableDragFigures;
+	}
+
+	/**
+	 * Sets the disable drag figures.
+	 *
+	 * @param disableDragFigures the new disable drag figures
+	 */
+	public void setDisableDragFigures(boolean disableDragFigures) {
+		this.disableDragFigures = disableDragFigures;
 	}
 
 	/**
