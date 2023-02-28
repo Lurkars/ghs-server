@@ -20,6 +20,8 @@ public class CharacterProgress {
 	private Map<LootType, Integer> loot = new HashMap<>();
 	@Required
 	private LinkedList<Identifier> items = new LinkedList<>();
+	@Required
+	private LinkedList<Identifier> equippedItems = new LinkedList<>();
 	private int personalQuest = 0;
 	private int battleGoals = 0;
 	private String notes = "";
@@ -101,6 +103,24 @@ public class CharacterProgress {
 	 */
 	public void setItems(LinkedList<Identifier> items) {
 		this.items = items;
+	}
+
+	/**
+	 * Gets the equipped items.
+	 *
+	 * @return the equipped items
+	 */
+	public LinkedList<Identifier> getEquippedItems() {
+		return equippedItems;
+	}
+
+	/**
+	 * Sets the equipped items.
+	 *
+	 * @param equippedItems the new equipped items
+	 */
+	public void setEquippedItems(LinkedList<Identifier> equippedItems) {
+		this.equippedItems = equippedItems;
 	}
 
 	/**
