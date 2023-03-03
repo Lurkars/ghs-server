@@ -35,6 +35,8 @@ public class Party {
 	private LinkedList<GameCharacterModel> characters = new LinkedList<>();
 	@Required
 	private LinkedList<GameCharacterModel> retirements = new LinkedList<>();
+	@Required
+	private LinkedList<Identifier> unlockedItems = new LinkedList<>();
 
 	private int weeks = 0;
 	@Required
@@ -52,6 +54,8 @@ public class Party {
 	private LinkedList<String> campaignStickers = new LinkedList<>();
 	@Required
 	private GameAttackModifierDeckModel townGuardDeck = new GameAttackModifierDeckModel();
+	@Required
+	private LinkedList<BuildingModel> buildings = new LinkedList<>();
 
 	/**
 	 * Gets the id.
@@ -486,6 +490,24 @@ public class Party {
 	}
 
 	/**
+	 * Gets the unlocked items.
+	 *
+	 * @return the unlocked items
+	 */
+	public LinkedList<Identifier> getUnlockedItems() {
+		return unlockedItems;
+	}
+
+	/**
+	 * Sets the unlocked items.
+	 *
+	 * @param unlockedItems the new unlocked items
+	 */
+	public void setUnlockedItems(LinkedList<Identifier> unlockedItems) {
+		this.unlockedItems = unlockedItems;
+	}
+
+	/**
 	 * Gets the town guard perk sections.
 	 *
 	 * @return the town guard perk sections
@@ -537,6 +559,24 @@ public class Party {
 	 */
 	public void setTownGuardDeck(GameAttackModifierDeckModel townGuardDeck) {
 		this.townGuardDeck = townGuardDeck;
+	}
+
+	/**
+	 * Gets the buildings.
+	 *
+	 * @return the buildings
+	 */
+	public LinkedList<BuildingModel> getBuildings() {
+		return buildings;
+	}
+
+	/**
+	 * Sets the buildings.
+	 *
+	 * @param buildings the new buildings
+	 */
+	public void setBuildings(LinkedList<BuildingModel> buildings) {
+		this.buildings = buildings;
 	}
 
 }
