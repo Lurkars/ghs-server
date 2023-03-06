@@ -90,6 +90,8 @@ public class Settings {
 	@Required
 	private boolean automaticAttackModifierFullscreen = true;
 	@Required
+	private boolean disableWakeLock = false;
+	@Required
 	private int barsize = 1;
 	@Required
 	private int fontsize = 1;
@@ -813,6 +815,24 @@ public class Settings {
 	 */
 	public void setAutomaticAttackModifierFullscreen(boolean automaticAttackModifierFullscreen) {
 		this.automaticAttackModifierFullscreen = automaticAttackModifierFullscreen;
+	}
+
+	/**
+	 * Checks if is disable wake lock.
+	 *
+	 * @return true, if is disable wake lock
+	 */
+	public boolean isDisableWakeLock() {
+		return disableWakeLock;
+	}
+
+	/**
+	 * Sets the disable wake lock.
+	 *
+	 * @param disableWakeLock the new disable wake lock
+	 */
+	public void setDisableWakeLock(boolean disableWakeLock) {
+		this.disableWakeLock = disableWakeLock;
 	}
 
 	/**

@@ -20,6 +20,8 @@ public class Party {
 	private String location;
 	private String notes;
 	private String achievements;
+	@Required
+	private LinkedList<String> achievementsList = new LinkedList<>();
 	private int reputation = 0;
 	private int prosperity = 0;
 	@Required
@@ -28,6 +30,8 @@ public class Party {
 	private LinkedList<GameScenarioModel> manualScenarios = new LinkedList<>();
 	private boolean campaignMode = false;
 	private String globalAchievements;
+	@Required
+	private LinkedList<String> globalAchievementsList = new LinkedList<>();
 	@Required
 	private LinkedList<Identifier> treasures = new LinkedList<>();
 	private int donations = 0;
@@ -166,6 +170,24 @@ public class Party {
 	}
 
 	/**
+	 * Gets the achievements list.
+	 *
+	 * @return the achievements list
+	 */
+	public LinkedList<String> getAchievementsList() {
+		return achievementsList;
+	}
+
+	/**
+	 * Sets the achievements list.
+	 *
+	 * @param achievementsList the new achievements list
+	 */
+	public void setAchievementsList(LinkedList<String> achievementsList) {
+		this.achievementsList = achievementsList;
+	}
+
+	/**
 	 * Gets the reputation.
 	 *
 	 * @return the reputation
@@ -271,6 +293,24 @@ public class Party {
 	 */
 	public void setGlobalAchievements(String globalAchievements) {
 		this.globalAchievements = globalAchievements;
+	}
+
+	/**
+	 * Gets the global achievements list.
+	 *
+	 * @return the global achievements list
+	 */
+	public LinkedList<String> getGlobalAchievementsList() {
+		return globalAchievementsList;
+	}
+
+	/**
+	 * Sets the global achievements list.
+	 *
+	 * @param globalAchievementsList the new global achievements list
+	 */
+	public void setGlobalAchievementsList(LinkedList<String> globalAchievementsList) {
+		this.globalAchievementsList = globalAchievementsList;
 	}
 
 	/**
