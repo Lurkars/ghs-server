@@ -27,6 +27,8 @@ public class Party {
 	@Required
 	private LinkedList<GameScenarioModel> scenarios = new LinkedList<>();
 	@Required
+	private LinkedList<GameScenarioModel> conclusions = new LinkedList<>();
+	@Required
 	private LinkedList<GameScenarioModel> manualScenarios = new LinkedList<>();
 	private boolean campaignMode = false;
 	private String globalAchievements;
@@ -239,6 +241,24 @@ public class Party {
 	 */
 	public void setScenarios(LinkedList<GameScenarioModel> scenarios) {
 		this.scenarios = scenarios;
+	}
+
+	/**
+	 * Gets the conclusions.
+	 *
+	 * @return the conclusions
+	 */
+	public LinkedList<GameScenarioModel> getConclusions() {
+		return conclusions;
+	}
+
+	/**
+	 * Sets the conclusions.
+	 *
+	 * @param conclusions the new conclusions
+	 */
+	public void setConclusions(LinkedList<GameScenarioModel> conclusions) {
+		this.conclusions = conclusions;
 	}
 
 	/**

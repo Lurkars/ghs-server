@@ -76,6 +76,8 @@ public class Settings {
 	@Required
 	private boolean disableDragFigures = false;
 	@Required
+	private boolean disableSortFigures = false;
+	@Required
 	private boolean disableAnimations = false;
 	@Required
 	private boolean dragValues = true;
@@ -688,6 +690,24 @@ public class Settings {
 	 */
 	public void setDisableDragFigures(boolean disableDragFigures) {
 		this.disableDragFigures = disableDragFigures;
+	}
+
+	/**
+	 * Checks if is disable sort figures.
+	 *
+	 * @return true, if is disable sort figures
+	 */
+	public boolean isDisableSortFigures() {
+		return disableSortFigures;
+	}
+
+	/**
+	 * Sets the disable sort figures.
+	 *
+	 * @param disableSortFigures the new disable sort figures
+	 */
+	public void setDisableSortFigures(boolean disableSortFigures) {
+		this.disableSortFigures = disableSortFigures;
 	}
 
 	/**
