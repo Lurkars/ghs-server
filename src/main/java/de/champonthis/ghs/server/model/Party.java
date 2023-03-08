@@ -38,6 +38,8 @@ public class Party {
 	private LinkedList<Identifier> treasures = new LinkedList<>();
 	private int donations = 0;
 	@Required
+	private LinkedList<String> players = new LinkedList<>();
+	@Required
 	private LinkedList<GameCharacterModel> characters = new LinkedList<>();
 	@Required
 	private LinkedList<GameCharacterModel> retirements = new LinkedList<>();
@@ -367,6 +369,20 @@ public class Party {
 	 */
 	public void setDonations(int donations) {
 		this.donations = donations;
+	}
+
+	/**
+	 * @return the players
+	 */
+	public LinkedList<String> getPlayers() {
+		return players;
+	}
+
+	/**
+	 * @param players the players to set
+	 */
+	public void setPlayers(LinkedList<String> players) {
+		this.players = players;
 	}
 
 	/**
