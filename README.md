@@ -1,5 +1,7 @@
 # Gloomhaven Secretariat Server (ghs-server)
 
+[![Build and deploy release](https://github.com/Lurkars/ghs-server/actions/workflows/deploy.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/deploy.yml) [![Build and publish release](https://github.com/Lurkars/ghs-server/actions/workflows/release.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/release.yml) [![Publish Docker Image](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml)
+
 This is a server component for [Gloomhaven Secretariat](https://gloomhaven-secretariat.de) ([Source](https://github.com/Lurkars/gloomhavensecretariat)). It synchronizes the game state between all clients via websockets. Access is controlled by providing a password in all messages.
 
 It's a java application to run on most systems the old [Gloomhaven Helper](http://esotericsoftware.com/gloomhaven-helper) (by [Esoteric Software®](http://esotericsoftware.com)) Desktop version run. Besides an headless mode is integrated.
@@ -21,8 +23,6 @@ Download the corresponding latest `jar`-executable from the [latest release](htt
 Execute the `jar`-file with your Java Runtime Environment or run `java -jar ghs-server-*.jar` in your terminal.
 
 ### Build and run using Docker
-
-[![Publish Docker Image](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml)
 
 If you want to use docker for running on port 8080 execute following:
 
