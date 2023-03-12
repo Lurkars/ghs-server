@@ -68,6 +68,8 @@ public class Settings {
 	@Required
 	private boolean scenarioRooms = true;
 	@Required
+	private boolean disabledTurnConfirmation = false;
+	@Required
 	private boolean automaticStandees = true;
 	@Required
 	private boolean scenarioNumberInput = false;
@@ -618,6 +620,24 @@ public class Settings {
 	 */
 	public void setScenarioRooms(boolean scenarioRooms) {
 		this.scenarioRooms = scenarioRooms;
+	}
+
+	/**
+	 * Checks if is disabled turn confirmation.
+	 *
+	 * @return true, if is disabled turn confirmation
+	 */
+	public boolean isDisabledTurnConfirmation() {
+		return disabledTurnConfirmation;
+	}
+
+	/**
+	 * Sets the disabled turn confirmation.
+	 *
+	 * @param disabledTurnConfirmation the new disabled turn confirmation
+	 */
+	public void setDisabledTurnConfirmation(boolean disabledTurnConfirmation) {
+		this.disabledTurnConfirmation = disabledTurnConfirmation;
 	}
 
 	/**

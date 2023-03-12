@@ -372,6 +372,8 @@ public class Party {
 	}
 
 	/**
+	 * Gets the players.
+	 *
 	 * @return the players
 	 */
 	public LinkedList<String> getPlayers() {
@@ -379,7 +381,9 @@ public class Party {
 	}
 
 	/**
-	 * @param players the players to set
+	 * Sets the players.
+	 *
+	 * @param players the new players
 	 */
 	public void setPlayers(LinkedList<String> players) {
 		this.players = players;
