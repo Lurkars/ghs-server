@@ -18,6 +18,8 @@ public class Settings {
 	@Required
 	private boolean abilityNumbers = true;
 	@Required
+	private boolean characterHandSize = false;
+	@Required
 	private boolean eliteFirst = true;
 	@Required
 	private boolean expireConditions = true;
@@ -67,6 +69,10 @@ public class Settings {
 	private boolean scenarioRules = true;
 	@Required
 	private boolean scenarioRooms = true;
+	@Required
+	private boolean treasures = true;
+	@Required
+	private boolean treasuresLoot = true;
 	@Required
 	private boolean disabledTurnConfirmation = false;
 	@Required
@@ -170,6 +176,24 @@ public class Settings {
 	 */
 	public void setAbilityNumbers(boolean abilityNumbers) {
 		this.abilityNumbers = abilityNumbers;
+	}
+
+	/**
+	 * Checks if is character hand size.
+	 *
+	 * @return true, if is character hand size
+	 */
+	public boolean isCharacterHandSize() {
+		return characterHandSize;
+	}
+
+	/**
+	 * Sets the character hand size.
+	 *
+	 * @param characterHandSize the new character hand size
+	 */
+	public void setCharacterHandSize(boolean characterHandSize) {
+		this.characterHandSize = characterHandSize;
 	}
 
 	/**
@@ -620,6 +644,42 @@ public class Settings {
 	 */
 	public void setScenarioRooms(boolean scenarioRooms) {
 		this.scenarioRooms = scenarioRooms;
+	}
+
+	/**
+	 * Checks if is treasures.
+	 *
+	 * @return true, if is treasures
+	 */
+	public boolean isTreasures() {
+		return treasures;
+	}
+
+	/**
+	 * Sets the treasures.
+	 *
+	 * @param treasures the new treasures
+	 */
+	public void setTreasures(boolean treasures) {
+		this.treasures = treasures;
+	}
+
+	/**
+	 * Checks if is treasures loot.
+	 *
+	 * @return true, if is treasures loot
+	 */
+	public boolean isTreasuresLoot() {
+		return treasuresLoot;
+	}
+
+	/**
+	 * Sets the treasures loot.
+	 *
+	 * @param treasuresLoot the new treasures loot
+	 */
+	public void setTreasuresLoot(boolean treasuresLoot) {
+		this.treasuresLoot = treasuresLoot;
 	}
 
 	/**
