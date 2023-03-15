@@ -38,6 +38,10 @@ public class Settings {
 	@Required
 	private boolean activeSummons = true;
 	@Required
+	private boolean interactiveAbilities = true;
+	@Required
+	private boolean combineSummonAction = true;
+	@Required
 	private boolean alwaysAllyAttackModifierDeck = true;
 	@Required
 	private boolean alwaysHazardousTerrain = true;
@@ -356,6 +360,42 @@ public class Settings {
 	 */
 	public void setActiveSummons(boolean activeSummons) {
 		this.activeSummons = activeSummons;
+	}
+
+	/**
+	 * Checks if is interactive abilities.
+	 *
+	 * @return true, if is interactive abilities
+	 */
+	public boolean isInteractiveAbilities() {
+		return interactiveAbilities;
+	}
+
+	/**
+	 * Sets the interactive abilities.
+	 *
+	 * @param interactiveAbilities the new interactive abilities
+	 */
+	public void setInteractiveAbilities(boolean interactiveAbilities) {
+		this.interactiveAbilities = interactiveAbilities;
+	}
+
+	/**
+	 * Checks if is combine summon action.
+	 *
+	 * @return true, if is combine summon action
+	 */
+	public boolean isCombineSummonAction() {
+		return combineSummonAction;
+	}
+
+	/**
+	 * Sets the combine summon action.
+	 *
+	 * @param combineSummonAction the new combine summon action
+	 */
+	public void setCombineSummonAction(boolean combineSummonAction) {
+		this.combineSummonAction = combineSummonAction;
 	}
 
 	/**
