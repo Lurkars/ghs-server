@@ -15,11 +15,13 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 /**
  * The Class Application.
  */
 @SpringBootApplication
+@EnableScheduling
 @PropertySource("classpath:default.properties")
 @PropertySource(value = "file:///${user.home}/.ghs/application.properties", ignoreResourceNotFound = true)
 public class Application {

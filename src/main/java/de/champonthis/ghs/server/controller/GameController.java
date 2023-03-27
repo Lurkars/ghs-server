@@ -18,7 +18,7 @@ import de.champonthis.ghs.server.businesslogic.Manager;
 import de.champonthis.ghs.server.model.GameModel;
 
 /**
- * 
+ * The Class GameController.
  */
 @RestController
 @RequestMapping("game")
@@ -33,6 +33,12 @@ public class GameController {
 	@Value("${ghs-server.debug:false}")
 	private boolean debug;
 
+	/**
+	 * Gets the game.
+	 *
+	 * @param password the password
+	 * @return the game
+	 */
 	@GetMapping
 	public GameModel getGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION, required = false) String password) {
 

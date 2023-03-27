@@ -9,6 +9,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.socket.CloseStatus;
@@ -41,6 +42,7 @@ import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 public class MessageHandler extends TextWebSocketHandler {
 
 	List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
+	List<WebSocketSessionContainer> webSocketSessionsCleanUp = Collections.synchronizedList(new LinkedList<>());
 
 	@Autowired
 	private Manager manager;
@@ -70,11 +72,10 @@ public class MessageHandler extends TextWebSocketHandler {
 			}
 		}
 		if (webSocketSessionContainer != null) {
-			webSocketSessions.remove(webSocketSessionContainer);
 			int gameId = webSocketSessionContainer.getGameId();
-
+			webSocketSessionsCleanUp.add(webSocketSessionContainer);
 			for (WebSocketSessionContainer container : webSocketSessions) {
-				if (container.getGameId() == gameId) {
+				if (container.getGameId() == gameId && webSocketSessionsCleanUp.indexOf(container) == -1) {
 					GameModel game = manager.getGame(gameId);
 					if (game == null) {
 						sendError(container.getSession(), "No game found for 'id=" + gameId + "'");
@@ -88,6 +89,17 @@ public class MessageHandler extends TextWebSocketHandler {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Clean up sessions.
+	 */
+	@Scheduled(fixedRate = 120000)
+	public void cleanUpSessions() {
+		for (WebSocketSessionContainer container : webSocketSessionsCleanUp) {
+			webSocketSessions.remove(container);
+		}
+		webSocketSessionsCleanUp.clear();
 	}
 
 	@Override
@@ -267,8 +279,8 @@ public class MessageHandler extends TextWebSocketHandler {
 					manager.setGame(gameId, gameUpdate);
 
 					for (WebSocketSessionContainer container : webSocketSessions) {
-						if (!container.getSession().getId().equals(session.getId())
-								&& container.getGameId() == gameId) {
+						if (!container.getSession().getId().equals(session.getId()) && container.getGameId() == gameId
+								&& webSocketSessionsCleanUp.indexOf(container) == -1) {
 							JsonObject gameResponse = new JsonObject();
 							if (!game.isServer()) {
 								gameUpdate.setServer(isServerSession(container.getSession(), gameId));
@@ -336,7 +348,7 @@ public class MessageHandler extends TextWebSocketHandler {
 
 					if (!game.isServer()) {
 						for (WebSocketSessionContainer container : webSocketSessions) {
-							if (container.getGameId() == gameId) {
+							if (container.getGameId() == gameId && webSocketSessionsCleanUp.indexOf(container) == -1) {
 								JsonObject updateResponse = new JsonObject();
 								updateResponse.addProperty("type", "requestUpdate");
 								container.getSession().sendMessage(new TextMessage(gson.toJson(updateResponse)));
@@ -376,7 +388,8 @@ public class MessageHandler extends TextWebSocketHandler {
 					}
 
 					for (WebSocketSessionContainer container : webSocketSessions) {
-						if (container.getSession() != session && container.getGameId() == gameId) {
+						if (container.getSession() != session && container.getGameId() == gameId
+								&& webSocketSessionsCleanUp.indexOf(container) == -1) {
 							JsonObject settingsResponse = new JsonObject();
 							settingsResponse.addProperty("type", "settings");
 							settingsResponse.add("payload", gson.toJsonTree(settingsUpdate));
@@ -410,17 +423,19 @@ public class MessageHandler extends TextWebSocketHandler {
 		int serverSessionIndex = Integer.MAX_VALUE;
 		boolean isServer = false;
 		for (WebSocketSessionContainer container : webSocketSessions) {
-			int containerIndex = webSocketSessions.indexOf(container);
-			if (container.getSession() == session) {
-				if (containerIndex < serverSessionIndex) {
+			if (webSocketSessionsCleanUp.indexOf(container) == -1) {
+				int containerIndex = webSocketSessions.indexOf(container);
+				if (container.getSession() == session) {
+					if (containerIndex < serverSessionIndex) {
+						serverSessionIndex = containerIndex;
+						isServer = true;
+					}
+					container.setGameId(gameId);
+					break;
+				} else if (container.getGameId() == gameId && containerIndex < serverSessionIndex) {
 					serverSessionIndex = containerIndex;
-					isServer = true;
+					isServer = false;
 				}
-				container.setGameId(gameId);
-				break;
-			} else if (container.getGameId() == gameId && containerIndex < serverSessionIndex) {
-				serverSessionIndex = containerIndex;
-				isServer = false;
 			}
 		}
 		return isServer;
