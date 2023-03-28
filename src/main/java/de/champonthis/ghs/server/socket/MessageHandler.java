@@ -4,6 +4,7 @@
 package de.champonthis.ghs.server.socket;
 
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -33,7 +34,6 @@ import de.champonthis.ghs.server.model.Permissions;
 import de.champonthis.ghs.server.model.Settings;
 import de.champonthis.ghs.server.socket.exception.SendErrorException;
 import de.champonthis.ghs.server.socket.model.MessageType;
-import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 
 /**
  * The Class MessageHandler.
@@ -41,8 +41,9 @@ import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 @Component
 public class MessageHandler extends TextWebSocketHandler {
 
-	List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
-	List<WebSocketSessionContainer> webSocketSessionsCleanUp = Collections.synchronizedList(new LinkedList<>());
+	protected static final String GAME_ID = "gameId";
+
+	List<WebSocketSession> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
 
 	@Autowired
 	private Manager manager;
@@ -58,33 +59,34 @@ public class MessageHandler extends TextWebSocketHandler {
 	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
-		webSocketSessions.add(new WebSocketSessionContainer(-1, session));
+		session.getAttributes().put(GAME_ID, -1);
+		webSocketSessions.add(session);
 	}
 
 	@Override
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);
-		WebSocketSessionContainer webSocketSessionContainer = null;
-		for (WebSocketSessionContainer container : webSocketSessions) {
-			if (container.getSession() == session) {
-				webSocketSessionContainer = container;
-				break;
-			}
+
+		Integer gameId = null;
+
+		if (session.getAttributes().containsKey(GAME_ID)) {
+			gameId = (int) session.getAttributes().get(GAME_ID);
+			session.getAttributes().remove(GAME_ID);
 		}
-		if (webSocketSessionContainer != null) {
-			int gameId = webSocketSessionContainer.getGameId();
-			webSocketSessionsCleanUp.add(webSocketSessionContainer);
-			for (WebSocketSessionContainer container : webSocketSessions) {
-				if (container.getGameId() == gameId && webSocketSessionsCleanUp.indexOf(container) == -1) {
+
+		if (gameId != null) {
+			for (WebSocketSession other : webSocketSessions) {
+				if (other != session && other.getAttributes().containsKey(GAME_ID)
+						&& other.getAttributes().get(GAME_ID) == gameId) {
 					GameModel game = manager.getGame(gameId);
 					if (game == null) {
-						sendError(container.getSession(), "No game found for 'id=" + gameId + "'");
+						sendError(other, "No game found for 'id=" + gameId + "'");
 					} else {
-						game.setServer(isServerSession(container.getSession(), gameId));
+						game.setServer(isServerSession(other, gameId));
 						JsonObject gameResponse = new JsonObject();
 						gameResponse.addProperty("type", "game");
 						gameResponse.add("payload", gson.toJsonTree(game));
-						container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+						other.sendMessage(new TextMessage(gson.toJson(gameResponse)));
 					}
 				}
 			}
@@ -96,10 +98,13 @@ public class MessageHandler extends TextWebSocketHandler {
 	 */
 	@Scheduled(fixedRate = 120000)
 	public void cleanUpSessions() {
-		for (WebSocketSessionContainer container : webSocketSessionsCleanUp) {
-			webSocketSessions.remove(container);
+		Iterator<WebSocketSession> iter = webSocketSessions.iterator();
+		while (iter.hasNext()) {
+			WebSocketSession session = iter.next();
+			if (!session.getAttributes().containsKey(GAME_ID)) {
+				iter.remove();
+			}
 		}
-		webSocketSessionsCleanUp.clear();
 	}
 
 	@Override
@@ -112,12 +117,14 @@ public class MessageHandler extends TextWebSocketHandler {
 				JsonObject messageObject = JsonParser.parseString(textMessage.getPayload()).getAsJsonObject();
 
 				if (messageObject.get("password") == null || messageObject.get("password").isJsonNull()) {
+					session.getAttributes().put(GAME_ID, -1);
 					sendError(session, "'password' missing");
 				}
 
 				String password = messageObject.get("password").getAsString();
 
 				if (!StringUtils.hasText(password)) {
+					session.getAttributes().put(GAME_ID, -1);
 					sendError(session, "empty 'password'");
 				}
 
@@ -133,6 +140,7 @@ public class MessageHandler extends TextWebSocketHandler {
 						gameId = manager.createGame(game);
 						manager.createPassword(password, gameId);
 					} else {
+						session.getAttributes().put(GAME_ID, -1);
 						sendError(session, "Invalid password '" + password + "'");
 					}
 				}
@@ -140,8 +148,11 @@ public class MessageHandler extends TextWebSocketHandler {
 				GameModel game = manager.getGame(gameId);
 
 				if (game == null) {
+					session.getAttributes().put(GAME_ID, -1);
 					sendError(session, "No game found for 'id=" + gameId + "'");
 				}
+
+				session.getAttributes().put(GAME_ID, gameId);
 
 				if (game.getParty() == null) {
 					game.setParty(new Party());
@@ -278,17 +289,17 @@ public class MessageHandler extends TextWebSocketHandler {
 					gameUpdate.setServer(false);
 					manager.setGame(gameId, gameUpdate);
 
-					for (WebSocketSessionContainer container : webSocketSessions) {
-						if (!container.getSession().getId().equals(session.getId()) && container.getGameId() == gameId
-								&& webSocketSessionsCleanUp.indexOf(container) == -1) {
+					for (WebSocketSession other : webSocketSessions) {
+						if (!other.getId().equals(session.getId()) && other.getAttributes().containsKey(GAME_ID)
+								&& other.getAttributes().get(GAME_ID) == gameId) {
 							JsonObject gameResponse = new JsonObject();
 							if (!game.isServer()) {
-								gameUpdate.setServer(isServerSession(container.getSession(), gameId));
+								gameUpdate.setServer(isServerSession(other, gameId));
 							}
 							gameResponse.addProperty("type", "game");
 							gameResponse.add("payload", gson.toJsonTree(gameUpdate));
 							gameResponse.add("undoinfo", messageObject.get("undoinfo"));
-							container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+							other.sendMessage(new TextMessage(gson.toJson(gameResponse)));
 						}
 					}
 					break;
@@ -347,11 +358,12 @@ public class MessageHandler extends TextWebSocketHandler {
 					session.sendMessage(new TextMessage(gson.toJson(permissionsResponse)));
 
 					if (!game.isServer()) {
-						for (WebSocketSessionContainer container : webSocketSessions) {
-							if (container.getGameId() == gameId && webSocketSessionsCleanUp.indexOf(container) == -1) {
+						for (WebSocketSession other : webSocketSessions) {
+							if (other.getAttributes().containsKey(GAME_ID)
+									&& other.getAttributes().get(GAME_ID) == gameId) {
 								JsonObject updateResponse = new JsonObject();
 								updateResponse.addProperty("type", "requestUpdate");
-								container.getSession().sendMessage(new TextMessage(gson.toJson(updateResponse)));
+								session.sendMessage(new TextMessage(gson.toJson(updateResponse)));
 								break;
 							}
 						}
@@ -387,13 +399,13 @@ public class MessageHandler extends TextWebSocketHandler {
 						manager.setSettings(settingsUpdate, gameId);
 					}
 
-					for (WebSocketSessionContainer container : webSocketSessions) {
-						if (container.getSession() != session && container.getGameId() == gameId
-								&& webSocketSessionsCleanUp.indexOf(container) == -1) {
+					for (WebSocketSession other : webSocketSessions) {
+						if (other != session && other.getAttributes().containsKey(GAME_ID)
+								&& other.getAttributes().get(GAME_ID) == gameId) {
 							JsonObject settingsResponse = new JsonObject();
 							settingsResponse.addProperty("type", "settings");
 							settingsResponse.add("payload", gson.toJsonTree(settingsUpdate));
-							container.getSession().sendMessage(new TextMessage(gson.toJson(settingsResponse)));
+							other.sendMessage(new TextMessage(gson.toJson(settingsResponse)));
 						}
 					}
 					break;
@@ -419,20 +431,19 @@ public class MessageHandler extends TextWebSocketHandler {
 	 * @param gameId  the game id
 	 * @return true, if is server session
 	 */
-	protected boolean isServerSession(WebSocketSession session, int gameId) {
+	protected boolean isServerSession(WebSocketSession session, Integer gameId) {
 		int serverSessionIndex = Integer.MAX_VALUE;
 		boolean isServer = false;
-		for (WebSocketSessionContainer container : webSocketSessions) {
-			if (webSocketSessionsCleanUp.indexOf(container) == -1) {
-				int containerIndex = webSocketSessions.indexOf(container);
-				if (container.getSession() == session) {
+		for (WebSocketSession other : webSocketSessions) {
+			if (other.getAttributes().containsKey(GAME_ID) && other.getAttributes().get(GAME_ID) == gameId) {
+				int containerIndex = webSocketSessions.indexOf(other);
+				if (other == session) {
 					if (containerIndex < serverSessionIndex) {
 						serverSessionIndex = containerIndex;
 						isServer = true;
 					}
-					container.setGameId(gameId);
 					break;
-				} else if (container.getGameId() == gameId && containerIndex < serverSessionIndex) {
+				} else if (containerIndex < serverSessionIndex) {
 					serverSessionIndex = containerIndex;
 					isServer = false;
 				}

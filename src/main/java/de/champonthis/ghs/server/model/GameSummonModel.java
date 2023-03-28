@@ -19,7 +19,7 @@ public class GameSummonModel {
 	private int number;
 	@Required
 	private SummonColor color;
-	private Integer attack;
+	private String attack;
 	private Integer movement;
 	private Integer range;
 	private Boolean flying;
@@ -118,7 +118,7 @@ public class GameSummonModel {
 	 *
 	 * @return the attack
 	 */
-	public Integer getAttack() {
+	public String getAttack() {
 		return attack;
 	}
 
@@ -127,7 +127,7 @@ public class GameSummonModel {
 	 *
 	 * @param attack the new attack
 	 */
-	public void setAttack(Integer attack) {
+	public void setAttack(String attack) {
 		this.attack = attack;
 	}
 
