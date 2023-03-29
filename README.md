@@ -22,7 +22,7 @@ Prerequisite:
 
 - Java 11 (or higher) Runtime Environment: [Installation Guide for different OS'](https://www.java.com/en/download/help/download_options.html)
 
-Afterwards download the corresponding latest `jar`-executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
+Then download the corresponding latest `jar`-executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
 
 Execute the `jar`-file with your Java Runtime Environment. 
 
