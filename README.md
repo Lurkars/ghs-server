@@ -12,15 +12,27 @@ A public server is available under `gloomhaven-secretariat.de` port `8443` with 
 
 ☕ [Buy me a coffee?](https://ko-fi.com/lurkars) (or [Direct Donation via PayPal](https://paypal.me/Lurkars))
 
-## How to run
+## How to run (basic)
+
+This will run a basic server for a single game code (e.g. for one group, you can still use multi-party feature)
+
+### Installation + Running
 
 Prerequisite:
 
-- Java 11 (or higher) Runtime Environment
+- Java 11 (or higher) Runtime Environment [Installation Tutorial for different OS'](https://www.java.com/en/download/help/download_options.html)
 
 Download the corresponding latest `jar`-executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
 
-Execute the `jar`-file with your Java Runtime Environment or run `java -jar ghs-server-*.jar` in your terminal.
+Execute the `jar`-file with your Java Runtime Environment. 
+
+Afterwards the server window should be visible, listing available IPs and hostnames to connect and the port running. Usual this will be something starting with `192.168...` as well as port `8080`. In general only those two values are required to connect all devices in the same network.
+
+If the server should also serve the client, see [Serve client](#serve-client). If you want to reset game code, see  the [Workaround](#workarounds).
+
+## How to run (advanced)
+
+If you want to configure your server in detail or create a public server, here are some advanced installation and configuration steps.
 
 ### Build and run using Docker
 
@@ -43,7 +55,9 @@ For usage with docker compose, simple run `docker compose up -d`.
 
 ### Serve client
 
-The server is also capable of serving the client. Simple click the "Install latest Client" button in GUI. If you run headless, just download zip file (NOT source code!) of [Gloomhaven Secretariat Release](https://github.com/Lurkars/gloomhavensecretariat/releases) and extract in folder `<your-home-folder>/.ghs/gloomhavensecretariat`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}` (`http://localhost:8080` with default values). To automatic install latest client on startup, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.lastestClientOnStartup=true`.
+The server is also capable of serving the client. Simple click the "Install latest Client" button in GUI. Afterwards the client can be opened directly in browser by clicking the corresponding button.
+
+If you run headless, just download zip file (NOT source code!) of [Gloomhaven Secretariat Release](https://github.com/Lurkars/gloomhavensecretariat/releases) and extract in folder `<your-home-folder>/.ghs/gloomhavensecretariat`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}` (`http://localhost:8080` with default values). To automatic install latest client on startup, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.lastestClientOnStartup=true`.
 
 ### Run headless
 

@@ -57,6 +57,7 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	private JButton quitButton = new JButton("Quit");
 	private JButton installButton = new JButton("Install latest Client");
 	private JButton openClientButton = new JButton("Open Client");
+	private JScrollPane tablePane = null;
 
 	/**
 	 * Instantiates a new main frame.
@@ -149,6 +150,9 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	 * Auht key table.
 	 */
 	protected void auhtKeyTable() {
+		if (tablePane != null) {
+			this.remove(tablePane);
+		}
 		try {
 			String[] columns = new String[] { "Password", "Permissions", "Game ID" };
 
@@ -165,7 +169,8 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 				}
 
 				JTable table = new JTable(dataList.toArray(new Object[][] {}), columns);
-				this.add(BorderLayout.CENTER, new JScrollPane(table));
+				tablePane = new JScrollPane(table);
+				this.add(BorderLayout.CENTER, tablePane);
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
