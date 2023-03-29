@@ -113,6 +113,7 @@ On the first time, just choose the **Password** of your choice. This will create
 
 ## Workarounds
 
+- [List of home-folder for different OS'](https://en.wikipedia.org/wiki/Home_directory#Default_home_directory_per_operating_system)
 - The database is a simple `ghs.sqlite`-file in GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simple delete the `sqlite`-file.
 - on startup, all passwords are written into syslog in plaintext.
 
