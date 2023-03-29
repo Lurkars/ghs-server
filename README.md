@@ -28,7 +28,10 @@ Execute the `jar`-file with your Java Runtime Environment.
 
 Afterwards the server window should be visible, listing available IPs and hostnames to connect and the port running. Usual this will be something starting with `192.168...` as well as port `8080`. In general only those two values are required to connect all devices in the same network.
 
-If the server should also serve the client, see [Serve client](#serve-client). If you want to reset server, delete the database file as descriped in the [Workaround](#workarounds).
+If the server should also serve the client, see [Serve client](#serve-client). 
+
+All data is stored under `<your-home-folder>/.ghs` ([List of home-folder for different OS'](https://en.wikipedia.org/wiki/Home_directory#Default_home_directory_per_operating_system)). 
+If you want to reset server, just delete the database file `ghs.sqlite`-file in that directory.
 
 ## How to run (advanced)
 
@@ -113,7 +116,6 @@ On the first time, just choose the **Password** of your choice. This will create
 
 ## Workarounds
 
-- [List of home-folder for different OS'](https://en.wikipedia.org/wiki/Home_directory#Default_home_directory_per_operating_system)
 - The database is a simple `ghs.sqlite`-file in GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simple delete the `sqlite`-file.
 - on startup, all passwords are written into syslog in plaintext.
 
