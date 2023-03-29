@@ -28,7 +28,7 @@ Execute the `jar`-file with your Java Runtime Environment.
 
 Afterwards the server window should be visible, listing available IPs and hostnames to connect and the port running. Usual this will be something starting with `192.168...` as well as port `8080`. In general only those two values are required to connect all devices in the same network.
 
-If the server should also serve the client, see [Serve client](#serve-client). If you want to reset game code, see  the [Workaround](#workarounds).
+If the server should also serve the client, see [Serve client](#serve-client). If you want to reset server, delete the database file as descriped in the [Workaround](#workarounds).
 
 ## How to run (advanced)
 
