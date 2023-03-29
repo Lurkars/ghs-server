@@ -63,6 +63,15 @@ public enum ConditionName {
 	@SerializedName("rupture")
 	RUPTURE,
 
+	@SerializedName("dodge")
+	DODGE,
+
+	@SerializedName("empower")
+	EMPOWER,
+
+	@SerializedName("enfeeble")
+	ENFEEBLE,
+
 	@SerializedName("poison_x")
 	POISON_X,
 

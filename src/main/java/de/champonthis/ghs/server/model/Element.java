@@ -10,8 +10,8 @@ import com.google.gson.annotations.SerializedName;
  */
 public enum Element {
 
-	@SerializedName("all")
-	ALL,
+	@SerializedName("wild")
+	WILD,
 
 	@SerializedName("fire")
 	FIRE,

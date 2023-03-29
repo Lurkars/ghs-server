@@ -40,6 +40,7 @@ public class GameSummonModel {
 	private String action;
 	private String additionalAction;
 	private boolean active = false;
+	private String thumbnail;
 
 	/**
 	 * Gets the name.
@@ -381,6 +382,20 @@ public class GameSummonModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * @return the thumbnail
+	 */
+	public String getThumbnail() {
+		return thumbnail;
+	}
+
+	/**
+	 * @param thumbnail the thumbnail to set
+	 */
+	public void setThumbnail(String thumbnail) {
+		this.thumbnail = thumbnail;
 	}
 
 }

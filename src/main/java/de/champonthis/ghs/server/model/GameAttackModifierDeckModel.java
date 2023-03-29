@@ -16,6 +16,8 @@ public class GameAttackModifierDeckModel {
 	private int current;
 	@Required
 	private LinkedList<String> cards = new LinkedList<>();
+	@Required
+	private LinkedList<Integer> disgarded = new LinkedList<>();
 
 	/**
 	 * Gets the current.
@@ -51,6 +53,20 @@ public class GameAttackModifierDeckModel {
 	 */
 	public void setCards(LinkedList<String> cards) {
 		this.cards = cards;
+	}
+
+	/**
+	 * @return the disgarded
+	 */
+	public LinkedList<Integer> getDisgarded() {
+		return disgarded;
+	}
+
+	/**
+	 * @param disgarded the disgarded to set
+	 */
+	public void setDisgarded(LinkedList<Integer> disgarded) {
+		this.disgarded = disgarded;
 	}
 
 }

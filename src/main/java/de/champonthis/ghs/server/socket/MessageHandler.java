@@ -74,17 +74,19 @@ public class MessageHandler extends TextWebSocketHandler {
 		if (webSocketSessionContainer != null) {
 			int gameId = webSocketSessionContainer.getGameId();
 			webSocketSessionsCleanUp.add(webSocketSessionContainer);
-			for (WebSocketSessionContainer container : webSocketSessions) {
-				if (container.getGameId() == gameId && webSocketSessionsCleanUp.indexOf(container) == -1) {
-					GameModel game = manager.getGame(gameId);
-					if (game == null) {
-						sendError(container.getSession(), "No game found for 'id=" + gameId + "'");
-					} else {
-						game.setServer(isServerSession(container.getSession(), gameId));
-						JsonObject gameResponse = new JsonObject();
-						gameResponse.addProperty("type", "game");
-						gameResponse.add("payload", gson.toJsonTree(game));
-						container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+			if (gameId != -1) {
+				for (WebSocketSessionContainer container : webSocketSessions) {
+					if (container.getGameId() == gameId && webSocketSessionsCleanUp.indexOf(container) == -1) {
+						GameModel game = manager.getGame(gameId);
+						if (game == null) {
+							sendError(container.getSession(), "No game found for 'id=" + gameId + "'");
+						} else {
+							game.setServer(isServerSession(container.getSession(), gameId));
+							JsonObject gameResponse = new JsonObject();
+							gameResponse.addProperty("type", "game");
+							gameResponse.add("payload", gson.toJsonTree(game));
+							container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+						}
 					}
 				}
 			}

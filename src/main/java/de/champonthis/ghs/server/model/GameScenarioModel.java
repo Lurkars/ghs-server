@@ -14,9 +14,9 @@ public class GameScenarioModel {
 
 	@Required
 	private String index;
-	private String group;
 	@Required
 	private String edition;
+	private String group;
 	private boolean isCustom = false;
 	private String custom;
 	@Required

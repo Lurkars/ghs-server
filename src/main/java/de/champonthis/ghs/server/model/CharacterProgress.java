@@ -27,6 +27,7 @@ public class CharacterProgress {
 	private String notes = "";
 	private boolean retired = false;
 	private int retirements = 0;
+	private int extraPerks = 0;
 	@Required
 	private LinkedList<Integer> perks = new LinkedList<>();
 	@Required
@@ -211,6 +212,20 @@ public class CharacterProgress {
 	 */
 	public void setRetirements(int retirements) {
 		this.retirements = retirements;
+	}
+
+	/**
+	 * @return the extraPerks
+	 */
+	public int getExtraPerks() {
+		return extraPerks;
+	}
+
+	/**
+	 * @param extraPerks the extraPerks to set
+	 */
+	public void setExtraPerks(int extraPerks) {
+		this.extraPerks = extraPerks;
 	}
 
 	/**
