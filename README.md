@@ -20,7 +20,7 @@ This will run a basic server for a single game code (e.g. for one group, you can
 
 Prerequisite:
 
-- Java 11 (or higher) Runtime Environment [Installation Tutorial for different OS'](https://www.java.com/en/download/help/download_options.html)
+- Java 11 (or higher) Runtime Environment: [Installation Tutorial for different OS'](https://www.java.com/en/download/help/download_options.html)
 
 Download the corresponding latest `jar`-executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
 
