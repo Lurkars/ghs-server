@@ -215,14 +215,18 @@ public class CharacterProgress {
 	}
 
 	/**
-	 * @return the extraPerks
+	 * Gets the extra perks.
+	 *
+	 * @return the extra perks
 	 */
 	public int getExtraPerks() {
 		return extraPerks;
 	}
 
 	/**
-	 * @param extraPerks the extraPerks to set
+	 * Sets the extra perks.
+	 *
+	 * @param extraPerks the new extra perks
 	 */
 	public void setExtraPerks(int extraPerks) {
 		this.extraPerks = extraPerks;

@@ -385,6 +385,8 @@ public class GameSummonModel {
 	}
 
 	/**
+	 * Gets the thumbnail.
+	 *
 	 * @return the thumbnail
 	 */
 	public String getThumbnail() {
@@ -392,7 +394,9 @@ public class GameSummonModel {
 	}
 
 	/**
-	 * @param thumbnail the thumbnail to set
+	 * Sets the thumbnail.
+	 *
+	 * @param thumbnail the new thumbnail
 	 */
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;

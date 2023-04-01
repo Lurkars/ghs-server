@@ -18,6 +18,8 @@ public class GameModel {
 	@Required
 	private LinkedList<String> figures = new LinkedList<>();
 	@Required
+	private LinkedList<EntityCounter> entitiesCounter = new LinkedList<>();
+	@Required
 	private LinkedList<GameCharacterModel> characters = new LinkedList<>();
 	@Required
 	private LinkedList<GameMonsterModel> monsters = new LinkedList<>();
@@ -129,6 +131,24 @@ public class GameModel {
 	 */
 	public void setFigures(LinkedList<String> figures) {
 		this.figures = figures;
+	}
+
+	/**
+	 * Gets the entities counter.
+	 *
+	 * @return the entities counter
+	 */
+	public LinkedList<EntityCounter> getEntitiesCounter() {
+		return entitiesCounter;
+	}
+
+	/**
+	 * Sets the entities counter.
+	 *
+	 * @param entitiesCounter the new entities counter
+	 */
+	public void setEntitiesCounter(LinkedList<EntityCounter> entitiesCounter) {
+		this.entitiesCounter = entitiesCounter;
 	}
 
 	/**

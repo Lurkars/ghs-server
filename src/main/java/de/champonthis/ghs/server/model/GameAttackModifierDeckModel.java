@@ -56,6 +56,8 @@ public class GameAttackModifierDeckModel {
 	}
 
 	/**
+	 * Gets the disgarded.
+	 *
 	 * @return the disgarded
 	 */
 	public LinkedList<Integer> getDisgarded() {
@@ -63,7 +65,9 @@ public class GameAttackModifierDeckModel {
 	}
 
 	/**
-	 * @param disgarded the disgarded to set
+	 * Sets the disgarded.
+	 *
+	 * @param disgarded the new disgarded
 	 */
 	public void setDisgarded(LinkedList<Integer> disgarded) {
 		this.disgarded = disgarded;
