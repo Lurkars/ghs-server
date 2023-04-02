@@ -18,6 +18,8 @@ public class GameAttackModifierDeckModel {
 	private LinkedList<String> cards = new LinkedList<>();
 	@Required
 	private LinkedList<Integer> disgarded = new LinkedList<>();
+	@Required
+	private boolean active = true;
 
 	/**
 	 * Gets the current.
@@ -71,6 +73,24 @@ public class GameAttackModifierDeckModel {
 	 */
 	public void setDisgarded(LinkedList<Integer> disgarded) {
 		this.disgarded = disgarded;
+	}
+
+	/**
+	 * Checks if is active.
+	 *
+	 * @return true, if is active
+	 */
+	public boolean isActive() {
+		return active;
+	}
+
+	/**
+	 * Sets the active.
+	 *
+	 * @param active the new active
+	 */
+	public void setActive(boolean active) {
+		this.active = active;
 	}
 
 }
