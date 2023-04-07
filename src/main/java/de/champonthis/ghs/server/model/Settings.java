@@ -13,6 +13,8 @@ import de.champonthis.ghs.server.util.Required;
 public class Settings {
 
 	@Required
+	private boolean abilities = true;
+	@Required
 	private boolean abilityNumbers = true;
 	@Required
 	private boolean abilityReveal = true;
@@ -95,6 +97,24 @@ public class Settings {
 	private boolean treasures = true;
 	@Required
 	private boolean treasuresLoot = true;
+
+	/**
+	 * Checks if is abilities.
+	 *
+	 * @return true, if is abilities
+	 */
+	public boolean isAbilities() {
+		return abilities;
+	}
+
+	/**
+	 * Sets the abilities.
+	 *
+	 * @param abilities the new abilities
+	 */
+	public void setAbilities(boolean abilities) {
+		this.abilities = abilities;
+	}
 
 	/**
 	 * Checks if is ability numbers.
