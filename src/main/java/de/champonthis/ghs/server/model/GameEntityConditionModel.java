@@ -19,6 +19,8 @@ public class GameEntityConditionModel {
 	@Required
 	private EntityConditionState lastState;
 	@Required
+	private boolean permanent;
+	@Required
 	private boolean expired;
 	@Required
 	private boolean highlight;
@@ -93,6 +95,24 @@ public class GameEntityConditionModel {
 	 */
 	public void setLastState(EntityConditionState lastState) {
 		this.lastState = lastState;
+	}
+
+	/**
+	 * Checks if is permanent.
+	 *
+	 * @return true, if is permanent
+	 */
+	public boolean isPermanent() {
+		return permanent;
+	}
+
+	/**
+	 * Sets the permanent.
+	 *
+	 * @param permanent the new permanent
+	 */
+	public void setPermanent(boolean permanent) {
+		this.permanent = permanent;
 	}
 
 	/**
