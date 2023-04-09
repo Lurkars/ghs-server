@@ -25,6 +25,8 @@ public class Settings {
 	@Required
 	private boolean activeSummons = true;
 	@Required
+	private boolean allyAttackModifierDeck = true;
+	@Required
 	private boolean alwaysAllyAttackModifierDeck = true;
 	@Required
 	private boolean alwaysFhSolo = true;
@@ -45,7 +47,11 @@ public class Settings {
 	@Required
 	private boolean calculateStats = true;
 	@Required
+	private boolean characterAttackModifierDeck = true;
+	@Required
 	private boolean characterHandSize = false;
+	@Required
+	private boolean characterSheet = true;
 	@Required
 	private boolean combineSummonAction = true;
 	@Required
@@ -78,9 +84,15 @@ public class Settings {
 	private boolean interactiveAbilities = true;
 	@Required
 	private String locale = "en";
+	@Required
+	private boolean lootDeck = true;
 	private int maxUndo = 50;
 	@Required
+	private boolean monsters = true;
+	@Required
 	private boolean moveElements = true;
+	@Required
+	private boolean partySheet = true;
 	@Required
 	private boolean randomStandees = false;
 	@Required
@@ -204,6 +216,24 @@ public class Settings {
 	 */
 	public void setActiveSummons(boolean activeSummons) {
 		this.activeSummons = activeSummons;
+	}
+
+	/**
+	 * Checks if is ally attack modifier deck.
+	 *
+	 * @return true, if is ally attack modifier deck
+	 */
+	public boolean isAllyAttackModifierDeck() {
+		return allyAttackModifierDeck;
+	}
+
+	/**
+	 * Sets the ally attack modifier deck.
+	 *
+	 * @param allyAttackModifierDeck the new ally attack modifier deck
+	 */
+	public void setAllyAttackModifierDeck(boolean allyAttackModifierDeck) {
+		this.allyAttackModifierDeck = allyAttackModifierDeck;
 	}
 
 	/**
@@ -387,6 +417,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is character attack modifier deck.
+	 *
+	 * @return true, if is character attack modifier deck
+	 */
+	public boolean isCharacterAttackModifierDeck() {
+		return characterAttackModifierDeck;
+	}
+
+	/**
+	 * Sets the character attack modifier deck.
+	 *
+	 * @param characterAttackModifierDeck the new character attack modifier deck
+	 */
+	public void setCharacterAttackModifierDeck(boolean characterAttackModifierDeck) {
+		this.characterAttackModifierDeck = characterAttackModifierDeck;
+	}
+
+	/**
 	 * Checks if is character hand size.
 	 *
 	 * @return true, if is character hand size
@@ -402,6 +450,24 @@ public class Settings {
 	 */
 	public void setCharacterHandSize(boolean characterHandSize) {
 		this.characterHandSize = characterHandSize;
+	}
+
+	/**
+	 * Checks if is character sheet.
+	 *
+	 * @return true, if is character sheet
+	 */
+	public boolean isCharacterSheet() {
+		return characterSheet;
+	}
+
+	/**
+	 * Sets the character sheet.
+	 *
+	 * @param characterSheet the new character sheet
+	 */
+	public void setCharacterSheet(boolean characterSheet) {
+		this.characterSheet = characterSheet;
 	}
 
 	/**
@@ -693,6 +759,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is loot deck.
+	 *
+	 * @return true, if is loot deck
+	 */
+	public boolean isLootDeck() {
+		return lootDeck;
+	}
+
+	/**
+	 * Sets the loot deck.
+	 *
+	 * @param lootDeck the new loot deck
+	 */
+	public void setLootDeck(boolean lootDeck) {
+		this.lootDeck = lootDeck;
+	}
+
+	/**
 	 * Gets the max undo.
 	 *
 	 * @return the max undo
@@ -711,6 +795,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is monsters.
+	 *
+	 * @return true, if is monsters
+	 */
+	public boolean isMonsters() {
+		return monsters;
+	}
+
+	/**
+	 * Sets the monsters.
+	 *
+	 * @param monsters the new monsters
+	 */
+	public void setMonsters(boolean monsters) {
+		this.monsters = monsters;
+	}
+
+	/**
 	 * Checks if is move elements.
 	 *
 	 * @return true, if is move elements
@@ -726,6 +828,24 @@ public class Settings {
 	 */
 	public void setMoveElements(boolean moveElements) {
 		this.moveElements = moveElements;
+	}
+
+	/**
+	 * Checks if is party sheet.
+	 *
+	 * @return true, if is party sheet
+	 */
+	public boolean isPartySheet() {
+		return partySheet;
+	}
+
+	/**
+	 * Sets the party sheet.
+	 *
+	 * @param partySheet the new party sheet
+	 */
+	public void setPartySheet(boolean partySheet) {
+		this.partySheet = partySheet;
 	}
 
 	/**
