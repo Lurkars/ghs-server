@@ -161,6 +161,8 @@ public class MessageHandler extends TextWebSocketHandler {
 					sendError(session, "cannot send errors to server!");
 					break;
 				case GAME:
+				case GAME_UNDO:
+				case GAME_REDO:
 					if (messageObject.get("payload") == null || messageObject.get("payload").isJsonNull()) {
 						sendError(session, "'payload' missing");
 					}
@@ -173,7 +175,10 @@ public class MessageHandler extends TextWebSocketHandler {
 
 					// Migration: check if revision is set
 					if (gameUpdate.getRevision() != null && game.getRevision() != null) {
-						if (gameUpdate.getRevision() <= game.getRevision()) {
+						if (gameUpdate.getRevision() == game.getRevision()) {
+							game.setPlaySeconds(gameUpdate.getPlaySeconds());
+							gameUpdate = game;
+						} else if (gameUpdate.getRevision() <= game.getRevision()) {
 							sendError(session, "invalid revision");
 						}
 					}
@@ -287,9 +292,39 @@ public class MessageHandler extends TextWebSocketHandler {
 							if (!game.isServer()) {
 								gameUpdate.setServer(isServerSession(container.getSession(), gameId));
 							}
-							gameResponse.addProperty("type", "game");
+							gameResponse.addProperty("type", type.toString().toLowerCase().replace('_', '-'));
 							gameResponse.add("payload", gson.toJsonTree(gameUpdate));
 							gameResponse.add("undoinfo", messageObject.get("undoinfo"));
+							container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+						}
+					}
+					break;
+				case GAME_UPDATE:
+					if (messageObject.get("payload") == null || messageObject.get("payload").isJsonNull()) {
+						sendError(session, "'payload' missing");
+					}
+
+					GameModel updateGame = gson.fromJson(messageObject.get("payload"), GameModel.class);
+
+					if (updateGame == null) {
+						sendError(session, "invalid game payload");
+					}
+					
+					game.setPlaySeconds(updateGame.getPlaySeconds());
+					updateGame = game;
+
+					updateGame.setServer(false);
+					manager.setGame(gameId, updateGame);
+
+					for (WebSocketSessionContainer container : webSocketSessions) {
+						if (!container.getSession().getId().equals(session.getId()) && container.getGameId() == gameId
+								&& webSocketSessionsCleanUp.indexOf(container) == -1) {
+							JsonObject gameResponse = new JsonObject();
+							if (!game.isServer()) {
+								updateGame.setServer(isServerSession(container.getSession(), gameId));
+							}
+							gameResponse.addProperty("type", "game-update");
+							gameResponse.add("payload", gson.toJsonTree(updateGame));
 							container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
 						}
 					}

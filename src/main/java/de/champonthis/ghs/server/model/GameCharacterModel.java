@@ -50,6 +50,8 @@ public class GameCharacterModel {
 	@Required
 	private LinkedList<String> tags = new LinkedList<>();
 	@Required
+	private int identity;
+	@Required
 	private LinkedList<GameSummonModel> summons = new LinkedList<>();
 	private CharacterProgress progress;
 	@JsonIgnore
@@ -387,6 +389,24 @@ public class GameCharacterModel {
 	 */
 	public void setTags(LinkedList<String> tags) {
 		this.tags = tags;
+	}
+
+	/**
+	 * Gets the identity.
+	 *
+	 * @return the identity
+	 */
+	public int getIdentity() {
+		return identity;
+	}
+
+	/**
+	 * Sets the identity.
+	 *
+	 * @param identity the new identity
+	 */
+	public void setIdentity(int identity) {
+		this.identity = identity;
 	}
 
 	/**

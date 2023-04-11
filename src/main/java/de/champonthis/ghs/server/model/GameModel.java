@@ -14,6 +14,7 @@ public class GameModel {
 
 	// @Required // Migration
 	private Long revision;
+	private int revisionOffset = 0;
 	private String edition;
 	@Required
 	private LinkedList<String> figures = new LinkedList<>();
@@ -95,6 +96,24 @@ public class GameModel {
 	 */
 	public void setRevision(Long revision) {
 		this.revision = revision;
+	}
+
+	/**
+	 * Gets the revision offset.
+	 *
+	 * @return the revision offset
+	 */
+	public int getRevisionOffset() {
+		return revisionOffset;
+	}
+
+	/**
+	 * Sets the revision offset.
+	 *
+	 * @param revisionOffset the new revision offset
+	 */
+	public void setRevisionOffset(int revisionOffset) {
+		this.revisionOffset = revisionOffset;
 	}
 
 	/**

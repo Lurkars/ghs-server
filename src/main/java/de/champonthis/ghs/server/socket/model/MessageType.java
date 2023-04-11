@@ -13,6 +13,15 @@ public enum MessageType {
 	@SerializedName("game")
 	GAME,
 
+	@SerializedName("game-undo")
+	GAME_UNDO,
+
+	@SerializedName("game-redo")
+	GAME_REDO,
+
+	@SerializedName("game-update")
+	GAME_UPDATE,
+
 	@SerializedName("permissions")
 	PERMISSIONS,
 
