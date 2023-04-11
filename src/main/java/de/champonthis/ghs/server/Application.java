@@ -16,6 +16,7 @@ import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
 /**
  * The Class Application.
@@ -71,6 +72,19 @@ public class Application {
 		properties.setIgnoreResourceNotFound(false);
 		properties.setLocalOverride(true);
 		return properties;
+	}
+
+	/**
+	 * Thread pool task scheduler.
+	 *
+	 * @return the thread pool task scheduler
+	 */
+	@Bean
+	public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
+		ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
+		threadPoolTaskScheduler.setPoolSize(1);
+		threadPoolTaskScheduler.setThreadNamePrefix("ThreadPoolTaskScheduler");
+		return threadPoolTaskScheduler;
 	}
 
 	/**

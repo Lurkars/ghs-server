@@ -4,12 +4,15 @@
 package de.champonthis.ghs.server.socket;
 
 import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.concurrent.ScheduledFuture;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.annotation.Scheduled;
+import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 import org.springframework.web.socket.CloseStatus;
@@ -48,6 +51,9 @@ public class MessageHandler extends TextWebSocketHandler {
 	private Manager manager;
 	@Autowired
 	private Gson gson;
+	@Autowired
+	private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+	private ScheduledFuture<?> cleanUpSessionTask;
 
 	@Value("${ghs-server.public:false}")
 	private boolean isPublic;
@@ -65,43 +71,65 @@ public class MessageHandler extends TextWebSocketHandler {
 	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);
 		WebSocketSessionContainer webSocketSessionContainer = null;
-		for (WebSocketSessionContainer container : webSocketSessions) {
+		Iterator<WebSocketSessionContainer> findSession = webSocketSessions.iterator();
+		while (findSession.hasNext()) {
+			WebSocketSessionContainer container = findSession.next();
 			if (container.getSession() == session) {
 				webSocketSessionContainer = container;
 				break;
 			}
 		}
 		if (webSocketSessionContainer != null) {
+			if (cleanUpSessionTask != null) {
+				cleanUpSessionTask.cancel(false);
+			}
 			int gameId = webSocketSessionContainer.getGameId();
+			webSocketSessionContainer.setGameId(-1);
 			webSocketSessionsCleanUp.add(webSocketSessionContainer);
 			if (gameId != -1) {
-				for (WebSocketSessionContainer container : webSocketSessions) {
-					if (container.getGameId() == gameId && webSocketSessionsCleanUp.indexOf(container) == -1) {
-						GameModel game = manager.getGame(gameId);
-						if (game == null) {
-							sendError(container.getSession(), "No game found for 'id=" + gameId + "'");
-						} else {
-							game.setServer(isServerSession(container.getSession(), gameId));
-							JsonObject gameResponse = new JsonObject();
-							gameResponse.addProperty("type", "game");
-							gameResponse.add("payload", gson.toJsonTree(game));
-							container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+				Iterator<WebSocketSessionContainer> findOthers = webSocketSessions.iterator();
+				while (findOthers.hasNext()) {
+					try {
+						WebSocketSessionContainer container = findOthers.next();
+						if (webSocketSessionsCleanUp.indexOf(container) == -1 && container.getGameId() == gameId) {
+							if (container.getSession().isOpen()) {
+								GameModel game = manager.getGame(gameId);
+								if (game == null) {
+									sendError(container.getSession(), "No game found for 'id=" + gameId + "'");
+								} else {
+									game.setServer(isServerSession(container.getSession(), gameId));
+									JsonObject gameResponse = new JsonObject();
+									gameResponse.addProperty("type", "game-update");
+									gameResponse.add("payload", gson.toJsonTree(game));
+									container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+								}
+							}
 						}
+					} catch (ConcurrentModificationException e) {
+						break;
 					}
 				}
+			}
+
+			if (cleanUpSessionTask == null || cleanUpSessionTask.isCancelled()) {
+				cleanUpSessionTask = threadPoolTaskScheduler.scheduleWithFixedDelay(new CleanUpSessionsRunner(),
+						120000);
 			}
 		}
 	}
 
 	/**
-	 * Clean up sessions.
+	 * The Class CleanUpSessionsRunner.
 	 */
-	@Scheduled(fixedRate = 120000)
-	public void cleanUpSessions() {
-		for (WebSocketSessionContainer container : webSocketSessionsCleanUp) {
-			webSocketSessions.remove(container);
+	class CleanUpSessionsRunner implements Runnable {
+
+		@Override
+		public void run() {
+			for (WebSocketSessionContainer container : webSocketSessionsCleanUp) {
+				webSocketSessions.remove(container);
+			}
+			webSocketSessionsCleanUp.clear();
 		}
-		webSocketSessionsCleanUp.clear();
 	}
 
 	@Override
@@ -309,7 +337,7 @@ public class MessageHandler extends TextWebSocketHandler {
 					if (updateGame == null) {
 						sendError(session, "invalid game payload");
 					}
-					
+
 					game.setPlaySeconds(updateGame.getPlaySeconds());
 					updateGame = game;
 
