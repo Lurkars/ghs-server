@@ -12,7 +12,7 @@ A public server is available under `gloomhaven-secretariat.de` port `8443` with 
 
 ☕ [Buy me a coffee?](https://ko-fi.com/lurkars) (or [Direct Donation via PayPal](https://paypal.me/Lurkars))
 
-## How to run (basic)
+## How to run
 
 This will run a basic server for a single game code (e.g. for one group, you can still use multi-party feature)
 
