@@ -51,6 +51,8 @@ public class Party {
 	private Map<Integer, LinkedList<String>> weekSections = new HashMap<>();
 	@Required
 	private Map<LootType, Integer> loot = new HashMap<>();
+	@Required
+	private LinkedList<GameScenarioModel> randomItemLooted = new LinkedList<>();
 	private int inspiration = 0;
 	private int defense = 0;
 	private int soldiers = 0;
@@ -459,6 +461,24 @@ public class Party {
 	 */
 	public void setLoot(Map<LootType, Integer> loot) {
 		this.loot = loot;
+	}
+
+	/**
+	 * Gets the random item looted.
+	 *
+	 * @return the random item looted
+	 */
+	public LinkedList<GameScenarioModel> getRandomItemLooted() {
+		return randomItemLooted;
+	}
+
+	/**
+	 * Sets the random item looted.
+	 *
+	 * @param randomItemLooted the new random item looted
+	 */
+	public void setRandomItemLooted(LinkedList<GameScenarioModel> randomItemLooted) {
+		this.randomItemLooted = randomItemLooted;
 	}
 
 	/**
