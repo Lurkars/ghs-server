@@ -34,6 +34,8 @@ public class GameMonsterModel {
 	private LinkedList<GameMonsterEntityModel> entities = new LinkedList<>();
 	@Required
 	private boolean isAlly = false;
+	@Required
+	private boolean isConfederated = false;
 
 	/**
 	 * Gets the name.
@@ -231,6 +233,24 @@ public class GameMonsterModel {
 	 */
 	public void setAlly(boolean isAlly) {
 		this.isAlly = isAlly;
+	}
+
+	/**
+	 * Checks if is confederated.
+	 *
+	 * @return true, if is confederated
+	 */
+	public boolean isConfederated() {
+		return isConfederated;
+	}
+
+	/**
+	 * Sets the confederated.
+	 *
+	 * @param isConfederated the new confederated
+	 */
+	public void setConfederated(boolean isConfederated) {
+		this.isConfederated = isConfederated;
 	}
 
 }
