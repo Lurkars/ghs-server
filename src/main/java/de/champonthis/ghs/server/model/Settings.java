@@ -43,6 +43,8 @@ public class Settings {
 	@Required
 	private boolean automaticStandees = true;
 	@Required
+	private boolean automaticStandeesDialog = false;
+	@Required
 	private boolean calculate = true;
 	@Required
 	private boolean calculateStats = true;
@@ -378,6 +380,24 @@ public class Settings {
 	 */
 	public void setAutomaticStandees(boolean automaticStandees) {
 		this.automaticStandees = automaticStandees;
+	}
+
+	/**
+	 * Checks if is automatic standees dialog.
+	 *
+	 * @return true, if is automatic standees dialog
+	 */
+	public boolean isAutomaticStandeesDialog() {
+		return automaticStandeesDialog;
+	}
+
+	/**
+	 * Sets the automatic standees dialog.
+	 *
+	 * @param automaticStandeesDialog the new automatic standees dialog
+	 */
+	public void setAutomaticStandeesDialog(boolean automaticStandeesDialog) {
+		this.automaticStandeesDialog = automaticStandeesDialog;
 	}
 
 	/**
