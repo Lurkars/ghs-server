@@ -53,6 +53,10 @@ public class Settings {
 	@Required
 	private boolean characterHandSize = false;
 	@Required
+	private boolean characterIdentities = true;
+	@Required
+	private boolean characterIdentityHint = true;
+	@Required
 	private boolean characterSheet = true;
 	@Required
 	private boolean combineSummonAction = true;
@@ -470,6 +474,42 @@ public class Settings {
 	 */
 	public void setCharacterHandSize(boolean characterHandSize) {
 		this.characterHandSize = characterHandSize;
+	}
+
+	/**
+	 * Checks if is character identities.
+	 *
+	 * @return true, if is character identities
+	 */
+	public boolean isCharacterIdentities() {
+		return characterIdentities;
+	}
+
+	/**
+	 * Sets the character identities.
+	 *
+	 * @param characterIdentities the new character identities
+	 */
+	public void setCharacterIdentities(boolean characterIdentities) {
+		this.characterIdentities = characterIdentities;
+	}
+
+	/**
+	 * Checks if is character identity hint.
+	 *
+	 * @return true, if is character identity hint
+	 */
+	public boolean isCharacterIdentityHint() {
+		return characterIdentityHint;
+	}
+
+	/**
+	 * Sets the character identity hint.
+	 *
+	 * @param characterIdentityHint the new character identity hint
+	 */
+	public void setCharacterIdentityHint(boolean characterIdentityHint) {
+		this.characterIdentityHint = characterIdentityHint;
 	}
 
 	/**
