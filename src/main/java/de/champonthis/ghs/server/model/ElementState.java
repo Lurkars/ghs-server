@@ -20,5 +20,11 @@ public enum ElementState {
 	INERT,
 
 	@SerializedName("new")
-	NEW
+	NEW,
+
+	@SerializedName("consumed")
+	CONSUMED,
+
+	@SerializedName("always")
+	ALWAYS
 }
