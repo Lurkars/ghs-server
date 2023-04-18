@@ -35,7 +35,7 @@ public class GameMonsterModel {
 	@Required
 	private boolean isAlly = false;
 	@Required
-	private boolean isConfederated = false;
+	private boolean isAllied = false;
 
 	/**
 	 * Gets the name.
@@ -236,21 +236,21 @@ public class GameMonsterModel {
 	}
 
 	/**
-	 * Checks if is confederated.
+	 * Checks if is allied.
 	 *
-	 * @return true, if is confederated
+	 * @return true, if is allied
 	 */
-	public boolean isConfederated() {
-		return isConfederated;
+	public boolean isAllied() {
+		return isAllied;
 	}
 
 	/**
-	 * Sets the confederated.
+	 * Sets the allied.
 	 *
-	 * @param isConfederated the new confederated
+	 * @param isAllied the new allied
 	 */
-	public void setConfederated(boolean isConfederated) {
-		this.isConfederated = isConfederated;
+	public void setAllied(boolean isAllied) {
+		this.isAllied = isAllied;
 	}
 
 }
