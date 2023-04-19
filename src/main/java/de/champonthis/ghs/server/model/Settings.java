@@ -27,11 +27,11 @@ public class Settings {
 	@Required
 	private boolean allyAttackModifierDeck = true;
 	@Required
-	private boolean alwaysAllyAttackModifierDeck = true;
+	private boolean alwaysAllyAttackModifierDeck = false;
 	@Required
-	private boolean alwaysFhSolo = true;
+	private boolean alwaysFhSolo = false;
 	@Required
-	private boolean alwaysHazardousTerrain = true;
+	private boolean alwaysHazardousTerrain = false;
 	@Required
 	private boolean alwaysLootApplyDialog = false;
 	@Required
