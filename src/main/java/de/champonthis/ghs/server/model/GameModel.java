@@ -78,6 +78,8 @@ public class GameModel {
 	@Required
 	private LinkedList<String> lootDeckSections = new LinkedList<>();
 	@Required
+	private LinkedList<String> unlockedCharacters = new LinkedList<>();
+	@Required
 	private boolean server = false;
 
 	/**
@@ -690,6 +692,24 @@ public class GameModel {
 	 */
 	public void setLootDeckSections(LinkedList<String> lootDeckSections) {
 		this.lootDeckSections = lootDeckSections;
+	}
+
+	/**
+	 * Gets the unlocked characters.
+	 *
+	 * @return the unlocked characters
+	 */
+	public LinkedList<String> getUnlockedCharacters() {
+		return unlockedCharacters;
+	}
+
+	/**
+	 * Sets the unlocked characters.
+	 *
+	 * @param unlockedCharacters the new unlocked characters
+	 */
+	public void setUnlockedCharacters(LinkedList<String> unlockedCharacters) {
+		this.unlockedCharacters = unlockedCharacters;
 	}
 
 	/**
