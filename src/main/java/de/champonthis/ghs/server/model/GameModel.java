@@ -81,6 +81,7 @@ public class GameModel {
 	private LinkedList<String> unlockedCharacters = new LinkedList<>();
 	@Required
 	private boolean server = false;
+	private ScenarioFinish finish;
 
 	/**
 	 * Gets the revision.
@@ -728,6 +729,24 @@ public class GameModel {
 	 */
 	public void setServer(boolean server) {
 		this.server = server;
+	}
+
+	/**
+	 * Gets the finish.
+	 *
+	 * @return the finish
+	 */
+	public ScenarioFinish getFinish() {
+		return finish;
+	}
+
+	/**
+	 * Sets the finish.
+	 *
+	 * @param finish the new finish
+	 */
+	public void setFinish(ScenarioFinish finish) {
+		this.finish = finish;
 	}
 
 }

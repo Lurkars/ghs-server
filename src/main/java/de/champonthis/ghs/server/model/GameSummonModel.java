@@ -14,6 +14,7 @@ public class GameSummonModel {
 
 	@Required
 	private String name;
+	private String title;
 	private String cardId;
 	@Required
 	private int number;
@@ -58,6 +59,24 @@ public class GameSummonModel {
 	 */
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Gets the title.
+	 *
+	 * @return the title
+	 */
+	public String getTitle() {
+		return title;
+	}
+
+	/**
+	 * Sets the title.
+	 *
+	 * @param title the new title
+	 */
+	public void setTitle(String title) {
+		this.title = title;
 	}
 
 	/**
