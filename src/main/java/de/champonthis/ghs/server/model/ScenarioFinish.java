@@ -23,6 +23,8 @@ public class ScenarioFinish {
 	private String chooseLocation;
 	private String chooseUnlockCharacter;
 	private int challenges;
+	@Required
+	private LinkedList<Integer> calenderSectionManual = new LinkedList<>();
 
 	/**
 	 * Gets the conclusion.
@@ -166,6 +168,20 @@ public class ScenarioFinish {
 	 */
 	public void setChallenges(int challenges) {
 		this.challenges = challenges;
+	}
+
+	/**
+	 * @return the calenderSectionManual
+	 */
+	public LinkedList<Integer> getCalenderSectionManual() {
+		return calenderSectionManual;
+	}
+
+	/**
+	 * @param calenderSectionManual the calenderSectionManual to set
+	 */
+	public void setCalenderSectionManual(LinkedList<Integer> calenderSectionManual) {
+		this.calenderSectionManual = calenderSectionManual;
 	}
 
 }
