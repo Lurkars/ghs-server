@@ -25,6 +25,8 @@ public class ScenarioFinish {
 	private int challenges;
 	@Required
 	private LinkedList<Integer> calenderSectionManual = new LinkedList<>();
+	@Required
+	private LinkedList<Integer> randomItemBlueprints = new LinkedList<>();
 
 	/**
 	 * Gets the conclusion.
@@ -171,17 +173,39 @@ public class ScenarioFinish {
 	}
 
 	/**
-	 * @return the calenderSectionManual
+	 * Gets the calender section manual.
+	 *
+	 * @return the calender section manual
 	 */
 	public LinkedList<Integer> getCalenderSectionManual() {
 		return calenderSectionManual;
 	}
 
 	/**
-	 * @param calenderSectionManual the calenderSectionManual to set
+	 * Sets the calender section manual.
+	 *
+	 * @param calenderSectionManual the new calender section manual
 	 */
 	public void setCalenderSectionManual(LinkedList<Integer> calenderSectionManual) {
 		this.calenderSectionManual = calenderSectionManual;
+	}
+
+	/**
+	 * Gets the random item blueprints.
+	 *
+	 * @return the random item blueprints
+	 */
+	public LinkedList<Integer> getRandomItemBlueprints() {
+		return randomItemBlueprints;
+	}
+
+	/**
+	 * Sets the random item blueprints.
+	 *
+	 * @param randomItemBlueprints the new random item blueprints
+	 */
+	public void setRandomItemBlueprints(LinkedList<Integer> randomItemBlueprints) {
+		this.randomItemBlueprints = randomItemBlueprints;
 	}
 
 }

@@ -63,6 +63,8 @@ public class GameCharacterModel {
 	@Required
 	private int donations;
 	@Required
+	private int token;
+	@Required
 	private boolean absent;
 	@Required
 	private boolean longRest;
@@ -515,6 +517,24 @@ public class GameCharacterModel {
 	 */
 	public void setDonations(int donations) {
 		this.donations = donations;
+	}
+
+	/**
+	 * Gets the token.
+	 *
+	 * @return the token
+	 */
+	public int getToken() {
+		return token;
+	}
+
+	/**
+	 * Sets the token.
+	 *
+	 * @param token the new token
+	 */
+	public void setToken(int token) {
+		this.token = token;
 	}
 
 	/**
