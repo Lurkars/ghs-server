@@ -5,8 +5,6 @@ package de.champonthis.ghs.server.model;
 
 import java.util.LinkedList;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
-
 import de.champonthis.ghs.server.util.Required;
 
 /**
@@ -54,8 +52,6 @@ public class GameCharacterModel {
 	@Required
 	private LinkedList<GameSummonModel> summons = new LinkedList<>();
 	private CharacterProgress progress;
-	@JsonIgnore
-	private boolean fullview;
 	@Required
 	private int number;
 	@Required
@@ -445,24 +441,6 @@ public class GameCharacterModel {
 	 */
 	public void setProgress(CharacterProgress progress) {
 		this.progress = progress;
-	}
-
-	/**
-	 * Checks if is fullview.
-	 *
-	 * @return true, if is fullview
-	 */
-	public boolean isFullview() {
-		return fullview;
-	}
-
-	/**
-	 * Sets the fullview.
-	 *
-	 * @param fullview the new fullview
-	 */
-	public void setFullview(boolean fullview) {
-		this.fullview = fullview;
 	}
 
 	/**
