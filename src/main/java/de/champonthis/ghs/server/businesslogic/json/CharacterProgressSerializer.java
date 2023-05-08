@@ -39,7 +39,8 @@ public class CharacterProgressSerializer implements JsonSerializer<CharacterProg
 
 		if (loot != null) {
 			for (Entry<LootType, Integer> entry : loot.entrySet()) {
-				lootJson.addProperty(entry.getKey().name().toLowerCase(), entry.getValue());
+				lootJson.addProperty(entry.getKey().name().toLowerCase(),
+						entry.getValue() != null ? entry.getValue() : 0);
 			}
 		}
 

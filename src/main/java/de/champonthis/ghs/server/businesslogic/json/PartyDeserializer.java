@@ -41,7 +41,11 @@ public class PartyDeserializer implements JsonDeserializer<Party> {
 		party.setLoot(new HashMap<>());
 
 		for (String key : lootJson.keySet()) {
-			party.getLoot().put(LootType.valueOf(key.toUpperCase()), lootJson.get(key).getAsInt());
+			if (lootJson.get(key).isJsonPrimitive()) {
+				party.getLoot().put(LootType.valueOf(key.toUpperCase()), lootJson.get(key).getAsInt());
+			} else {
+				party.getLoot().put(LootType.valueOf(key.toUpperCase()), 0);
+			}
 		}
 
 		return party;

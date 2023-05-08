@@ -41,7 +41,11 @@ public class CharacterProgressDeserializer implements JsonDeserializer<Character
 		progress.setLoot(new HashMap<>());
 
 		for (String key : lootJson.keySet()) {
-			progress.getLoot().put(LootType.valueOf(key.toUpperCase()), lootJson.get(key).getAsInt());
+			if (lootJson.get(key).isJsonPrimitive()) {
+				progress.getLoot().put(LootType.valueOf(key.toUpperCase()), lootJson.get(key).getAsInt());
+			} else {
+				progress.getLoot().put(LootType.valueOf(key.toUpperCase()), 0);
+			}
 		}
 
 		return progress;
