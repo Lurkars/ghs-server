@@ -12,6 +12,7 @@ import de.champonthis.ghs.server.util.Required;
  */
 public class GameSummonModel {
 
+	private String uuid;
 	@Required
 	private String name;
 	private String title;
@@ -42,6 +43,24 @@ public class GameSummonModel {
 	private String additionalAction;
 	private boolean active = false;
 	private String thumbnail;
+
+	/**
+	 * Gets the uuid.
+	 *
+	 * @return the uuid
+	 */
+	public String getUuid() {
+		return uuid;
+	}
+
+	/**
+	 * Sets the uuid.
+	 *
+	 * @param uuid the new uuid
+	 */
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 
 	/**
 	 * Gets the name.

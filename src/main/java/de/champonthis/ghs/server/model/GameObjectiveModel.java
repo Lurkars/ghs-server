@@ -12,6 +12,7 @@ import de.champonthis.ghs.server.util.Required;
  */
 public class GameObjectiveModel {
 
+	private String uuid;
 	@Required
 	private int id;
 	private String marker;
@@ -35,6 +36,24 @@ public class GameObjectiveModel {
 	private LinkedList<String> tags = new LinkedList<>();
 	private Integer initiative;
 	private ScenarioObjectiveIdentifier objectiveId;
+
+	/**
+	 * Gets the uuid.
+	 *
+	 * @return the uuid
+	 */
+	public String getUuid() {
+		return uuid;
+	}
+
+	/**
+	 * Sets the uuid.
+	 *
+	 * @param uuid the new uuid
+	 */
+	public void setUuid(String uuid) {
+		this.uuid = uuid;
+	}
 
 	/**
 	 * Gets the id.
