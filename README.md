@@ -1,45 +1,45 @@
 # Gloomhaven Secretariat Server (ghs-server)
 
-[![Build and deploy release](https://github.com/Lurkars/ghs-server/actions/workflows/deploy.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/deploy.yml) [![Build and publish release](https://github.com/Lurkars/ghs-server/actions/workflows/release.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/release.yml) [![Publish Docker Image](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml)
+[![Build and Deploy Release](https://github.com/Lurkars/ghs-server/actions/workflows/deploy.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/deploy.yml) [![Build and Publish Release](https://github.com/Lurkars/ghs-server/actions/workflows/release.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/release.yml) [![Publish Docker Image](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml/badge.svg)](https://github.com/Lurkars/ghs-server/actions/workflows/publish-docker-image.yml)
 
-This is a server component for [Gloomhaven Secretariat](https://gloomhaven-secretariat.de) ([Source](https://github.com/Lurkars/gloomhavensecretariat)). It synchronizes the game state between all clients via websockets. Access is controlled by providing a password in all messages.
+This is a server component for the [Gloomhaven Secretariat](https://gloomhaven-secretariat.de) ([Source](https://github.com/Lurkars/gloomhavensecretariat)). It synchronises the game state between all clients via websockets. Access is controlled by specifying a **Game ID** in all messages.
 
-It's a java application to run on most systems the old [Gloomhaven Helper](http://esotericsoftware.com/gloomhaven-helper) (by [Esoteric Software®](http://esotericsoftware.com)) Desktop version run. Besides an headless mode is integrated.
+It's a Java application that runs on most systems that run the old [Gloomhaven Helper](http://esotericsoftware.com/gloomhaven-helper) (by [Esoteric Software®](http://esotericsoftware.com)) desktop version. A headless mode is also integrated.
 
-A public server is available under `gloomhaven-secretariat.de` port `8443` with `secure` option. I also manage a public server list, so please contact me, if you're running a public instance yourself.
+A public server is available at `gloomhaven-secretariat.de` port `8443` with `secure` option. I also maintain a public server list, so please contact me if you'd like to run a public instance yourself.
 
 ## Support
 
-☕ [Buy me a coffee?](https://ko-fi.com/lurkars) (or [Direct Donation via PayPal](https://paypal.me/Lurkars))
+☕ [Buy me a coffee?](https://ko-fi.com/lurkars) (or [Donate directly via PayPal](https://paypal.me/Lurkars))
 
 ## How to run
 
-This will run a basic server for a single game code (e.g. for one group, you can still use multi-party feature)
+This will run a basic server for a single game code (e.g. for a group, you can still use the multi-party feature).
 
 ### Installation + Running
 
-Prerequisite:
+Requirements:
 
 - Java 11 (or higher) Runtime Environment: [Installation Guide for different OS'](https://www.java.com/en/download/help/download_options.html)
 
-Then download the corresponding latest `jar`-executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
+Then download the appropriate latest `jar` executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
 
-Execute the `jar`-file with your Java Runtime Environment. 
+Run the `jar` file with your Java Runtime Environment. 
 
-Afterwards the server window should be visible, listing available IPs and hostnames to connect and the port running. Usual this will be something starting with `192.168...` as well as port `8080`. In general only those two values are required to connect all devices in the same network.
+The server window should then be visible, listing the available IPs and hostnames to connect to, and the port it is listening on. Usually this will be something starting with `192.168...` and port `8080`. Usually only these two values are needed to connect all devices on the same network.
 
-If the server should also serve the client, see [Serve client](#serve-client). 
+If the server should also serve the client, see [Serve the client](#serve-the-client). 
 
-All data is stored under `<your-home-folder>/.ghs` ([List of home-folder for different OS'](https://en.wikipedia.org/wiki/Home_directory#Default_home_directory_per_operating_system)). 
-If you want to reset server, just delete the database file `ghs.sqlite`-file in that directory.
+All data is stored in `<your-home-folder>/.ghs` ([List of home-folders for different OS'](https://en.wikipedia.org/wiki/Home_directory#Default_home_directory_per_operating_system)). 
+If you want to reset the server, just delete the `ghs.sqlite` database file in this directory.
 
 ## How to run (advanced)
 
 If you want to configure your server in detail or create a public server, here are some advanced installation and configuration steps.
 
-### Build and run using Docker
+### Building and running with Docker
 
-If you want to use docker for running on port 8080 execute following:
+If you want to use Docker to run on port 8080, execute the following
 
 ```shell
 docker pull gloomhavensecretariat/ghs-server
@@ -54,33 +54,33 @@ docker run --rm -p 8080:8080 -v {local_path}:/root/.ghs --name ghs-server gloomh
 
 The `.ghs` folder is now accessible from your `{local_path}`.
 
-For usage with docker compose, simple run `docker compose up -d`.
+For use with docker compose, just run `docker compose up -d`.
 
-### Serve client
+### Serve the client
 
-The server is also capable of serving the client. Simple click the "Install latest Client" button in GUI. Afterwards the client can be opened directly in browser by clicking the corresponding button.
+The Server is also able to serve the Client. Simply click on the "Install latest client" button in the GUI. Then you can open the client directly in your browser by clicking on the appropriate button.
 
-If you run headless, just download zip file (NOT source code!) of [Gloomhaven Secretariat Release](https://github.com/Lurkars/gloomhavensecretariat/releases) and extract in folder `<your-home-folder>/.ghs/gloomhavensecretariat`. Afterwards GHS is accessible under `http://{your-ip}:{server-port}` (`http://localhost:8080` with default values). To automatic install latest client on startup, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.lastestClientOnStartup=true`.
+If you are running headless, just download the zip file (NOT the source code!) of the [Gloomhaven Secretariat Release](https://github.com/Lurkars/gloomhavensecretariat/releases) and extract it to the folder `<your-home-folder>/.ghs/gloomhavensecretariat`. After that GHS is accessible at `http://{your-ip}:{server-port}` (`http://localhost:8080` with default values). To automatically install the latest client on startup, edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.lastestClientOnStartup=true`.
 
-### Run headless
+### Running headless
 
-To run the server in headless mode, just set `-Djava.awt.headless=true` parameter for execution. For example  `java -jar ghs-server-*.jar -Djava.awt.headless=true`.
+To run the server in headless mode, simply set the `-Djava.awt.headless=true` parameter for execution. For example `java -jar ghs-server-*.jar -Djava.awt.headless=true`.
 
 ### Change port
 
-To run the server on a different port (default: 8080), edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.port=<NEW PORT>`.
+To run the server on a different port (default: 8080), edit the `application.properties` file in the GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.port=<NEW PORT>`.
 
 Replace `<NEW PORT>` with the port of your choice.
 
-### Run public
+### Running public
 
-A public server accepts any password and creates a game for it. So the password is more an identifier for an individual game than a protection. To make a public server edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
+A public server will accept any **Game ID** and create a game for it. The **Game ID** is therefore more of an identifier for a single game than a password protection. To make a public server, edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
 
 ### Enable SSL
 
-If you want to connect to the server from a client using HTTPS (HINT: not the case when you run your own client locally!) the websocket connection is upgraded to wss by any modern browser. Therefore a connection to a server in local network is only possible when enabling SSL. A self-signed certificate is already shipped within (yes, inlcuding hardcoded password visible for everyone). So to simple enable SSL, just edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.ssl.enabled=true`. Because self-signed certificate is used, it is untrusted by all modern browsers. To be able to connect, just call `https://{your-ip}:{server-port}` (`https://localhost:8080` with default values) and accept the security warnings. Afterwards you should be able to connect via SSL. (This has to be done for each client.)
+If you want to connect to the server from a client using HTTPS (NOTE: this is not the case if you run your own client locally!), the websocket connection will be upgraded to wss by any modern browser. Therefore, connecting to a server on the local network is only possible if SSL is enabled. A self-signed certificate is already included (yes, including a hardcoded password visible to everyone). So to easily enable SSL, just edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `server.ssl.enabled=true`. As a self-signed certificate is used, it is untrusted by all modern browsers. To connect, just type `https://{your-ip}:{server-port}` (`https://localhost:8080` with default values) and accept the security warnings. You should then be able to connect using SSL. (This must be done for each client).
 
-To serve with your own certificate, overwrite the following properties in your `application.properties`-file:
+To serve with your own certificate, overwrite the following properties in your `application.properties` file
 
 ```
 server.ssl.key-store-type=
@@ -89,47 +89,47 @@ server.ssl.key-store-password=
 server.ssl.key-alias=
 ```
 
-To create a cert file from your [Let's Encrypt](https://letsencrypt.org/)-certificate, use 
+To generate a certificate file from your [Let's Encrypt](https://letsencrypt.org/) certificate, use 
 
 ```
 openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -CAfile chain.pem -caname root -name ghs-server -out ghs-server.p12
 ```
 
-This will ask for a password and afterwards create a `ghs-server.p12`-file to be referenced as `server.ssl.key-store`.
+This will prompt for a password and then create a `ghs-server.p12` file which will be referenced as `server.ssl.key-store`.
 
 
 #### Automatic HTTP
 
-When running with SSL, a non-SSL server will be automatically available at port `8081`. To change this port, edit the `application.properties`-file in GHS server config folder `<your-home-folder>/.ghs` and add the following line: `server.http.port=<HTTP PORT>`.
+When running with SSL, a non-SSL server is automatically available on port `8081`. To change this port, edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `server.http.port=<HTTP PORT>`.
 
 ## How to use with GHS
 
-Go to the main menu in Gloomhaven Secretariat (GHS) and click on **Connect to Server**. Enter the server's IP/Hostname into **Host** (on same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
+Go to the main menu in Gloomhaven Secretariat (GHS) and click on **Connect to Server**. Enter the IP/Hostname of the server in **Host** (on the same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
 
-On the first time, just choose the **Password** of your choice. This will create a new Game with this password. Afterwards, any connection to the server will need the same password to be set (It is not changeable by now!). Alternatively make the instance [public](#run-public) to allow multiple games/passwords. 
+When you run the game for the first time, simply select a **Game ID** of your choice. This will create a new game with that **Game ID**. After that, each time you connect to the server, you will need to set the same **Game ID** (it is now unchangeable!). Alternatively, you can make the instance [public](#running-public) to allow multiple games/game IDs.
 
-## Missing / Upcoming
+## Missing / Coming
 
-- updated GUI (it's more a placeholder by now)
-  - add/change/update password/permissions
-- optional: track Undo/Redo also on server
+- updated GUI (it's more of a placeholder now)
+  - add/change/update Game IDs/permissions
+- optional: track undo/redo on server too
 
 ## Workarounds
 
-- The database is a simple `ghs.sqlite`-file in GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simple delete the `sqlite`-file.
-- on startup, all passwords are written into syslog in plaintext.
+- The database is a simple `ghs.sqlite` file in the GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simply delete the `sqlite` file.
+- On startup, all **Game IDs** are written to syslog in clear text.
 
 ## Privacy
 
-This application does NOT collect ANY personal data besides the GHS game state, authentication and permission data. Please keep in mind that this data is NOT ENCRYPTED. Take care that you need to trust any third party provider of a server component to not collect any more data like IP addresses.
+This application does NOT collect any personal data other than GHS game state, authentication and permission data. Please note that this data is NOT ENCRYPTED. Be aware that you must trust any third party provider of a server component not to collect any other data such as IP addresses.
 
 ## Copyright / License
 
 Gloomhaven and all related properties, images and text are owned by [Cephalofair Games](https://cephalofair.com).
 
-Source code is licenced under [AGPL](/LICENSE)
+The source code is licensed under [AGPL](/LICENSE)
 
 ## Personal disclaimer
 
-This is a hobby project I do in my free-time. The software provides a practical need due to the end of the original Helper app and so I completely follow the **Quick'n'Dirty** approach to get things fast done. This leads of course to a lack of quality and testing and the code base does definitely not comply with my profession.
+This is a hobby project I do in my spare time. The software fills a practical need due to the demise of the original Helper application, so I am following the **Quick'n'Dirty** approach to get things done quickly. This of course leads to a lack of quality and testing and the code base is definitely not in line with my profession.
 	 
