@@ -39,6 +39,8 @@ public class Settings {
 	@Required
 	private boolean applyConditions = true;
 	@Required
+	private boolean applyLongRest = true;
+	@Required
 	private boolean applyLoot = true;
 	@Required
 	private boolean automaticStandees = true;
@@ -348,6 +350,24 @@ public class Settings {
 	 */
 	public void setApplyConditions(boolean applyConditions) {
 		this.applyConditions = applyConditions;
+	}
+
+	/**
+	 * Checks if is apply long rest.
+	 *
+	 * @return true, if is apply long rest
+	 */
+	public boolean isApplyLongRest() {
+		return applyLongRest;
+	}
+
+	/**
+	 * Sets the apply long rest.
+	 *
+	 * @param applyLongRest the new apply long rest
+	 */
+	public void setApplyLongRest(boolean applyLongRest) {
+		this.applyLongRest = applyLongRest;
 	}
 
 	/**
