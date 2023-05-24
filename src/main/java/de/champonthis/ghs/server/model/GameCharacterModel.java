@@ -61,6 +61,8 @@ public class GameCharacterModel {
 	@Required
 	private int token;
 	@Required
+	private LinkedList<Integer> tokenValues = new LinkedList<>();
+	@Required
 	private boolean absent;
 	@Required
 	private boolean longRest;
@@ -513,6 +515,24 @@ public class GameCharacterModel {
 	 */
 	public void setToken(int token) {
 		this.token = token;
+	}
+
+	/**
+	 * Gets the token values.
+	 *
+	 * @return the token values
+	 */
+	public LinkedList<Integer> getTokenValues() {
+		return tokenValues;
+	}
+
+	/**
+	 * Sets the token values.
+	 *
+	 * @param tokenValues the new token values
+	 */
+	public void setTokenValues(LinkedList<Integer> tokenValues) {
+		this.tokenValues = tokenValues;
 	}
 
 	/**
