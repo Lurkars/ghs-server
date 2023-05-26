@@ -14,6 +14,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
+import de.champonthis.ghs.server.model.CharacterProgress;
 import de.champonthis.ghs.server.model.LootType;
 import de.champonthis.ghs.server.model.Party;
 import de.champonthis.ghs.server.util.RequiredTypeAdapterFactory;
@@ -23,7 +24,8 @@ import de.champonthis.ghs.server.util.RequiredTypeAdapterFactory;
  */
 public class PartyDeserializer implements JsonDeserializer<Party> {
 
-	private Gson gson = new GsonBuilder().registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
+	private Gson gson = new GsonBuilder().registerTypeAdapter(CharacterProgress.class, new CharacterProgressDeserializer())
+			.registerTypeAdapter(CharacterProgress.class, new CharacterProgressSerializer()).registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).registerTypeAdapter(CharacterProgress.class, new CharacterProgressSerializer()).create();
 
 	@Override
 	public Party deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context)
