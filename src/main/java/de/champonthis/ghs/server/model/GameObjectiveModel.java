@@ -12,7 +12,8 @@ import de.champonthis.ghs.server.util.Required;
  */
 public class GameObjectiveModel {
 
-	private String uuid;
+	@Required
+	private String uuid = "";
 	@Required
 	private int id;
 	private String marker;

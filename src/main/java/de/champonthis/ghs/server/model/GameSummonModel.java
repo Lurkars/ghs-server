@@ -12,7 +12,8 @@ import de.champonthis.ghs.server.util.Required;
  */
 public class GameSummonModel {
 
-	private String uuid;
+	@Required
+	private String uuid = "";
 	@Required
 	private String name;
 	private String title;
