@@ -47,6 +47,8 @@ public class Settings {
 	@Required
 	private boolean automaticStandeesDialog = false;
 	@Required
+	private boolean automaticUnlocking = true;
+	@Required
 	private boolean calculate = true;
 	@Required
 	private boolean calculateStats = true;
@@ -422,6 +424,24 @@ public class Settings {
 	 */
 	public void setAutomaticStandeesDialog(boolean automaticStandeesDialog) {
 		this.automaticStandeesDialog = automaticStandeesDialog;
+	}
+
+	/**
+	 * Checks if is automatic unlocking.
+	 *
+	 * @return true, if is automatic unlocking
+	 */
+	public boolean isAutomaticUnlocking() {
+		return automaticUnlocking;
+	}
+
+	/**
+	 * Sets the automatic unlocking.
+	 *
+	 * @param automaticUnlocking the new automatic unlocking
+	 */
+	public void setAutomaticUnlocking(boolean automaticUnlocking) {
+		this.automaticUnlocking = automaticUnlocking;
 	}
 
 	/**
