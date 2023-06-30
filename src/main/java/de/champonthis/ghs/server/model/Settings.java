@@ -53,6 +53,8 @@ public class Settings {
 	@Required
 	private boolean calculateStats = true;
 	@Required
+	private boolean calculateShieldStats = true;
+	@Required
 	private boolean characterAttackModifierDeck = true;
 	@Required
 	private boolean characterHandSize = false;
@@ -115,6 +117,8 @@ public class Settings {
 	private boolean showFullAbilityCard = false;
 	@Required
 	private LinkedList<String> spoilers = new LinkedList<>();
+	@Required
+	private boolean standeeStats = false;
 	@Required
 	private boolean treasures = true;
 	@Required
@@ -478,6 +482,24 @@ public class Settings {
 	 */
 	public void setCalculateStats(boolean calculateStats) {
 		this.calculateStats = calculateStats;
+	}
+
+	/**
+	 * Checks if is calculate shield stats.
+	 *
+	 * @return true, if is calculate shield stats
+	 */
+	public boolean isCalculateShieldStats() {
+		return calculateShieldStats;
+	}
+
+	/**
+	 * Sets the calculate shield stats.
+	 *
+	 * @param calculateShieldStats the new calculate shield stats
+	 */
+	public void setCalculateShieldStats(boolean calculateShieldStats) {
+		this.calculateShieldStats = calculateShieldStats;
 	}
 
 	/**
@@ -1054,6 +1076,24 @@ public class Settings {
 	 */
 	public void setSpoilers(LinkedList<String> spoilers) {
 		this.spoilers = spoilers;
+	}
+
+	/**
+	 * Checks if is standee stats.
+	 *
+	 * @return true, if is standee stats
+	 */
+	public boolean isStandeeStats() {
+		return standeeStats;
+	}
+
+	/**
+	 * Sets the standee stats.
+	 *
+	 * @param standeeStats the new standee stats
+	 */
+	public void setStandeeStats(boolean standeeStats) {
+		this.standeeStats = standeeStats;
 	}
 
 	/**
