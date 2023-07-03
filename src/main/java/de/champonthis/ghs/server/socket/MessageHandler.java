@@ -259,6 +259,13 @@ public class MessageHandler extends TextWebSocketHandler {
 						if (!permissions.isCharacters()) {
 							for (GameCharacterModel updateCharacter : gameUpdate.getCharacters()) {
 								boolean characterPermission = false;
+								boolean roundPermissions = permissions.isRound()
+										&& gameUpdate.getState() != game.getState();
+								boolean lootDeckPermissions = permissions.isLootDeck() && !gson
+										.toJson(gameUpdate.getLootDeck()).equals(gson.toJson(game.getLootDeck()));
+								boolean scenarioPermissions = permissions.isScenario() && !gson
+										.toJson(gameUpdate.getScenario()).equals(gson.toJson(game.getScenario()));
+
 								for (GameCharacterModel character : game.getCharacters()) {
 									if (updateCharacter.getName().equals(character.getName())
 											&& updateCharacter.getEdition().equals(character.getEdition())) {
@@ -271,9 +278,48 @@ public class MessageHandler extends TextWebSocketHandler {
 										}
 										if (characterPermission) {
 											break;
-										} else if (gson.toJson(updateCharacter).equals(gson.toJson(character))) {
-											characterPermission = true;
-											break;
+										} else {
+											updateCharacter.getAttackModifierDeck()
+													.setActive(character.getAttackModifierDeck().isActive());
+
+											if (permissions.isRound()) {
+												character.setOff(updateCharacter.isOff());
+												character.setActive(updateCharacter.isActive());
+												character.setEntityConditions(updateCharacter.getEntityConditions());
+											}
+
+											if (roundPermissions || scenarioPermissions) {
+												character.setOff(updateCharacter.isOff());
+												character.setActive(updateCharacter.isActive());
+												character.setInitiative(updateCharacter.getInitiative());
+												character.setEntityConditions(updateCharacter.getEntityConditions());
+												character
+														.setAttackModifierDeck(updateCharacter.getAttackModifierDeck());
+											}
+
+											if (scenarioPermissions) {
+												character.setHealth(updateCharacter.getHealth());
+												character.setMaxHealth(updateCharacter.getMaxHealth());
+												character.setLoot(updateCharacter.getLoot());
+												character.setLootCards(updateCharacter.getLootCards());
+												character.setTreasures(updateCharacter.getTreasures());
+												character.setExperience(updateCharacter.getExperience());
+												character.setEntityConditions(updateCharacter.getEntityConditions());
+												character.setSummons(updateCharacter.getSummons());
+												character.setExhausted(updateCharacter.isExhausted());
+												character.setToken(updateCharacter.getToken());
+											}
+
+											if (lootDeckPermissions) {
+												character.setLoot(updateCharacter.getLoot());
+												character.setLootCards(updateCharacter.getLootCards());
+											}
+											String characterJson = gson.toJson(character);
+											String updateCharacterJson = gson.toJson(updateCharacter);
+											if (characterJson.equals(updateCharacterJson)) {
+												characterPermission = true;
+												break;
+											}
 										}
 									}
 								}
@@ -285,6 +331,10 @@ public class MessageHandler extends TextWebSocketHandler {
 						if (!permissions.isMonsters()) {
 							for (GameMonsterModel updateMonster : gameUpdate.getMonsters()) {
 								boolean monsterPermission = false;
+								boolean roundPermissions = permissions.isRound()
+										&& gameUpdate.getState() != game.getState();
+								boolean scenarioPermissions = permissions.isScenario() && !gson
+										.toJson(gameUpdate.getScenario()).equals(gson.toJson(game.getScenario()));
 								for (GameMonsterModel monster : game.getMonsters()) {
 									if (updateMonster.getName().equals(monster.getName())
 											&& updateMonster.getEdition().equals(monster.getEdition())) {
@@ -297,9 +347,27 @@ public class MessageHandler extends TextWebSocketHandler {
 										}
 										if (monsterPermission) {
 											break;
-										} else if (gson.toJson(updateMonster).equals(gson.toJson(monster))) {
-											monsterPermission = true;
-											break;
+										} else {
+
+											if (permissions.isRound()) {
+												monster.setOff(updateMonster.getOff());
+												monster.setActive(updateMonster.getActive());
+												monster.setEntities(updateMonster.getEntities());
+											}
+
+											if (roundPermissions) {
+												monster.setAbility(updateMonster.getAbility());
+												monster.setAbilities(updateMonster.getAbilities());
+												monster.setEntities(updateMonster.getEntities());
+												monster.setActive(updateMonster.getActive());
+												monster.setOff(updateMonster.getOff());
+											}
+
+											if (scenarioPermissions
+													|| gson.toJson(updateMonster).equals(gson.toJson(monster))) {
+												monsterPermission = true;
+												break;
+											}
 										}
 									}
 								}
