@@ -17,6 +17,8 @@ public class GameModel {
 	private int revisionOffset = 0;
 	private String edition;
 	@Required
+	private LinkedList<ConditionName> conditions = new LinkedList<>();
+	@Required
 	private LinkedList<String> figures = new LinkedList<>();
 	@Required
 	private LinkedList<EntityCounter> entitiesCounter = new LinkedList<>();
@@ -135,6 +137,24 @@ public class GameModel {
 	 */
 	public void setEdition(String edition) {
 		this.edition = edition;
+	}
+
+	/**
+	 * Gets the conditions.
+	 *
+	 * @return the conditions
+	 */
+	public LinkedList<ConditionName> getConditions() {
+		return conditions;
+	}
+
+	/**
+	 * Sets the conditions.
+	 *
+	 * @param conditions the new conditions
+	 */
+	public void setConditions(LinkedList<ConditionName> conditions) {
+		this.conditions = conditions;
 	}
 
 	/**
