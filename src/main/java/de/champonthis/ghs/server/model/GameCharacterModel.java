@@ -66,6 +66,9 @@ public class GameCharacterModel {
 	private boolean absent;
 	@Required
 	private boolean longRest;
+	@Required
+	private LinkedList<Identifier> battleGoals = new LinkedList<>();
+	private Boolean battleGoal = false;
 
 	/**
 	 * Gets the name.
@@ -569,6 +572,42 @@ public class GameCharacterModel {
 	 */
 	public void setLongRest(boolean longRest) {
 		this.longRest = longRest;
+	}
+
+	/**
+	 * Gets the battle goals.
+	 *
+	 * @return the battle goals
+	 */
+	public LinkedList<Identifier> getBattleGoals() {
+		return battleGoals;
+	}
+
+	/**
+	 * Sets the battle goals.
+	 *
+	 * @param battleGoals the new battle goals
+	 */
+	public void setBattleGoals(LinkedList<Identifier> battleGoals) {
+		this.battleGoals = battleGoals;
+	}
+
+	/**
+	 * Gets the battle goal.
+	 *
+	 * @return the battle goal
+	 */
+	public boolean getBattleGoal() {
+		return battleGoal;
+	}
+
+	/**
+	 * Sets the battle goal.
+	 *
+	 * @param battleGoal the new battle goal
+	 */
+	public void setBattleGoal(boolean battleGoal) {
+		this.battleGoal = battleGoal;
 	}
 
 }

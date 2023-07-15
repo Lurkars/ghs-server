@@ -19,6 +19,10 @@ public class GameModel {
 	@Required
 	private LinkedList<ConditionName> conditions = new LinkedList<>();
 	@Required
+	private LinkedList<String> battleGoalEditions = new LinkedList<>();
+	@Required
+	private LinkedList<Identifier> filteredBattleGoals = new LinkedList<>();
+	@Required
 	private LinkedList<String> figures = new LinkedList<>();
 	@Required
 	private LinkedList<EntityCounter> entitiesCounter = new LinkedList<>();
@@ -155,6 +159,42 @@ public class GameModel {
 	 */
 	public void setConditions(LinkedList<ConditionName> conditions) {
 		this.conditions = conditions;
+	}
+
+	/**
+	 * Gets the battle goal editions.
+	 *
+	 * @return the battle goal editions
+	 */
+	public LinkedList<String> getBattleGoalEditions() {
+		return battleGoalEditions;
+	}
+
+	/**
+	 * Sets the battle goal editions.
+	 *
+	 * @param battleGoalEditions the new battle goal editions
+	 */
+	public void setBattleGoalEditions(LinkedList<String> battleGoalEditions) {
+		this.battleGoalEditions = battleGoalEditions;
+	}
+
+	/**
+	 * Gets the filtered battle goals.
+	 *
+	 * @return the filtered battle goals
+	 */
+	public LinkedList<Identifier> getFilteredBattleGoals() {
+		return filteredBattleGoals;
+	}
+
+	/**
+	 * Sets the filtered battle goals.
+	 *
+	 * @param filteredBattleGoals the new filtered battle goals
+	 */
+	public void setFilteredBattleGoals(LinkedList<Identifier> filteredBattleGoals) {
+		this.filteredBattleGoals = filteredBattleGoals;
 	}
 
 	/**

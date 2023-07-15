@@ -49,6 +49,12 @@ public class Settings {
 	@Required
 	private boolean automaticUnlocking = true;
 	@Required
+	private boolean battleGoals = false;
+	@Required
+	private boolean battleGoalsCharacter = false;
+	@Required
+	private boolean battleGoalsFh = false;
+	@Required
 	private boolean calculate = true;
 	@Required
 	private boolean calculateStats = true;
@@ -446,6 +452,48 @@ public class Settings {
 	 */
 	public void setAutomaticUnlocking(boolean automaticUnlocking) {
 		this.automaticUnlocking = automaticUnlocking;
+	}
+
+	/**
+	 * @return the battleGoals
+	 */
+	public boolean isBattleGoals() {
+		return battleGoals;
+	}
+
+	/**
+	 * @param battleGoals the battleGoals to set
+	 */
+	public void setBattleGoals(boolean battleGoals) {
+		this.battleGoals = battleGoals;
+	}
+
+	/**
+	 * @return the battleGoalsCharacter
+	 */
+	public boolean isBattleGoalsCharacter() {
+		return battleGoalsCharacter;
+	}
+
+	/**
+	 * @param battleGoalsCharacter the battleGoalsCharacter to set
+	 */
+	public void setBattleGoalsCharacter(boolean battleGoalsCharacter) {
+		this.battleGoalsCharacter = battleGoalsCharacter;
+	}
+
+	/**
+	 * @return the battleGoalsFh
+	 */
+	public boolean isBattleGoalsFh() {
+		return battleGoalsFh;
+	}
+
+	/**
+	 * @param battleGoalsFh the battleGoalsFh to set
+	 */
+	public void setBattleGoalsFh(boolean battleGoalsFh) {
+		this.battleGoalsFh = battleGoalsFh;
 	}
 
 	/**
