@@ -25,6 +25,8 @@ public class Settings {
 	@Required
 	private boolean activeSummons = true;
 	@Required
+	private boolean addAllMonsters = false;
+	@Required
 	private boolean allyAttackModifierDeck = true;
 	@Required
 	private boolean alwaysAllyAttackModifierDeck = false;
@@ -236,6 +238,24 @@ public class Settings {
 	 */
 	public void setActiveSummons(boolean activeSummons) {
 		this.activeSummons = activeSummons;
+	}
+
+	/**
+	 * Checks if is adds the all monsters.
+	 *
+	 * @return true, if is adds the all monsters
+	 */
+	public boolean isAddAllMonsters() {
+		return addAllMonsters;
+	}
+
+	/**
+	 * Sets the adds the all monsters.
+	 *
+	 * @param addAllMonsters the new adds the all monsters
+	 */
+	public void setAddAllMonsters(boolean addAllMonsters) {
+		this.addAllMonsters = addAllMonsters;
 	}
 
 	/**
@@ -455,42 +475,54 @@ public class Settings {
 	}
 
 	/**
-	 * @return the battleGoals
+	 * Checks if is battle goals.
+	 *
+	 * @return true, if is battle goals
 	 */
 	public boolean isBattleGoals() {
 		return battleGoals;
 	}
 
 	/**
-	 * @param battleGoals the battleGoals to set
+	 * Sets the battle goals.
+	 *
+	 * @param battleGoals the new battle goals
 	 */
 	public void setBattleGoals(boolean battleGoals) {
 		this.battleGoals = battleGoals;
 	}
 
 	/**
-	 * @return the battleGoalsCharacter
+	 * Checks if is battle goals character.
+	 *
+	 * @return true, if is battle goals character
 	 */
 	public boolean isBattleGoalsCharacter() {
 		return battleGoalsCharacter;
 	}
 
 	/**
-	 * @param battleGoalsCharacter the battleGoalsCharacter to set
+	 * Sets the battle goals character.
+	 *
+	 * @param battleGoalsCharacter the new battle goals character
 	 */
 	public void setBattleGoalsCharacter(boolean battleGoalsCharacter) {
 		this.battleGoalsCharacter = battleGoalsCharacter;
 	}
 
 	/**
-	 * @return the battleGoalsFh
+	 * Checks if is battle goals fh.
+	 *
+	 * @return true, if is battle goals fh
 	 */
 	public boolean isBattleGoalsFh() {
 		return battleGoalsFh;
 	}
 
 	/**
-	 * @param battleGoalsFh the battleGoalsFh to set
+	 * Sets the battle goals fh.
+	 *
+	 * @param battleGoalsFh the new battle goals fh
 	 */
 	public void setBattleGoalsFh(boolean battleGoalsFh) {
 		this.battleGoalsFh = battleGoalsFh;
