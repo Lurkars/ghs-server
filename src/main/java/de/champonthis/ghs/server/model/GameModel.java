@@ -33,6 +33,8 @@ public class GameModel {
 	@Required
 	private LinkedList<GameObjectiveModel> objectives = new LinkedList<>();
 	@Required
+	private LinkedList<GameObjectiveContainerModel> objectiveContainers = new LinkedList<>();
+	@Required
 	private GameState state = GameState.DRAW;
 	private GameScenarioModel scenario;
 	@Required
@@ -285,6 +287,24 @@ public class GameModel {
 	 */
 	public void setObjectives(LinkedList<GameObjectiveModel> objectives) {
 		this.objectives = objectives;
+	}
+
+	/**
+	 * Gets the objective containers.
+	 *
+	 * @return the objective containers
+	 */
+	public LinkedList<GameObjectiveContainerModel> getObjectiveContainers() {
+		return objectiveContainers;
+	}
+
+	/**
+	 * Sets the objective containers.
+	 *
+	 * @param objectiveContainers the new objective containers
+	 */
+	public void setObjectiveContainers(LinkedList<GameObjectiveContainerModel> objectiveContainers) {
+		this.objectiveContainers = objectiveContainers;
 	}
 
 	/**
