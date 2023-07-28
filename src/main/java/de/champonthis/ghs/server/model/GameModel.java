@@ -32,7 +32,6 @@ public class GameModel {
 	private LinkedList<GameMonsterModel> monsters = new LinkedList<>();
 	@Required
 	private LinkedList<GameObjectiveModel> objectives = new LinkedList<>();
-	@Required
 	private LinkedList<GameObjectiveContainerModel> objectiveContainers = new LinkedList<>();
 	@Required
 	private GameState state = GameState.DRAW;
