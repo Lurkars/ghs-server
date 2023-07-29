@@ -21,7 +21,7 @@ public class CharacterProgress {
 	@Required
 	private LinkedList<Identifier> items = new LinkedList<>();
 	@Required
-	private LinkedList<Identifier> equippedItems = new LinkedList<>();
+	private LinkedList<AdditionalIdentifier> equippedItems = new LinkedList<>();
 	private int personalQuest = 0;
 	private int battleGoals = 0;
 	private String notes = "";
@@ -111,7 +111,7 @@ public class CharacterProgress {
 	 *
 	 * @return the equipped items
 	 */
-	public LinkedList<Identifier> getEquippedItems() {
+	public LinkedList<AdditionalIdentifier> getEquippedItems() {
 		return equippedItems;
 	}
 
@@ -120,7 +120,7 @@ public class CharacterProgress {
 	 *
 	 * @param equippedItems the new equipped items
 	 */
-	public void setEquippedItems(LinkedList<Identifier> equippedItems) {
+	public void setEquippedItems(LinkedList<AdditionalIdentifier> equippedItems) {
 		this.equippedItems = equippedItems;
 	}
 

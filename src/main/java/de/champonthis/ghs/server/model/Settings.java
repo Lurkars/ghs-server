@@ -71,6 +71,8 @@ public class Settings {
 	@Required
 	private boolean characterIdentityHint = true;
 	@Required
+	private boolean characterItems = true;
+	@Required
 	private boolean characterSheet = true;
 	@Required
 	private boolean combineSummonAction = true;
@@ -652,6 +654,24 @@ public class Settings {
 	 */
 	public void setCharacterIdentityHint(boolean characterIdentityHint) {
 		this.characterIdentityHint = characterIdentityHint;
+	}
+
+	/**
+	 * Checks if is character items.
+	 *
+	 * @return true, if is character items
+	 */
+	public boolean isCharacterItems() {
+		return characterItems;
+	}
+
+	/**
+	 * Sets the character items.
+	 *
+	 * @param characterItems the new character items
+	 */
+	public void setCharacterItems(boolean characterItems) {
+		this.characterItems = characterItems;
 	}
 
 	/**

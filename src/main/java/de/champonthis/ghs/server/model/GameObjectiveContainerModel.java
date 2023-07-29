@@ -19,7 +19,7 @@ public class GameObjectiveContainerModel {
 	@Required
 	private String name;
 	private Boolean escort;
-	private LinkedList<GameObjectiveEntityModel	> entities = new LinkedList<>();
+	private LinkedList<GameObjectiveEntityModel> entities = new LinkedList<>();
 	private Integer level;
 	private Boolean off;
 	private Boolean active;
