@@ -95,6 +95,8 @@ public class Settings {
 	@Required
 	private boolean expireConditions = true;
 	@Required
+	private boolean fhGhItems = false;
+	@Required
 	private boolean hideAbsent = false;
 	@Required
 	private boolean hideStats = true;
@@ -870,6 +872,24 @@ public class Settings {
 	 */
 	public void setExpireConditions(boolean expireConditions) {
 		this.expireConditions = expireConditions;
+	}
+
+	/**
+	 * Checks if is fh gh items.
+	 *
+	 * @return true, if is fh gh items
+	 */
+	public boolean isFhGhItems() {
+		return fhGhItems;
+	}
+
+	/**
+	 * Sets the fh gh items.
+	 *
+	 * @param fhGhItems the new fh gh items
+	 */
+	public void setFhGhItems(boolean fhGhItems) {
+		this.fhGhItems = fhGhItems;
 	}
 
 	/**

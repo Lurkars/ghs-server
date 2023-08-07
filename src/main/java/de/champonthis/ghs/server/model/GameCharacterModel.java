@@ -43,6 +43,7 @@ public class GameCharacterModel {
 	private int maxHealth;
 	@Required
 	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<>();
+	private LinkedList<ConditionName> immunities = new LinkedList<>();
 	@Required
 	private LinkedList<String> markers = new LinkedList<>();
 	@Required
@@ -359,6 +360,24 @@ public class GameCharacterModel {
 	}
 
 	/**
+	 * Gets the immunities.
+	 *
+	 * @return the immunities
+	 */
+	public LinkedList<ConditionName> getImmunities() {
+		return immunities;
+	}
+
+	/**
+	 * Sets the immunities.
+	 *
+	 * @param immunities the new immunities
+	 */
+	public void setImmunities(LinkedList<ConditionName> immunities) {
+		this.immunities = immunities;
+	}
+
+	/**
 	 * Gets the markers.
 	 *
 	 * @return the markers
@@ -597,7 +616,7 @@ public class GameCharacterModel {
 	 *
 	 * @return the battle goal
 	 */
-	public boolean getBattleGoal() {
+	public Boolean getBattleGoal() {
 		return battleGoal;
 	}
 
@@ -606,7 +625,7 @@ public class GameCharacterModel {
 	 *
 	 * @param battleGoal the new battle goal
 	 */
-	public void setBattleGoal(boolean battleGoal) {
+	public void setBattleGoal(Boolean battleGoal) {
 		this.battleGoal = battleGoal;
 	}
 

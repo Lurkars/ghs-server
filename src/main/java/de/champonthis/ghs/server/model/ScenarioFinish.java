@@ -25,6 +25,9 @@ public class ScenarioFinish {
 	private int challenges;
 	@Required
 	private LinkedList<Integer> calenderSectionManual = new LinkedList<>();
+	private Identifier randomItem;
+	private Integer randomItemIndex = -1;
+	private LinkedList<Identifier> randomItems = new LinkedList<>();
 	@Required
 	private LinkedList<Integer> randomItemBlueprints = new LinkedList<>();
 
@@ -188,6 +191,60 @@ public class ScenarioFinish {
 	 */
 	public void setCalenderSectionManual(LinkedList<Integer> calenderSectionManual) {
 		this.calenderSectionManual = calenderSectionManual;
+	}
+
+	/**
+	 * Gets the random item.
+	 *
+	 * @return the random item
+	 */
+	public Identifier getRandomItem() {
+		return randomItem;
+	}
+
+	/**
+	 * Sets the random item.
+	 *
+	 * @param randomItem the new random item
+	 */
+	public void setRandomItem(Identifier randomItem) {
+		this.randomItem = randomItem;
+	}
+
+	/**
+	 * Gets the random item index.
+	 *
+	 * @return the random item index
+	 */
+	public Integer getRandomItemIndex() {
+		return randomItemIndex;
+	}
+
+	/**
+	 * Sets the random item index.
+	 *
+	 * @param randomItemIndex the new random item index
+	 */
+	public void setRandomItemIndex(Integer randomItemIndex) {
+		this.randomItemIndex = randomItemIndex;
+	}
+
+	/**
+	 * Gets the random items.
+	 *
+	 * @return the random items
+	 */
+	public LinkedList<Identifier> getRandomItems() {
+		return randomItems;
+	}
+
+	/**
+	 * Sets the random items.
+	 *
+	 * @param randomItems the new random items
+	 */
+	public void setRandomItems(LinkedList<Identifier> randomItems) {
+		this.randomItems = randomItems;
 	}
 
 	/**

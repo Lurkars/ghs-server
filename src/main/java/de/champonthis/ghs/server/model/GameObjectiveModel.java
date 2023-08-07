@@ -31,6 +31,7 @@ public class GameObjectiveModel {
 	private String maxHealth;
 	@Required
 	private LinkedList<GameEntityConditionModel> entityConditions = new LinkedList<>();
+	private LinkedList<ConditionName> immunities = new LinkedList<>();
 	@Required
 	private LinkedList<String> markers = new LinkedList<>();
 	@Required
@@ -270,6 +271,24 @@ public class GameObjectiveModel {
 	 */
 	public void setEntityConditions(LinkedList<GameEntityConditionModel> entityConditions) {
 		this.entityConditions = entityConditions;
+	}
+
+	/**
+	 * Gets the immunities.
+	 *
+	 * @return the immunities
+	 */
+	public LinkedList<ConditionName> getImmunities() {
+		return immunities;
+	}
+
+	/**
+	 * Sets the immunities.
+	 *
+	 * @param immunities the new immunities
+	 */
+	public void setImmunities(LinkedList<ConditionName> immunities) {
+		this.immunities = immunities;
 	}
 
 	/**
