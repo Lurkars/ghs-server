@@ -46,7 +46,7 @@ public class Party {
 	@Required
 	private LinkedList<GameCharacterModel> retirements = new LinkedList<>();
 	@Required
-	private LinkedList<Identifier> unlockedItems = new LinkedList<>();
+	private LinkedList<CountIdentifier> unlockedItems = new LinkedList<>();
 
 	private int weeks = 0;
 	@Required
@@ -614,7 +614,7 @@ public class Party {
 	 *
 	 * @return the unlocked items
 	 */
-	public LinkedList<Identifier> getUnlockedItems() {
+	public LinkedList<CountIdentifier> getUnlockedItems() {
 		return unlockedItems;
 	}
 
@@ -623,7 +623,7 @@ public class Party {
 	 *
 	 * @param unlockedItems the new unlocked items
 	 */
-	public void setUnlockedItems(LinkedList<Identifier> unlockedItems) {
+	public void setUnlockedItems(LinkedList<CountIdentifier> unlockedItems) {
 		this.unlockedItems = unlockedItems;
 	}
 
