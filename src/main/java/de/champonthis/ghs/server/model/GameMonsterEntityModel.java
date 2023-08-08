@@ -22,6 +22,8 @@ public class GameMonsterEntityModel {
 	@Required
 	private SummonState summon;
 	@Required
+	private boolean revealed = false;
+	@Required
 	private boolean active = false;
 	@Required
 	private boolean off = false;
@@ -125,6 +127,24 @@ public class GameMonsterEntityModel {
 	 */
 	public void setSummon(SummonState summon) {
 		this.summon = summon;
+	}
+
+	/**
+	 * Checks if is revealed.
+	 *
+	 * @return true, if is revealed
+	 */
+	public boolean isRevealed() {
+		return revealed;
+	}
+
+	/**
+	 * Sets the revealed.
+	 *
+	 * @param revealed the new revealed
+	 */
+	public void setRevealed(boolean revealed) {
+		this.revealed = revealed;
 	}
 
 	/**

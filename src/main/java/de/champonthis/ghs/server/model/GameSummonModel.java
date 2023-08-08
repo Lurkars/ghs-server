@@ -44,6 +44,7 @@ public class GameSummonModel {
 	private String action;
 	private String additionalAction;
 	private boolean active = false;
+	private boolean revealed = false;
 	private String thumbnail;
 
 	/**
@@ -440,6 +441,24 @@ public class GameSummonModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * Checks if is revealed.
+	 *
+	 * @return true, if is revealed
+	 */
+	public boolean isRevealed() {
+		return revealed;
+	}
+
+	/**
+	 * Sets the revealed.
+	 *
+	 * @param revealed the new revealed
+	 */
+	public void setRevealed(boolean revealed) {
+		this.revealed = revealed;
 	}
 
 	/**

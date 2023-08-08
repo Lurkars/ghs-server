@@ -22,6 +22,8 @@ public class GameObjectiveEntityModel {
 	@Required
 	private boolean active = false;
 	@Required
+	private boolean revealed = false;
+	@Required
 	private int health;
 	@Required
 	private int maxHealth;
@@ -121,6 +123,24 @@ public class GameObjectiveEntityModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * Checks if is revealed.
+	 *
+	 * @return true, if is revealed
+	 */
+	public boolean isRevealed() {
+		return revealed;
+	}
+
+	/**
+	 * Sets the revealed.
+	 *
+	 * @param revealed the new revealed
+	 */
+	public void setRevealed(boolean revealed) {
+		this.revealed = revealed;
 	}
 
 	/**
