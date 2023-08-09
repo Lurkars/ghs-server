@@ -21,6 +21,7 @@ public class GameObjectiveEntityModel {
 	private boolean dead;
 	@Required
 	private boolean active = false;
+	private boolean dormant = false;
 	@Required
 	private boolean revealed = false;
 	@Required
@@ -123,6 +124,24 @@ public class GameObjectiveEntityModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * Checks if is dormant.
+	 *
+	 * @return true, if is dormant
+	 */
+	public boolean isDormant() {
+		return dormant;
+	}
+
+	/**
+	 * Sets the dormant.
+	 *
+	 * @param dormant the new dormant
+	 */
+	public void setDormant(boolean dormant) {
+		this.dormant = dormant;
 	}
 
 	/**

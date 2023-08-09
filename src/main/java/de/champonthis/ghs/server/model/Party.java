@@ -17,6 +17,9 @@ public class Party {
 	private int id = 0;
 	private String name;
 	private String edition;
+	private LinkedList<ConditionName> conditions = new LinkedList<>();
+	private LinkedList<String> battleGoalEditions = new LinkedList<>();
+	private LinkedList<Identifier> filteredBattleGoals = new LinkedList<>();
 	private String location;
 	private String notes;
 	private String achievements;
@@ -121,6 +124,60 @@ public class Party {
 	 */
 	public void setEdition(String edition) {
 		this.edition = edition;
+	}
+
+	/**
+	 * Gets the conditions.
+	 *
+	 * @return the conditions
+	 */
+	public LinkedList<ConditionName> getConditions() {
+		return conditions;
+	}
+
+	/**
+	 * Sets the conditions.
+	 *
+	 * @param conditions the new conditions
+	 */
+	public void setConditions(LinkedList<ConditionName> conditions) {
+		this.conditions = conditions;
+	}
+
+	/**
+	 * Gets the battle goal editions.
+	 *
+	 * @return the battle goal editions
+	 */
+	public LinkedList<String> getBattleGoalEditions() {
+		return battleGoalEditions;
+	}
+
+	/**
+	 * Sets the battle goal editions.
+	 *
+	 * @param battleGoalEditions the new battle goal editions
+	 */
+	public void setBattleGoalEditions(LinkedList<String> battleGoalEditions) {
+		this.battleGoalEditions = battleGoalEditions;
+	}
+
+	/**
+	 * Gets the filtered battle goals.
+	 *
+	 * @return the filtered battle goals
+	 */
+	public LinkedList<Identifier> getFilteredBattleGoals() {
+		return filteredBattleGoals;
+	}
+
+	/**
+	 * Sets the filtered battle goals.
+	 *
+	 * @param filteredBattleGoals the new filtered battle goals
+	 */
+	public void setFilteredBattleGoals(LinkedList<Identifier> filteredBattleGoals) {
+		this.filteredBattleGoals = filteredBattleGoals;
 	}
 
 	/**

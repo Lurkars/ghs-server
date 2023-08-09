@@ -25,6 +25,7 @@ public class GameMonsterEntityModel {
 	private boolean revealed = false;
 	@Required
 	private boolean active = false;
+	private boolean dormant = false;
 	@Required
 	private boolean off = false;
 	@Required
@@ -163,6 +164,24 @@ public class GameMonsterEntityModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * Checks if is dormant.
+	 *
+	 * @return true, if is dormant
+	 */
+	public boolean isDormant() {
+		return dormant;
+	}
+
+	/**
+	 * Sets the dormant.
+	 *
+	 * @param dormant the new dormant
+	 */
+	public void setDormant(boolean dormant) {
+		this.dormant = dormant;
 	}
 
 	/**

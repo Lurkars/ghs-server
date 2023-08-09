@@ -44,6 +44,7 @@ public class GameSummonModel {
 	private String action;
 	private String additionalAction;
 	private boolean active = false;
+	private boolean dormant = false;
 	private boolean revealed = false;
 	private String thumbnail;
 
@@ -441,6 +442,24 @@ public class GameSummonModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * Checks if is dormant.
+	 *
+	 * @return true, if is dormant
+	 */
+	public boolean isDormant() {
+		return dormant;
+	}
+
+	/**
+	 * Sets the dormant.
+	 *
+	 * @param dormant the new dormant
+	 */
+	public void setDormant(boolean dormant) {
+		this.dormant = dormant;
 	}
 
 	/**
