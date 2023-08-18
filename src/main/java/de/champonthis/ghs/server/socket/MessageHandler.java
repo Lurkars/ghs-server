@@ -44,8 +44,8 @@ import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 @Component
 public class MessageHandler extends TextWebSocketHandler {
 
-	List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
-	List<WebSocketSessionContainer> webSocketSessionsCleanUp = Collections.synchronizedList(new LinkedList<>());
+	private List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
+	private List<WebSocketSessionContainer> webSocketSessionsCleanUp = Collections.synchronizedList(new LinkedList<>());
 
 	@Autowired
 	private Manager manager;
@@ -215,33 +215,33 @@ public class MessageHandler extends TextWebSocketHandler {
 
 						if (!permissions.isScenario()
 								&& !gson.toJson(gameUpdate.getScenario()).equals(gson.toJson(game.getScenario()))) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: scenario");
 						}
 						if (!permissions.isScenario()
 								&& !gson.toJson(gameUpdate.getSections()).equals(gson.toJson(game.getSections()))) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: scenario");
 						}
 						if (!permissions.isScenario() && (gameUpdate.getEdition() != null
 								&& !gameUpdate.getEdition().equals(game.getEdition())
 								|| game.getEdition() != null && !game.getEdition().equals(gameUpdate.getEdition()))) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: scenario");
 						}
 						if (!permissions.isElements() && !gson.toJson(gameUpdate.getElementBoard())
 								.equals(gson.toJson(game.getElementBoard()))) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: elements");
 						}
 						if (!permissions.isLootDeck()
 								&& !gson.toJson(gameUpdate.getLootDeck()).equals(gson.toJson(game.getLootDeck()))) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: lootDeck");
 						}
 						if (!permissions.isRound() && gameUpdate.getRound() != game.getRound()) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: round");
 						}
 						if (!permissions.isRound() && !gameUpdate.getState().equals(game.getState())) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: round");
 						}
 						if (!permissions.isLevel() && gameUpdate.getLevel() != game.getLevel()) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: level");
 						}
 						if (!permissions.isAttackModifiers() && !gson.toJson(gameUpdate.getMonsterAttackModifierDeck())
 								.equals(gson.toJson(game.getMonsterAttackModifierDeck()))) {
@@ -249,12 +249,12 @@ public class MessageHandler extends TextWebSocketHandler {
 						}
 						if (!permissions.isAttackModifiers() && !gson.toJson(gameUpdate.getAllyAttackModifierDeck())
 								.equals(gson.toJson(game.getAllyAttackModifierDeck()))) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: attackModifiers");
 						}
 						if (!permissions.isParty()
 								&& (!gson.toJson(gameUpdate.getParty()).equals(gson.toJson(game.getParty())) || !gson
 										.toJson(gameUpdate.getParties()).equals(gson.toJson(game.getParties())))) {
-							sendError(session, "Permission(s) missing");
+							sendError(session, "Permission(s) missing: party");
 						}
 						if (!permissions.isCharacters()) {
 							for (GameCharacterModel updateCharacter : gameUpdate.getCharacters()) {
@@ -324,7 +324,7 @@ public class MessageHandler extends TextWebSocketHandler {
 									}
 								}
 								if (!characterPermission) {
-									sendError(session, "Permission(s) missing");
+									sendError(session, "Permission(s) missing: characters");
 								}
 							}
 						}
@@ -371,8 +371,8 @@ public class MessageHandler extends TextWebSocketHandler {
 										}
 									}
 								}
-								if (!monsterPermission) {
-									sendError(session, "Permission(s) missing");
+								if (!monsterPermission && !game.getMonsters().isEmpty() && !scenarioPermissions) {
+									sendError(session, "Permission(s) missing: monsters");
 								}
 							}
 						}
@@ -552,7 +552,7 @@ public class MessageHandler extends TextWebSocketHandler {
 	 * @param gameId  the game id
 	 * @return true, if is server session
 	 */
-	protected boolean isServerSession(WebSocketSession session, Integer gameId) {
+	public boolean isServerSession(WebSocketSession session, Integer gameId) {
 		int serverSessionIndex = Integer.MAX_VALUE;
 		boolean isServer = false;
 		for (WebSocketSessionContainer container : webSocketSessions) {
@@ -601,6 +601,20 @@ public class MessageHandler extends TextWebSocketHandler {
 		if (stop) {
 			throw new SendErrorException("Error: " + message);
 		}
+	}
+
+	/**
+	 * @return the webSocketSessions
+	 */
+	public List<WebSocketSessionContainer> getWebSocketSessions() {
+		return webSocketSessions;
+	}
+
+	/**
+	 * @return the webSocketSessionsCleanUp
+	 */
+	public List<WebSocketSessionContainer> getWebSocketSessionsCleanUp() {
+		return webSocketSessionsCleanUp;
 	}
 
 }
