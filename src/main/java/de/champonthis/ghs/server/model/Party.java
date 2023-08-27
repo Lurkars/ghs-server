@@ -50,7 +50,15 @@ public class Party {
 	private LinkedList<GameCharacterModel> retirements = new LinkedList<>();
 	@Required
 	private LinkedList<CountIdentifier> unlockedItems = new LinkedList<>();
-
+	@Required
+	private LinkedList<String> unlockedCharacters = new LinkedList<>();
+	private Integer level;
+	private Boolean levelCalculation;
+	private Integer levelAdjustment;
+	private Integer bonusAdjustment;
+	private Boolean ge5Player;
+	private Integer playerCount;
+	private Boolean solo;
 	private int weeks = 0;
 	@Required
 	private Map<Integer, LinkedList<String>> weekSections = new HashMap<>();
@@ -71,6 +79,12 @@ public class Party {
 	private GameAttackModifierDeckModel townGuardDeck = new GameAttackModifierDeckModel();
 	@Required
 	private LinkedList<BuildingModel> buildings = new LinkedList<>();
+	@Required
+	private LinkedList<Loot> lootDeckEnhancements = new LinkedList<>();
+	@Required
+	private LinkedList<LootType> lootDeckFixed = new LinkedList<>();
+	@Required
+	private LinkedList<String> lootDeckSections = new LinkedList<>();
 
 	/**
 	 * Gets the id.
@@ -685,6 +699,150 @@ public class Party {
 	}
 
 	/**
+	 * Gets the unlocked characters.
+	 *
+	 * @return the unlocked characters
+	 */
+	public LinkedList<String> getUnlockedCharacters() {
+		return unlockedCharacters;
+	}
+
+	/**
+	 * Sets the unlocked characters.
+	 *
+	 * @param unlockedCharacters the new unlocked characters
+	 */
+	public void setUnlockedCharacters(LinkedList<String> unlockedCharacters) {
+		this.unlockedCharacters = unlockedCharacters;
+	}
+
+	/**
+	 * Gets the level.
+	 *
+	 * @return the level
+	 */
+	public Integer getLevel() {
+		return level;
+	}
+
+	/**
+	 * Sets the level.
+	 *
+	 * @param level the new level
+	 */
+	public void setLevel(Integer level) {
+		this.level = level;
+	}
+
+	/**
+	 * Gets the level calculation.
+	 *
+	 * @return the level calculation
+	 */
+	public Boolean getLevelCalculation() {
+		return levelCalculation;
+	}
+
+	/**
+	 * Sets the level calculation.
+	 *
+	 * @param levelCalculation the new level calculation
+	 */
+	public void setLevelCalculation(Boolean levelCalculation) {
+		this.levelCalculation = levelCalculation;
+	}
+
+	/**
+	 * Gets the level adjustment.
+	 *
+	 * @return the level adjustment
+	 */
+	public Integer getLevelAdjustment() {
+		return levelAdjustment;
+	}
+
+	/**
+	 * Sets the level adjustment.
+	 *
+	 * @param levelAdjustment the new level adjustment
+	 */
+	public void setLevelAdjustment(Integer levelAdjustment) {
+		this.levelAdjustment = levelAdjustment;
+	}
+
+	/**
+	 * Gets the bonus adjustment.
+	 *
+	 * @return the bonus adjustment
+	 */
+	public Integer getBonusAdjustment() {
+		return bonusAdjustment;
+	}
+
+	/**
+	 * Sets the bonus adjustment.
+	 *
+	 * @param bonusAdjustment the new bonus adjustment
+	 */
+	public void setBonusAdjustment(Integer bonusAdjustment) {
+		this.bonusAdjustment = bonusAdjustment;
+	}
+
+	/**
+	 * Gets the ge 5 player.
+	 *
+	 * @return the ge 5 player
+	 */
+	public Boolean getGe5Player() {
+		return ge5Player;
+	}
+
+	/**
+	 * Sets the ge 5 player.
+	 *
+	 * @param ge5Player the new ge 5 player
+	 */
+	public void setGe5Player(Boolean ge5Player) {
+		this.ge5Player = ge5Player;
+	}
+
+	/**
+	 * Gets the player count.
+	 *
+	 * @return the player count
+	 */
+	public Integer getPlayerCount() {
+		return playerCount;
+	}
+
+	/**
+	 * Sets the player count.
+	 *
+	 * @param playerCount the new player count
+	 */
+	public void setPlayerCount(Integer playerCount) {
+		this.playerCount = playerCount;
+	}
+
+	/**
+	 * Gets the solo.
+	 *
+	 * @return the solo
+	 */
+	public Boolean getSolo() {
+		return solo;
+	}
+
+	/**
+	 * Sets the solo.
+	 *
+	 * @param solo the new solo
+	 */
+	public void setSolo(Boolean solo) {
+		this.solo = solo;
+	}
+
+	/**
 	 * Gets the town guard perk sections.
 	 *
 	 * @return the town guard perk sections
@@ -754,6 +912,60 @@ public class Party {
 	 */
 	public void setBuildings(LinkedList<BuildingModel> buildings) {
 		this.buildings = buildings;
+	}
+
+	/**
+	 * Gets the loot deck enhancements.
+	 *
+	 * @return the loot deck enhancements
+	 */
+	public LinkedList<Loot> getLootDeckEnhancements() {
+		return lootDeckEnhancements;
+	}
+
+	/**
+	 * Sets the loot deck enhancements.
+	 *
+	 * @param lootDeckEnhancements the new loot deck enhancements
+	 */
+	public void setLootDeckEnhancements(LinkedList<Loot> lootDeckEnhancements) {
+		this.lootDeckEnhancements = lootDeckEnhancements;
+	}
+
+	/**
+	 * Gets the loot deck fixed.
+	 *
+	 * @return the loot deck fixed
+	 */
+	public LinkedList<LootType> getLootDeckFixed() {
+		return lootDeckFixed;
+	}
+
+	/**
+	 * Sets the loot deck fixed.
+	 *
+	 * @param lootDeckFixed the new loot deck fixed
+	 */
+	public void setLootDeckFixed(LinkedList<LootType> lootDeckFixed) {
+		this.lootDeckFixed = lootDeckFixed;
+	}
+
+	/**
+	 * Gets the loot deck sections.
+	 *
+	 * @return the loot deck sections
+	 */
+	public LinkedList<String> getLootDeckSections() {
+		return lootDeckSections;
+	}
+
+	/**
+	 * Sets the loot deck sections.
+	 *
+	 * @param lootDeckSections the new loot deck sections
+	 */
+	public void setLootDeckSections(LinkedList<String> lootDeckSections) {
+		this.lootDeckSections = lootDeckSections;
 	}
 
 }
