@@ -25,6 +25,8 @@ public class ScenarioFinish {
 	private int challenges;
 	@Required
 	private LinkedList<Integer> calenderSectionManual = new LinkedList<>();
+	@Required
+	private LinkedList<Integer> calendarSectionManual = new LinkedList<>();
 	private Identifier randomItem;
 	private Integer randomItemIndex = -1;
 	private LinkedList<Identifier> randomItems = new LinkedList<>();
@@ -191,6 +193,20 @@ public class ScenarioFinish {
 	 */
 	public void setCalenderSectionManual(LinkedList<Integer> calenderSectionManual) {
 		this.calenderSectionManual = calenderSectionManual;
+	}
+
+	/**
+	 * @return the calendarSectionManual
+	 */
+	public LinkedList<Integer> getCalendarSectionManual() {
+		return calendarSectionManual;
+	}
+
+	/**
+	 * @param calendarSectionManual the calendarSectionManual to set
+	 */
+	public void setCalendarSectionManual(LinkedList<Integer> calendarSectionManual) {
+		this.calendarSectionManual = calendarSectionManual;
 	}
 
 	/**

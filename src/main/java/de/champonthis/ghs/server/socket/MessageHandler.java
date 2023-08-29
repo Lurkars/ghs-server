@@ -157,6 +157,7 @@ public class MessageHandler extends TextWebSocketHandler {
 					// if first password or public create new game for password
 					if (manager.countPasswords() == 0 || isPublic) {
 						GameModel game = new GameModel();
+						game.setRevision(-1L);
 						if (messageObject.get("payload") != null && !messageObject.get("payload").isJsonNull()) {
 							game = gson.fromJson(messageObject.get("payload"), GameModel.class);
 						}
@@ -391,6 +392,8 @@ public class MessageHandler extends TextWebSocketHandler {
 							gameResponse.addProperty("type", type.toString().toLowerCase().replace('_', '-'));
 							gameResponse.add("payload", gson.toJsonTree(gameUpdate));
 							gameResponse.add("undoinfo", messageObject.get("undoinfo"));
+							gameResponse.add("revision", messageObject.get("revision"));
+							gameResponse.add("undolength", messageObject.get("undolength"));
 							container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
 						}
 					}
