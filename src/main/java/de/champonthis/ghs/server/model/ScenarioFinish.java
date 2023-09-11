@@ -196,14 +196,18 @@ public class ScenarioFinish {
 	}
 
 	/**
-	 * @return the calendarSectionManual
+	 * Gets the calendar section manual.
+	 *
+	 * @return the calendar section manual
 	 */
 	public LinkedList<Integer> getCalendarSectionManual() {
 		return calendarSectionManual;
 	}
 
 	/**
-	 * @param calendarSectionManual the calendarSectionManual to set
+	 * Sets the calendar section manual.
+	 *
+	 * @param calendarSectionManual the new calendar section manual
 	 */
 	public void setCalendarSectionManual(LinkedList<Integer> calendarSectionManual) {
 		this.calendarSectionManual = calendarSectionManual;

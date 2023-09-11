@@ -103,6 +103,7 @@ public class GameController {
 	 * Update game.
 	 *
 	 * @param password the password
+	 * @param silent   the silent
 	 * @param payload  the payload
 	 * @return the string
 	 */

@@ -19,13 +19,20 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
 /**
- * 
+ * The Class ControllerResponseEntityExceptionHandler.
  */
 @ControllerAdvice
 public class ControllerResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
 	private Gson gson = new Gson();
 
+	/**
+	 * Handle response entity status exception.
+	 *
+	 * @param exception the exception
+	 * @param request   the request
+	 * @return the response entity
+	 */
 	@ExceptionHandler(value = { ResponseStatusException.class })
 	protected ResponseEntity<Object> handleResponseEntityStatusException(ResponseStatusException exception,
 			WebRequest request) {

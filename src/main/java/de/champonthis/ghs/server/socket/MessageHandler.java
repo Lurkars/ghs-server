@@ -607,14 +607,18 @@ public class MessageHandler extends TextWebSocketHandler {
 	}
 
 	/**
-	 * @return the webSocketSessions
+	 * Gets the web socket sessions.
+	 *
+	 * @return the web socket sessions
 	 */
 	public List<WebSocketSessionContainer> getWebSocketSessions() {
 		return webSocketSessions;
 	}
 
 	/**
-	 * @return the webSocketSessionsCleanUp
+	 * Gets the web socket sessions clean up.
+	 *
+	 * @return the web socket sessions clean up
 	 */
 	public List<WebSocketSessionContainer> getWebSocketSessionsCleanUp() {
 		return webSocketSessionsCleanUp;

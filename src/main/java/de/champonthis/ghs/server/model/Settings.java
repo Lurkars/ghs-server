@@ -3,6 +3,7 @@
  */
 package de.champonthis.ghs.server.model;
 
+import java.util.Arrays;
 import java.util.LinkedList;
 
 import de.champonthis.ghs.server.util.Required;
@@ -20,6 +21,9 @@ public class Settings {
 	private boolean abilityReveal = true;
 	@Required
 	private boolean activeApplyConditions = true;
+	@Required
+	private LinkedList<ConditionName> activeApplyConditionsExcludes = new LinkedList<>(
+			Arrays.asList(ConditionName.SHIELD));
 	@Required
 	private boolean activeStandees = true;
 	@Required
@@ -40,6 +44,8 @@ public class Settings {
 	private boolean alwaysLootDeck = false;
 	@Required
 	private boolean applyConditions = true;
+	@Required
+	private LinkedList<ConditionName> applyConditionsExcludes = new LinkedList<>(Arrays.asList(ConditionName.SHIELD));
 	@Required
 	private boolean applyLongRest = true;
 	@Required
@@ -126,6 +132,8 @@ public class Settings {
 	@Required
 	private boolean scenarioRules = true;
 	@Required
+	private boolean showExpandedAbilityCard = false;
+	@Required
 	private boolean showFullAbilityCard = false;
 	@Required
 	private LinkedList<String> spoilers = new LinkedList<>();
@@ -206,6 +214,24 @@ public class Settings {
 	 */
 	public void setActiveApplyConditions(boolean activeApplyConditions) {
 		this.activeApplyConditions = activeApplyConditions;
+	}
+
+	/**
+	 * Gets the active apply conditions excludes.
+	 *
+	 * @return the active apply conditions excludes
+	 */
+	public LinkedList<ConditionName> getActiveApplyConditionsExcludes() {
+		return activeApplyConditionsExcludes;
+	}
+
+	/**
+	 * Sets the active apply conditions excludes.
+	 *
+	 * @param activeApplyConditionsExcludes the new active apply conditions excludes
+	 */
+	public void setActiveApplyConditionsExcludes(LinkedList<ConditionName> activeApplyConditionsExcludes) {
+		this.activeApplyConditionsExcludes = activeApplyConditionsExcludes;
 	}
 
 	/**
@@ -386,6 +412,24 @@ public class Settings {
 	 */
 	public void setApplyConditions(boolean applyConditions) {
 		this.applyConditions = applyConditions;
+	}
+
+	/**
+	 * Gets the apply conditions excludes.
+	 *
+	 * @return the apply conditions excludes
+	 */
+	public LinkedList<ConditionName> getApplyConditionsExcludes() {
+		return applyConditionsExcludes;
+	}
+
+	/**
+	 * Sets the apply conditions excludes.
+	 *
+	 * @param applyConditionsExcludes the new apply conditions excludes
+	 */
+	public void setApplyConditionsExcludes(LinkedList<ConditionName> applyConditionsExcludes) {
+		this.applyConditionsExcludes = applyConditionsExcludes;
 	}
 
 	/**
@@ -1160,6 +1204,24 @@ public class Settings {
 	 */
 	public void setScenarioRules(boolean scenarioRules) {
 		this.scenarioRules = scenarioRules;
+	}
+
+	/**
+	 * Checks if is show expanded ability card.
+	 *
+	 * @return true, if is show expanded ability card
+	 */
+	public boolean isShowExpandedAbilityCard() {
+		return showExpandedAbilityCard;
+	}
+
+	/**
+	 * Sets the show expanded ability card.
+	 *
+	 * @param showExpandedAbilityCard the new show expanded ability card
+	 */
+	public void setShowExpandedAbilityCard(boolean showExpandedAbilityCard) {
+		this.showExpandedAbilityCard = showExpandedAbilityCard;
 	}
 
 	/**
