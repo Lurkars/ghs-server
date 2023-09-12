@@ -63,6 +63,8 @@ public class Settings {
 	@Required
 	private boolean battleGoalsFh = false;
 	@Required
+	private boolean battleGoalsReminder = false;
+	@Required
 	private boolean calculate = true;
 	@Required
 	private boolean calculateStats = true;
@@ -105,7 +107,7 @@ public class Settings {
 	@Required
 	private boolean hideAbsent = false;
 	@Required
-	private boolean hideStats = true;
+	private boolean hideStats = false;
 	@Required
 	private boolean hints = true;
 	@Required
@@ -574,6 +576,24 @@ public class Settings {
 	 */
 	public void setBattleGoalsFh(boolean battleGoalsFh) {
 		this.battleGoalsFh = battleGoalsFh;
+	}
+
+	/**
+	 * Checks if is battle goals reminder.
+	 *
+	 * @return true, if is battle goals reminder
+	 */
+	public boolean isBattleGoalsReminder() {
+		return battleGoalsReminder;
+	}
+
+	/**
+	 * Sets the battle goals reminder.
+	 *
+	 * @param battleGoalsReminder the new battle goals reminder
+	 */
+	public void setBattleGoalsReminder(boolean battleGoalsReminder) {
+		this.battleGoalsReminder = battleGoalsReminder;
 	}
 
 	/**
