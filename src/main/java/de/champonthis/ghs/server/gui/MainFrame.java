@@ -46,6 +46,8 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	private ClientManager clientManager;
 	@Value("${server.port:8080}")
 	private int port;
+	@Value("${server.http.port:8081}")
+	private int httpPort;
 	@Value("${server.ssl.enabled:false}")
 	private boolean ssl;
 	private String clientUrl = null;
@@ -142,7 +144,11 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	 */
 	@EventListener(ApplicationReadyEvent.class)
 	public void setLabel() {
-		portLabel.setText("Port: " + port);
+		if (ssl) {
+			portLabel.setText("Port: " + port + " (HTTPS) / " + httpPort  + " (HTTP)");
+		} else { 	
+			portLabel.setText("Port: " + port );
+		}
 		ipLabel.setText("IPs: " + String.join(", ", clientManager.getHosts().toArray(new String[] {})));
 	}
 
