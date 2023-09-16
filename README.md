@@ -28,7 +28,7 @@ This will run a basic server for a single game code (e.g. for a group, you can s
 5. Click the **Install latest client** button, afterwards window should like this:<br><img width="776" alt="image" src="./resources/Screenshot2.png">
 6. On any device in your local network, you should now be able to access the client with the listed address `http://192.[...]:8080/index.html` and connect to your server via `Host: 192.[...]`and `Port: 8080`.
   	
-  	> ℹ️ **Notice**: Connecting from a different client running with HTTPS (like [gloomhaven-secretariat.de](https://gloomhaven-secretariat.de)) won't work! See [Enable SSL](#enable-ssl)
+  	> ℹ️ **Notice**: Connecting from a different client running with HTTPS (like [gloomhaven-secretariat.de](https://gloomhaven-secretariat.de)) won't work! If you want the server to be accessbile from HTTPS, see [Enable SSL](#enable-ssl).
 
 
 All data is stored in `<your-home-folder>/.ghs` ([List of home-folders for different OS'](https://en.wikipedia.org/wiki/Home_directory#Default_home_directory_per_operating_system)). 
