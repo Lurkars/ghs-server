@@ -75,7 +75,7 @@ Replace `<NEW PORT>` with the port of your choice.
 
 ### Running public
 
-A public server will accept any **Game ID** and create a game for it. The **Game ID** is therefore more of an identifier for a single game than a password protection. To make a public server, edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
+A public server will accept any **Game Code** and create a game for it. The **Game Code** is therefore more of an identifier for a single game than a password protection. To make a public server, edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
 
 ### Enable SSL
 
