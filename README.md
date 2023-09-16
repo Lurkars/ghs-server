@@ -107,18 +107,18 @@ When running with SSL, a non-SSL server is automatically available on port `8081
 
 Go to the main menu in Gloomhaven Secretariat (GHS) and click on **Connect to Server**. Enter the IP/Hostname of the server in **Host** (on the same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
 
-When you run the game for the first time, simply select a **Game ID** of your choice. This will create a new game with that **Game ID**. After that, each time you connect to the server, you will need to set the same **Game ID** (it is now unchangeable!). Alternatively, you can make the instance [public](#running-public) to allow multiple games/game IDs.
+When you run the game for the first time, simply select a **Game Code** of your choice. This will create a new game with that **Game Code**. After that, each time you connect to the server, you will need to set the same **Game Code** (it is now unchangeable!). Alternatively, you can make the instance [public](#running-public) to allow multiple games/Game Codes.
 
 ## Missing / Coming
 
 - updated GUI (it's more of a placeholder now)
-  - add/change/update Game IDs/permissions
+  - add/change/update Game Codes/permissions
 - optional: track undo/redo on server too
 
 ## Workarounds
 
 - The database is a simple `ghs.sqlite` file in the GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simply delete the `sqlite` file.
-- On startup, all **Game IDs** are written to syslog in clear text.
+- On startup, all **Game Codes** are written to syslog in clear text.
 
 ## Privacy
 
