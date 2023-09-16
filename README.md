@@ -14,21 +14,19 @@ A public server is available at `gloomhaven-secretariat.de` port `8443` with `se
 
 ## How to run
 
-This will run a basic server for a single game code (e.g. for a group, you can still use the multi-party feature).
+This will run a basic server for a single game code (e.g. for a group, you can still use the multi-campaign feature).
 
-### Installation + Running
+### Quickstart
 
-Requirements:
+1. Install *Java 11* (or higher) *Runtime Environment*: [Installation Guide for different OS'](https://www.java.com/en/download/help/download_options.html)
+2. Download the appropriate latest `jar` executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
+3. Execute the `jar` file (should be working automatically with your Java Runtime Environment)
+4. You should see a similar window:<br><img width="776" alt="image" src="./resources/Screenshot1.png">
+	
+	> ⚠️ **Important**: If you do not see any local IP address listed besides `localhost`, please check your Firewall settings! After allowing the application in your network and restarting the app, you should see your local IP starting with `192.[...]` in most cases!
 
-- Java 11 (or higher) Runtime Environment: [Installation Guide for different OS'](https://www.java.com/en/download/help/download_options.html)
-
-Then download the appropriate latest `jar` executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
-
-Run the `jar` file with your Java Runtime Environment. 
-
-The server window should then be visible, listing the available IPs and hostnames to connect to, and the port it is listening on. Usually this will be something starting with `192.168...` and port `8080`. Usually only these two values are needed to connect all devices on the same network.
-
-If the server should also serve the client, see [Serve the client](#serve-the-client). 
+5. Click the **Install latest client** button, afterwards window should like this:<br><img width="776" alt="image" src="./resources/Screenshot2.png">
+6. On any device in your local network, you should now be able to access the client with the listed address `http://192.[...]:8080/index.html` and connect to your server via `Host: 192.[...]`and `Port: 8080`.
 
 All data is stored in `<your-home-folder>/.ghs` ([List of home-folders for different OS'](https://en.wikipedia.org/wiki/Home_directory#Default_home_directory_per_operating_system)). 
 If you want to reset the server, just delete the `ghs.sqlite` database file in this directory.
