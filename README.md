@@ -25,7 +25,7 @@ This will run a basic server for a single game code (e.g. for a group, you can s
 	
 	> ⚠️ **Important**: If you do not see any local IP address listed besides `localhost`, please check your Firewall settings! After allowing the application in your network and restarting the app, you should see your local IP starting with `192.[...]` in most cases!
 
-5. Click the **Install latest client** button, afterwards window should like this:<br><img width="776" alt="image" src="./resources/Screenshot2.png">
+5. Click the **Install latest client** button, afterwards window should look like this:<br><img width="776" alt="image" src="./resources/Screenshot2.png">
 6. On any device in your local network, you should now be able to access the client with the listed address `http://192.[...]:8080/index.html` and connect to your server via `Host: 192.[...]`and `Port: 8080`.
   	
   	> ℹ️ **Notice**: Connecting from a different client running with HTTPS (like [gloomhaven-secretariat.de](https://gloomhaven-secretariat.de)) won't work! If you want the server to be accessbile from HTTPS, see [Enable SSL](#enable-ssl).
