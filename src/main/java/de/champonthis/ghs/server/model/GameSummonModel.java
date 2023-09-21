@@ -47,6 +47,8 @@ public class GameSummonModel {
 	private boolean dormant = false;
 	private boolean revealed = false;
 	private String thumbnail;
+	private String thumbnailUrl;
+	private boolean noThumbnail = false;
 
 	/**
 	 * Gets the uuid.
@@ -496,6 +498,42 @@ public class GameSummonModel {
 	 */
 	public void setThumbnail(String thumbnail) {
 		this.thumbnail = thumbnail;
+	}
+
+	/**
+	 * Gets the thumbnail url.
+	 *
+	 * @return the thumbnail url
+	 */
+	public String getThumbnailUrl() {
+		return thumbnailUrl;
+	}
+
+	/**
+	 * Sets the thumbnail url.
+	 *
+	 * @param thumbnailUrl the new thumbnail url
+	 */
+	public void setThumbnailUrl(String thumbnailUrl) {
+		this.thumbnailUrl = thumbnailUrl;
+	}
+
+	/**
+	 * Checks if is no thumbnail.
+	 *
+	 * @return true, if is no thumbnail
+	 */
+	public boolean isNoThumbnail() {
+		return noThumbnail;
+	}
+
+	/**
+	 * Sets the no thumbnail.
+	 *
+	 * @param noThumbnail the new no thumbnail
+	 */
+	public void setNoThumbnail(boolean noThumbnail) {
+		this.noThumbnail = noThumbnail;
 	}
 
 }
