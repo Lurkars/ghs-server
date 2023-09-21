@@ -25,7 +25,7 @@ This will run a basic server for a single game code (e.g. for a group, you can s
 	
 	> ⚠️ **Important**: If you do not see any local IP address listed besides `localhost`, please check your Firewall settings! After allowing the application in your network and restarting the app, you should see your local IP starting with `192.[...]` in most cases!
 
-5. Click the **Install latest client** button, afterwards window should like this:<br><img width="776" alt="image" src="./resources/Screenshot2.png">
+5. Click the **Install latest client** button, afterwards window should look like this:<br><img width="776" alt="image" src="./resources/Screenshot2.png">
 6. On any device in your local network, you should now be able to access the client with the listed address `http://192.[...]:8080/index.html` and connect to your server via `Host: 192.[...]`and `Port: 8080`.
   	
   	> ℹ️ **Notice**: Connecting from a different client running with HTTPS (like [gloomhaven-secretariat.de](https://gloomhaven-secretariat.de)) won't work! If you want the server to be accessbile from HTTPS, see [Enable SSL](#enable-ssl).
@@ -75,7 +75,7 @@ Replace `<NEW PORT>` with the port of your choice.
 
 ### Running public
 
-A public server will accept any **Game ID** and create a game for it. The **Game ID** is therefore more of an identifier for a single game than a password protection. To make a public server, edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
+A public server will accept any **Game Code** and create a game for it. The **Game Code** is therefore more of an identifier for a single game than a password protection. To make a public server, edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
 
 ### Enable SSL
 
@@ -107,18 +107,18 @@ When running with SSL, a non-SSL server is automatically available on port `8081
 
 Go to the main menu in Gloomhaven Secretariat (GHS) and click on **Connect to Server**. Enter the IP/Hostname of the server in **Host** (on the same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
 
-When you run the game for the first time, simply select a **Game ID** of your choice. This will create a new game with that **Game ID**. After that, each time you connect to the server, you will need to set the same **Game ID** (it is now unchangeable!). Alternatively, you can make the instance [public](#running-public) to allow multiple games/game IDs.
+When you run the game for the first time, simply select a **Game Code** of your choice. This will create a new game with that **Game Code**. After that, each time you connect to the server, you will need to set the same **Game Code** (it is now unchangeable!). Alternatively, you can make the instance [public](#running-public) to allow multiple games/Game Codes.
 
 ## Missing / Coming
 
 - updated GUI (it's more of a placeholder now)
-  - add/change/update Game IDs/permissions
+  - add/change/update Game Codes/permissions
 - optional: track undo/redo on server too
 
 ## Workarounds
 
 - The database is a simple `ghs.sqlite` file in the GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simply delete the `sqlite` file.
-- On startup, all **Game IDs** are written to syslog in clear text.
+- On startup, all **Game Codes** are written to syslog in clear text.
 
 ## Privacy
 
