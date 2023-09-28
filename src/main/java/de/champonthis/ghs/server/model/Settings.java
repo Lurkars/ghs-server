@@ -85,8 +85,6 @@ public class Settings {
 	@Required
 	private boolean combineSummonAction = true;
 	@Required
-	private boolean disableDragFigures = false;
-	@Required
 	private boolean disabledTurnConfirmation = false;
 	@Required
 	private boolean disableSortFigures = false;
@@ -108,8 +106,6 @@ public class Settings {
 	private boolean hideAbsent = false;
 	@Required
 	private boolean hideStats = false;
-	@Required
-	private boolean hints = true;
 	@Required
 	private boolean initiativeRequired = true;
 	@Required
@@ -777,24 +773,6 @@ public class Settings {
 	}
 
 	/**
-	 * Checks if is disable drag figures.
-	 *
-	 * @return true, if is disable drag figures
-	 */
-	public boolean isDisableDragFigures() {
-		return disableDragFigures;
-	}
-
-	/**
-	 * Sets the disable drag figures.
-	 *
-	 * @param disableDragFigures the new disable drag figures
-	 */
-	public void setDisableDragFigures(boolean disableDragFigures) {
-		this.disableDragFigures = disableDragFigures;
-	}
-
-	/**
 	 * Checks if is disabled turn confirmation.
 	 *
 	 * @return true, if is disabled turn confirmation
@@ -990,24 +968,6 @@ public class Settings {
 	 */
 	public void setHideStats(boolean hideStats) {
 		this.hideStats = hideStats;
-	}
-
-	/**
-	 * Checks if is hints.
-	 *
-	 * @return true, if is hints
-	 */
-	public boolean isHints() {
-		return hints;
-	}
-
-	/**
-	 * Sets the hints.
-	 *
-	 * @param hints the new hints
-	 */
-	public void setHints(boolean hints) {
-		this.hints = hints;
 	}
 
 	/**

@@ -18,6 +18,7 @@ public class CharacterProgress {
 	private int gold = 0;
 	@Required
 	private Map<LootType, Integer> loot = new HashMap<>();
+	private String itemNotes = "";
 	@Required
 	private LinkedList<Identifier> items = new LinkedList<>();
 	@Required
@@ -86,6 +87,24 @@ public class CharacterProgress {
 	 */
 	public void setLoot(Map<LootType, Integer> loot) {
 		this.loot = loot;
+	}
+
+	/**
+	 * Gets the item notes.
+	 *
+	 * @return the item notes
+	 */
+	public String getItemNotes() {
+		return itemNotes;
+	}
+
+	/**
+	 * Sets the item notes.
+	 *
+	 * @param itemNotes the new item notes
+	 */
+	public void setItemNotes(String itemNotes) {
+		this.itemNotes = itemNotes;
 	}
 
 	/**
