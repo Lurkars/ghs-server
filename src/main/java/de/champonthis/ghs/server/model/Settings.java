@@ -43,6 +43,8 @@ public class Settings {
 	@Required
 	private boolean alwaysLootDeck = false;
 	@Required
+	private boolean applyBuildingRewards = true;
+	@Required
 	private boolean applyConditions = true;
 	@Required
 	private LinkedList<ConditionName> applyConditionsExcludes = new LinkedList<>(Arrays.asList(ConditionName.SHIELD));
@@ -50,6 +52,8 @@ public class Settings {
 	private boolean applyLongRest = true;
 	@Required
 	private boolean applyLoot = true;
+	@Required
+	private boolean applyRetirement = true;
 	@Required
 	private boolean automaticStandees = true;
 	@Required
@@ -395,6 +399,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is apply building rewards.
+	 *
+	 * @return true, if is apply building rewards
+	 */
+	public boolean isApplyBuildingRewards() {
+		return applyBuildingRewards;
+	}
+
+	/**
+	 * Sets the apply building rewards.
+	 *
+	 * @param applyBuildingRewards the new apply building rewards
+	 */
+	public void setApplyBuildingRewards(boolean applyBuildingRewards) {
+		this.applyBuildingRewards = applyBuildingRewards;
+	}
+
+	/**
 	 * Checks if is apply conditions.
 	 *
 	 * @return true, if is apply conditions
@@ -464,6 +486,24 @@ public class Settings {
 	 */
 	public void setApplyLoot(boolean applyLoot) {
 		this.applyLoot = applyLoot;
+	}
+
+	/**
+	 * Checks if is apply retirement.
+	 *
+	 * @return true, if is apply retirement
+	 */
+	public boolean isApplyRetirement() {
+		return applyRetirement;
+	}
+
+	/**
+	 * Sets the apply retirement.
+	 *
+	 * @param applyRetirement the new apply retirement
+	 */
+	public void setApplyRetirement(boolean applyRetirement) {
+		this.applyRetirement = applyRetirement;
 	}
 
 	/**
