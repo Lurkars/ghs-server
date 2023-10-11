@@ -53,6 +53,8 @@ public class Settings {
 	@Required
 	private boolean applyLoot = true;
 	@Required
+	private boolean applyLootRandomItem = true;
+	@Required
 	private boolean applyRetirement = true;
 	@Required
 	private boolean automaticStandees = true;
@@ -86,6 +88,8 @@ public class Settings {
 	private boolean characterItems = true;
 	@Required
 	private boolean characterSheet = true;
+	@Required
+	private boolean characterTraits = false;
 	@Required
 	private boolean combineSummonAction = true;
 	@Required
@@ -489,6 +493,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is apply loot random item.
+	 *
+	 * @return true, if is apply loot random item
+	 */
+	public boolean isApplyLootRandomItem() {
+		return applyLootRandomItem;
+	}
+
+	/**
+	 * Sets the apply loot random item.
+	 *
+	 * @param applyLootRandomItem the new apply loot random item
+	 */
+	public void setApplyLootRandomItem(boolean applyLootRandomItem) {
+		this.applyLootRandomItem = applyLootRandomItem;
+	}
+
+	/**
 	 * Checks if is apply retirement.
 	 *
 	 * @return true, if is apply retirement
@@ -792,6 +814,24 @@ public class Settings {
 	 */
 	public void setCharacterSheet(boolean characterSheet) {
 		this.characterSheet = characterSheet;
+	}
+
+	/**
+	 * Checks if is character traits.
+	 *
+	 * @return true, if is character traits
+	 */
+	public boolean isCharacterTraits() {
+		return characterTraits;
+	}
+
+	/**
+	 * Sets the character traits.
+	 *
+	 * @param characterTraits the new character traits
+	 */
+	public void setCharacterTraits(boolean characterTraits) {
+		this.characterTraits = characterTraits;
 	}
 
 	/**
