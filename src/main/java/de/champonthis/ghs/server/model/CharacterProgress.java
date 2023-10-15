@@ -24,6 +24,8 @@ public class CharacterProgress {
 	@Required
 	private LinkedList<AdditionalIdentifier> equippedItems = new LinkedList<>();
 	private int personalQuest = 0;
+	@Required
+	private LinkedList<Integer> personalQuestProgress = new LinkedList<>();
 	private int battleGoals = 0;
 	private String notes = "";
 	private boolean retired = false;
@@ -159,6 +161,24 @@ public class CharacterProgress {
 	 */
 	public void setPersonalQuest(int personalQuest) {
 		this.personalQuest = personalQuest;
+	}
+
+	/**
+	 * Gets the personal quest progress.
+	 *
+	 * @return the personal quest progress
+	 */
+	public LinkedList<Integer> getPersonalQuestProgress() {
+		return personalQuestProgress;
+	}
+
+	/**
+	 * Sets the personal quest progress.
+	 *
+	 * @param personalQuestProgress the new personal quest progress
+	 */
+	public void setPersonalQuestProgress(LinkedList<Integer> personalQuestProgress) {
+		this.personalQuestProgress = personalQuestProgress;
 	}
 
 	/**
