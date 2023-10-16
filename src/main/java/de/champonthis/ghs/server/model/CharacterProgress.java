@@ -23,7 +23,7 @@ public class CharacterProgress {
 	private LinkedList<Identifier> items = new LinkedList<>();
 	@Required
 	private LinkedList<AdditionalIdentifier> equippedItems = new LinkedList<>();
-	private int personalQuest = 0;
+	private String personalQuest = "";
 	@Required
 	private LinkedList<Integer> personalQuestProgress = new LinkedList<>();
 	private int battleGoals = 0;
@@ -150,7 +150,7 @@ public class CharacterProgress {
 	 *
 	 * @return the personal quest
 	 */
-	public int getPersonalQuest() {
+	public String getPersonalQuest() {
 		return personalQuest;
 	}
 
@@ -159,7 +159,7 @@ public class CharacterProgress {
 	 *
 	 * @param personalQuest the new personal quest
 	 */
-	public void setPersonalQuest(int personalQuest) {
+	public void setPersonalQuest(String personalQuest) {
 		this.personalQuest = personalQuest;
 	}
 
