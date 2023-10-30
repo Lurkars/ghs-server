@@ -41,13 +41,14 @@ public class ControllerResponseEntityExceptionHandler extends ResponseEntityExce
 
 		JsonObject errorResponse = new JsonObject();
 		errorResponse.addProperty("timestamp", Instant.now().toString());
-		errorResponse.addProperty("status", exception.getStatus().value());
-		errorResponse.addProperty("error", exception.getStatus().getReasonPhrase());
+		errorResponse.addProperty("status", exception.getStatusCode().value());
+		// errorResponse.addProperty("error", exception.getStatus().getReasonPhrase());
 		if (StringUtils.hasText(exception.getReason())) {
 			errorResponse.addProperty("reason", exception.getReason());
 		}
 
-		return handleExceptionInternal(exception, gson.toJson(errorResponse), headers, exception.getStatus(), request);
+		return handleExceptionInternal(exception, gson.toJson(errorResponse), headers, exception.getStatusCode(),
+				request);
 	}
 
 }

@@ -1,4 +1,4 @@
-FROM maven:3.8.7-eclipse-temurin-11 as builder
+FROM maven:3-eclipse-temurin-17 as builder
 ENV HOME=/usr/app
 RUN mkdir -p $HOME
 WORKDIR $HOME
@@ -7,7 +7,7 @@ RUN mvn verify --fail-never
 ADD . $HOME
 RUN mvn package
 
-FROM eclipse-temurin:11
+FROM eclipse-temurin:17
 WORKDIR /root
 COPY --from=builder /usr/app/target/ghs-server*.jar /root/
 ENTRYPOINT java -jar /root/ghs-server-*.jar -Djava.awt.headless=true

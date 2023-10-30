@@ -18,7 +18,7 @@ This will run a basic server for a single game code (e.g. for a group, you can s
 
 ### Quickstart
 
-1. Install *Java 11* (or higher) *Runtime Environment*: [Installation Guide for different OS'](https://adoptium.net/en-GB/installation/)
+1. Install *Java 17* (or higher) (***Requirement changes with newer version!***) *Runtime Environment*: [Installation Guide for different OS'](https://adoptium.net/en-GB/installation/)
 2. Download the appropriate latest `jar` executable from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
 3. Execute the `jar` file (should be working automatically with your Java Runtime Environment)
 4. You should see a similar window:<br><img width="776" alt="image" src="./resources/Screenshot1.png">

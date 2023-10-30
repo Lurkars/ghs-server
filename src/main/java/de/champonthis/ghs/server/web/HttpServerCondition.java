@@ -18,7 +18,7 @@ public class HttpServerCondition implements Condition {
 
 	@Override
 	public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
-		return this.ssl || context.getEnvironment().getProperty("server.ssl.enabled", Boolean.class);
+		return this.ssl || context.getEnvironment().getProperty("server.ssl.enabled", Boolean.class) == true;
 	}
 
 }
