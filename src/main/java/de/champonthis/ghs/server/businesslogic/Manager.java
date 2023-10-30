@@ -254,8 +254,11 @@ public class Manager {
 		try {
 			Statement statement = connection.createStatement();
 			statement.executeUpdate("INSERT INTO games (game) VALUES('" + gson.toJson(game) + "')");
-			ResultSet resultSet = statement.getGeneratedKeys();
-			return resultSet.getInt(1);
+			statement = connection.createStatement();
+			ResultSet resultSet = statement.executeQuery("SELECT last_insert_rowid()");
+			if (resultSet.next()) {
+				return resultSet.getInt(1);
+			}
 		} catch (SQLException e) {
 			System.err.println(e.getMessage());
 		}
