@@ -132,6 +132,8 @@ public class Settings {
 	@Required
 	private boolean randomStandees = false;
 	@Required
+	private boolean removeUnusedMonster = false;
+	@Required
 	private boolean scenarioNumberInput = false;
 	@Required
 	private boolean scenarioRooms = true;
@@ -1210,6 +1212,24 @@ public class Settings {
 	 */
 	public void setRandomStandees(boolean randomStandees) {
 		this.randomStandees = randomStandees;
+	}
+
+	/**
+	 * Checks if is remove unused monster.
+	 *
+	 * @return true, if is remove unused monster
+	 */
+	public boolean isremoveUnusedMonster() {
+		return removeUnusedMonster;
+	}
+
+	/**
+	 * Sets the remove unused monster.
+	 *
+	 * @param removeUnusedMonster the new remove unused monster
+	 */
+	public void setRemoveUnusedMonster(boolean removeUnusedMonster) {
+		this.removeUnusedMonster = removeUnusedMonster;
 	}
 
 	/**
