@@ -126,6 +126,8 @@ public class Settings {
 	@Required
 	private boolean monsters = true;
 	@Required
+	private boolean monsterAttackModifierDeck = true;
+	@Required
 	private boolean moveElements = true;
 	@Required
 	private boolean partySheet = true;
@@ -147,6 +149,8 @@ public class Settings {
 	private LinkedList<String> spoilers = new LinkedList<>();
 	@Required
 	private boolean standeeStats = false;
+	@Required
+	private boolean summons = true;
 	@Required
 	private boolean treasures = true;
 	@Required
@@ -1161,6 +1165,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is monster attack modifier deck.
+	 *
+	 * @return true, if is monster attack modifier deck
+	 */
+	public boolean isMonsterAttackModifierDeck() {
+		return monsterAttackModifierDeck;
+	}
+
+	/**
+	 * Sets the monster attack modifier deck.
+	 *
+	 * @param monsterAttackModifierDeck the new monster attack modifier deck
+	 */
+	public void setMonsterAttackModifierDeck(boolean monsterAttackModifierDeck) {
+		this.monsterAttackModifierDeck = monsterAttackModifierDeck;
+	}
+
+	/**
 	 * Checks if is move elements.
 	 *
 	 * @return true, if is move elements
@@ -1356,6 +1378,24 @@ public class Settings {
 	 */
 	public void setStandeeStats(boolean standeeStats) {
 		this.standeeStats = standeeStats;
+	}
+
+	/**
+	 * Sets the summons.
+	 *
+	 * @param summons the new summons
+	 */
+	public void setSummons(boolean summons) {
+		this.summons = summons;
+	}
+
+	/**
+	 * Checks if is summons.
+	 *
+	 * @return true, if is summons
+	 */
+	public boolean isSummons() {
+		return summons;
 	}
 
 	/**
