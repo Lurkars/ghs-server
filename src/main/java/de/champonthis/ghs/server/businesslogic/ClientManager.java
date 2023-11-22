@@ -7,8 +7,10 @@ import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.Writer;
 import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
@@ -30,6 +32,9 @@ import org.springframework.context.event.EventListener;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
+import com.google.gson.Gson;
+import com.google.gson.JsonObject;
+
 /**
  * The Class ClientManager.
  */
@@ -46,6 +51,10 @@ public class ClientManager implements SmartInitializingSingleton {
 	private int httpPort;
 	@Value("${ghs-server.externalHost:}")
 	private String externalHost;
+	@Value("${ghs-server.defaultClientSettings:false}")
+	private boolean defaultClientSettings;
+
+	private Gson gson = new Gson();
 
 	@Override
 	public void afterSingletonsInstantiated() {
@@ -118,13 +127,16 @@ public class ClientManager implements SmartInitializingSingleton {
 				}
 				zipIn.close();
 
-				File defaultSettingsFile = new File(System.getProperty("user.home"),
-						".ghs" + File.separator + "ghs-settings-default.json");
+				if (!defaultClientSettings) {
+					File defaultSettingsFile = new File(System.getProperty("user.home"),
+							".ghs" + File.separator + "ghs-settings-default.json");
 
-				if (defaultSettingsFile.exists() && defaultSettingsFile.isFile()) {
-					Files.copy(defaultSettingsFile.toPath(),
-							new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretariat"
-									+ File.separator + "ghs-settings-default.json").toPath());
+					if (defaultSettingsFile.exists() && defaultSettingsFile.isFile()) {
+						Files.copy(defaultSettingsFile.toPath(),
+								new File(outputPath.getAbsolutePath()
+										+ File.separator + "ghs-settings-default.json")
+										.toPath());
+					}
 				}
 
 				System.out.println("Latest client installed!");
@@ -135,6 +147,31 @@ public class ClientManager implements SmartInitializingSingleton {
 		}
 
 		return false;
+	}
+
+	public void setupDefaultClientSettings() throws IOException {
+		File clientDirectory = new File(System.getProperty("user.home"),
+				".ghs" + File.separator + "gloomhavensecretariat");
+		// check if client exists
+		if (clientDirectory.exists()) {
+			JsonObject defaultSettings = new JsonObject();
+			String host = "localhost";
+			List<String> hosts = getHosts();
+			for (String tmpHost : hosts) {
+				if (!tmpHost.equals(host)) {
+					host = tmpHost;
+					break;
+				}
+			}
+			defaultSettings.addProperty("serverPort", port);
+			defaultSettings.addProperty("serverUrl", host);
+			defaultSettings.addProperty("serverWss", ssl);
+
+			Writer defaultSettingsWrite = new FileWriter(
+					clientDirectory.getAbsolutePath() + File.separator + "ghs-settings-default.json");
+			gson.toJson(defaultSettings, defaultSettingsWrite);
+			defaultSettingsWrite.close();
+		}
 	}
 
 	/**
@@ -253,6 +290,14 @@ public class ClientManager implements SmartInitializingSingleton {
 
 			if (ssl && checkClientRunningHttpOnly(host)) {
 				System.out.println("Client running at: " + getClientUrl(host, true));
+			}
+		}
+
+		if (defaultClientSettings) {
+			try {
+				setupDefaultClientSettings();
+			} catch (IOException e) {
+				e.printStackTrace();
 			}
 		}
 	}
