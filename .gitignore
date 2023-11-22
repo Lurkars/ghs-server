@@ -5,7 +5,6 @@ config/
 .project
 .classpath
 hs_err*.log
-application.properties
 ghs.sqlite
 gloomhavensecretariat
 

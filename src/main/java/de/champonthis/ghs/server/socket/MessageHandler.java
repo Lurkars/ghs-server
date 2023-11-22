@@ -56,6 +56,9 @@ public class MessageHandler extends TextWebSocketHandler {
 	private ThreadPoolTaskScheduler threadPoolTaskScheduler;
 	private ScheduledFuture<?> cleanUpSessionTask;
 
+	@Value("${build.version}")
+	private String buildVersion;
+
 	@Value("${ghs-server.public:false}")
 	private boolean isPublic;
 
@@ -102,6 +105,7 @@ public class MessageHandler extends TextWebSocketHandler {
 									JsonObject gameResponse = new JsonObject();
 									gameResponse.addProperty("type", "game-update");
 									gameResponse.add("payload", gson.toJsonTree(game));
+									gameResponse.addProperty("serverVersion", buildVersion);
 									container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
 								}
 							}
@@ -428,6 +432,7 @@ public class MessageHandler extends TextWebSocketHandler {
 											gameResponse.add("undoinfo", messageObject.get("undoinfo"));
 											gameResponse.add("revision", messageObject.get("revision"));
 											gameResponse.add("undolength", messageObject.get("undolength"));
+											gameResponse.addProperty("serverVersion", buildVersion);
 											container.getSession()
 													.sendMessage(new TextMessage(gson.toJson(gameResponse)));
 										}
@@ -461,6 +466,7 @@ public class MessageHandler extends TextWebSocketHandler {
 											}
 											gameResponse.addProperty("type", "game-update");
 											gameResponse.add("payload", gson.toJsonTree(updateGame));
+											gameResponse.addProperty("serverVersion", buildVersion);
 											container.getSession()
 													.sendMessage(new TextMessage(gson.toJson(gameResponse)));
 										}
@@ -516,11 +522,13 @@ public class MessageHandler extends TextWebSocketHandler {
 								JsonObject gameResponse = new JsonObject();
 								gameResponse.addProperty("type", "game");
 								gameResponse.add("payload", gson.toJsonTree(game));
+								gameResponse.addProperty("serverVersion", buildVersion);
 								session.sendMessage(new TextMessage(gson.toJson(gameResponse)));
 
 								JsonObject permissionsResponse = new JsonObject();
 								permissionsResponse.addProperty("type", "permissions");
 								permissionsResponse.add("payload", gson.toJsonTree(permissions));
+								permissionsResponse.addProperty("serverVersion", buildVersion);
 								session.sendMessage(new TextMessage(gson.toJson(permissionsResponse)));
 
 								if (!game.isServer()) {
@@ -529,6 +537,7 @@ public class MessageHandler extends TextWebSocketHandler {
 												&& webSocketSessionsCleanUp.indexOf(container) == -1) {
 											JsonObject updateResponse = new JsonObject();
 											updateResponse.addProperty("type", "requestUpdate");
+											updateResponse.addProperty("serverVersion", buildVersion);
 											container.getSession()
 													.sendMessage(new TextMessage(gson.toJson(updateResponse)));
 											break;
@@ -547,6 +556,7 @@ public class MessageHandler extends TextWebSocketHandler {
 								JsonObject settingsRequestResponse = new JsonObject();
 								settingsRequestResponse.addProperty("type", "settings");
 								settingsRequestResponse.add("payload", gson.toJsonTree(settings));
+								settingsRequestResponse.addProperty("serverVersion", buildVersion);
 								session.sendMessage(new TextMessage(gson.toJson(settingsRequestResponse)));
 								break;
 							case SETTINGS:
@@ -572,6 +582,7 @@ public class MessageHandler extends TextWebSocketHandler {
 										JsonObject settingsResponse = new JsonObject();
 										settingsResponse.addProperty("type", "settings");
 										settingsResponse.add("payload", gson.toJsonTree(settingsUpdate));
+										settingsResponse.addProperty("serverVersion", buildVersion);
 										container.getSession()
 												.sendMessage(new TextMessage(gson.toJson(settingsResponse)));
 									}
@@ -646,6 +657,7 @@ public class MessageHandler extends TextWebSocketHandler {
 		JsonObject error = new JsonObject();
 		error.addProperty("type", "error");
 		error.addProperty("message", message);
+		error.addProperty("serverVersion", buildVersion);
 		session.sendMessage(new TextMessage(gson.toJson(error)));
 		if (stop) {
 			throw new SendErrorException("Error: " + message);
