@@ -138,6 +138,10 @@ public class Settings {
 	@Required
 	private boolean scenarioNumberInput = false;
 	@Required
+	private boolean scenarioRewards = true;
+	@Required
+	private boolean scenarioRewardsItems = true;
+	@Required
 	private boolean scenarioRooms = true;
 	@Required
 	private boolean scenarioRules = true;
@@ -146,7 +150,11 @@ public class Settings {
 	@Required
 	private boolean showFullAbilityCard = false;
 	@Required
+	private boolean sortFigures = true;
+	@Required
 	private LinkedList<String> spoilers = new LinkedList<>();
+	@Required
+	private boolean standees = true;
 	@Required
 	private boolean standeeStats = false;
 	@Required
@@ -155,6 +163,12 @@ public class Settings {
 	private boolean treasures = true;
 	@Required
 	private boolean treasuresLoot = true;
+	@Required
+	private boolean treasuresLootItem = true;
+	@Required
+	private boolean treasuresLootScenario = true;
+	@Required
+	private boolean turnConfirmation = true;
 
 	/**
 	 * Checks if is abilities.
@@ -1273,6 +1287,42 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is scenario rewards.
+	 *
+	 * @return true, if is scenario rewards
+	 */
+	public boolean isScenarioRewards() {
+		return scenarioRewards;
+	}
+
+	/**
+	 * Sets the scenario rewards.
+	 *
+	 * @param scenarioRewards the new scenario rewards
+	 */
+	public void setScenarioRewards(boolean scenarioRewards) {
+		this.scenarioRewards = scenarioRewards;
+	}
+
+	/**
+	 * Checks if is scenario rewards.
+	 *
+	 * @return true, if is scenario rewards
+	 */
+	public boolean isScenarioRewardsItems() {
+		return scenarioRewardsItems;
+	}
+
+	/**
+	 * Sets the scenario rewards items.
+	 *
+	 * @param scenarioRewardsItems the new scenario rewards items
+	 */
+	public void setScenarioRewardsItems(boolean scenarioRewardsItems) {
+		this.scenarioRewardsItems = scenarioRewardsItems;
+	}
+
+	/**
 	 * Checks if is scenario rooms.
 	 *
 	 * @return true, if is scenario rooms
@@ -1345,6 +1395,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is sort figures.
+	 *
+	 * @return true, if is sort figures
+	 */
+	public boolean isSortFigures() {
+		return sortFigures;
+	}
+
+	/**
+	 * Sets the sort figures.
+	 *
+	 * @param sortFigures the new sort figures
+	 */
+	public void setSortFigures(boolean sortFigures) {
+		this.sortFigures = sortFigures;
+	}
+
+	/**
 	 * Gets the spoilers.
 	 *
 	 * @return the spoilers
@@ -1360,6 +1428,24 @@ public class Settings {
 	 */
 	public void setSpoilers(LinkedList<String> spoilers) {
 		this.spoilers = spoilers;
+	}
+
+	/**
+	 * Checks if is standees.
+	 *
+	 * @return true, if is standees
+	 */
+	public boolean isStandees() {
+		return standees;
+	}
+
+	/**
+	 * Sets the standees.
+	 *
+	 * @param standees the new standees
+	 */
+	public void setStandees(boolean standees) {
+		this.standees = standees;
 	}
 
 	/**
@@ -1432,6 +1518,62 @@ public class Settings {
 	 */
 	public void setTreasuresLoot(boolean treasuresLoot) {
 		this.treasuresLoot = treasuresLoot;
+	}
+
+	/**
+	 * Checks if is treasures loot item.
+	 *
+	 * @return true, if is treasures loot item
+	 */
+	public boolean isTreasuresLootItem() {
+		return treasuresLootItem;
+	}
+
+	/**
+	 * Sets the treasures loot item.
+	 *
+	 * @param treasuresLootItem the new treasures loot item
+	 */
+	public void setTreasuresLootItem(boolean treasuresLootItem) {
+		this.treasuresLoot = treasuresLootItem;
+	}
+
+	/**
+	 * Checks if is treasures loot.
+	 *
+	 * @return true, if is treasures loot
+	 */
+	public boolean isTreasuresLootScenario() {
+		return treasuresLootScenario;
+	}
+
+	/**
+	 * Sets the treasures loot scenario.
+	 *
+	 * @param treasuresLootScenario the new treasures loot scenario
+	 */
+	public void setTreasuresLootScenario(boolean treasuresLootScenario) {
+		this.treasuresLootScenario = treasuresLootScenario;
+	}
+
+
+
+	/**
+	 * Checks if is turn confirmation.
+	 *
+	 * @return true, if is turn confirmation
+	 */
+	public boolean isTurnConfirmation() {
+		return turnConfirmation;
+	}
+
+	/**
+	 * Sets the turn confirmation.
+	 *
+	 * @param turnConfirmation the new turn confirmation
+	 */
+	public void setTurnConfirmation(boolean turnConfirmation) {
+		this.turnConfirmation = turnConfirmation;
 	}
 
 }
