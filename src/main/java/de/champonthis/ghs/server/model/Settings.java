@@ -57,6 +57,8 @@ public class Settings {
 	@Required
 	private boolean applyRetirement = true;
 	@Required
+	private boolean automaticPassTime = true;
+	@Required
 	private boolean automaticStandees = true;
 	@Required
 	private boolean automaticStandeesDialog = false;
@@ -546,6 +548,24 @@ public class Settings {
 	 */
 	public void setApplyRetirement(boolean applyRetirement) {
 		this.applyRetirement = applyRetirement;
+	}
+
+	/**
+	 * Checks if is automatic pass time.
+	 *
+	 * @return true, if is automatic pass time
+	 */
+	public boolean isAutomaticPassTime() {
+		return automaticPassTime;
+	}
+
+	/**
+	 * Sets the automatic pass time.
+	 *
+	 * @param automaticPassTime the new automatic pass time
+	 */
+	public void setAutomaticPassTime(boolean automaticPassTime) {
+		this.automaticPassTime = automaticPassTime;
 	}
 
 	/**
