@@ -4,6 +4,7 @@
 package de.champonthis.ghs.server.model;
 
 import java.util.LinkedList;
+import java.util.Map;
 
 import de.champonthis.ghs.server.util.Required;
 
@@ -18,6 +19,8 @@ public class ScenarioFinish {
 	private LinkedList<Integer> battleGoals = new LinkedList<>();
 	@Required
 	private LinkedList<Integer> collectiveGold = new LinkedList<>();
+	@Required
+	private LinkedList<Map<LootType, Integer>> collectiveResources = new LinkedList<>();
 	@Required
 	private LinkedList<LinkedList<Integer>> items = new LinkedList<>();
 	private String chooseLocation;
@@ -103,6 +106,24 @@ public class ScenarioFinish {
 	 */
 	public void setCollectiveGold(LinkedList<Integer> collectiveGold) {
 		this.collectiveGold = collectiveGold;
+	}
+
+	/**
+	 * Gets the collective resources.
+	 *
+	 * @return the collective resources
+	 */
+	public LinkedList<Map<LootType, Integer>> getCollectiveResources() {
+		return collectiveResources;
+	}
+
+	/**
+	 * Sets the collective resources.
+	 *
+	 * @param collectiveResources the new collective resources
+	 */
+	public void setCollectiveResources(LinkedList<Map<LootType, Integer>> collectiveResources) {
+		this.collectiveResources = collectiveResources;
 	}
 
 	/**
