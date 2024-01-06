@@ -70,6 +70,9 @@ public class GameCharacterModel {
 	@Required
 	private LinkedList<Identifier> battleGoals = new LinkedList<>();
 	private Boolean battleGoal = false;
+	private String shield;
+	@Required
+	private LinkedList<String> retaliate = new LinkedList<>();
 
 	/**
 	 * Gets the name.
@@ -627,6 +630,42 @@ public class GameCharacterModel {
 	 */
 	public void setBattleGoal(Boolean battleGoal) {
 		this.battleGoal = battleGoal;
+	}
+
+	/**
+	 * Gets the shield.
+	 *
+	 * @return the shield
+	 */
+	public String getShield() {
+		return shield;
+	}
+
+	/**
+	 * Sets the shield.
+	 *
+	 * @param shield the new shield
+	 */
+	public void setShield(String shield) {
+		this.shield = shield;
+	}
+
+	/**
+	 * Gets the retaliate.
+	 *
+	 * @return the retaliate
+	 */
+	public LinkedList<String> getRetaliate() {
+		return retaliate;
+	}
+
+	/**
+	 * Sets the retaliate.
+	 *
+	 * @param retaliate the new retaliate
+	 */
+	public void setRetaliate(LinkedList<String> retaliate) {
+		this.retaliate = retaliate;
 	}
 
 }

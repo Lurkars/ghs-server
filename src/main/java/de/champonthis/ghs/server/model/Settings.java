@@ -91,6 +91,8 @@ public class Settings {
 	@Required
 	private boolean characterSheet = true;
 	@Required
+	private boolean characterShieldRetaliate = false;
+	@Required
 	private boolean characterTraits = false;
 	@Required
 	private boolean combineSummonAction = true;
@@ -857,6 +859,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is character shield retaliate.
+	 *
+	 * @return true, if is character shield retaliate
+	 */
+	public boolean isCharacterShieldRetaliate() {
+		return characterShieldRetaliate;
+	}
+
+	/**
+	 * Sets the character shield retaliate.
+	 *
+	 * @param characterShieldRetaliate the new character shield retaliate
+	 */
+	public void setCharacterShieldRetaliate(boolean characterShieldRetaliate) {
+		this.characterShieldRetaliate = characterShieldRetaliate;
+	}
+
+	/**
 	 * Checks if is character traits.
 	 *
 	 * @return true, if is character traits
@@ -1575,8 +1595,6 @@ public class Settings {
 	public void setTreasuresLootScenario(boolean treasuresLootScenario) {
 		this.treasuresLootScenario = treasuresLootScenario;
 	}
-
-
 
 	/**
 	 * Checks if is turn confirmation.
