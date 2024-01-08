@@ -89,6 +89,8 @@ public class Settings {
 	@Required
 	private boolean characterItems = true;
 	@Required
+	private boolean characterItemsApply = true;
+	@Required
 	private boolean characterSheet = true;
 	@Required
 	private boolean characterShieldRetaliate = false;
@@ -838,6 +840,24 @@ public class Settings {
 	 */
 	public void setCharacterItems(boolean characterItems) {
 		this.characterItems = characterItems;
+	}
+
+	/**
+	 * Checks if is character items apply.
+	 *
+	 * @return true, if is character items apply
+	 */
+	public boolean isCharacterItemsApply() {
+		return characterItemsApply;
+	}
+
+	/**
+	 * Sets the character items apply.
+	 *
+	 * @param characterItemsApply the new character items apply
+	 */
+	public void setCharacterItemsApply(boolean characterItemsApply) {
+		this.characterItemsApply = characterItemsApply;
 	}
 
 	/**
