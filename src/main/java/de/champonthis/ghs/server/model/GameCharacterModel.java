@@ -71,8 +71,11 @@ public class GameCharacterModel {
 	private LinkedList<Identifier> battleGoals = new LinkedList<>();
 	private Boolean battleGoal = false;
 	private String shield;
+	private String shieldPersistent;
 	@Required
 	private LinkedList<String> retaliate = new LinkedList<>();
+	@Required
+	private LinkedList<String> retaliatePersistent = new LinkedList<>();
 
 	/**
 	 * Gets the name.
@@ -651,6 +654,24 @@ public class GameCharacterModel {
 	}
 
 	/**
+	 * Gets the shield permanent.
+	 *
+	 * @return the shield permanent
+	 */
+	public String getShieldPersistent() {
+		return shieldPersistent;
+	}
+
+	/**
+	 * Sets the shield permanent.
+	 *
+	 * @param shieldPersistent the new shield permanent
+	 */
+	public void setShieldPersistent(String shieldPersistent) {
+		this.shieldPersistent = shieldPersistent;
+	}
+
+	/**
 	 * Gets the retaliate.
 	 *
 	 * @return the retaliate
@@ -666,6 +687,24 @@ public class GameCharacterModel {
 	 */
 	public void setRetaliate(LinkedList<String> retaliate) {
 		this.retaliate = retaliate;
+	}
+
+	/**
+	 * Gets the retaliate permanent.
+	 *
+	 * @return the retaliate permanent
+	 */
+	public LinkedList<String> getRetaliatePersistent() {
+		return retaliatePersistent;
+	}
+
+	/**
+	 * Sets the retaliate permanent.
+	 *
+	 * @param retaliatePersistent the new retaliate permanent
+	 */
+	public void setRetaliatePersistent(LinkedList<String> retaliatePersistent) {
+		this.retaliatePersistent = retaliatePersistent;
 	}
 
 }
