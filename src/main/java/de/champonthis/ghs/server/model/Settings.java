@@ -164,6 +164,8 @@ public class Settings {
 	@Required
 	private boolean standeeStats = false;
 	@Required
+	private boolean stats = true;
+	@Required
 	private boolean summons = true;
 	@Required
 	private boolean treasures = true;
@@ -1524,6 +1526,24 @@ public class Settings {
 	 */
 	public void setStandeeStats(boolean standeeStats) {
 		this.standeeStats = standeeStats;
+	}
+
+	/**
+	 * Checks if is stats.
+	 *
+	 * @return true, if is stats
+	 */
+	public boolean isStats() {
+		return stats;
+	}
+
+	/**
+	 * Sets the stats.
+	 *
+	 * @param stats the new stats
+	 */
+	public void setStats(boolean stats) {
+		this.stats = stats;
 	}
 
 	/**
