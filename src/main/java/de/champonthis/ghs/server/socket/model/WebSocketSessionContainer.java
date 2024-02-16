@@ -10,7 +10,7 @@ import org.springframework.web.socket.WebSocketSession;
  */
 public class WebSocketSessionContainer {
 
-	private int gameId;
+	private long gameId;
 	private WebSocketSession session;
 
 	/**
@@ -19,7 +19,7 @@ public class WebSocketSessionContainer {
 	 * @param gameId  the game id
 	 * @param session the session
 	 */
-	public WebSocketSessionContainer(int gameId, WebSocketSession session) {
+	public WebSocketSessionContainer(long gameId, WebSocketSession session) {
 		this.gameId = gameId;
 		this.session = session;
 	}
@@ -29,7 +29,7 @@ public class WebSocketSessionContainer {
 	 *
 	 * @return the game id
 	 */
-	public int getGameId() {
+	public long getGameId() {
 		return gameId;
 	}
 
@@ -38,7 +38,7 @@ public class WebSocketSessionContainer {
 	 *
 	 * @param gameId the new game id
 	 */
-	public void setGameId(int gameId) {
+	public void setGameId(long gameId) {
 		this.gameId = gameId;
 	}
 

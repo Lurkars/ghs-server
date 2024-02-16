@@ -87,7 +87,7 @@ public class MessageHandler extends TextWebSocketHandler {
 			if (cleanUpSessionTask != null) {
 				cleanUpSessionTask.cancel(false);
 			}
-			int gameId = webSocketSessionContainer.getGameId();
+			long gameId = webSocketSessionContainer.getGameId();
 			webSocketSessionContainer.setGameId(-1);
 			webSocketSessionsCleanUp.add(webSocketSessionContainer);
 			if (gameId != -1) {
@@ -150,26 +150,28 @@ public class MessageHandler extends TextWebSocketHandler {
 					sendError(session, "'password' missing");
 				}
 
-				String password = messageObject.get("password").getAsString();
+				String gameCode = messageObject.get("password").getAsString();
 
-				if (!StringUtils.hasText(password)) {
+				if (!StringUtils.hasText(gameCode)) {
 					sendError(session, "empty 'password'");
+				} else if (gameCode.length() > 1024) {
+					sendError(session, "game code too long!");
 				}
 
-				Integer gameId = manager.getGameIdByPassword(password);
+				Long gameId = manager.getGameIdByGameCode(gameCode);
 
 				if (gameId == null) {
-					// if first password or public create new game for password
-					if (manager.countPasswords() == 0 || isPublic) {
+					// if first game code or public create new game for game code
+					if (manager.countGameCodes() == 0 || isPublic) {
 						GameModel game = new GameModel();
 						game.setRevision(-1L);
 						if (messageObject.get("payload") != null && !messageObject.get("payload").isJsonNull()) {
 							game = gson.fromJson(messageObject.get("payload"), GameModel.class);
 						}
 						gameId = manager.createGame(game);
-						manager.createPassword(password, gameId);
+						manager.createGameCode(gameCode, gameId);
 					} else {
-						sendError(session, "Invalid password '" + password + "'");
+						sendError(session, "Invalid game code '" + gameCode + "'");
 					}
 				}
 
@@ -184,7 +186,7 @@ public class MessageHandler extends TextWebSocketHandler {
 							game.setParty(new Party());
 						}
 
-						Permissions permissions = manager.getPermissionsByPassword(password);
+						Permissions permissions = manager.getPermissionsByGameCode(gameCode);
 
 						game.setServer(isServerSession(session, gameId));
 
@@ -488,17 +490,17 @@ public class MessageHandler extends TextWebSocketHandler {
 									sendError(session, "invalid 'payload'");
 								}
 
-								String permissionPassword = payload.getAsJsonObject().get("password").getAsString();
+								String permissionGameCode = payload.getAsJsonObject().get("password").getAsString();
 
-								Integer permissionGameId = manager.getGameIdByPassword(permissionPassword);
+								Long permissionGameId = manager.getGameIdByGameCode(permissionGameCode);
 
 								if (permissionGameId != null && !permissionGameId.equals(gameId)
-										|| permissionPassword.equals(password)) {
+										|| permissionGameCode.equals(gameCode)) {
 									sendError(session, "password already in use");
 								}
 
 								if (permissionGameId != null
-										&& manager.getPermissionsByPassword(permissionPassword) == null) {
+										&& manager.getPermissionsByGameCode(permissionGameCode) == null) {
 									sendError(session, "cannot overwrite root permissions");
 								}
 
@@ -514,7 +516,7 @@ public class MessageHandler extends TextWebSocketHandler {
 									permissionPermissions.setMonster(new LinkedList<Identifier>());
 								}
 
-								manager.savePassword(permissionPassword, gson.toJson(permissionPermissions), gameId);
+								manager.saveGameCode(permissionGameCode, gson.toJson(permissionPermissions), gameId);
 								break;
 							case REQUEST_GAME:
 								game.setServer(isServerSession(session, gameId));
@@ -612,8 +614,8 @@ public class MessageHandler extends TextWebSocketHandler {
 	 * @param gameId  the game id
 	 * @return true, if is server session
 	 */
-	public boolean isServerSession(WebSocketSession session, Integer gameId) {
-		int serverSessionIndex = Integer.MAX_VALUE;
+	public boolean isServerSession(WebSocketSession session, Long gameId) {
+		long serverSessionIndex = Long.MAX_VALUE;
 		boolean isServer = false;
 		for (WebSocketSessionContainer container : webSocketSessions) {
 			if (webSocketSessionsCleanUp.indexOf(container) == -1) {

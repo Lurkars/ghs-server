@@ -10,7 +10,7 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<revision>0.86.0</revision>
+		<revision>0.88.0</revision>
 	</properties>
 
 	<parent>
@@ -37,8 +37,13 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.xerial</groupId>
-			<artifactId>sqlite-jdbc</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-jpa</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.liquibase</groupId>
+			<artifactId>liquibase-core</artifactId>
 		</dependency>
 
 		<dependency>
@@ -60,6 +65,117 @@
 
 	<profiles>
 		<profile>
+			<id>db-sqlite</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.xerial</groupId>
+					<artifactId>sqlite-jdbc</artifactId>
+				</dependency>
+
+				<dependency>
+					<groupId>org.hibernate.orm</groupId>
+					<artifactId>hibernate-community-dialects</artifactId>
+				</dependency>
+			</dependencies>		
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<mainClass>de.champonthis.ghs.server.Application</mainClass>
+							<finalName>ghs-server-v${revision}</finalName>
+							<executable>true</executable>
+							<layout>ZIP</layout>
+						</configuration>
+						<executions>
+							<execution>
+								<id>build-info</id>
+								<goals>
+									<goal>build-info</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>	
+			<!--
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+			-->
+		</profile>
+		<profile>
+			<id>db-postgresql</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.postgresql</groupId>
+					<artifactId>postgresql</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<mainClass>de.champonthis.ghs.server.Application</mainClass>
+							<finalName>ghs-server-v${revision}-postgresql</finalName>
+							<executable>true</executable>
+							<layout>ZIP</layout>
+						</configuration>
+						<executions>
+							<execution>
+								<id>build-info</id>
+								<goals>
+									<goal>build-info</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+
+			<activation>
+				<activeByDefault>true</activeByDefault>
+			</activation>
+		</profile>
+		<profile>
+			<id>db-mariadb</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.mariadb.jdbc</groupId>
+					<artifactId>mariadb-java-client</artifactId>
+					<scope>runtime</scope>
+				</dependency>
+			</dependencies>
+
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>org.springframework.boot</groupId>
+						<artifactId>spring-boot-maven-plugin</artifactId>
+						<configuration>
+							<mainClass>de.champonthis.ghs.server.Application</mainClass>
+							<finalName>ghs-server-v${revision}-mariadb</finalName>
+							<executable>true</executable>
+							<layout>ZIP</layout>
+						</configuration>
+						<executions>
+							<execution>
+								<id>build-info</id>
+								<goals>
+									<goal>build-info</goal>
+								</goals>
+							</execution>
+						</executions>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>melody</id>
 			<dependencies>
 				<dependency>
@@ -75,27 +191,4 @@
 			</dependencies>
 		</profile>
 	</profiles>
-
-	<build>
-		<plugins>
-			<plugin>
-				<groupId>org.springframework.boot</groupId>
-				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<mainClass>de.champonthis.ghs.server.Application</mainClass>
-					<finalName>ghs-server-v${revision}</finalName>
-					<executable>true</executable>
-					<layout>ZIP</layout>
-				</configuration>
-				<executions>
-					<execution>
-						<id>build-info</id>
-						<goals>
-							<goal>build-info</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-		</plugins>
-	</build>
 </project>

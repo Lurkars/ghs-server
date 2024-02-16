@@ -85,6 +85,7 @@ public class Party {
 	private LinkedList<LootType> lootDeckFixed = new LinkedList<>();
 	@Required
 	private LinkedList<String> lootDeckSections = new LinkedList<>();
+	private Boolean envelopeB;
 
 	/**
 	 * Gets the id.
@@ -966,6 +967,24 @@ public class Party {
 	 */
 	public void setLootDeckSections(LinkedList<String> lootDeckSections) {
 		this.lootDeckSections = lootDeckSections;
+	}
+
+	/**
+	 * Gets the envelope b.
+	 *
+	 * @return the envelope b
+	 */
+	public Boolean getEnvelopeB() {
+		return envelopeB;
+	}
+
+	/**
+	 * Sets the envelope b.
+	 *
+	 * @param envelopeB the new envelope b
+	 */
+	public void setEnvelopeB(Boolean envelopeB) {
+		this.envelopeB = envelopeB;
 	}
 
 }

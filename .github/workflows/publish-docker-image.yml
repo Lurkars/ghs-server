@@ -5,6 +5,7 @@ on:
   push:
     tags:
       - "v*"
+      - "!v*-*"
 
 env:
   SLUG_DOCKERHUB: ${{ secrets.DOCKER_USERNAME }}/ghs-server

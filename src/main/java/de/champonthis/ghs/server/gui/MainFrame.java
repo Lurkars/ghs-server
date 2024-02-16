@@ -7,7 +7,6 @@ import java.awt.BorderLayout;
 import java.awt.Desktop;
 import java.awt.event.ActionEvent;
 import java.net.URI;
-import java.sql.ResultSet;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,6 +29,7 @@ import org.springframework.util.StringUtils;
 
 import de.champonthis.ghs.server.businesslogic.ClientManager;
 import de.champonthis.ghs.server.businesslogic.Manager;
+import de.champonthis.ghs.server.entity.GameCode;
 
 /**
  * The Class MainFrame.
@@ -145,9 +145,9 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	@EventListener(ApplicationReadyEvent.class)
 	public void setLabel() {
 		if (ssl) {
-			portLabel.setText("Port: " + port + " (HTTPS) / " + httpPort  + " (HTTP)");
-		} else { 	
-			portLabel.setText("Port: " + port );
+			portLabel.setText("Port: " + port + " (HTTPS) / " + httpPort + " (HTTP)");
+		} else {
+			portLabel.setText("Port: " + port);
 		}
 		ipLabel.setText("IPs: " + String.join(", ", clientManager.getHosts().toArray(new String[] {})));
 	}
@@ -160,17 +160,17 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 			this.remove(tablePane);
 		}
 		try {
-			String[] columns = new String[] { "Password", "Permissions", "Game ID" };
+			String[] columns = new String[] { "Game Code", "Permissions", "Game ID" };
 
-			ResultSet passwordResultSet = manager.passwords();
+			List<GameCode> gameCodes = manager.gameCodes();
 
 			List<Object[]> dataList = new LinkedList<>();
-			if (passwordResultSet != null) {
-				while (passwordResultSet.next()) {
+			if (gameCodes != null) {
+				for (GameCode gameCode : gameCodes) {
 					Object[] result = new Object[3];
-					result[0] = passwordResultSet.getString("password");
-					result[1] = passwordResultSet.getString("json_path");
-					result[2] = passwordResultSet.getInt("game_id");
+					result[0] = gameCode.getGameCode();
+					result[1] = gameCode.getJsonPath();
+					result[2] = gameCode.getGameId();
 					dataList.add(result);
 				}
 

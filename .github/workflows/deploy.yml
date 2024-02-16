@@ -1,10 +1,11 @@
-name: Build and deploy release
+name: "Build and deploy release"
 
 on:
   workflow_dispatch:
   push:
     tags:
       - "v*"
+      - "!v*-*"
 
 jobs:
   build_public:

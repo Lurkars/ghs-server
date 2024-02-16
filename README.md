@@ -103,6 +103,30 @@ This will prompt for a password and then create a `ghs-server.p12` file which wi
 
 When running with SSL, a non-SSL server is automatically available on port `8081`. To change this port, edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `server.http.port=<HTTP PORT>`.
 
+### Use PostgreSQL/MariaDB
+
+It is possible to replace the sqlite database with a PostgreSQL or MariaDB database. Download the corresponding [artifact](https://github.com/Lurkars/ghs-server/releases/latest) or build your own package with profile `db-postgresql` or `db-mariadb`.
+
+Afterwards, add the following lines to the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs`:
+
+```
+# keep those blank
+spring.datasource.driverClassName=
+spring.jpa.database-platform=
+
+# postgresql: replace <database>, <username> and <password> to your needs, remove *mariadb* lines below
+spring.liquibase.change-log=classpath:db/postgresql/main.xml
+spring.datasource.url=jdbc:postgresql://localhost/<database>
+spring.datasource.username=<username>
+spring.datasource.password=<password>
+
+# mariadb: replace <database>, <username> and <password> to your needs, remove *postgresql* lines above
+spring.liquibase.change-log=classpath:db/mariadb/main.xml
+spring.datasource.url=jdbc:mariadb://localhost:3306/<database>
+spring.datasource.username=<username>
+spring.datasource.password=<password>
+```
+
 ## How to use with GHS
 
 Go to the main menu in Gloomhaven Secretariat (GHS) and click on **Connect to Server**. Enter the IP/Hostname of the server in **Host** (on the same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
@@ -118,7 +142,7 @@ When you run the game for the first time, simply select a **Game Code** of your 
 ## Workarounds
 
 - The database is a simple `ghs.sqlite` file in the GHS server config folder `<your-home-folder>/.ghs`. You can manipulate the file directly with `Sqlite`. To reset the database, simply delete the `sqlite` file.
-- On startup, all **Game Codes** are written to syslog in clear text.
+- On startup, all **Game Codes** are written to syslog in clear text. (Can be disabled in the `application.properties` via `ghs-server.gameCodesDump=false`)
 
 ## Privacy
 

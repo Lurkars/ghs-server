@@ -3,221 +3,150 @@
  */
 package de.champonthis.ghs.server.businesslogic;
 
-import java.io.File;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.util.List;
 
+import org.springframework.beans.factory.SmartInitializingSingleton;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import com.google.gson.Gson;
 
+import de.champonthis.ghs.server.entity.Game;
+import de.champonthis.ghs.server.entity.GameCode;
+import de.champonthis.ghs.server.entity.Setting;
 import de.champonthis.ghs.server.model.GameModel;
 import de.champonthis.ghs.server.model.Permissions;
 import de.champonthis.ghs.server.model.Settings;
+import de.champonthis.ghs.server.repository.GameCodeRepository;
+import de.champonthis.ghs.server.repository.GameRepository;
+import de.champonthis.ghs.server.repository.SettingRepository;
 
 /**
  * The Class Manager.
  */
 @Component
-public class Manager {
+public class Manager implements SmartInitializingSingleton {
 
 	@Autowired
 	private Gson gson;
 
-	private Connection connection = null;
+	@Autowired
+	private GameRepository gameRepository;
+	@Autowired
+	private GameCodeRepository gameCodeRepository;
+	@Autowired
+	private SettingRepository settingRepository;
+	@Value("${ghs-server.gameCodesDump:true}")
+	private boolean gameCodesDump;
 
-	/**
-	 * Instantiates a new manager.
-	 */
-	public Manager() {
-		try {
-			File ghsFolder = new File(System.getProperty("user.home"), ".ghs");
-			if (!ghsFolder.exists()) {
-				ghsFolder.mkdirs();
-			} else if (ghsFolder.isFile()) {
-				System.err.println("ghs folder is file!");
-			}
-
-			File dbFile = new File(System.getProperty("user.home"), ".ghs" + File.separator + "ghs.sqlite");
-
-			// migration
-			migrateToUserDir(dbFile);
-
-			connection = DriverManager.getConnection("jdbc:sqlite:" + dbFile.getAbsolutePath());
-
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("PRAGMA foreign_keys = ON");
-			statement.executeUpdate(
-					"CREATE TABLE IF NOT EXISTS games (id INTEGER PRIMARY KEY AUTOINCREMENT, game STRING)");
-			statement.executeUpdate(
-					"CREATE TABLE IF NOT EXISTS passwords (password STRING PRIMARY KEY, game_id INTEGER, json_path STRING, FOREIGN KEY(game_id) REFERENCES games(id))");
-			statement.executeUpdate(
-					"CREATE TABLE IF NOT EXISTS settings (game_id INTEGER PRIMARY KEY, settings STRING, FOREIGN KEY(game_id) REFERENCES games(id))");
-
-			ResultSet passwordResultSet = passwords();
-
-			if (passwordResultSet != null) {
-				while (passwordResultSet.next()) {
-					String password = passwordResultSet.getString("password");
-					String jsonPath = passwordResultSet.getString("json_path");
+	@Override
+	public void afterSingletonsInstantiated() {
+		if (gameCodesDump) {
+			List<GameCode> gameCodes = gameCodes();
+			if (gameCodes != null) {
+				for (GameCode gameCode : gameCodes) {
+					String code = gameCode.getGameCode();
+					String jsonPath = gameCode.getJsonPath();
 					if (jsonPath == null) {
 						jsonPath = "[ALL]";
 					}
-					int gameId = passwordResultSet.getInt("game_id");
-					System.out.println(
-							"\nPASSWORD: " + password + " GRANTING " + jsonPath + " ON GAME: " + gameId + "\n");
+					Long gameId = gameCode.getGameId();
+
+					boolean game = gameRepository.existsById(gameId);
+					boolean settings = settingRepository.existsById(gameId);
+
+					if (!game) {
+						System.err.println("NO GAME for GAMECODE '" + code + "' found!");
+					} else {
+						System.out.println(
+								"\nGAMECODE '" + code + "' GRANTING '" + jsonPath + "' ON GAME '" + gameId
+										+ (settings ? "' WITH SETTINGS" : "'") + "\n");
+					}
 				}
 			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
 		}
 	}
 
 	/**
-	 * Migrate to user dir.
+	 * Game codes.
 	 *
-	 * @param dbFile the db file
+	 * @return the game code list
 	 */
-	private void migrateToUserDir(File dbFile) {
-		File oldDbFile = new File("ghs.sqlite");
-		if (oldDbFile.exists()) {
-			try {
-				Files.move(oldDbFile.toPath(), dbFile.toPath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-
-		File clientFolder = new File("gloomhavensecretariat");
-
-		if (clientFolder.exists() && clientFolder.isDirectory()) {
-			try {
-				Files.move(clientFolder.toPath(),
-						new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretariat")
-								.toPath());
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-		}
-	}
-
-	/**
-	 * Passwords.
-	 *
-	 * @return the result set
-	 */
-	public ResultSet passwords() {
+	public List<GameCode> gameCodes() {
 		try {
-			return connection.createStatement().executeQuery("SELECT game_id,password,json_path FROM passwords");
-		} catch (SQLException e) {
+			return gameCodeRepository.findAll();
+		} catch (Exception e) {
 			System.err.println(e.getMessage());
 		}
 		return null;
 	}
 
 	/**
-	 * Count passwords.
+	 * Count game codes.
 	 *
-	 * @return the int
+	 * @return the long
 	 */
-	public int countPasswords() {
-		try {
-			ResultSet passwordCountResultSet = connection.createStatement()
-					.executeQuery("SELECT count(*) FROM passwords;");
-
-			if (passwordCountResultSet.next()) {
-				return passwordCountResultSet.getInt("count(*)");
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-		}
-
-		return 0;
+	public long countGameCodes() {
+		return gameCodeRepository.count();
 	}
 
 	/**
-	 * Creates the password.
+	 * Creates the game code.
 	 *
-	 * @param password the password
-	 * @param gameId   the game id
+	 * @param code   the code
+	 * @param gameId the game id
 	 */
-	public void createPassword(String password, int gameId) {
-		try {
-			connection.createStatement().executeUpdate(
-					"INSERT INTO passwords (game_id, password) VALUES(" + gameId + ",'" + password + "')");
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-		}
+	public void createGameCode(String code, long gameId) {
+		GameCode gameCode = new GameCode();
+		gameCode.setGameCode(code);
+		gameCode.setGameId(gameId);
+		gameCodeRepository.save(gameCode);
 	}
 
 	/**
-	 * Save password.
+	 * Save game code.
 	 *
-	 * @param password    the password
+	 * @param code        the code
 	 * @param permissions the permissions
 	 * @param gameId      the game id
 	 */
-	public void savePassword(String password, String permissions, int gameId) {
-		try {
-			Statement statement = connection.createStatement();
-			if (getGameIdByPassword(password) == null) {
-				statement.executeUpdate("INSERT INTO passwords (game_id,json_path,password) VALUES(" + gameId + ",'"
-						+ permissions + "','" + password + "')");
-			} else {
-				statement.executeUpdate(
-						"UPDATE passwords SET json_path = '" + permissions + "' where password = '" + password + "'");
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-		}
+	public void saveGameCode(String code, String permissions, long gameId) {
+		GameCode gameCode = new GameCode();
+		gameCode.setGameCode(code);
+		gameCode.setJsonPath(permissions);
+		gameCode.setGameId(gameId);
+		gameCodeRepository.save(gameCode);
 	}
 
 	/**
-	 * Gets the game id by password.
+	 * Gets the game id by game code.
 	 *
-	 * @param password the password
-	 * @return the game id by password
+	 * @param code the code
+	 * @return the game id by game code
 	 */
-	public Integer getGameIdByPassword(String password) {
-		try {
-			ResultSet gameIdResultSet = connection.createStatement()
-					.executeQuery("SELECT game_id FROM passwords WHERE password = '" + password + "';");
-			if (gameIdResultSet.next()) {
-				return gameIdResultSet.getInt("game_id");
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+	public Long getGameIdByGameCode(String code) {
+		GameCode gameCode = gameCodeRepository.findById(code).orElse(null);
+
+		if (gameCode != null) {
+			return gameCode.getGameId();
 		}
 
 		return null;
 	}
 
 	/**
-	 * Gets the permissions by password.
+	 * Gets the permissions by game code.
 	 *
-	 * @param password the password
-	 * @return the permissions by password
+	 * @param code the code
+	 * @return the permissions by game code
 	 */
-	public Permissions getPermissionsByPassword(String password) {
-		try {
-			ResultSet gameIdResultSet = connection.createStatement()
-					.executeQuery("SELECT json_path FROM passwords WHERE password = '" + password + "';");
-			if (gameIdResultSet.next()) {
-				String json_path = gameIdResultSet.getString("json_path");
-				if (StringUtils.hasText(json_path)) {
+	public Permissions getPermissionsByGameCode(String code) {
+		GameCode gameCode = gameCodeRepository.findById(code).orElse(null);
 
-					return gson.fromJson(json_path, Permissions.class);
-				}
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+		if (gameCode != null && StringUtils.hasText(gameCode.getJsonPath())) {
+			return gson.fromJson(gameCode.getJsonPath(), Permissions.class);
 		}
 
 		return null;
@@ -229,16 +158,11 @@ public class Manager {
 	 * @param id the id
 	 * @return the game
 	 */
-	public GameModel getGame(int id) {
-		try {
-			ResultSet gameResultSet = connection.createStatement()
-					.executeQuery("SELECT game FROM games WHERE id = " + id + ";");
+	public GameModel getGame(long id) {
+		Game game = gameRepository.findById(id).orElse(null);
 
-			if (gameResultSet.next()) {
-				return gson.fromJson(gameResultSet.getString("game"), GameModel.class);
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+		if (game != null && StringUtils.hasText(game.getGame())) {
+			return gson.fromJson(game.getGame(), GameModel.class);
 		}
 
 		return null;
@@ -250,20 +174,11 @@ public class Manager {
 	 * @param game the game
 	 * @return the integer
 	 */
-	public Integer createGame(GameModel game) {
-		try {
-			Statement statement = connection.createStatement();
-			statement.executeUpdate("INSERT INTO games (game) VALUES('" + gson.toJson(game) + "')");
-			statement = connection.createStatement();
-			ResultSet resultSet = statement.executeQuery("SELECT last_insert_rowid()");
-			if (resultSet.next()) {
-				return resultSet.getInt(1);
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-		}
-
-		return null;
+	public Long createGame(GameModel gameModel) {
+		Game game = new Game();
+		game.setGame(gson.toJson(gameModel));
+		game = gameRepository.save(game);
+		return game.getId();
 	}
 
 	/**
@@ -272,12 +187,12 @@ public class Manager {
 	 * @param id   the id
 	 * @param game the game
 	 */
-	public void setGame(int id, GameModel game) {
-		try {
-			connection.createStatement()
-					.executeUpdate("UPDATE games SET game= '" + gson.toJson(game) + "' WHERE id=" + id);
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+	public void setGame(long id, GameModel gameModel) {
+		Game game = gameRepository.findById(id).orElse(null);
+
+		if (game != null) {
+			game.setGame(gson.toJson(gameModel));
+			gameRepository.save(game);
 		}
 	}
 
@@ -287,16 +202,11 @@ public class Manager {
 	 * @param gameId the game id
 	 * @return the settings
 	 */
-	public Settings getSettings(int gameId) {
-		try {
-			ResultSet settingsResultSet = connection.createStatement()
-					.executeQuery("SELECT settings FROM settings WHERE game_id = " + gameId + ";");
+	public Settings getSettings(long gameId) {
+		Setting setting = settingRepository.findById(gameId).orElse(null);
 
-			if (settingsResultSet.next()) {
-				return gson.fromJson(settingsResultSet.getString("settings"), Settings.class);
-			}
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+		if (setting != null && StringUtils.hasText(setting.getSettings())) {
+			return gson.fromJson(setting.getSettings(), Settings.class);
 		}
 
 		return null;
@@ -308,13 +218,11 @@ public class Manager {
 	 * @param settings the settings
 	 * @param gameId   the game id
 	 */
-	public void createSettings(Settings settings, int gameId) {
-		try {
-			connection.createStatement().executeUpdate(
-					"INSERT INTO settings (game_id, settings) VALUES(" + gameId + ",'" + gson.toJson(settings) + "')");
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
-		}
+	public void createSettings(Settings settings, long gameId) {
+		Setting setting = new Setting();
+		setting.setSettings(gson.toJson(settings));
+		setting.setGameId(gameId);
+		settingRepository.save(setting);
 	}
 
 	/**
@@ -323,12 +231,12 @@ public class Manager {
 	 * @param settings the settings
 	 * @param gameId   the game id
 	 */
-	public void setSettings(Settings settings, int gameId) {
-		try {
-			connection.createStatement().executeUpdate(
-					"UPDATE settings SET settings= '" + gson.toJson(settings) + "' WHERE game_id=" + gameId);
-		} catch (SQLException e) {
-			System.err.println(e.getMessage());
+	public void setSettings(Settings settings, long gameId) {
+		Setting setting = settingRepository.findById(gameId).orElse(null);
+
+		if (settings != null) {
+			setting.setSettings(gson.toJson(settings));
+			settingRepository.save(setting);
 		}
 	}
 

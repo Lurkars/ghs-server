@@ -58,22 +58,22 @@ public class GameController {
 	/**
 	 * Gets the game.
 	 *
-	 * @param password the password
+	 * @param gameCode the game code
 	 * @return the game
 	 */
-	protected GameModel getGame(String password) {
-		if (!StringUtils.hasText(password)) {
+	protected GameModel getGame(String gameCode) {
+		if (!StringUtils.hasText(gameCode)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
 		}
 
-		Integer gameId = manager.getGameIdByPassword(password);
+		Long gameId = manager.getGameIdByGameCode(gameCode);
 
 		if (gameId == null) {
-			// if first password or public create new game for password
-			if (manager.countPasswords() == 0 || isPublic) {
+			// if first game code or public create new game for game code
+			if (manager.countGameCodes() == 0 || isPublic) {
 				GameModel game = new GameModel();
 				gameId = manager.createGame(game);
-				manager.createPassword(password, gameId);
+				manager.createGameCode(gameCode, gameId);
 			} else {
 				throw new ResponseStatusException(HttpStatus.FORBIDDEN);
 			}
@@ -91,31 +91,37 @@ public class GameController {
 	/**
 	 * Request game.
 	 *
-	 * @param password the password
+	 * @param gameCode the game code
 	 * @return the string
 	 */
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String requestGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String password) {
-		return gson.toJson(getGame(password));
+	public String requestGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode) {
+		return gson.toJson(getGame(gameCode));
 	}
 
 	/**
 	 * Update game.
 	 *
-	 * @param password the password
+	 * @param gameCode the game code
 	 * @param silent   the silent
 	 * @param payload  the payload
 	 * @return the string
 	 */
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String updateGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String password,
+	public String updateGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
 			@RequestParam Optional<Boolean> silent, @RequestBody String payload) {
 
-		GameModel game = getGame(password);
+		if (!StringUtils.hasText(gameCode)) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
+		} else if (gameCode.length() > 1024) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "game code too long");
+		}
 
-		Integer gameId = manager.getGameIdByPassword(password);
+		GameModel game = getGame(gameCode);
 
-		Permissions permissions = manager.getPermissionsByPassword(password);
+		Long gameId = manager.getGameIdByGameCode(gameCode);
+
+		Permissions permissions = manager.getPermissionsByGameCode(gameCode);
 
 		if (payload == null) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid game payload");
