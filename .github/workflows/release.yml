@@ -9,24 +9,7 @@ on:
 
 jobs:
   create_release:
-    name: Create release
-    runs-on: ubuntu-latest
-    outputs:
-      release_id: ${{ steps.create_release.outputs.id }}
-      upload_url: ${{ steps.create_release.outputs.upload_url }}
-    steps:
-      - name: Create release
-        id: create_release
-        uses: actions/create-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          tag_name: ${{ github.ref }}
-          release_name: ${{ github.ref }}
-          draft: true
-  release_jar:
     name: Release JAR
-    needs: create_release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -35,46 +18,16 @@ jobs:
         with:
           java-version: "17"
           distribution: "adopt"
-      - name: Build with mariadb Maven
-        run: mvn --batch-mode --update-snapshots clean package -P db-mariadb
-      - name: Upload release jar
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./target/ghs-server-${{github.ref_name}}-mariadb.jar
-          asset_name: ghs-server-${{github.ref_name}}-mariadb.jar
-          asset_content_type: application/octet-stream
-      - name: Build with postgresql Maven
-        run: mvn --batch-mode --update-snapshots clean package -P db-postgresql
-      - name: Upload release jar
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./target/ghs-server-${{github.ref_name}}-postgresql.jar
-          asset_name: ghs-server-${{github.ref_name}}-postgresql.jar
-          asset_content_type: application/octet-stream
       - name: Build with default Maven
         run: mvn --batch-mode --update-snapshots clean package
-      - name: Upload release jar
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
+      - name: Build with postgresql Maven
+        run: mvn --batch-mode --update-snapshots clean package -P db-postgresql
+      - name: Build with mariadb Maven
+        run: mvn --batch-mode --update-snapshots clean package -P db-mariadb
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./target/ghs-server-${{github.ref_name}}.jar
-          asset_name: ghs-server-${{github.ref_name}}.jar
-          asset_content_type: application/octet-stream
-  publish:
-    name: Publish Draft Release
-    needs: [create_release, release_jar]
-    runs-on: ubuntu-latest
-    steps:
-      - uses: eregon/publish-release@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.TOKEN }}
-        with:
-          release_id: ${{ needs.create_release.outputs.release_id }}
+          files: |
+            ./target/ghs-server-${{github.ref_name}}.jar
+            ./target/ghs-server-${{github.ref_name}}-postgresql.jar
+            ./target/ghs-server-${{github.ref_name}}-mariadb.jar
