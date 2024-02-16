@@ -1,15 +1,11 @@
-name: "Build and publish release"
+name: "Build and publish pre-release"
 
 on:
   workflow_dispatch:
-  push:
-    tags:
-      - "v*"
-      - "!v*-*"
 
 jobs:
   create_release:
-    name: Create Release
+    name: Create Pre-Release
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -28,6 +24,7 @@ jobs:
         uses: softprops/action-gh-release@v1
         with:
           generate_release_notes: true
+          prerelease: true
           files: |
             ./target/ghs-server-${{github.ref_name}}.jar
             ./target/ghs-server-${{github.ref_name}}-postgresql.jar
