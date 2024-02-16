@@ -99,11 +99,10 @@
 					</plugin>
 				</plugins>
 			</build>	
-			<!--
+
 			<activation>
 				<activeByDefault>true</activeByDefault>
 			</activation>
-			-->
 		</profile>
 		<profile>
 			<id>db-postgresql</id>
@@ -137,10 +136,6 @@
 					</plugin>
 				</plugins>
 			</build>
-
-			<activation>
-				<activeByDefault>true</activeByDefault>
-			</activation>
 		</profile>
 		<profile>
 			<id>db-mariadb</id>
