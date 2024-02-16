@@ -19,10 +19,10 @@ jobs:
           java-version: "17"
           distribution: "adopt"
       - name: Build with Maven
-        run: mvn --batch-mode --update-snapshots clean package -P melody
+        run: mvn --batch-mode --update-snapshots clean package -P db-postgesql,melody
       - uses: mdallasanta/ssh-scp-deploy@v1.2.0
         with:
-          local: "./target/ghs-server-${{github.ref_name}}.jar"
+          local: "./target/ghs-server-${{github.ref_name}}-postgresql.jar"
           remote: "~/ghs-server.jar"
           host: ${{secrets.HOST}}
           port: ${{secrets.PORT}}
