@@ -29,22 +29,22 @@ jobs:
     needs: create_release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
       - name: Set up JDK 17
-        uses: actions/setup-java@v3
+        uses: actions/setup-java@v4
         with:
-          java-version: '17'
-          distribution: 'adopt'
-      - name: Build with default Maven
-        run: mvn --batch-mode --update-snapshots clean package
+          java-version: "17"
+          distribution: "adopt"
+      - name: Build with mariadb Maven
+        run: mvn --batch-mode --update-snapshots clean package -P db-mariadb
       - name: Upload release jar
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./target/ghs-server-${{github.ref_name}}.jar
-          asset_name: ghs-server-${{github.ref_name}}.jar
+          asset_path: ./target/ghs-server-${{github.ref_name}}-mariadb.jar
+          asset_name: ghs-server-${{github.ref_name}}-mariadb.jar
           asset_content_type: application/octet-stream
       - name: Build with postgresql Maven
         run: mvn --batch-mode --update-snapshots clean package -P db-postgresql
@@ -57,16 +57,16 @@ jobs:
           asset_path: ./target/ghs-server-${{github.ref_name}}-postgresql.jar
           asset_name: ghs-server-${{github.ref_name}}-postgresql.jar
           asset_content_type: application/octet-stream
-      - name: Build with mariadb Maven
-        run: mvn --batch-mode --update-snapshots clean package -P db-mariadb
+      - name: Build with default Maven
+        run: mvn --batch-mode --update-snapshots clean package
       - name: Upload release jar
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.TOKEN }}
         with:
           upload_url: ${{ needs.create_release.outputs.upload_url }}
-          asset_path: ./target/ghs-server-${{github.ref_name}}-mariadb.jar
-          asset_name: ghs-server-${{github.ref_name}}-mariadb.jar
+          asset_path: ./target/ghs-server-${{github.ref_name}}.jar
+          asset_name: ghs-server-${{github.ref_name}}.jar
           asset_content_type: application/octet-stream
   publish:
     name: Publish Draft Release
