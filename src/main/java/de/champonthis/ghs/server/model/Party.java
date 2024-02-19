@@ -47,6 +47,8 @@ public class Party {
 	@Required
 	private LinkedList<GameCharacterModel> characters = new LinkedList<>();
 	@Required
+	private LinkedList<GameCharacterModel> availableCharacters = new LinkedList<>();
+	@Required
 	private LinkedList<GameCharacterModel> retirements = new LinkedList<>();
 	@Required
 	private LinkedList<CountIdentifier> unlockedItems = new LinkedList<>();
@@ -499,6 +501,24 @@ public class Party {
 	 */
 	public void setCharacters(LinkedList<GameCharacterModel> characters) {
 		this.characters = characters;
+	}
+
+	/**
+	 * Gets the available characters.
+	 *
+	 * @return the available characters
+	 */
+	public LinkedList<GameCharacterModel> getAvailableCharacters() {
+		return availableCharacters;
+	}
+
+	/**
+	 * Sets the available characters.
+	 *
+	 * @param availableCharacters the new available characters
+	 */
+	public void setAvailableCharacters(LinkedList<GameCharacterModel> availableCharacters) {
+		this.availableCharacters = availableCharacters;
 	}
 
 	/**

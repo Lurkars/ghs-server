@@ -146,14 +146,17 @@ public class MessageHandler extends TextWebSocketHandler {
 			try {
 				JsonObject messageObject = JsonParser.parseString(textMessage.getPayload()).getAsJsonObject();
 
-				if (messageObject.get("password") == null || messageObject.get("password").isJsonNull()) {
-					sendError(session, "'password' missing");
+				if ((messageObject.get("password") == null || messageObject.get("password").isJsonNull())
+						&& (messageObject.get("code") == null || messageObject.get("code").isJsonNull())) {
+					sendError(session, "'code' missing");
 				}
 
-				String gameCode = messageObject.get("password").getAsString();
+				String gameCode = messageObject.has("code") && !messageObject.get("code").isJsonNull()
+						? messageObject.get("code").getAsString()
+						: messageObject.get("password").getAsString();
 
 				if (!StringUtils.hasText(gameCode)) {
-					sendError(session, "empty 'password'");
+					sendError(session, "empty 'game code'");
 				} else if (gameCode.length() > 1024) {
 					sendError(session, "game code too long!");
 				}
@@ -485,18 +488,23 @@ public class MessageHandler extends TextWebSocketHandler {
 								}
 
 								JsonElement payload = messageObject.get("payload");
-								if (!payload.isJsonObject() || !payload.getAsJsonObject().has("password")
+								if (!payload.isJsonObject()
+										|| !payload.getAsJsonObject().has("password")
+												&& !payload.getAsJsonObject().has("code")
 										|| !payload.getAsJsonObject().has("permissions")) {
 									sendError(session, "invalid 'payload'");
 								}
 
-								String permissionGameCode = payload.getAsJsonObject().get("password").getAsString();
+								String permissionGameCode = payload.getAsJsonObject().has("code")
+										&& !payload.getAsJsonObject().get("code").isJsonNull()
+												? payload.getAsJsonObject().get("code").getAsString()
+												: payload.getAsJsonObject().get("password").getAsString();
 
 								Long permissionGameId = manager.getGameIdByGameCode(permissionGameCode);
 
 								if (permissionGameId != null && !permissionGameId.equals(gameId)
 										|| permissionGameCode.equals(gameCode)) {
-									sendError(session, "password already in use");
+									sendError(session, "'game code' already in use");
 								}
 
 								if (permissionGameId != null
