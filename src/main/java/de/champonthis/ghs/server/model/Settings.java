@@ -177,6 +177,8 @@ public class Settings {
 	private boolean treasuresLootScenario = true;
 	@Required
 	private boolean turnConfirmation = true;
+	@Required
+	private boolean unlockEnvelopeBuildings = true;
 
 	/**
 	 * Checks if is abilities.
@@ -1652,6 +1654,24 @@ public class Settings {
 	 */
 	public void setTurnConfirmation(boolean turnConfirmation) {
 		this.turnConfirmation = turnConfirmation;
+	}
+
+	/**
+	 * Checks if is unlock envelope buildings.
+	 *
+	 * @return true, if is unlock envelope buildings
+	 */
+	public boolean isUnlockEnvelopeBuildings() {
+		return unlockEnvelopeBuildings;
+	}
+
+	/**
+	 * Sets the unlock envelope buildings.
+	 *
+	 * @param unlockEnvelopeBuildings the new unlock envelope buildings
+	 */
+	public void setUnlockEnvelopeBuildings(boolean unlockEnvelopeBuildings) {
+		this.unlockEnvelopeBuildings = unlockEnvelopeBuildings;
 	}
 
 }
