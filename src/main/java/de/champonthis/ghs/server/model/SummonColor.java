@@ -34,6 +34,9 @@ public enum SummonColor {
 	@SerializedName("red")
 	RED,
 
+	@SerializedName("fh")
+	FH,
+
 	@SerializedName("custom")
 	CUSTOM
 }
