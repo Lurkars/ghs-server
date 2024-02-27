@@ -89,6 +89,8 @@ public class GameModel {
 	@Required
 	private boolean server = false;
 	private ScenarioFinish finish;
+	@Required
+	private LinkedList<GameClockTimestamp> gameClock = new LinkedList<>();
 
 	/**
 	 * Gets the revision.
@@ -826,6 +828,24 @@ public class GameModel {
 	 */
 	public void setFinish(ScenarioFinish finish) {
 		this.finish = finish;
+	}
+
+	/**
+	 * Gets the game clock.
+	 *
+	 * @return the game clock
+	 */
+	public LinkedList<GameClockTimestamp> getGameClock() {
+		return gameClock;
+	}
+
+	/**
+	 * Sets the game clock.
+	 *
+	 * @param gameClock the new game clock
+	 */
+	public void setGameClock(LinkedList<GameClockTimestamp> gameClock) {
+		this.gameClock = gameClock;
 	}
 
 }

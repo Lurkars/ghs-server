@@ -13,10 +13,6 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-      - uses: ncipollo/release-action@v1
-        with:
-          draft: true
-          generateReleaseNotes: true
       - name: Set up JDK 17
         uses: actions/setup-java@v4
         with:
@@ -28,18 +24,11 @@ jobs:
         run: mvn --batch-mode --update-snapshots package -P db-postgresql
       - name: Build with mariadb Maven
         run: mvn --batch-mode --update-snapshots package -P db-mariadb
-      - name: add files to release
-        uses: ncipollo/release-action@v1
+      - name: Release
+        uses: softprops/action-gh-release@v1
         with:
-          allowUpdates: true
-          draft: true
-          generateReleaseNotes: true
-          updateOnlyUnreleased: true
-          artifacts: "./target/ghs-server-${{github.ref_name}}.jar,./target/ghs-server-${{github.ref_name}}-postgresql.jar,./target/ghs-server-${{github.ref_name}}-mariadb.jar"
-      - name: publish release
-        uses: ncipollo/release-action@v1
-        with:
-          allowUpdates: true
-          draft: false
-          generateReleaseNotes: true
-          updateOnlyUnreleased: true
+          generate_release_notes: true
+          files: |
+            ./target/ghs-server-${{github.ref_name}}.jar
+            ./target/ghs-server-${{github.ref_name}}-postgresql.jar
+            ./target/ghs-server-${{github.ref_name}}-mariadb.jar
