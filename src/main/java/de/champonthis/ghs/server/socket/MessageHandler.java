@@ -558,14 +558,18 @@ public class MessageHandler extends TextWebSocketHandler {
 								break;
 							case REQUEST_SETTINGS:
 								Settings settings = manager.getSettings(gameId);
-								if (settings == null) {
+								JsonObject settingsRequestResponse = new JsonObject();
+								settingsRequestResponse.addProperty("type", "settings");
+
+								// migration
+								if (settings == null && !messageObject.has("allow-empty")) {
 									settings = new Settings();
 									manager.createSettings(settings, gameId);
 								}
 
-								JsonObject settingsRequestResponse = new JsonObject();
-								settingsRequestResponse.addProperty("type", "settings");
-								settingsRequestResponse.add("payload", gson.toJsonTree(settings));
+								if (settings != null) {
+									settingsRequestResponse.add("payload", gson.toJsonTree(settings));
+								}
 								settingsRequestResponse.addProperty("serverVersion", buildVersion);
 								session.sendMessage(new TextMessage(gson.toJson(settingsRequestResponse)));
 								break;

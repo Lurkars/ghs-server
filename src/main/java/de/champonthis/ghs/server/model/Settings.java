@@ -71,7 +71,7 @@ public class Settings {
 	@Required
 	private boolean battleGoalsFh = false;
 	@Required
-	private boolean battleGoalsReminder = false;
+	private boolean battleGoalsReminder = true;
 	@Required
 	private boolean calculate = true;
 	@Required
@@ -87,7 +87,7 @@ public class Settings {
 	@Required
 	private boolean characterIdentityHint = true;
 	@Required
-	private boolean characterItems = true;
+	private boolean characterItems = false;
 	@Required
 	private boolean characterItemsApply = true;
 	@Required
