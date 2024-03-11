@@ -97,6 +97,8 @@ public class Settings {
 	@Required
 	private boolean characterTraits = false;
 	@Required
+	private boolean combineInteractiveAbilities = true;
+	@Required
 	private boolean combineSummonAction = true;
 	@Required
 	private boolean disabledTurnConfirmation = false;
@@ -916,6 +918,24 @@ public class Settings {
 	 */
 	public void setCharacterTraits(boolean characterTraits) {
 		this.characterTraits = characterTraits;
+	}
+
+	/**
+	 * Checks if is combine interactive abilities.
+	 *
+	 * @return true, if is combine interactive abilities
+	 */
+	public boolean isCombineInteractiveAbilities() {
+		return combineInteractiveAbilities;
+	}
+
+	/**
+	 * Sets the combine interactive abilities.
+	 *
+	 * @param combineInteractiveAbilities the new combine interactive abilities
+	 */
+	public void setCombineInteractiveAbilities(boolean combineInteractiveAbilities) {
+		this.combineInteractiveAbilities = combineInteractiveAbilities;
 	}
 
 	/**

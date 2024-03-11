@@ -212,15 +212,11 @@ public class MessageHandler extends TextWebSocketHandler {
 								if (gameUpdate == null) {
 									sendError(session, "invalid game payload");
 								} else {
-
-									// Migration: check if revision is set
-									if (gameUpdate.getRevision() != null && game.getRevision() != null) {
-										if (gameUpdate.getRevision() == game.getRevision()) {
-											game.setPlaySeconds(gameUpdate.getPlaySeconds());
-											gameUpdate = game;
-										} else if (gameUpdate.getRevision() <= game.getRevision()) {
-											sendError(session, "invalid revision");
-										}
+									if (gameUpdate.getRevision() == game.getRevision()) {
+										game.setPlaySeconds(gameUpdate.getPlaySeconds());
+										gameUpdate = game;
+									} else if (gameUpdate.getRevision() < game.getRevision()) {
+										sendError(session, "invalid revision");
 									}
 
 									if (permissions != null) {
@@ -617,6 +613,7 @@ public class MessageHandler extends TextWebSocketHandler {
 				}
 			}
 		}
+
 	}
 
 	/**

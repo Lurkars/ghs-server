@@ -12,7 +12,7 @@ import de.champonthis.ghs.server.util.Required;
  */
 public class GameModel {
 
-	// @Required // Migration
+	@Required
 	private Long revision;
 	private int revisionOffset = 0;
 	private String edition;
@@ -30,8 +30,6 @@ public class GameModel {
 	private LinkedList<GameCharacterModel> characters = new LinkedList<>();
 	@Required
 	private LinkedList<GameMonsterModel> monsters = new LinkedList<>();
-	@Required
-	private LinkedList<GameObjectiveModel> objectives = new LinkedList<>();
 	private LinkedList<GameObjectiveContainerModel> objectiveContainers = new LinkedList<>();
 	@Required
 	private GameState state = GameState.DRAW;
@@ -270,24 +268,6 @@ public class GameModel {
 	 */
 	public void setMonsters(LinkedList<GameMonsterModel> monsters) {
 		this.monsters = monsters;
-	}
-
-	/**
-	 * Gets the objectives.
-	 *
-	 * @return the objectives
-	 */
-	public LinkedList<GameObjectiveModel> getObjectives() {
-		return objectives;
-	}
-
-	/**
-	 * Sets the objectives.
-	 *
-	 * @param objectives the new objectives
-	 */
-	public void setObjectives(LinkedList<GameObjectiveModel> objectives) {
-		this.objectives = objectives;
 	}
 
 	/**

@@ -27,6 +27,7 @@ public class GameObjectiveContainerModel {
 	private int health;
 	private Integer initiative;
 	private ScenarioObjectiveIdentifier objectiveId;
+	private AdditionalIdentifier additionalObjectiveId;
 
 	/**
 	 * Gets the uuid.
@@ -242,6 +243,23 @@ public class GameObjectiveContainerModel {
 	 */
 	public void setObjectiveId(ScenarioObjectiveIdentifier objectiveId) {
 		this.objectiveId = objectiveId;
+	}
+	/**
+	 * Gets the additional objective id.
+	 *
+	 * @return the additional objective id
+	 */
+	public AdditionalIdentifier getAdditionalObjectiveId() {
+		return additionalObjectiveId;
+	}
+
+	/**
+	 * Sets the additional objective id.
+	 *
+	 * @param additionalObjectiveId the new additional objective id
+	 */
+	public void setAdditionalObjectiveId(AdditionalIdentifier additionalObjectiveId) {
+		this.additionalObjectiveId = additionalObjectiveId;
 	}
 
 }

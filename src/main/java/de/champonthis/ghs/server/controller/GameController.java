@@ -134,15 +134,12 @@ public class GameController {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid game payload");
 			}
 
-			// Migration: check if revision is set
-			if (gameUpdate.getRevision() != null && game.getRevision() != null) {
-				if (gameUpdate.getRevision() == game.getRevision()) {
-					game.setPlaySeconds(gameUpdate.getPlaySeconds());
-					gameUpdate = game;
-				} else if (gameUpdate.getRevision() <= game.getRevision()) {
-					throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
-							"invalid revision: " + gameUpdate.getRevision());
-				}
+			if (gameUpdate.getRevision() == game.getRevision()) {
+				game.setPlaySeconds(gameUpdate.getPlaySeconds());
+				gameUpdate = game;
+			} else if (gameUpdate.getRevision() < game.getRevision()) {
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST,
+						"invalid revision: " + gameUpdate.getRevision());
 			}
 
 			if (permissions != null) {
