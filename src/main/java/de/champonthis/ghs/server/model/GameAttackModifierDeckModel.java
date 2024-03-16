@@ -20,6 +20,7 @@ public class GameAttackModifierDeckModel {
 	private LinkedList<Integer> disgarded = new LinkedList<>();
 	@Required
 	private boolean active = true;
+	private String state;
 
 	/**
 	 * Gets the current.
@@ -91,6 +92,24 @@ public class GameAttackModifierDeckModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * Gets the state.
+	 *
+	 * @return the state
+	 */
+	public String getState() {
+		return state;
+	}
+
+	/**
+	 * Sets the state.
+	 *
+	 * @param state the new state
+	 */
+	public void setState(String state) {
+		this.state = state;
 	}
 
 }

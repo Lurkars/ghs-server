@@ -35,6 +35,8 @@ public class Settings {
 	@Required
 	private boolean alwaysAllyAttackModifierDeck = false;
 	@Required
+	private boolean alwaysFhAdvantage = false;
+	@Required
 	private boolean alwaysFhSolo = false;
 	@Required
 	private boolean alwaysHazardousTerrain = false;
@@ -42,6 +44,8 @@ public class Settings {
 	private boolean alwaysLootApplyDialog = false;
 	@Required
 	private boolean alwaysLootDeck = false;
+	@Required
+	private boolean amAdvantage = false;
 	@Required
 	private boolean applyBuildingRewards = true;
 	@Required
@@ -363,6 +367,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is always fh advantage.
+	 *
+	 * @return true, if is always fh advantage
+	 */
+	public boolean isAlwaysFhAdvantage() {
+		return alwaysFhAdvantage;
+	}
+
+	/**
+	 * Sets the always fh advantage.
+	 *
+	 * @param alwaysFhAdvantage the new always fh advantage
+	 */
+	public void setAlwaysFhAdvantage(boolean alwaysFhAdvantage) {
+		this.alwaysFhAdvantage = alwaysFhAdvantage;
+	}
+
+	/**
 	 * Checks if is always fh solo.
 	 *
 	 * @return true, if is always fh solo
@@ -432,6 +454,24 @@ public class Settings {
 	 */
 	public void setAlwaysLootDeck(boolean alwaysLootDeck) {
 		this.alwaysLootDeck = alwaysLootDeck;
+	}
+
+	/**
+	 * Checks if is am advantage.
+	 *
+	 * @return true, if is am advantage
+	 */
+	public boolean isAmAdvantage() {
+		return amAdvantage;
+	}
+
+	/**
+	 * Sets the am advantage.
+	 *
+	 * @param alwaysFhAdvantage the new am advantage
+	 */
+	public void setAmAdvantage(boolean amAdvantage) {
+		this.amAdvantage = amAdvantage;
 	}
 
 	/**
