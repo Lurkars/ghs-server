@@ -20,6 +20,7 @@ public class GameAttackModifierDeckModel {
 	private LinkedList<Integer> disgarded = new LinkedList<>();
 	@Required
 	private boolean active = true;
+	private Integer lastVisible;
 	private String state;
 
 	/**
@@ -92,6 +93,24 @@ public class GameAttackModifierDeckModel {
 	 */
 	public void setActive(boolean active) {
 		this.active = active;
+	}
+
+	/**
+	 * Gets the .
+	 *
+	 * @return the last visible
+	 */
+	public Integer getLastVisible() {
+		return lastVisible;
+	}
+
+	/**
+	 * Sets the last visible.
+	 *
+	 * @param lastVisible the new last visible
+	 */
+	public void setLastVisible(Integer lastVisible) {
+		this.lastVisible = lastVisible;
 	}
 
 	/**
