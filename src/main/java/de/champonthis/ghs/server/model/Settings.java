@@ -47,6 +47,8 @@ public class Settings {
 	@Required
 	private boolean amAdvantage = false;
 	@Required
+	private boolean amAdvantageHouseRule = false;
+	@Required
 	private boolean applyBuildingRewards = true;
 	@Required
 	private boolean applyConditions = true;
@@ -468,10 +470,28 @@ public class Settings {
 	/**
 	 * Sets the am advantage.
 	 *
-	 * @param alwaysFhAdvantage the new am advantage
+	 * @param amAdvantage the new am advantage
 	 */
 	public void setAmAdvantage(boolean amAdvantage) {
 		this.amAdvantage = amAdvantage;
+	}
+
+	/**
+	 * Checks if is am advantage house rule.
+	 *
+	 * @return true, if is am advantage house rule
+	 */
+	public boolean isAmAdvantageHouseRule() {
+		return amAdvantageHouseRule;
+	}
+
+	/**
+	 * Sets the am advantage house rule.
+	 *
+	 * @param amAdvantageHouseRule the new am advantage house rule
+	 */
+	public void setAmAdvantageHouseRule(boolean amAdvantageHouseRule) {
+		this.amAdvantageHouseRule = amAdvantageHouseRule;
 	}
 
 	/**
