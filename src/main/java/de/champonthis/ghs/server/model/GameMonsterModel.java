@@ -36,7 +36,6 @@ public class GameMonsterModel {
 	private boolean isAlly = false;
 	@Required
 	private boolean isAllied = false;
-	private GameMonsterStatEffectModel statEffect;
 
 	/**
 	 * Gets the name.
@@ -252,13 +251,5 @@ public class GameMonsterModel {
 	 */
 	public void setAllied(boolean isAllied) {
 		this.isAllied = isAllied;
-	}
-
-	public GameMonsterStatEffectModel getStatEffect() {
-		return statEffect;
-	}
-
-	public void setStatEffect(GameMonsterStatEffectModel statEffect) {
-		this.statEffect = statEffect;
 	}
 }
