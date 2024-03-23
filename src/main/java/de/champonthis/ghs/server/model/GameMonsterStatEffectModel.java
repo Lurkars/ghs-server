@@ -12,6 +12,7 @@ public class GameMonsterStatEffectModel {
     private LinkedList<ConditionName> immunities = new LinkedList<>();
     private String deck;
     private Boolean absolute;
+    private String note;
 
     public String getHealth() {
         return health;
@@ -75,6 +76,14 @@ public class GameMonsterStatEffectModel {
 
     public void setAbsolute(Boolean absolute) {
         this.absolute = absolute;
+    }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note;
     }
 
 }
