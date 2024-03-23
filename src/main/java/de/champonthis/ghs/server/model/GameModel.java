@@ -39,6 +39,8 @@ public class GameModel {
 	@Required
 	private LinkedList<ScenarioRuleIdentifier> scenarioRules = new LinkedList<>();
 	@Required
+	private LinkedList<ScenarioRuleIdentifier> appliedScenarioRules = new LinkedList<>();
+	@Required
 	private LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules = new LinkedList<>();
 	@Required
 	private int level = 1;
@@ -358,6 +360,24 @@ public class GameModel {
 	 */
 	public void setScenarioRules(LinkedList<ScenarioRuleIdentifier> scenarioRules) {
 		this.scenarioRules = scenarioRules;
+	}
+
+	/**
+	 * Gets the applied scenario rules.
+	 *
+	 * @return the applied scenario rules
+	 */
+	public LinkedList<ScenarioRuleIdentifier> getAppliedScenarioRules() {
+		return appliedScenarioRules;
+	}
+
+	/**
+	 * Sets the applied scenario rules.
+	 *
+	 * @param appliedScenarioRules the new applied scenario rules
+	 */
+	public void setAppliedScenarioRules(LinkedList<ScenarioRuleIdentifier> appliedScenarioRules) {
+		this.appliedScenarioRules = appliedScenarioRules;
 	}
 
 	/**
