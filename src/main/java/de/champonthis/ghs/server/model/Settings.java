@@ -22,6 +22,8 @@ public class Settings {
 	@Required
 	private boolean activeApplyConditions = true;
 	@Required
+	private LinkedList<ConditionName> activeApplyConditionsAuto = new LinkedList<>();
+	@Required
 	private LinkedList<ConditionName> activeApplyConditionsExcludes = new LinkedList<>(
 			Arrays.asList(ConditionName.SHIELD));
 	@Required
@@ -258,6 +260,24 @@ public class Settings {
 	 */
 	public void setActiveApplyConditions(boolean activeApplyConditions) {
 		this.activeApplyConditions = activeApplyConditions;
+	}
+
+	/**
+	 * Gets the active apply conditions auto.
+	 *
+	 * @return the active apply conditions auto
+	 */
+	public LinkedList<ConditionName> getActiveApplyConditionsAuto() {
+		return activeApplyConditionsAuto;
+	}
+
+	/**
+	 * Sets the active apply conditions auto.
+	 *
+	 * @param activeApplyConditionsAuto the new active apply conditions auto
+	 */
+	public void setActiveApplyConditionsAuto(LinkedList<ConditionName> activeApplyConditionsAuto) {
+		this.activeApplyConditionsAuto = activeApplyConditionsAuto;
 	}
 
 	/**
