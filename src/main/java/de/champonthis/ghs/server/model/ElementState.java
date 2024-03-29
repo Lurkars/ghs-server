@@ -25,6 +25,9 @@ public enum ElementState {
 	@SerializedName("consumed")
 	CONSUMED,
 
+	@SerializedName("partlyConsumed")
+	PARTLY_CONSUMED,
+
 	@SerializedName("always")
 	ALWAYS
 }
