@@ -109,6 +109,8 @@ public class Settings {
 	@Required
 	private boolean combineSummonAction = true;
 	@Required
+	private boolean damageHP = false;
+	@Required
 	private boolean disabledTurnConfirmation = false;
 	@Required
 	private boolean disableSortFigures = false;
@@ -1034,6 +1036,24 @@ public class Settings {
 	 */
 	public void setCombineSummonAction(boolean combineSummonAction) {
 		this.combineSummonAction = combineSummonAction;
+	}
+
+	/**
+	 * Checks if is damage HP.
+	 *
+	 * @return true, if is damage HP
+	 */
+	public boolean isDamageHP() {
+		return damageHP;
+	}
+
+	/**
+	 * Sets the damage HP.
+	 *
+	 * @param damageHP the new damage HP
+	 */
+	public void setDamageHP(boolean damageHP) {
+		this.damageHP = damageHP;
 	}
 
 	/**
