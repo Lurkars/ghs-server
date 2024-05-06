@@ -164,6 +164,8 @@ public class Settings {
 	@Required
 	private boolean scenarioRules = true;
 	@Required
+	private boolean scenarioRulesAutoapply = false;
+	@Required
 	private boolean showExpandedAbilityCard = false;
 	@Required
 	private boolean showFullAbilityCard = false;
@@ -1540,6 +1542,24 @@ public class Settings {
 	 */
 	public void setScenarioRules(boolean scenarioRules) {
 		this.scenarioRules = scenarioRules;
+	}
+
+	/**
+	 * Checks if is scenario rules autoapply.
+	 *
+	 * @return true, if is scenario rules autoapply
+	 */
+	public boolean isScenarioRulesAutoapply() {
+		return scenarioRulesAutoapply;
+	}
+
+	/**
+	 * Sets the scenario rules autoapply.
+	 *
+	 * @param scenarioRulesAutoapply the new scenario rules autoapply
+	 */
+	public void setScenarioRulesAutoapply(boolean scenarioRulesAutoapply) {
+		this.scenarioRulesAutoapply = scenarioRulesAutoapply;
 	}
 
 	/**
