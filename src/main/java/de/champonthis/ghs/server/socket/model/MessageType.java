@@ -37,4 +37,7 @@ public enum MessageType {
 	@SerializedName("error")
 	ERROR,
 
+	@SerializedName("ping")
+	PING,
+
 }

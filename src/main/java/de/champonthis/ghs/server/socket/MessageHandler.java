@@ -200,6 +200,13 @@ public class MessageHandler extends TextWebSocketHandler {
 							case ERROR:
 								sendError(session, "cannot send errors to server!");
 								break;
+							case PING:
+								JsonObject pingMessage = new JsonObject();
+								pingMessage.addProperty("type", "ping");
+								pingMessage.addProperty("message", "pong");
+								pingMessage.addProperty("serverVersion", buildVersion);
+								session.sendMessage(new TextMessage(gson.toJson(pingMessage)));
+								break;
 							case GAME:
 							case GAME_UNDO:
 							case GAME_REDO:
