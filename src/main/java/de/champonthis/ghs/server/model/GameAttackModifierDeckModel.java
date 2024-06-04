@@ -22,6 +22,7 @@ public class GameAttackModifierDeckModel {
 	private boolean active = true;
 	private Integer lastVisible;
 	private String state;
+	private Boolean bb;
 
 	/**
 	 * Gets the current.
@@ -129,6 +130,24 @@ public class GameAttackModifierDeckModel {
 	 */
 	public void setState(String state) {
 		this.state = state;
+	}
+
+	/**
+	 * Gets the bb.
+	 *
+	 * @return the bb
+	 */
+	public Boolean getBb() {
+		return bb;
+	}
+
+	/**
+	 * Sets the bb.
+	 *
+	 * @param bb the new bb
+	 */
+	public void setState(Boolean bb) {
+		this.bb = bb;
 	}
 
 }
