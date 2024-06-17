@@ -103,6 +103,8 @@ public class Settings {
 	@Required
 	private boolean characterShieldRetaliate = false;
 	@Required
+	private boolean characterSortIndex = false;
+	@Required
 	private boolean characterTraits = false;
 	@Required
 	private boolean combineInteractiveAbilities = true;
@@ -984,6 +986,24 @@ public class Settings {
 	 */
 	public void setCharacterShieldRetaliate(boolean characterShieldRetaliate) {
 		this.characterShieldRetaliate = characterShieldRetaliate;
+	}
+
+	/**
+	 * Checks if is character sort index.
+	 *
+	 * @return true, if is character sort index
+	 */
+	public boolean isCharacterSortIndex() {
+		return characterSortIndex;
+	}
+
+	/**
+	 * Sets the character sort index.
+	 *
+	 * @param characterSortIndex the new character sort index
+	 */
+	public void setCharacterSortIndex(boolean characterSortIndex) {
+		this.characterSortIndex = characterSortIndex;
 	}
 
 	/**

@@ -127,6 +127,17 @@ spring.datasource.username=<username>
 spring.datasource.password=<password>
 ```
 
+### Use as GHS Backup Server
+
+You can also use the server component to be used as GHS Backup Server to accept game payloads and store to file system. The upload url is `http://{your-ip}:{server-port}/backup`. To enable, add the following lines to the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs`:
+
+
+```
+# replace <path-to-backup> with an accessible path to store the backup files and <token> as authorization header for authentication.
+ghs-server.backup.path=<path-to-backup>
+ghs-server.backup.authorization=<token>
+```
+
 ## How to use with GHS
 
 Go to the main menu in Gloomhaven Secretariat (GHS) and click on **Connect to Server**. Enter the IP/Hostname of the server in **Host** (on the same machine just use `localhost`), set **Port** to `8080` (if not changed default port).
