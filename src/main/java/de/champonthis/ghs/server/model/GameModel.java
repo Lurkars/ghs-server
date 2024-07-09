@@ -91,6 +91,7 @@ public class GameModel {
 	private ScenarioFinish finish;
 	@Required
 	private LinkedList<GameClockTimestamp> gameClock = new LinkedList<>();
+	private GameChallengeDeckModel challengeDeck = new GameChallengeDeckModel();
 
 	/**
 	 * Gets the revision.
@@ -846,6 +847,24 @@ public class GameModel {
 	 */
 	public void setGameClock(LinkedList<GameClockTimestamp> gameClock) {
 		this.gameClock = gameClock;
+	}
+
+	/**
+	 * Gets the challenge deck.
+	 *
+	 * @return the challenge deck
+	 */
+	public GameChallengeDeckModel getChallengeDeck() {
+		return challengeDeck;
+	}
+
+	/**
+	 * Sets the challenge deck.
+	 *
+	 * @param challengeDeck the new challenge deck
+	 */
+	public void setChallengeDeck(GameChallengeDeckModel challengeDeck) {
+		this.challengeDeck = challengeDeck;
 	}
 
 }

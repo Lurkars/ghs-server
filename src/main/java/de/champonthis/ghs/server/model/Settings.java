@@ -129,6 +129,8 @@ public class Settings {
 	@Required
 	private boolean expireConditions = true;
 	@Required
+	private boolean fhChallenges = false;
+	@Required
 	private boolean fhGhItems = false;
 	@Required
 	private boolean hideAbsent = false;
@@ -1220,6 +1222,24 @@ public class Settings {
 	 */
 	public void setExpireConditions(boolean expireConditions) {
 		this.expireConditions = expireConditions;
+	}
+
+	/**
+	 * Checks if is fh challenges.
+	 *
+	 * @return true, if is fh challenges
+	 */
+	public boolean isFhChallenges() {
+		return fhChallenges;
+	}
+
+	/**
+	 * Sets the fh challenges.
+	 *
+	 * @param fhChallenges the new fh challenges
+	 */
+	public void setFhChallenges(boolean fhChallenges) {
+		this.fhChallenges = fhChallenges;
 	}
 
 	/**
