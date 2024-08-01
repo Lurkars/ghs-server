@@ -81,6 +81,12 @@ public class Settings {
 	@Required
 	private boolean battleGoalsReminder = true;
 	@Required
+	private boolean bbAm = true;
+	@Required
+	private boolean bbChars = true;
+	@Required
+	private boolean bbStandeeLimit = true;
+	@Required
 	private boolean calculate = true;
 	@Required
 	private boolean calculateStats = true;
@@ -790,6 +796,30 @@ public class Settings {
 	 */
 	public void setBattleGoalsReminder(boolean battleGoalsReminder) {
 		this.battleGoalsReminder = battleGoalsReminder;
+	}
+
+	public boolean isBbAm() {
+		return bbAm;
+	}
+
+	public void setBbAm(boolean bbAm) {
+		this.bbAm = bbAm;
+	}
+
+	public boolean isBbChars() {
+		return bbChars;
+	}
+
+	public void setBbChars(boolean bbChars) {
+		this.bbChars = bbChars;
+	}
+
+	public boolean isBbStandeeLimit() {
+		return bbStandeeLimit;
+	}
+
+	public void setBbStandeeLimit(boolean bbStandeeLimit) {
+		this.bbStandeeLimit = bbStandeeLimit;
 	}
 
 	/**
