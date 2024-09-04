@@ -39,6 +39,12 @@ public class GameMonsterEntityModel {
 	private LinkedList<String> markers = new LinkedList<>();
 	@Required
 	private LinkedList<String> tags = new LinkedList<>();
+	private String shield;
+	private String shieldPersistent;
+	@Required
+	private LinkedList<String> retaliate = new LinkedList<>();
+	@Required
+	private LinkedList<String> retaliatePersistent = new LinkedList<>();
 
 	/**
 	 * Gets the number.
@@ -308,6 +314,78 @@ public class GameMonsterEntityModel {
 	 */
 	public void setTags(LinkedList<String> tags) {
 		this.tags = tags;
+	}
+
+	/**
+	 * Gets the shield.
+	 *
+	 * @return the shield
+	 */
+	public String getShield() {
+		return shield;
+	}
+
+	/**
+	 * Sets the shield.
+	 *
+	 * @param shield the new shield
+	 */
+	public void setShield(String shield) {
+		this.shield = shield;
+	}
+
+	/**
+	 * Gets the shield permanent.
+	 *
+	 * @return the shield permanent
+	 */
+	public String getShieldPersistent() {
+		return shieldPersistent;
+	}
+
+	/**
+	 * Sets the shield permanent.
+	 *
+	 * @param shieldPersistent the new shield permanent
+	 */
+	public void setShieldPersistent(String shieldPersistent) {
+		this.shieldPersistent = shieldPersistent;
+	}
+
+	/**
+	 * Gets the retaliate.
+	 *
+	 * @return the retaliate
+	 */
+	public LinkedList<String> getRetaliate() {
+		return retaliate;
+	}
+
+	/**
+	 * Sets the retaliate.
+	 *
+	 * @param retaliate the new retaliate
+	 */
+	public void setRetaliate(LinkedList<String> retaliate) {
+		this.retaliate = retaliate;
+	}
+
+	/**
+	 * Gets the retaliate permanent.
+	 *
+	 * @return the retaliate permanent
+	 */
+	public LinkedList<String> getRetaliatePersistent() {
+		return retaliatePersistent;
+	}
+
+	/**
+	 * Sets the retaliate permanent.
+	 *
+	 * @param retaliatePersistent the new retaliate permanent
+	 */
+	public void setRetaliatePersistent(LinkedList<String> retaliatePersistent) {
+		this.retaliatePersistent = retaliatePersistent;
 	}
 
 }

@@ -186,6 +186,8 @@ public class Settings {
 	@Required
 	private boolean standees = true;
 	@Required
+	private boolean standeeShieldRetaliate = false;
+	@Required
 	private boolean standeeStats = false;
 	@Required
 	private boolean stats = true;
@@ -1721,6 +1723,25 @@ public class Settings {
 	public void setStandees(boolean standees) {
 		this.standees = standees;
 	}
+
+	/**
+	 * Checks if is summon shield retaliate.
+	 *
+	 * @return true, if is summon shield retaliate
+	 */
+	public boolean isStandeeShieldRetaliate() {
+		return standeeShieldRetaliate;
+	}
+
+	/**
+	 * Sets the summon shield retaliate.
+	 *
+	 * @param standeeShieldRetaliate the new summon shield retaliate
+	 */
+	public void setStandeeShieldRetaliate(boolean standeeShieldRetaliate) {
+		this.standeeShieldRetaliate = standeeShieldRetaliate;
+	}
+
 
 	/**
 	 * Checks if is standee stats.
