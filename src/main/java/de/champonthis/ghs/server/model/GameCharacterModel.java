@@ -53,6 +53,7 @@ public class GameCharacterModel {
 	@Required
 	private LinkedList<GameSummonModel> summons = new LinkedList<>();
 	private CharacterProgress progress;
+	private ScenarioStats scenarioStats;
 	@Required
 	private int number;
 	@Required
@@ -471,6 +472,14 @@ public class GameCharacterModel {
 	 */
 	public void setProgress(CharacterProgress progress) {
 		this.progress = progress;
+	}
+
+	public ScenarioStats getScenarioStats() {
+		return scenarioStats;
+	}
+
+	public void setScenarioStats(ScenarioStats scenarioStats) {
+		this.scenarioStats = scenarioStats;
 	}
 
 	/**

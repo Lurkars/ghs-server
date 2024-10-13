@@ -36,6 +36,8 @@ public class CharacterProgress {
 	@Required
 	private LinkedList<Integer> masteries = new LinkedList<>();
 	private int donations = 0;
+	@Required
+	private LinkedList<ScenarioStats> scenarioStats = new LinkedList<>();
 
 	/**
 	 * Gets the experience.

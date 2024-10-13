@@ -176,6 +176,8 @@ public class Settings {
 	@Required
 	private boolean scenarioRulesAutoapply = false;
 	@Required
+	private boolean scenarioStats = false;
+	@Required
 	private boolean showExpandedAbilityCard = false;
 	@Required
 	private boolean showFullAbilityCard = false;
@@ -1634,6 +1636,14 @@ public class Settings {
 		this.scenarioRulesAutoapply = scenarioRulesAutoapply;
 	}
 
+	public boolean isScenarioStats() {
+		return scenarioStats;
+	}
+
+	public void setScenarioStats(boolean scenarioStats) {
+		this.scenarioStats = scenarioStats;
+	}
+
 	/**
 	 * Checks if is show expanded ability card.
 	 *
@@ -1741,7 +1751,6 @@ public class Settings {
 	public void setStandeeShieldRetaliate(boolean standeeShieldRetaliate) {
 		this.standeeShieldRetaliate = standeeShieldRetaliate;
 	}
-
 
 	/**
 	 * Checks if is standee stats.
