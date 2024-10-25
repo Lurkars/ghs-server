@@ -88,6 +88,7 @@ public class Party {
 	@Required
 	private LinkedList<String> lootDeckSections = new LinkedList<>();
 	private Boolean envelopeB;
+	private Integer trials;
 
 	/**
 	 * Gets the id.
@@ -1005,6 +1006,14 @@ public class Party {
 	 */
 	public void setEnvelopeB(Boolean envelopeB) {
 		this.envelopeB = envelopeB;
+	}
+
+	public Integer getTrials() {
+		return trials;
+	}
+
+	public void setTrials(Integer trials) {
+		this.trials = trials;
 	}
 
 }

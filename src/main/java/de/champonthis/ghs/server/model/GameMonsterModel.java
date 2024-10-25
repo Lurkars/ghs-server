@@ -36,6 +36,8 @@ public class GameMonsterModel {
 	private boolean isAlly = false;
 	@Required
 	private boolean isAllied = false;
+	@Required
+	private LinkedList<String> tags = new LinkedList<>();
 
 	/**
 	 * Gets the name.
@@ -251,5 +253,23 @@ public class GameMonsterModel {
 	 */
 	public void setAllied(boolean isAllied) {
 		this.isAllied = isAllied;
+	}
+
+	/**
+	 * Gets the tags.
+	 *
+	 * @return the tags
+	 */
+	public LinkedList<String> getTags() {
+		return tags;
+	}
+
+	/**
+	 * Sets the tags.
+	 *
+	 * @param tags the new tags
+	 */
+	public void setTags(LinkedList<String> tags) {
+		this.tags = tags;
 	}
 }

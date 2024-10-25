@@ -35,6 +35,8 @@ public class ScenarioFinish {
 	private LinkedList<Identifier> randomItems = new LinkedList<>();
 	@Required
 	private LinkedList<Integer> randomItemBlueprints = new LinkedList<>();
+	@Required
+	private LinkedList<Boolean> trials = new LinkedList<>();
 
 	/**
 	 * Gets the conclusion.
@@ -304,6 +306,14 @@ public class ScenarioFinish {
 	 */
 	public void setRandomItemBlueprints(LinkedList<Integer> randomItemBlueprints) {
 		this.randomItemBlueprints = randomItemBlueprints;
+	}
+
+	public LinkedList<Boolean> getTrials() {
+		return trials;
+	}
+
+	public void setTrials(LinkedList<Boolean> trials) {
+		this.trials = trials;
 	}
 
 }

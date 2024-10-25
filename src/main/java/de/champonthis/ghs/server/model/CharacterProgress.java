@@ -38,6 +38,7 @@ public class CharacterProgress {
 	private int donations = 0;
 	@Required
 	private LinkedList<ScenarioStats> scenarioStats = new LinkedList<>();
+	private Identifier trial;
 
 	/**
 	 * Gets the experience.
@@ -325,6 +326,22 @@ public class CharacterProgress {
 	 */
 	public void setDonations(int donations) {
 		this.donations = donations;
+	}
+
+	public LinkedList<ScenarioStats> getScenarioStats() {
+		return scenarioStats;
+	}
+
+	public void setScenarioStats(LinkedList<ScenarioStats> scenarioStats) {
+		this.scenarioStats = scenarioStats;
+	}
+
+	public Identifier getTrial() {
+		return trial;
+	}
+
+	public void setTrial(Identifier trial) {
+		this.trial = trial;
 	}
 
 }

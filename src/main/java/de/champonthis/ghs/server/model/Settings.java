@@ -137,7 +137,13 @@ public class Settings {
 	@Required
 	private boolean fhChallenges = false;
 	@Required
+	private boolean fhChallengesApply = true;
+	@Required
 	private boolean fhGhItems = false;
+	@Required
+	private boolean fhTrials = false;
+	@Required
+	private boolean fhTrialsApply = true;
 	@Required
 	private boolean hideAbsent = false;
 	@Required
@@ -1277,6 +1283,24 @@ public class Settings {
 	}
 
 	/**
+	 * Checks if is fh challenges apply.
+	 *
+	 * @return true, if is fh challenges apply
+	 */
+	public boolean isFhChallengesApply() {
+		return fhChallengesApply;
+	}
+
+	/**
+	 * Sets the fh challenges apply.
+	 *
+	 * @param fhChallengesApply the new fh challenges apply
+	 */
+	public void setFhChallengesApply(boolean fhChallengesApply) {
+		this.fhChallengesApply = fhChallengesApply;
+	}
+
+	/**
 	 * Checks if is fh gh items.
 	 *
 	 * @return true, if is fh gh items
@@ -1292,6 +1316,42 @@ public class Settings {
 	 */
 	public void setFhGhItems(boolean fhGhItems) {
 		this.fhGhItems = fhGhItems;
+	}
+
+	/**
+	 * Checks if is fh trials.
+	 *
+	 * @return true, if is fh trials
+	 */
+	public boolean isFhTrials() {
+		return fhTrials;
+	}
+
+	/**
+	 * Sets the fh trials.
+	 *
+	 * @param fhTrials the new fh trials
+	 */
+	public void setFhTrials(boolean fhTrials) {
+		this.fhTrials = fhTrials;
+	}
+
+	/**
+	 * Checks if is fh trials apply.
+	 *
+	 * @return true, if is fh trials apply
+	 */
+	public boolean isFhTrialsApply() {
+		return fhTrialsApply;
+	}
+
+	/**
+	 * Sets the fh trials apply.
+	 *
+	 * @param fhTrialsApply the new fh trials apply
+	 */
+	public void setFhTrialsApply(boolean fhTrialsApply) {
+		this.fhTrialsApply = fhTrialsApply;
 	}
 
 	/**

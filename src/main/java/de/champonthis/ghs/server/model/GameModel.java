@@ -92,6 +92,10 @@ public class GameModel {
 	@Required
 	private LinkedList<GameClockTimestamp> gameClock = new LinkedList<>();
 	private GameChallengeDeckModel challengeDeck = new GameChallengeDeckModel();
+	@Required
+	private LinkedList<Identifier> favors = new LinkedList<>();
+	@Required
+	private LinkedList<Integer> favorPoints = new LinkedList<>();
 
 	/**
 	 * Gets the revision.
@@ -867,4 +871,19 @@ public class GameModel {
 		this.challengeDeck = challengeDeck;
 	}
 
+	public LinkedList<Identifier> getFavors() {
+		return favors;
+	}
+
+	public void setFavors(LinkedList<Identifier> favors) {
+		this.favors = favors;
+	}
+
+	public LinkedList<Integer> getFavorPoints() {
+		return favorPoints;
+	}
+
+	public void setFavorPoints(LinkedList<Integer> favorPoints) {
+		this.favorPoints = favorPoints;
+	}
 }

@@ -28,6 +28,7 @@ public class GameObjectiveContainerModel {
 	private Integer initiative;
 	private ScenarioObjectiveIdentifier objectiveId;
 	private AdditionalIdentifier additionalObjectiveId;
+	private String amDeck;
 
 	/**
 	 * Gets the uuid.
@@ -244,6 +245,7 @@ public class GameObjectiveContainerModel {
 	public void setObjectiveId(ScenarioObjectiveIdentifier objectiveId) {
 		this.objectiveId = objectiveId;
 	}
+
 	/**
 	 * Gets the additional objective id.
 	 *
@@ -260,6 +262,14 @@ public class GameObjectiveContainerModel {
 	 */
 	public void setAdditionalObjectiveId(AdditionalIdentifier additionalObjectiveId) {
 		this.additionalObjectiveId = additionalObjectiveId;
+	}
+
+	public String getAmDeck() {
+		return amDeck;
+	}
+
+	public void setAmDeck(String amDeck) {
+		this.amDeck = amDeck;
 	}
 
 }
