@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.controller;
 
 import java.util.Optional;
@@ -34,9 +31,6 @@ import de.champonthis.ghs.server.model.Permissions;
 import de.champonthis.ghs.server.socket.MessageHandler;
 import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 
-/**
- * The Class GameController.
- */
 @RestController
 @RequestMapping("game")
 @CrossOrigin(origins = "*")
@@ -55,12 +49,6 @@ public class GameController {
 	@Value("${ghs-server.debug:false}")
 	private boolean debug;
 
-	/**
-	 * Gets the game.
-	 *
-	 * @param gameCode the game code
-	 * @return the game
-	 */
 	protected GameModel getGame(String gameCode) {
 		if (!StringUtils.hasText(gameCode)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
@@ -88,25 +76,11 @@ public class GameController {
 		return game;
 	}
 
-	/**
-	 * Request game.
-	 *
-	 * @param gameCode the game code
-	 * @return the string
-	 */
 	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public String requestGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode) {
 		return gson.toJson(getGame(gameCode));
 	}
 
-	/**
-	 * Update game.
-	 *
-	 * @param gameCode the game code
-	 * @param silent   the silent
-	 * @param payload  the payload
-	 * @return the string
-	 */
 	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
 	public String updateGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
 			@RequestParam Optional<Boolean> silent, @RequestBody String payload) {

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.businesslogic;
 
 import java.io.BufferedOutputStream;
@@ -35,9 +32,6 @@ import org.springframework.util.StringUtils;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 
-/**
- * The Class ClientManager.
- */
 @Component
 public class ClientManager implements SmartInitializingSingleton {
 
@@ -63,11 +57,6 @@ public class ClientManager implements SmartInitializingSingleton {
 		}
 	}
 
-	/**
-	 * Install latest client.
-	 *
-	 * @return true, if successful
-	 */
 	public boolean installLatestClient() {
 		try {
 			HttpURLConnection connection = (HttpURLConnection) new URL(
@@ -174,12 +163,6 @@ public class ClientManager implements SmartInitializingSingleton {
 		}
 	}
 
-	/**
-	 * Check client running.
-	 *
-	 * @param host the host
-	 * @return true, if successful
-	 */
 	public boolean checkClientRunning(String host) {
 		try {
 			HttpURLConnection connection = (HttpURLConnection) new URL(getClientUrl(host)).openConnection();
@@ -195,12 +178,6 @@ public class ClientManager implements SmartInitializingSingleton {
 		return false;
 	}
 
-	/**
-	 * Check client running http only.
-	 *
-	 * @param host the host
-	 * @return true, if successful
-	 */
 	public boolean checkClientRunningHttpOnly(String host) {
 		try {
 			HttpURLConnection connection = (HttpURLConnection) new URL(getClientUrl(host, true)).openConnection();
@@ -217,23 +194,10 @@ public class ClientManager implements SmartInitializingSingleton {
 		return false;
 	}
 
-	/**
-	 * Gets the client url.
-	 *
-	 * @param host the host
-	 * @return the client url
-	 */
 	public String getClientUrl(String host) {
 		return getClientUrl(host, false);
 	}
 
-	/**
-	 * Gets the client url.
-	 *
-	 * @param host     the host
-	 * @param httpOnly the http only
-	 * @return the client url
-	 */
 	public String getClientUrl(String host, boolean httpOnly) {
 		if (ssl && !httpOnly) {
 			return "https://" + host + ":" + port + "/index.html";
@@ -244,11 +208,6 @@ public class ClientManager implements SmartInitializingSingleton {
 		return "http://" + host + ":" + port + "/index.html";
 	}
 
-	/**
-	 * Gets the hosts.
-	 *
-	 * @return the hosts
-	 */
 	public List<String> getHosts() {
 		LinkedList<String> hosts = new LinkedList<>();
 
@@ -276,11 +235,6 @@ public class ClientManager implements SmartInitializingSingleton {
 		return hosts;
 	}
 
-	/**
-	 * Check on startup.
-	 *
-	 * @param event the event
-	 */
 	@EventListener
 	void checkOnStartup(ApplicationReadyEvent event) {
 		for (String host : getHosts()) {

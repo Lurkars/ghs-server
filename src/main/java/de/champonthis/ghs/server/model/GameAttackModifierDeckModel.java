@@ -1,15 +1,9 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.model;
 
 import java.util.LinkedList;
 
 import de.champonthis.ghs.server.util.Required;
 
-/**
- * The Class GameAttackModifierDeckModel.
- */
 public class GameAttackModifierDeckModel {
 
 	@Required
@@ -24,128 +18,58 @@ public class GameAttackModifierDeckModel {
 	private String state;
 	private Boolean bb;
 
-	/**
-	 * Gets the current.
-	 *
-	 * @return the current
-	 */
 	public int getCurrent() {
 		return current;
 	}
 
-	/**
-	 * Sets the current.
-	 *
-	 * @param current the new current
-	 */
 	public void setCurrent(int current) {
 		this.current = current;
 	}
 
-	/**
-	 * Gets the cards.
-	 *
-	 * @return the cards
-	 */
 	public LinkedList<String> getCards() {
 		return cards;
 	}
 
-	/**
-	 * Sets the cards.
-	 *
-	 * @param cards the new cards
-	 */
 	public void setCards(LinkedList<String> cards) {
 		this.cards = cards;
 	}
 
-	/**
-	 * Gets the disgarded.
-	 *
-	 * @return the disgarded
-	 */
 	public LinkedList<Integer> getDisgarded() {
 		return disgarded;
 	}
 
-	/**
-	 * Sets the disgarded.
-	 *
-	 * @param disgarded the new disgarded
-	 */
 	public void setDisgarded(LinkedList<Integer> disgarded) {
 		this.disgarded = disgarded;
 	}
 
-	/**
-	 * Checks if is active.
-	 *
-	 * @return true, if is active
-	 */
 	public boolean isActive() {
 		return active;
 	}
 
-	/**
-	 * Sets the active.
-	 *
-	 * @param active the new active
-	 */
 	public void setActive(boolean active) {
 		this.active = active;
 	}
 
-	/**
-	 * Gets the .
-	 *
-	 * @return the last visible
-	 */
 	public Integer getLastVisible() {
 		return lastVisible;
 	}
 
-	/**
-	 * Sets the last visible.
-	 *
-	 * @param lastVisible the new last visible
-	 */
 	public void setLastVisible(Integer lastVisible) {
 		this.lastVisible = lastVisible;
 	}
 
-	/**
-	 * Gets the state.
-	 *
-	 * @return the state
-	 */
 	public String getState() {
 		return state;
 	}
 
-	/**
-	 * Sets the state.
-	 *
-	 * @param state the new state
-	 */
 	public void setState(String state) {
 		this.state = state;
 	}
 
-	/**
-	 * Gets the bb.
-	 *
-	 * @return the bb
-	 */
 	public Boolean getBb() {
 		return bb;
 	}
 
-	/**
-	 * Sets the bb.
-	 *
-	 * @param bb the new bb
-	 */
 	public void setState(Boolean bb) {
 		this.bb = bb;
 	}

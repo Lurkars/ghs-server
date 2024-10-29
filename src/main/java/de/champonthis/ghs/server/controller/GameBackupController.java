@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.controller;
 
 import java.io.BufferedWriter;
@@ -23,9 +20,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 
-/**
- * The Class GameBackupController.
- */
 @RestController
 @RequestMapping("backup")
 public class GameBackupController {
@@ -36,13 +30,6 @@ public class GameBackupController {
 	@Value("${ghs-server.backup.authorization:}")
 	private String authorization;
 
-	/**
-	 * Store backup.
-	 *
-	 * @param authorizationHeader the authorization header
-	 * @param filename            the filename
-	 * @param payload             the payload
-	 */
 	@PostMapping(value = "{filename}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void storeBackup(
 			@RequestHeader(name = HttpHeaders.AUTHORIZATION, required = false) String authorizationHeader,

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.gui;
 
 import java.awt.BorderLayout;
@@ -31,9 +28,6 @@ import de.champonthis.ghs.server.businesslogic.ClientManager;
 import de.champonthis.ghs.server.businesslogic.Manager;
 import de.champonthis.ghs.server.entity.GameCode;
 
-/**
- * The Class MainFrame.
- */
 @Component
 @Conditional(GuiCondition.class)
 public class MainFrame extends JFrame implements SmartInitializingSingleton {
@@ -61,16 +55,10 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 	private JButton openClientButton = new JButton("Open Client");
 	private JScrollPane tablePane = null;
 
-	/**
-	 * Instantiates a new main frame.
-	 */
 	public MainFrame() {
 		initUI();
 	}
 
-	/**
-	 * Inits the UI.
-	 */
 	private void initUI() {
 		topPanel.setLayout(new BorderLayout());
 		bottomPanel.setLayout(new BorderLayout());
@@ -139,9 +127,6 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 		this.setVisible(true);
 	}
 
-	/**
-	 * Sets the label.
-	 */
 	@EventListener(ApplicationReadyEvent.class)
 	public void setLabel() {
 		if (ssl) {
@@ -152,9 +137,6 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 		ipLabel.setText("IPs: " + String.join(", ", clientManager.getHosts().toArray(new String[] {})));
 	}
 
-	/**
-	 * Auht key table.
-	 */
 	protected void auhtKeyTable() {
 		if (tablePane != null) {
 			this.remove(tablePane);
@@ -183,19 +165,11 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 		}
 	}
 
-	/**
-	 * Check client on startup.
-	 *
-	 * @param event the event
-	 */
 	@EventListener
 	void checkClientOnStartup(ApplicationReadyEvent event) {
 		checkClient();
 	}
 
-	/**
-	 * Check client.
-	 */
 	void checkClient() {
 
 		openClientButton.setVisible(false);

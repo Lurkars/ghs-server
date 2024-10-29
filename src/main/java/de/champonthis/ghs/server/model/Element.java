@@ -1,13 +1,7 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * The Enum Element.
- */
 public enum Element {
 
 	@SerializedName("wild")

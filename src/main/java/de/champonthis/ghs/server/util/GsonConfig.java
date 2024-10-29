@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.util;
 
 import org.springframework.context.annotation.Bean;
@@ -16,17 +13,9 @@ import de.champonthis.ghs.server.businesslogic.json.PartySerializer;
 import de.champonthis.ghs.server.model.CharacterProgress;
 import de.champonthis.ghs.server.model.Party;
 
-/**
- * The Class GsonConfig.
- */
 @Configuration
 public class GsonConfig {
 
-	/**
-	 * Gson.
-	 *
-	 * @return the gson
-	 */
 	@Bean
 	public Gson gson() {
 		return new GsonBuilder().registerTypeAdapter(CharacterProgress.class, new CharacterProgressDeserializer())

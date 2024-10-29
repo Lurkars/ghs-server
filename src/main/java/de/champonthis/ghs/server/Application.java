@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server;
 
 import java.io.File;
@@ -18,20 +15,12 @@ import org.springframework.core.io.FileSystemResource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 
-/**
- * The Class Application.
- */
 @SpringBootApplication
 @EnableScheduling
 @PropertySource("classpath:default.properties")
 @PropertySource(value = "file:///${user.home}/.ghs/application.properties", ignoreResourceNotFound = true)
 public class Application {
 
-	/**
-	 * The main method.
-	 *
-	 * @param args the arguments
-	 */
 	public static void main(String[] args) {
 		SpringApplicationBuilder builder = new SpringApplicationBuilder(Application.class);
 		if (!Arrays.asList(args).contains("-Djava.awt.headless=true")) {
@@ -40,11 +29,6 @@ public class Application {
 		builder.run(args);
 	}
 
-	/**
-	 * Property sources placeholder configurer.
-	 *
-	 * @return the property sources placeholder configurer
-	 */
 	@Bean
 	public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		File ghsFolder = new File(System.getProperty("user.home"), ".ghs");
@@ -74,11 +58,6 @@ public class Application {
 		return properties;
 	}
 
-	/**
-	 * Thread pool task scheduler.
-	 *
-	 * @return the thread pool task scheduler
-	 */
 	@Bean
 	public ThreadPoolTaskScheduler threadPoolTaskScheduler() {
 		ThreadPoolTaskScheduler threadPoolTaskScheduler = new ThreadPoolTaskScheduler();
@@ -87,11 +66,6 @@ public class Application {
 		return threadPoolTaskScheduler;
 	}
 
-	/**
-	 * Migrate to user dir.
-	 *
-	 * @param propertiesFile the properties file
-	 */
 	private void migrateToUserDir(File propertiesFile) {
 		File oldPropertiesFile = new File("application.properties");
 		if (oldPropertiesFile.exists()) {

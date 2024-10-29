@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.businesslogic.json;
 
 import java.lang.reflect.Type;
@@ -19,9 +16,6 @@ import de.champonthis.ghs.server.model.LootType;
 import de.champonthis.ghs.server.model.Party;
 import de.champonthis.ghs.server.util.RequiredTypeAdapterFactory;
 
-/**
- * The Class PartyDeserializer.
- */
 public class PartyDeserializer implements JsonDeserializer<Party> {
 
 	private Gson gson = new GsonBuilder()

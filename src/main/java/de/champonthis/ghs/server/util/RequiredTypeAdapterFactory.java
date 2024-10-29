@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.util;
 
 import java.io.IOException;
@@ -15,9 +12,6 @@ import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
-/**
- * A factory for creating RequiredTypeAdapter objects.
- */
 public class RequiredTypeAdapterFactory implements TypeAdapterFactory {
 
 	/*

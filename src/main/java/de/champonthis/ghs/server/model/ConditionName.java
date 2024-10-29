@@ -1,13 +1,7 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.model;
 
 import com.google.gson.annotations.SerializedName;
 
-/**
- * The Enum ConditionName.
- */
 public enum ConditionName {
 	@SerializedName("stun")
 	STUN,

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.web;
 
 import org.springframework.beans.factory.annotation.Value;
@@ -8,9 +5,6 @@ import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-/**
- * The Class HttpServerCondition.
- */
 public class HttpServerCondition implements Condition {
 
 	@Value("${server.ssl.enabled:false}")

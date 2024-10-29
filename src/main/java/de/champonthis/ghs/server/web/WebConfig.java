@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.web;
 
 import java.io.File;
@@ -10,9 +7,6 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
-/**
- * The Class WebConfig.
- */
 @Configuration
 @EnableWebMvc
 public class WebConfig implements WebMvcConfigurer {

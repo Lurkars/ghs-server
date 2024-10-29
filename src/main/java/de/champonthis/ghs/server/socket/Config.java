@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.socket;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,9 +8,6 @@ import org.springframework.web.socket.config.annotation.WebSocketConfigurer;
 import org.springframework.web.socket.config.annotation.WebSocketHandlerRegistry;
 import org.springframework.web.socket.server.standard.ServletServerContainerFactoryBean;
 
-/**
- * The Class Config.
- */
 @Configuration
 @EnableWebSocket
 public class Config implements WebSocketConfigurer {
@@ -26,11 +20,6 @@ public class Config implements WebSocketConfigurer {
 		webSocketHandlerRegistry.addHandler(messageHandler, "/").setAllowedOrigins("*");
 	}
 
-	/**
-	 * Creates the servlet server container factory bean.
-	 *
-	 * @return the servlet server container factory bean
-	 */
 	@Bean
 	public ServletServerContainerFactoryBean createServletServerContainerFactoryBean() {
 		ServletServerContainerFactoryBean container = new ServletServerContainerFactoryBean();

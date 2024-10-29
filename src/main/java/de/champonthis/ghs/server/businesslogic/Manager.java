@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.businesslogic;
 
 import java.util.List;
@@ -23,9 +20,6 @@ import de.champonthis.ghs.server.repository.GameCodeRepository;
 import de.champonthis.ghs.server.repository.GameRepository;
 import de.champonthis.ghs.server.repository.SettingRepository;
 
-/**
- * The Class Manager.
- */
 @Component
 public class Manager implements SmartInitializingSingleton {
 
@@ -69,11 +63,6 @@ public class Manager implements SmartInitializingSingleton {
 		}
 	}
 
-	/**
-	 * Game codes.
-	 *
-	 * @return the game code list
-	 */
 	public List<GameCode> gameCodes() {
 		try {
 			return gameCodeRepository.findAll();
@@ -83,21 +72,10 @@ public class Manager implements SmartInitializingSingleton {
 		return null;
 	}
 
-	/**
-	 * Count game codes.
-	 *
-	 * @return the long
-	 */
 	public long countGameCodes() {
 		return gameCodeRepository.count();
 	}
 
-	/**
-	 * Creates the game code.
-	 *
-	 * @param code   the code
-	 * @param gameId the game id
-	 */
 	public void createGameCode(String code, long gameId) {
 		GameCode gameCode = new GameCode();
 		gameCode.setGameCode(code);
@@ -105,13 +83,6 @@ public class Manager implements SmartInitializingSingleton {
 		gameCodeRepository.save(gameCode);
 	}
 
-	/**
-	 * Save game code.
-	 *
-	 * @param code        the code
-	 * @param permissions the permissions
-	 * @param gameId      the game id
-	 */
 	public void saveGameCode(String code, String permissions, long gameId) {
 		GameCode gameCode = new GameCode();
 		gameCode.setGameCode(code);
@@ -120,12 +91,6 @@ public class Manager implements SmartInitializingSingleton {
 		gameCodeRepository.save(gameCode);
 	}
 
-	/**
-	 * Gets the game id by game code.
-	 *
-	 * @param code the code
-	 * @return the game id by game code
-	 */
 	public Long getGameIdByGameCode(String code) {
 		GameCode gameCode = gameCodeRepository.findById(code).orElse(null);
 
@@ -136,12 +101,6 @@ public class Manager implements SmartInitializingSingleton {
 		return null;
 	}
 
-	/**
-	 * Gets the permissions by game code.
-	 *
-	 * @param code the code
-	 * @return the permissions by game code
-	 */
 	public Permissions getPermissionsByGameCode(String code) {
 		GameCode gameCode = gameCodeRepository.findById(code).orElse(null);
 
@@ -152,12 +111,6 @@ public class Manager implements SmartInitializingSingleton {
 		return null;
 	}
 
-	/**
-	 * Gets the game.
-	 *
-	 * @param id the id
-	 * @return the game
-	 */
 	public GameModel getGame(long id) {
 		Game game = gameRepository.findById(id).orElse(null);
 
@@ -168,12 +121,6 @@ public class Manager implements SmartInitializingSingleton {
 		return null;
 	}
 
-	/**
-	 * Creates the game.
-	 *
-	 * @param game the game
-	 * @return the integer
-	 */
 	public Long createGame(GameModel gameModel) {
 		Game game = new Game();
 		game.setGame(gson.toJson(gameModel));
@@ -181,12 +128,6 @@ public class Manager implements SmartInitializingSingleton {
 		return game.getId();
 	}
 
-	/**
-	 * Sets the game.
-	 *
-	 * @param id   the id
-	 * @param game the game
-	 */
 	public void setGame(long id, GameModel gameModel) {
 		Game game = gameRepository.findById(id).orElse(null);
 
@@ -196,12 +137,6 @@ public class Manager implements SmartInitializingSingleton {
 		}
 	}
 
-	/**
-	 * Gets the settings.
-	 *
-	 * @param gameId the game id
-	 * @return the settings
-	 */
 	public Settings getSettings(long gameId) {
 		Setting setting = settingRepository.findById(gameId).orElse(null);
 
@@ -212,12 +147,6 @@ public class Manager implements SmartInitializingSingleton {
 		return null;
 	}
 
-	/**
-	 * Creates the settings.
-	 *
-	 * @param settings the settings
-	 * @param gameId   the game id
-	 */
 	public void createSettings(Settings settings, long gameId) {
 		Setting setting = new Setting();
 		setting.setSettings(gson.toJson(settings));
@@ -225,12 +154,6 @@ public class Manager implements SmartInitializingSingleton {
 		settingRepository.save(setting);
 	}
 
-	/**
-	 * Sets the settings.
-	 *
-	 * @param settings the settings
-	 * @param gameId   the game id
-	 */
 	public void setSettings(Settings settings, long gameId) {
 		Setting setting = settingRepository.findById(gameId).orElse(null);
 

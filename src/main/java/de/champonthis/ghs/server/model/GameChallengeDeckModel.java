@@ -1,15 +1,9 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.model;
 
 import java.util.LinkedList;
 
 import de.champonthis.ghs.server.util.Required;
 
-/**
- * The Class GameChallengeDeckModel.
- */
 public class GameChallengeDeckModel {
 
 	@Required

@@ -1,15 +1,9 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.gui;
 
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
 
-/**
- * The Class GuiCondition.
- */
 public class GuiCondition implements Condition {
 
 	@Override

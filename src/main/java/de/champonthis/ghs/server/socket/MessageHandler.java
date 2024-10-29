@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.socket;
 
 import java.time.Duration;
@@ -39,9 +36,6 @@ import de.champonthis.ghs.server.socket.exception.SendErrorException;
 import de.champonthis.ghs.server.socket.model.MessageType;
 import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 
-/**
- * The Class MessageHandler.
- */
 @Component
 public class MessageHandler extends TextWebSocketHandler {
 
@@ -123,9 +117,6 @@ public class MessageHandler extends TextWebSocketHandler {
 		}
 	}
 
-	/**
-	 * The Class CleanUpSessionsRunner.
-	 */
 	class CleanUpSessionsRunner implements Runnable {
 
 		@Override
@@ -623,13 +614,6 @@ public class MessageHandler extends TextWebSocketHandler {
 
 	}
 
-	/**
-	 * Checks if is server session.
-	 *
-	 * @param session the session
-	 * @param gameId  the game id
-	 * @return true, if is server session
-	 */
 	public boolean isServerSession(WebSocketSession session, Long gameId) {
 		long serverSessionIndex = Long.MAX_VALUE;
 		boolean isServer = false;
@@ -652,25 +636,10 @@ public class MessageHandler extends TextWebSocketHandler {
 		return isServer;
 	}
 
-	/**
-	 * Send error.
-	 *
-	 * @param session the session
-	 * @param message the message
-	 * @throws Exception the exception
-	 */
 	protected void sendError(WebSocketSession session, String message) throws Exception {
 		sendError(session, message, true);
 	}
 
-	/**
-	 * Send error.
-	 *
-	 * @param session the session
-	 * @param message the message
-	 * @param stop    the stop
-	 * @throws Exception the exception
-	 */
 	protected void sendError(WebSocketSession session, String message, boolean stop) throws Exception {
 		JsonObject error = new JsonObject();
 		error.addProperty("type", "error");
@@ -682,20 +651,10 @@ public class MessageHandler extends TextWebSocketHandler {
 		}
 	}
 
-	/**
-	 * Gets the web socket sessions.
-	 *
-	 * @return the web socket sessions
-	 */
 	public List<WebSocketSessionContainer> getWebSocketSessions() {
 		return webSocketSessions;
 	}
 
-	/**
-	 * Gets the web socket sessions clean up.
-	 *
-	 * @return the web socket sessions clean up
-	 */
 	public List<WebSocketSessionContainer> getWebSocketSessionsCleanUp() {
 		return webSocketSessionsCleanUp;
 	}

@@ -1,6 +1,3 @@
-/**
- * 
- */
 package de.champonthis.ghs.server.web;
 
 import org.apache.catalina.connector.Connector;
@@ -13,19 +10,10 @@ import org.springframework.context.annotation.Conditional;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.stereotype.Component;
 
-/**
- * The Class HttpServer.
- */
 @Component
 @Configuration
 public class HttpServer {
 
-	/**
-	 * Servlet container.
-	 *
-	 * @param httpPort the http port
-	 * @return the servlet web server factory
-	 */
 	@Bean
 	@Conditional(HttpServerCondition.class)
 	@ConditionalOnProperty(name = "server.ssl.enabled")
