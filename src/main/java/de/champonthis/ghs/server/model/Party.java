@@ -76,6 +76,8 @@ public class Party {
 	@Required
 	private LinkedList<BuildingModel> buildings = new LinkedList<>();
 	@Required
+	private LinkedList<PetIdentifier> pets = new LinkedList<>();
+	@Required
 	private LinkedList<Loot> lootDeckEnhancements = new LinkedList<>();
 	@Required
 	private LinkedList<LootType> lootDeckFixed = new LinkedList<>();
@@ -83,6 +85,7 @@ public class Party {
 	private LinkedList<String> lootDeckSections = new LinkedList<>();
 	private Boolean envelopeB;
 	private Integer trials;
+	private GardenModel garden;
 
 	public int getId() {
 		return id;
@@ -460,6 +463,14 @@ public class Party {
 		this.buildings = buildings;
 	}
 
+	public LinkedList<PetIdentifier> getPets() {
+		return pets;
+	}
+
+	public void setPets(LinkedList<PetIdentifier> pets) {
+		this.pets = pets;
+	}
+
 	public LinkedList<Loot> getLootDeckEnhancements() {
 		return lootDeckEnhancements;
 	}
@@ -498,6 +509,14 @@ public class Party {
 
 	public void setTrials(Integer trials) {
 		this.trials = trials;
+	}
+
+	public GardenModel getGarden() {
+		return garden;
+	}
+
+	public void setGarden(GardenModel garden) {
+		this.garden = garden;
 	}
 
 }
