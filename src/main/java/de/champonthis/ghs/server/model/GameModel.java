@@ -35,7 +35,7 @@ public class GameModel {
 	@Required
 	private LinkedList<ScenarioRuleIdentifier> appliedScenarioRules = new LinkedList<>();
 	@Required
-	private LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules = new LinkedList<>();
+	private LinkedList<ScenarioRuleIdentifier> discardedScenarioRules = new LinkedList<>();
 	@Required
 	private int level = 1;
 	@Required
@@ -91,6 +91,8 @@ public class GameModel {
 	@Required
 	private LinkedList<Integer> favorPoints = new LinkedList<>();
 	private Boolean keepFavors = false;
+	// Migration
+	private LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules = new LinkedList<>();
 
 	public Long getRevision() {
 		return revision;
@@ -220,12 +222,12 @@ public class GameModel {
 		this.appliedScenarioRules = appliedScenarioRules;
 	}
 
-	public LinkedList<ScenarioRuleIdentifier> getDisgardedScenarioRules() {
-		return disgardedScenarioRules;
+	public LinkedList<ScenarioRuleIdentifier> getDiscardedScenarioRules() {
+		return discardedScenarioRules;
 	}
 
-	public void setDisgardedScenarioRules(LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules) {
-		this.disgardedScenarioRules = disgardedScenarioRules;
+	public void setDiscardedScenarioRules(LinkedList<ScenarioRuleIdentifier> discardedScenarioRules) {
+		this.discardedScenarioRules = discardedScenarioRules;
 	}
 
 	public int getLevel() {
@@ -458,6 +460,14 @@ public class GameModel {
 
 	public void setKeepFavors(Boolean keepFavors) {
 		this.keepFavors = keepFavors;
+	}
+
+	public LinkedList<ScenarioRuleIdentifier> getDisgardedScenarioRules() {
+		return disgardedScenarioRules;
+	}
+
+	public void setDisgardedScenarioRules(LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules) {
+		this.disgardedScenarioRules = disgardedScenarioRules;
 	}
 
 }

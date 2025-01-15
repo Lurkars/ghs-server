@@ -11,12 +11,14 @@ public class GameAttackModifierDeckModel {
 	@Required
 	private LinkedList<String> cards = new LinkedList<>();
 	@Required
-	private LinkedList<Integer> disgarded = new LinkedList<>();
+	private LinkedList<Integer> discarded = new LinkedList<>();
 	@Required
 	private boolean active = true;
 	private Integer lastVisible;
 	private String state;
 	private Boolean bb;
+	// migration
+	private LinkedList<Integer> disgarded = new LinkedList<>();
 
 	public int getCurrent() {
 		return current;
@@ -34,12 +36,12 @@ public class GameAttackModifierDeckModel {
 		this.cards = cards;
 	}
 
-	public LinkedList<Integer> getDisgarded() {
-		return disgarded;
+	public LinkedList<Integer> getDiscarded() {
+		return discarded;
 	}
 
-	public void setDisgarded(LinkedList<Integer> disgarded) {
-		this.disgarded = disgarded;
+	public void setDiscarded(LinkedList<Integer> discarded) {
+		this.discarded = discarded;
 	}
 
 	public boolean isActive() {
@@ -72,6 +74,14 @@ public class GameAttackModifierDeckModel {
 
 	public void setState(Boolean bb) {
 		this.bb = bb;
+	}
+
+	public LinkedList<Integer> getDisgarded() {
+		return disgarded;
+	}
+
+	public void setDisgarded(LinkedList<Integer> disgarded) {
+		this.disgarded = disgarded;
 	}
 
 }
