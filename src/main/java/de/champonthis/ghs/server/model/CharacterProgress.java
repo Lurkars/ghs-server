@@ -33,6 +33,8 @@ public class CharacterProgress {
 	@Required
 	private LinkedList<ScenarioStats> scenarioStats = new LinkedList<>();
 	private Identifier trial;
+	@Required
+	private LinkedList<Integer> deck = new LinkedList<>();
 
 	public int getExperience() {
 		return experience;
@@ -178,4 +180,11 @@ public class CharacterProgress {
 		this.trial = trial;
 	}
 
+	public LinkedList<Integer> getDeck() {
+		return deck;
+	}
+
+	public void setDeck(LinkedList<Integer> deck) {
+		this.deck = deck;
+	}
 }
