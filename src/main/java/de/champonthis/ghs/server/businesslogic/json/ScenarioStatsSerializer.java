@@ -12,25 +12,21 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonSerializationContext;
 import com.google.gson.JsonSerializer;
 
-import de.champonthis.ghs.server.model.CharacterProgress;
 import de.champonthis.ghs.server.model.LootType;
 import de.champonthis.ghs.server.model.ScenarioStats;
 import de.champonthis.ghs.server.util.RequiredTypeAdapterFactory;
 
-public class CharacterProgressSerializer implements JsonSerializer<CharacterProgress> {
+public class ScenarioStatsSerializer implements JsonSerializer<ScenarioStats> {
 
-	private Gson gson = new GsonBuilder()
-			.registerTypeAdapter(ScenarioStats.class, new ScenarioStatsDeserializer())
-			.registerTypeAdapter(ScenarioStats.class, new ScenarioStatsSerializer())
-			.registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
+	private Gson gson = new GsonBuilder().registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
 
 	@Override
-	public JsonElement serialize(CharacterProgress src, Type typeOfSrc, JsonSerializationContext context) {
+	public JsonElement serialize(ScenarioStats src, Type typeOfSrc, JsonSerializationContext context) {
 
 		Map<LootType, Integer> loot = src.getLoot();
 
 		src.setLoot(new HashMap<>());
-		JsonObject result = gson.toJsonTree(src, CharacterProgress.class).getAsJsonObject();
+		JsonObject result = gson.toJsonTree(src, ScenarioStats.class).getAsJsonObject();
 		src.setLoot(loot);
 
 		JsonObject lootJson = new JsonObject();

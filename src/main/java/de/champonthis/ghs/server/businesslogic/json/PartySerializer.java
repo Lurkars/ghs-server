@@ -15,6 +15,7 @@ import com.google.gson.JsonSerializer;
 import de.champonthis.ghs.server.model.CharacterProgress;
 import de.champonthis.ghs.server.model.LootType;
 import de.champonthis.ghs.server.model.Party;
+import de.champonthis.ghs.server.model.ScenarioStats;
 import de.champonthis.ghs.server.util.RequiredTypeAdapterFactory;
 
 public class PartySerializer implements JsonSerializer<Party> {
@@ -22,6 +23,8 @@ public class PartySerializer implements JsonSerializer<Party> {
 	private Gson gson = new GsonBuilder()
 			.registerTypeAdapter(CharacterProgress.class, new CharacterProgressDeserializer())
 			.registerTypeAdapter(CharacterProgress.class, new CharacterProgressSerializer())
+			.registerTypeAdapter(ScenarioStats.class, new ScenarioStatsDeserializer())
+			.registerTypeAdapter(ScenarioStats.class, new ScenarioStatsSerializer())
 			.registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
 
 	@Override

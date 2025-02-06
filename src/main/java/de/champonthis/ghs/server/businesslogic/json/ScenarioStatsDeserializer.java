@@ -11,20 +11,16 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 
-import de.champonthis.ghs.server.model.CharacterProgress;
 import de.champonthis.ghs.server.model.LootType;
 import de.champonthis.ghs.server.model.ScenarioStats;
 import de.champonthis.ghs.server.util.RequiredTypeAdapterFactory;
 
-public class CharacterProgressDeserializer implements JsonDeserializer<CharacterProgress> {
+public class ScenarioStatsDeserializer implements JsonDeserializer<ScenarioStats> {
 
-	private Gson gson = new GsonBuilder()
-			.registerTypeAdapter(ScenarioStats.class, new ScenarioStatsDeserializer())
-			.registerTypeAdapter(ScenarioStats.class, new ScenarioStatsSerializer())
-			.registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
+	private Gson gson = new GsonBuilder().registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
 
 	@Override
-	public CharacterProgress deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context)
+	public ScenarioStats deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext context)
 			throws JsonParseException {
 
 		JsonObject jsonObject = jsonElement.getAsJsonObject();
@@ -35,18 +31,18 @@ public class CharacterProgressDeserializer implements JsonDeserializer<Character
 			jsonObject.add("loot", new JsonObject());
 		}
 
-		CharacterProgress progress = gson.fromJson(jsonObject, CharacterProgress.class);
-		progress.setLoot(new HashMap<>());
+		ScenarioStats stats = gson.fromJson(jsonObject, ScenarioStats.class);
+		stats.setLoot(new HashMap<>());
 
 		for (String key : lootJson.keySet()) {
 			if (lootJson.get(key).isJsonPrimitive()) {
-				progress.getLoot().put(LootType.valueOf(key.toUpperCase()), lootJson.get(key).getAsInt());
+				stats.getLoot().put(LootType.valueOf(key.toUpperCase()), lootJson.get(key).getAsInt());
 			} else {
-				progress.getLoot().put(LootType.valueOf(key.toUpperCase()), 0);
+				stats.getLoot().put(LootType.valueOf(key.toUpperCase()), 0);
 			}
 		}
 
-		return progress;
+		return stats;
 	}
 
 }
