@@ -379,7 +379,8 @@ public class GameController {
 			}
 
 			for (GameCharacterModel character : game.getCharacters()) {
-				if (character.getNumber() == playerNumber) {
+				if (character.getNumber() == playerNumber
+						&& (character.getInitiative() != initiative || character.isLongRest() != longRest)) {
 					character.setInitiative(initiative);
 					character.setLongRest(longRest);
 					changed = true;
@@ -387,7 +388,7 @@ public class GameController {
 			}
 
 			if (!changed) {
-				throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+				throw new ResponseStatusException(HttpStatus.NOT_MODIFIED);
 			}
 
 			game.setRevision(game.getRevision() + 1);
