@@ -28,6 +28,7 @@ import de.champonthis.ghs.server.businesslogic.Manager;
 import de.champonthis.ghs.server.model.GameCharacterModel;
 import de.champonthis.ghs.server.model.GameModel;
 import de.champonthis.ghs.server.model.GameMonsterModel;
+import de.champonthis.ghs.server.model.GameState;
 import de.champonthis.ghs.server.model.Identifier;
 import de.champonthis.ghs.server.model.Permissions;
 import de.champonthis.ghs.server.socket.MessageHandler;
@@ -349,6 +350,12 @@ public class GameController {
 			int playerNumber = data.get("playerNumber").getAsInt();
 			int initiative = data.get("initiative").getAsInt();
 			boolean longRest = initiative == 99 && data.has("longRest") && data.get("longRest").getAsBoolean();
+			boolean force = data.has("force") && data.get("force").getAsBoolean();
+
+			if (!force && game.getState().equals(GameState.NEXT)) {
+				throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+						"Do not set Initiative after Draw!");
+			}
 
 			if (permissions != null) {
 				if (!permissions.isCharacters()) {
