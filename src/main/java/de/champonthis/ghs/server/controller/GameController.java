@@ -20,7 +20,9 @@ import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.socket.TextMessage;
 
 import com.google.gson.Gson;
+import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 import de.champonthis.ghs.server.businesslogic.Manager;
 import de.champonthis.ghs.server.model.GameCharacterModel;
@@ -102,7 +104,18 @@ public class GameController {
 		}
 
 		try {
-			GameModel gameUpdate = gson.fromJson(payload, GameModel.class);
+			GameModel gameUpdate = null;
+			JsonArray undoInfo = null;
+			JsonObject data = JsonParser.parseString(payload).getAsJsonObject();
+
+			if (data.has("game")) {
+				gameUpdate = gson.fromJson(data.get("game"), GameModel.class);
+				if (data.has("undoinfo")) {
+					undoInfo = data.get("undoinfo").getAsJsonArray();
+				}
+			} else {
+				gameUpdate = gson.fromJson(payload, GameModel.class);
+			}
 
 			if (gameUpdate == null) {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid game payload");
@@ -293,6 +306,9 @@ public class GameController {
 						}
 						gameResponse.addProperty("type", "game");
 						gameResponse.add("payload", gson.toJsonTree(gameUpdate));
+						if (undoInfo != null) {
+							gameResponse.add("undoinfo", undoInfo);
+						}
 						container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
 					}
 				}
@@ -308,4 +324,96 @@ public class GameController {
 		}
 	}
 
+	@PostMapping(value = "/initiative", produces = { MediaType.APPLICATION_JSON_VALUE })
+	public String setInitiative(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
+			@RequestBody String payload) {
+
+		GameModel game = getGame(gameCode);
+
+		Long gameId = manager.getGameIdByGameCode(gameCode);
+
+		Permissions permissions = manager.getPermissionsByGameCode(gameCode);
+
+		if (payload == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid game payload");
+		}
+
+		JsonObject data = JsonParser.parseString(payload).getAsJsonObject();
+
+		if (!data.has("playerNumber") || !data.has("initiative")) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid game payload");
+		}
+
+		try {
+			boolean changed = false;
+			int playerNumber = data.get("playerNumber").getAsInt();
+			int initiative = data.get("initiative").getAsInt();
+			boolean longRest = initiative == 99 && data.has("longRest") && data.get("longRest").getAsBoolean();
+
+			if (permissions != null) {
+				if (!permissions.isCharacters()) {
+					boolean characterPermission = false;
+					for (GameCharacterModel character : game.getCharacters()) {
+						if (character.getNumber() == playerNumber) {
+							for (Identifier characterFigure : permissions.getCharacter()) {
+								if (characterFigure.getName().equals(character.getName())
+										&& characterFigure.getEdition().equals(character.getEdition())) {
+									characterPermission = true;
+									break;
+								}
+							}
+						}
+					}
+					if (!characterPermission) {
+						throw new ResponseStatusException(HttpStatus.FORBIDDEN,
+								"Permission(s) missing: characters");
+					}
+				}
+			}
+
+			for (GameCharacterModel character : game.getCharacters()) {
+				if (character.getNumber() == playerNumber) {
+					character.setInitiative(initiative);
+					character.setLongRest(longRest);
+					changed = true;
+				}
+			}
+
+			if (!changed) {
+				throw new ResponseStatusException(HttpStatus.NO_CONTENT);
+			}
+
+			game.setRevision(game.getRevision() + 1);
+			game.setServer(false);
+			manager.setGame(gameId, game);
+
+			for (WebSocketSessionContainer container : messageHandler.getWebSocketSessions()) {
+				if (container.getGameId() == gameId
+						&& messageHandler.getWebSocketSessionsCleanUp().indexOf(container) == -1) {
+					JsonObject gameResponse = new JsonObject();
+					if (!game.isServer()) {
+						game.setServer(messageHandler.isServerSession(container.getSession(), gameId));
+					}
+					gameResponse.addProperty("type", "game");
+					gameResponse.add("payload", gson.toJsonTree(game));
+
+					JsonArray undoInfo = new JsonArray();
+					undoInfo.add("serverSync");
+					undoInfo.add("setInitiative");
+					undoInfo.add("#" + playerNumber);
+					undoInfo.add(initiative);
+					gameResponse.add("undoinfo", undoInfo);
+					container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+				}
+			}
+
+			return gson.toJson(game);
+		} catch (Exception e) {
+			if (!(e instanceof ResponseStatusException)) {
+				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid game payload");
+			} else {
+				throw (ResponseStatusException) e;
+			}
+		}
+	}
 }
