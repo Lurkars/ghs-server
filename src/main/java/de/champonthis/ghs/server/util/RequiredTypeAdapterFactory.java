@@ -50,13 +50,15 @@ public class RequiredTypeAdapterFactory implements TypeAdapterFactory {
 					throw new IllegalArgumentException(e);
 				}
 				if (v == null) {
-					throw new IllegalArgumentException(field.getName() + " is null");
+					throw new IllegalArgumentException(
+							field.getName() + " is null (" + field.getType().getSimpleName() + ")");
 				}
 
 				if (List.class.isAssignableFrom(t) && !((LinkedList<?>) v).isEmpty()) {
 					for (Object item : ((LinkedList<?>) v)) {
 						if (item == null) {
-							throw new IllegalArgumentException(field.getName() + " has null item");
+							throw new IllegalArgumentException(
+									field.getName() + " has null item (" + field.getType().getSimpleName() + ")");
 						}
 					}
 				}
