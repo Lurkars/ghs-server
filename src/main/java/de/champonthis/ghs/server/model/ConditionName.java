@@ -78,6 +78,9 @@ public enum ConditionName {
 	@SerializedName("shield")
 	SHIELD,
 
+	@SerializedName("retaliate")
+	RETALIATE,
+
 	@SerializedName("invalid")
 	INVALID
 }
