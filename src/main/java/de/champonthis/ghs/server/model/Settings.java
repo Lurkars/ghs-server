@@ -33,6 +33,8 @@ public class Settings {
 	@Required
 	private boolean alwaysFhAdvantage = false;
 	@Required
+	private boolean alwaysFhEnhancements = false;
+	@Required
 	private boolean alwaysFhSolo = false;
 	@Required
 	private boolean alwaysHazardousTerrain = false;
@@ -198,6 +200,8 @@ public class Settings {
 	@Required
 	private boolean summons = true;
 	@Required
+	private boolean temporaryEnhancements = true;
+	@Required
 	private boolean treasures = true;
 	@Required
 	private boolean treasuresLoot = true;
@@ -304,6 +308,14 @@ public class Settings {
 
 	public void setAlwaysFhAdvantage(boolean alwaysFhAdvantage) {
 		this.alwaysFhAdvantage = alwaysFhAdvantage;
+	}
+
+	public boolean isAlwaysFhEnhancements() {
+		return alwaysFhEnhancements;
+	}
+
+	public void setAlwaysFhEnhancements(boolean alwaysFhEnhancements) {
+		this.alwaysFhEnhancements = alwaysFhEnhancements;
 	}
 
 	public boolean isAlwaysFhSolo() {
@@ -968,6 +980,14 @@ public class Settings {
 
 	public boolean isSummons() {
 		return summons;
+	}
+
+	public boolean isTemporaryEnhancements() {
+		return temporaryEnhancements;
+	}
+
+	public void setTemporaryEnhancements(boolean temporaryEnhancements) {
+		this.temporaryEnhancements = temporaryEnhancements;
 	}
 
 	public boolean isTreasures() {

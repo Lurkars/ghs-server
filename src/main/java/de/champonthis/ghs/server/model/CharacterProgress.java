@@ -35,6 +35,8 @@ public class CharacterProgress {
 	private Identifier trial;
 	@Required
 	private LinkedList<Integer> deck = new LinkedList<>();
+	@Required
+	private LinkedList<Enhancement> enhancements = new LinkedList<>();
 
 	public int getExperience() {
 		return experience;
@@ -187,4 +189,13 @@ public class CharacterProgress {
 	public void setDeck(LinkedList<Integer> deck) {
 		this.deck = deck;
 	}
+
+	public LinkedList<Enhancement> getEnhancements() {
+		return enhancements;
+	}
+
+	public void setEnhancements(LinkedList<Enhancement> enhancements) {
+		this.enhancements = enhancements;
+	}
+
 }
