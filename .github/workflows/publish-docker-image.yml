@@ -48,15 +48,18 @@ jobs:
       - 
         name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
-      -
-        name: Build and push
-        uses: docker/build-push-action@v5
+      - name: Set up JDK 17 for x64
+        uses: actions/setup-java@v4
         with:
-          context: .
-          platforms: linux/amd64,linux/arm64
-          push: ${{ github.event_name != 'pull_request' }}
-          tags: ${{ steps.meta.outputs.tags }}
-          labels: ${{ steps.meta.outputs.labels }}
+          java-version: '17'
+          distribution: 'temurin'
+          architecture: x64
+      - name: Maven
+        run: mvn install -P db-sqlite-image -f pom.xml
+      - name: Docker push
+        run: |
+          docker image tag ${{ env.SLUG_DOCKERHUB }} "${{env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
+          docker push "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
       -
         name: Inspect Image published to Docker
         run: |
