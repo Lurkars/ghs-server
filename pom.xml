@@ -104,6 +104,51 @@
 			</activation>
 		</profile>
 		<profile>
+			<id>db-sqlite-image</id>
+			<dependencies>
+				<dependency>
+					<groupId>org.xerial</groupId>
+					<artifactId>sqlite-jdbc</artifactId>
+				</dependency>
+				<dependency>
+					<groupId>org.hibernate.orm</groupId>
+					<artifactId>hibernate-community-dialects</artifactId>
+				</dependency>
+			</dependencies>
+			<build>
+				<plugins>
+					<plugin>
+						<groupId>com.google.cloud.tools</groupId>
+						<artifactId>jib-maven-plugin</artifactId>
+						<version>3.4.5</version>
+						<executions>
+							<execution>
+								<phase>package</phase>
+								<goals>
+									<goal>dockerBuild</goal>
+								</goals>
+							</execution>
+						</executions>
+						<configuration>
+							<from>
+								<image>eclipse-temurin:24-jre-alpine</image>
+							</from>
+							<to>
+								<image>gloomhavensecretariat/ghs-server</image>
+							</to>
+							<container>
+								<mainClass>de.champonthis.ghs.server.Application</mainClass>
+								<args>
+									<arg>-Djava.awt.headless=true</arg>
+								</args>
+								<format>OCI</format>
+							</container>
+						</configuration>
+					</plugin>
+				</plugins>
+			</build>
+		</profile>
+		<profile>
 			<id>db-postgresql</id>
 			<dependencies>
 				<dependency>
