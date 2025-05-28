@@ -66,8 +66,6 @@ jobs:
 
           docker image tag ${{ env.SLUG_DOCKERHUB }} "${{env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
           docker push "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
-
-          docker image tag ${{ env.SLUG_GHCR_LC }} "ghcr.io/${{ env.SLUG_GHCR_LC }}:${{ steps.meta.outputs.version }}"
           docker push "ghcr.io/${{ env.SLUG_GHCR_LC }}:${{ steps.meta.outputs.version }}"
       -
         name: Inspect Image published to Docker
