@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<image.name>gloomhavensecretariat/ghs-server</image.name>
-		<revision>0.115.3</revision>
+		<revision>0.115.4</revision>
 	</properties>
 
 	<parent>
@@ -126,7 +126,7 @@
 							<execution>
 								<phase>package</phase>
 								<goals>
-									<goal>dockerBuild</goal>
+									<goal>build</goal>
 								</goals>
 							</execution>
 						</executions>
