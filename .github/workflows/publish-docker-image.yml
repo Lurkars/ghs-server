@@ -61,6 +61,8 @@ jobs:
           mvn install -P db-sqlite-image -f pom.xml
           docker image tag ${{ env.SLUG_DOCKERHUB }} "${{env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
           docker push "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
+          docker image tag ${{ env.SLUG_DOCKERHUB }} "ghcr.io/${{ env.SLUG_GHCR_LC }}:${{ steps.meta.outputs.version }}"
+          docker push "ghcr.io/${{ env.SLUG_GHCR_LC }}:${{ steps.meta.outputs.version }}"
       -
         name: Inspect Image published to Docker
         run: |
