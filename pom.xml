@@ -10,7 +10,8 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
-		<revision>0.115.2</revision>
+		<image.name>gloomhavensecretariat/ghs-server</image.name>
+		<revision>0.115.3</revision>
 	</properties>
 
 	<parent>
@@ -134,7 +135,7 @@
 								<image>eclipse-temurin:24-jre-alpine</image>
 							</from>
 							<to>
-								<image>gloomhavensecretariat/ghs-server</image>
+								<image>${image.name}</image>
 							</to>
 							<container>
 								<mainClass>de.champonthis.ghs.server.Application</mainClass>
