@@ -56,20 +56,24 @@ jobs:
           distribution: 'temurin'
           architecture: x64
       -
+        name: Lowercase GHCR repository name # required because docker doesn't support uppercase chars: https://github.com/docker/build-push-action/issues/37
+        run: |
+          echo "SLUG_GHCR_LC=${SLUG_GHCR,,}" >>${GITHUB_ENV}
+      -
         name: Build and push image
         run: |
           mvn install -P db-sqlite-image -f pom.xml
+
           docker image tag ${{ env.SLUG_DOCKERHUB }} "${{env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
           docker push "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
+
+          docker image tag ${{ env.SLUG_GHCR_LC }} "ghcr.io/${{ env.SLUG_GHCR_LC }}:${{ steps.meta.outputs.version }}"
+          docker push "ghcr.io/${{ env.SLUG_GHCR_LC }}:${{ steps.meta.outputs.version }}"
       -
         name: Inspect Image published to Docker
         run: |
           docker pull "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
           docker image inspect "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
-      -
-        name: Lowercase GHCR repository name # required because docker doesn't support uppercase chars: https://github.com/docker/build-push-action/issues/37
-        run: |
-          echo "SLUG_GHCR_LC=${SLUG_GHCR,,}" >>${GITHUB_ENV}
       -
         name: Inspect Image published to GHCR
         run: |
