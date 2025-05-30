@@ -424,4 +424,49 @@ public class GameController {
 			}
 		}
 	}
+
+	@PostMapping(value = "/command")
+	public void remoteCommand(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
+			@RequestBody String payload) {
+
+		Long gameId = manager.getGameIdByGameCode(gameCode);
+
+		if (gameId == null) {
+			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, "invalid authorization");
+		}
+
+		Permissions permissions = manager.getPermissionsByGameCode(gameCode);
+
+		if (permissions != null) {
+			throw new ResponseStatusException(HttpStatus.FORBIDDEN, "missing permissions");
+		}
+
+		if (payload == null) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid game payload");
+		}
+
+		JsonObject data = JsonParser.parseString(payload).getAsJsonObject();
+
+		if (!data.has("id")) {
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid command payload");
+		}
+
+		for (WebSocketSessionContainer container : messageHandler.getWebSocketSessions()) {
+			if (container.getGameId() == gameId
+					&& messageHandler.getWebSocketSessionsCleanUp().indexOf(container) == -1) {
+				try {
+ 					JsonObject response = new JsonObject();
+					response.addProperty("type", "remoteCommand");
+					response.add("payload",data);
+					container.getSession()
+							.sendMessage(new TextMessage(gson.toJson(response)));
+				} catch (Exception e) {
+					if (debug) {
+						e.printStackTrace();
+					}
+				}
+			}
+		}
+
+	}
 }
