@@ -384,8 +384,8 @@ public class MessageHandler extends TextWebSocketHandler {
 														} else {
 
 															if (permissions.isRound()) {
-																monster.setOff(updateMonster.getOff());
-																monster.setActive(updateMonster.getActive());
+																monster.setOff(updateMonster.isOff());
+																monster.setActive(updateMonster.isActive());
 																monster.setEntities(updateMonster.getEntities());
 															}
 
@@ -393,8 +393,8 @@ public class MessageHandler extends TextWebSocketHandler {
 																monster.setAbility(updateMonster.getAbility());
 																monster.setAbilities(updateMonster.getAbilities());
 																monster.setEntities(updateMonster.getEntities());
-																monster.setActive(updateMonster.getActive());
-																monster.setOff(updateMonster.getOff());
+																monster.setActive(updateMonster.isActive());
+																monster.setOff(updateMonster.isOff());
 															}
 
 															if (scenarioPermissions
