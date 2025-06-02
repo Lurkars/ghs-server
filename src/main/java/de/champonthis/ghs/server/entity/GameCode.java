@@ -4,9 +4,11 @@ import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
+import lombok.Data;
 
 @Entity
 @Table(name = "game_codes")
+@Data
 public class GameCode {
 
     @Id
@@ -19,29 +21,4 @@ public class GameCode {
     @Column(name = "json_path")
     private String jsonPath;
 
-    public String getGameCode() {
-        return gameCode;
-    }
-
-    public void setGameCode(String gameCode) {
-        this.gameCode = gameCode;
-    }
-
-    public Long getGameId() {
-        return gameId;
-    }
-
-    public void setGameId(Long gameId) {
-        this.gameId = gameId;
-    }
-
-    public String getJsonPath() {
-        return jsonPath;
-    }
-
-    public void setJsonPath(String jsonPath) {
-        this.jsonPath = jsonPath;
-    }
-    
-    
 }
