@@ -18,7 +18,7 @@ import com.google.gson.JsonObject;
 @ControllerAdvice
 public class ControllerResponseEntityExceptionHandler extends ResponseEntityExceptionHandler {
 
-	private Gson gson = new Gson();
+	private final Gson gson = new Gson();
 
 	@ExceptionHandler(value = { ResponseStatusException.class })
 	protected ResponseEntity<Object> handleResponseEntityStatusException(ResponseStatusException exception,

@@ -35,22 +35,32 @@ import com.google.gson.JsonObject;
 @Component
 public class ClientManager implements SmartInitializingSingleton {
 
-	@Value("${ghs-server.lastestClientOnStartup:false}")
-	private boolean lastestClientOnStartup;
-	@Value("${server.ssl.enabled:false}")
-	private boolean ssl;
-	@Value("${server.port:8080}")
-	private int port;
-	@Value("${server.http.port:8081}")
-	private int httpPort;
-	@Value("${ghs-server.externalHost:}")
-	private String externalHost;
-	@Value("${ghs-server.defaultClientSettings:false}")
-	private boolean defaultClientSettings;
+	private final boolean lastestClientOnStartup;
+	private final boolean ssl;
+	private final int port;
+	private final int httpPort;
+	private final String externalHost;
+	private final boolean defaultClientSettings;
 
-	private Gson gson = new Gson();
+	private final Gson gson = new Gson();
 
-	@Override
+	public ClientManager(
+			@Value("${ghs-server.lastestClientOnStartup:false}") boolean lastestClientOnStartup,
+			@Value("${server.ssl.enabled:false}") boolean ssl,
+			@Value("${server.port:8080}") int port,
+			@Value("${server.http.port:8081}") int httpPort,
+			@Value("${ghs-server.externalHost:}") String externalHost,
+			@Value("${ghs-server.defaultClientSettings:false}") boolean defaultClientSettings
+	) {
+		this.lastestClientOnStartup = lastestClientOnStartup;
+		this.ssl = ssl;
+		this.port = port;
+		this.httpPort = httpPort;
+		this.externalHost = externalHost;
+		this.defaultClientSettings = defaultClientSettings;
+	}
+
+    @Override
 	public void afterSingletonsInstantiated() {
 		if (lastestClientOnStartup) {
 			installLatestClient();

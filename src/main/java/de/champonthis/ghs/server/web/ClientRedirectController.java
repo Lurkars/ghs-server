@@ -12,10 +12,13 @@ import org.springframework.web.servlet.view.RedirectView;
 @Controller
 public class ClientRedirectController {
 
-	@Autowired
-	private ResourceLoader resourceLoader;
+	private final ResourceLoader resourceLoader;
 
-	@GetMapping(value = "/", headers = { "Connection!=upgrade", "Connection!=Upgrade",
+    public ClientRedirectController(ResourceLoader resourceLoader) {
+        this.resourceLoader = resourceLoader;
+    }
+
+    @GetMapping(value = "/", headers = { "Connection!=upgrade", "Connection!=Upgrade",
 			"Connection!=keep-alive, upgrade", "Connection!=keep-alive, Upgrade" })
 	public RedirectView redirectWithUsingRedirectView() {
 		Resource resource = resourceLoader.getResource(
