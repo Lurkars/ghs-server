@@ -3,10 +3,7 @@ package de.champonthis.ghs.server.model;
 import java.util.LinkedList;
 
 import de.champonthis.ghs.server.util.Required;
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.Getter;
-import lombok.Setter;
 
 @Data
 public class GameAttackModifierDeckModel {
