@@ -12,7 +12,7 @@ import java.net.HttpURLConnection;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
 import java.net.Socket;
-import java.net.URL;
+import java.net.URI;
 import java.nio.file.Files;
 import java.util.LinkedList;
 import java.util.List;
@@ -50,8 +50,7 @@ public class ClientManager implements SmartInitializingSingleton {
 			@Value("${server.port:8080}") int port,
 			@Value("${server.http.port:8081}") int httpPort,
 			@Value("${ghs-server.externalHost:}") String externalHost,
-			@Value("${ghs-server.defaultClientSettings:false}") boolean defaultClientSettings
-	) {
+			@Value("${ghs-server.defaultClientSettings:false}") boolean defaultClientSettings) {
 		this.lastestClientOnStartup = lastestClientOnStartup;
 		this.ssl = ssl;
 		this.port = port;
@@ -60,7 +59,7 @@ public class ClientManager implements SmartInitializingSingleton {
 		this.defaultClientSettings = defaultClientSettings;
 	}
 
-    @Override
+	@Override
 	public void afterSingletonsInstantiated() {
 		if (lastestClientOnStartup) {
 			installLatestClient();
@@ -69,8 +68,9 @@ public class ClientManager implements SmartInitializingSingleton {
 
 	public boolean installLatestClient() {
 		try {
-			HttpURLConnection connection = (HttpURLConnection) new URL(
-					"https://api.github.com/repos/Lurkars/gloomhavensecretariat/releases/latest").openConnection();
+			HttpURLConnection connection = (HttpURLConnection) URI.create(
+					"https://api.github.com/repos/Lurkars/gloomhavensecretariat/releases/latest").toURL()
+					.openConnection();
 			connection.setRequestMethod("GET");
 			BufferedReader in = new BufferedReader(new InputStreamReader(connection.getInputStream()));
 			String inputLine;
@@ -87,7 +87,7 @@ public class ClientManager implements SmartInitializingSingleton {
 
 			if (matcher.matches()) {
 				System.out.println("Download latest client from : " + matcher.group(1));
-				connection = (HttpURLConnection) new URL(matcher.group(1)).openConnection();
+				connection = (HttpURLConnection) URI.create(matcher.group(1)).toURL().openConnection();
 				connection.setRequestMethod("GET");
 				ZipInputStream zipIn = new ZipInputStream(connection.getInputStream());
 				ZipEntry entry = zipIn.getNextEntry();
@@ -175,7 +175,7 @@ public class ClientManager implements SmartInitializingSingleton {
 
 	public boolean checkClientRunning(String host) {
 		try {
-			HttpURLConnection connection = (HttpURLConnection) new URL(getClientUrl(host)).openConnection();
+			HttpURLConnection connection = (HttpURLConnection) URI.create(getClientUrl(host)).toURL().openConnection();
 			connection.setRequestMethod("GET");
 			connection.connect();
 			int responseCode = connection.getResponseCode();
@@ -190,7 +190,8 @@ public class ClientManager implements SmartInitializingSingleton {
 
 	public boolean checkClientRunningHttpOnly(String host) {
 		try {
-			HttpURLConnection connection = (HttpURLConnection) new URL(getClientUrl(host, true)).openConnection();
+			HttpURLConnection connection = (HttpURLConnection) URI.create(getClientUrl(host, true)).toURL()
+					.openConnection();
 			connection.setRequestMethod("GET");
 			connection.connect();
 			int responseCode = connection.getResponseCode();

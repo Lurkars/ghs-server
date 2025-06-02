@@ -3,7 +3,6 @@ package de.champonthis.ghs.server.controller;
 import java.util.Objects;
 import java.util.Optional;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -46,21 +45,20 @@ public class GameController {
 	private final boolean isPublic;
 	private final boolean debug;
 
-    public GameController(
+	public GameController(
 			@Value("${ghs-server.public:false}") boolean isPublic,
 			@Value("${ghs-server.debug:false}") boolean debug,
 			Manager manager,
 			Gson gson,
-			MessageHandler messageHandler
-	) {
-        this.manager = manager;
-        this.gson = gson;
-        this.messageHandler = messageHandler;
-        this.isPublic = isPublic;
-        this.debug = debug;
-    }
+			MessageHandler messageHandler) {
+		this.manager = manager;
+		this.gson = gson;
+		this.messageHandler = messageHandler;
+		this.isPublic = isPublic;
+		this.debug = debug;
+	}
 
-    protected GameModel getGame(String gameCode) {
+	protected GameModel getGame(String gameCode) {
 		if (!StringUtils.hasText(gameCode)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
 		}
@@ -463,9 +461,9 @@ public class GameController {
 			if (container.getGameId() == gameId
 					&& !messageHandler.getWebSocketSessionsCleanUp().contains(container)) {
 				try {
- 					JsonObject response = new JsonObject();
+					JsonObject response = new JsonObject();
 					response.addProperty("type", "remoteCommand");
-					response.add("payload",data);
+					response.add("payload", data);
 					container.getSession()
 							.sendMessage(new TextMessage(gson.toJson(response)));
 				} catch (Exception e) {

@@ -1,11 +1,14 @@
 package de.champonthis.ghs.server.socket;
 
 import java.time.Duration;
-import java.util.*;
+import java.util.Collections;
+import java.util.ConcurrentModificationException;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ScheduledFuture;
 
-import lombok.Getter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
 import org.springframework.stereotype.Component;
@@ -32,14 +35,16 @@ import de.champonthis.ghs.server.model.Settings;
 import de.champonthis.ghs.server.socket.exception.SendErrorException;
 import de.champonthis.ghs.server.socket.model.MessageType;
 import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
+import lombok.Getter;
 
 @Component
 public class MessageHandler extends TextWebSocketHandler {
 
 	@Getter
-    private final List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
+	private final List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
 	@Getter
-    private final List<WebSocketSessionContainer> webSocketSessionsCleanUp = Collections.synchronizedList(new LinkedList<>());
+	private final List<WebSocketSessionContainer> webSocketSessionsCleanUp = Collections
+			.synchronizedList(new LinkedList<>());
 
 	private final Manager manager;
 	private final Gson gson;
@@ -50,23 +55,22 @@ public class MessageHandler extends TextWebSocketHandler {
 	private final boolean isPublic;
 	private final boolean debug;
 
-    public MessageHandler(
+	public MessageHandler(
 			@Value("${build.version}") String buildVersion,
 			@Value("${ghs-server.public:false}") boolean isPublic,
 			@Value("${ghs-server.debug:false}") boolean debug,
 			Manager manager,
 			Gson gson,
-			ThreadPoolTaskScheduler threadPoolTaskScheduler
-	) {
-        this.manager = manager;
-        this.gson = gson;
-        this.threadPoolTaskScheduler = threadPoolTaskScheduler;
-        this.buildVersion = buildVersion;
-        this.isPublic = isPublic;
-        this.debug = debug;
-    }
+			ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+		this.manager = manager;
+		this.gson = gson;
+		this.threadPoolTaskScheduler = threadPoolTaskScheduler;
+		this.buildVersion = buildVersion;
+		this.isPublic = isPublic;
+		this.debug = debug;
+	}
 
-    @Override
+	@Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
 		webSocketSessions.add(new WebSocketSessionContainer(-1, session));

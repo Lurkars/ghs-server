@@ -13,7 +13,7 @@ public class WebConfig implements WebMvcConfigurer {
 
 	@Override
 	public void addResourceHandlers(ResourceHandlerRegistry registry) {
-		registry.addResourceHandler("/noclient.html").addResourceLocations("classpath:/public/noclient.html");
+		registry.addResourceHandler("/noclient.html").addResourceLocations("classpath:/public/");
 
 		registry.addResourceHandler("/**").addResourceLocations(
 				"file:" + new File(System.getProperty("user.home"), ".ghs" + File.separator + "gloomhavensecretariat")

@@ -1,9 +1,9 @@
 package de.champonthis.ghs.server.model;
 
+import java.util.LinkedList;
+
 import lombok.Data;
 import lombok.EqualsAndHashCode;
-
-import java.util.LinkedList;
 
 @Data
 @EqualsAndHashCode(callSuper = true)

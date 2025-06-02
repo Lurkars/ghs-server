@@ -16,7 +16,6 @@ import javax.swing.JTable;
 import javax.swing.SwingWorker;
 
 import org.springframework.beans.factory.SmartInitializingSingleton;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Conditional;
@@ -54,14 +53,13 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 			@Value("${server.port:8080}") int port,
 			@Value("${server.http.port:8081}") int httpPort,
 			@Value("${server.ssl.enabled:false}") boolean ssl,
-			Manager manager, ClientManager clientManager
-	) {
-        this.manager = manager;
-        this.clientManager = clientManager;
-        this.port = port;
-        this.httpPort = httpPort;
-        this.ssl = ssl;
-        initUI();
+			Manager manager, ClientManager clientManager) {
+		this.manager = manager;
+		this.clientManager = clientManager;
+		this.port = port;
+		this.httpPort = httpPort;
+		this.ssl = ssl;
+		initUI();
 	}
 
 	private void initUI() {

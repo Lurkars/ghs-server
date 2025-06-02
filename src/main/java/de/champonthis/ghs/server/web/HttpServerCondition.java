@@ -1,6 +1,5 @@
 package de.champonthis.ghs.server.web;
 
-import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
@@ -9,7 +8,7 @@ import org.springframework.lang.NonNull;
 
 public class HttpServerCondition implements Condition {
 
-	private final boolean ssl;
+    private final boolean ssl;
 
     public HttpServerCondition() {
         this.ssl = false;
@@ -20,8 +19,9 @@ public class HttpServerCondition implements Condition {
     }
 
     @Override
-	public boolean matches(@NonNull ConditionContext context, @NonNull AnnotatedTypeMetadata metadata) {
-		return this.ssl || Boolean.TRUE.equals(context.getEnvironment().getProperty("server.ssl.enabled", Boolean.class));
-	}
+    public boolean matches(@NonNull ConditionContext context, @NonNull AnnotatedTypeMetadata metadata) {
+        return this.ssl
+                || Boolean.TRUE.equals(context.getEnvironment().getProperty("server.ssl.enabled", Boolean.class));
+    }
 
 }

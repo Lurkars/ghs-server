@@ -3,7 +3,6 @@ package de.champonthis.ghs.server.businesslogic;
 import java.util.List;
 
 import org.springframework.beans.factory.SmartInitializingSingleton;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
@@ -34,8 +33,7 @@ public class Manager implements SmartInitializingSingleton {
 			Gson gson,
 			GameRepository gameRepository,
 			GameCodeRepository gameCodeRepository,
-			SettingRepository settingRepository
-	) {
+			SettingRepository settingRepository) {
 		this.gson = gson;
 		this.gameRepository = gameRepository;
 		this.gameCodeRepository = gameCodeRepository;
@@ -43,7 +41,7 @@ public class Manager implements SmartInitializingSingleton {
 		this.gameCodesDump = gameCodesDump;
 	}
 
-    @Override
+	@Override
 	public void afterSingletonsInstantiated() {
 		if (gameCodesDump) {
 			List<GameCode> gameCodes = gameCodes();

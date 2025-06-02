@@ -28,15 +28,14 @@ public class GameBackupController {
 	private final String path;
 	private final String authorization;
 
-    public GameBackupController(
+	public GameBackupController(
 			@Value("${ghs-server.backup.path:}") String path,
-			@Value("${ghs-server.backup.authorization:}")String authorization
-	) {
-        this.path = path;
-        this.authorization = authorization;
-    }
+			@Value("${ghs-server.backup.authorization:}") String authorization) {
+		this.path = path;
+		this.authorization = authorization;
+	}
 
-    @PostMapping(value = "{filename}", consumes = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(value = "{filename}", consumes = MediaType.APPLICATION_JSON_VALUE)
 	public void storeBackup(
 			@RequestHeader(name = HttpHeaders.AUTHORIZATION, required = false) String authorizationHeader,
 			@PathVariable("filename") String filename, @RequestBody String payload) {
@@ -50,7 +49,7 @@ public class GameBackupController {
 
 		try (Writer writer = new BufferedWriter(new OutputStreamWriter(
 				new FileOutputStream(path + (path.endsWith(File.separator) ? "" : File.separator) + filename),
-                StandardCharsets.UTF_8))) {
+				StandardCharsets.UTF_8))) {
 			writer.write(payload);
 		} catch (IOException e) {
 			e.printStackTrace();
