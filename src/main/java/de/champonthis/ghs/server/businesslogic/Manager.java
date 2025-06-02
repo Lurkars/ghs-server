@@ -23,19 +23,27 @@ import de.champonthis.ghs.server.repository.SettingRepository;
 @Component
 public class Manager implements SmartInitializingSingleton {
 
-	@Autowired
-	private Gson gson;
+	private final Gson gson;
+	private final GameRepository gameRepository;
+	private final GameCodeRepository gameCodeRepository;
+	private final SettingRepository settingRepository;
+	private final boolean gameCodesDump;
 
-	@Autowired
-	private GameRepository gameRepository;
-	@Autowired
-	private GameCodeRepository gameCodeRepository;
-	@Autowired
-	private SettingRepository settingRepository;
-	@Value("${ghs-server.gameCodesDump:true}")
-	private boolean gameCodesDump;
+	public Manager(
+			@Value("${ghs-server.gameCodesDump:true}") boolean gameCodesDump,
+			Gson gson,
+			GameRepository gameRepository,
+			GameCodeRepository gameCodeRepository,
+			SettingRepository settingRepository
+	) {
+		this.gson = gson;
+		this.gameRepository = gameRepository;
+		this.gameCodeRepository = gameCodeRepository;
+		this.settingRepository = settingRepository;
+		this.gameCodesDump = gameCodesDump;
+	}
 
-	@Override
+    @Override
 	public void afterSingletonsInstantiated() {
 		if (gameCodesDump) {
 			List<GameCode> gameCodes = gameCodes();
@@ -157,7 +165,7 @@ public class Manager implements SmartInitializingSingleton {
 	public void setSettings(Settings settings, long gameId) {
 		Setting setting = settingRepository.findById(gameId).orElse(null);
 
-		if (settings != null) {
+		if (settings != null && setting != null) {
 			setting.setSettings(gson.toJson(settings));
 			settingRepository.save(setting);
 		}

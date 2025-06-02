@@ -1,5 +1,6 @@
 package de.champonthis.ghs.server.controller;
 
+import java.util.Objects;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,20 +40,27 @@ import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 @CrossOrigin(origins = "*")
 public class GameController {
 
-	@Autowired
-	private Manager manager;
-	@Autowired
-	private Gson gson;
-	@Autowired
-	private MessageHandler messageHandler;
+	private final Manager manager;
+	private final Gson gson;
+	private final MessageHandler messageHandler;
+	private final boolean isPublic;
+	private final boolean debug;
 
-	@Value("${ghs-server.public:false}")
-	private boolean isPublic;
+    public GameController(
+			@Value("${ghs-server.public:false}") boolean isPublic,
+			@Value("${ghs-server.debug:false}") boolean debug,
+			Manager manager,
+			Gson gson,
+			MessageHandler messageHandler
+	) {
+        this.manager = manager;
+        this.gson = gson;
+        this.messageHandler = messageHandler;
+        this.isPublic = isPublic;
+        this.debug = debug;
+    }
 
-	@Value("${ghs-server.debug:false}")
-	private boolean debug;
-
-	protected GameModel getGame(String gameCode) {
+    protected GameModel getGame(String gameCode) {
 		if (!StringUtils.hasText(gameCode)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
 		}
@@ -122,7 +130,7 @@ public class GameController {
 				throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid game payload");
 			}
 
-			if (gameUpdate.getRevision() == game.getRevision()) {
+			if (Objects.equals(gameUpdate.getRevision(), game.getRevision())) {
 				game.setPlaySeconds(gameUpdate.getPlaySeconds());
 				gameUpdate = game;
 			} else if (gameUpdate.getRevision() < game.getRevision()) {
@@ -297,10 +305,10 @@ public class GameController {
 			gameUpdate.setServer(false);
 			manager.setGame(gameId, gameUpdate);
 
-			if (!silent.isPresent() || !silent.get()) {
+			if (silent.isEmpty() || !silent.get()) {
 				for (WebSocketSessionContainer container : messageHandler.getWebSocketSessions()) {
 					if (container.getGameId() == gameId
-							&& messageHandler.getWebSocketSessionsCleanUp().indexOf(container) == -1) {
+							&& !messageHandler.getWebSocketSessionsCleanUp().contains(container)) {
 						JsonObject gameResponse = new JsonObject();
 						if (!game.isServer()) {
 							gameUpdate.setServer(messageHandler.isServerSession(container.getSession(), gameId));
@@ -397,7 +405,7 @@ public class GameController {
 
 			for (WebSocketSessionContainer container : messageHandler.getWebSocketSessions()) {
 				if (container.getGameId() == gameId
-						&& messageHandler.getWebSocketSessionsCleanUp().indexOf(container) == -1) {
+						&& !messageHandler.getWebSocketSessionsCleanUp().contains(container)) {
 					JsonObject gameResponse = new JsonObject();
 					if (!game.isServer()) {
 						game.setServer(messageHandler.isServerSession(container.getSession(), gameId));
@@ -453,7 +461,7 @@ public class GameController {
 
 		for (WebSocketSessionContainer container : messageHandler.getWebSocketSessions()) {
 			if (container.getGameId() == gameId
-					&& messageHandler.getWebSocketSessionsCleanUp().indexOf(container) == -1) {
+					&& !messageHandler.getWebSocketSessionsCleanUp().contains(container)) {
 				try {
  					JsonObject response = new JsonObject();
 					response.addProperty("type", "remoteCommand");

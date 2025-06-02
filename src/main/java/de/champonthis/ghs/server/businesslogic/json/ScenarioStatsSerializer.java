@@ -18,7 +18,7 @@ import de.champonthis.ghs.server.util.RequiredTypeAdapterFactory;
 
 public class ScenarioStatsSerializer implements JsonSerializer<ScenarioStats> {
 
-	private Gson gson = new GsonBuilder().registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
+	private final Gson gson = new GsonBuilder().registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
 
 	@Override
 	public JsonElement serialize(ScenarioStats src, Type typeOfSrc, JsonSerializationContext context) {

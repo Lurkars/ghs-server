@@ -20,7 +20,7 @@ import de.champonthis.ghs.server.util.RequiredTypeAdapterFactory;
 
 public class PartySerializer implements JsonSerializer<Party> {
 
-	private Gson gson = new GsonBuilder()
+	private final Gson gson = new GsonBuilder()
 			.registerTypeAdapter(CharacterProgress.class, new CharacterProgressDeserializer())
 			.registerTypeAdapter(CharacterProgress.class, new CharacterProgressSerializer())
 			.registerTypeAdapter(ScenarioStats.class, new ScenarioStatsDeserializer())

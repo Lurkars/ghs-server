@@ -34,29 +34,34 @@ public class MainFrame extends JFrame implements SmartInitializingSingleton {
 
 	private static final long serialVersionUID = 1L;
 
-	@Autowired
-	private Manager manager;
-	@Autowired
-	private ClientManager clientManager;
-	@Value("${server.port:8080}")
-	private int port;
-	@Value("${server.http.port:8081}")
-	private int httpPort;
-	@Value("${server.ssl.enabled:false}")
-	private boolean ssl;
+	private final Manager manager;
+	private final ClientManager clientManager;
+	private final int port;
+	private final int httpPort;
+	private final boolean ssl;
 	private String clientUrl = null;
 
-	private JPanel topPanel = new JPanel();
-	private JPanel bottomPanel = new JPanel();
-	private JLabel ipLabel = new JLabel();
-	private JLabel portLabel = new JLabel();
-	private JButton quitButton = new JButton("Quit");
-	private JButton installButton = new JButton("Install latest Client");
-	private JButton openClientButton = new JButton("Open Client");
+	private final JPanel topPanel = new JPanel();
+	private final JPanel bottomPanel = new JPanel();
+	private final JLabel ipLabel = new JLabel();
+	private final JLabel portLabel = new JLabel();
+	private final JButton quitButton = new JButton("Quit");
+	private final JButton installButton = new JButton("Install latest Client");
+	private final JButton openClientButton = new JButton("Open Client");
 	private JScrollPane tablePane = null;
 
-	public MainFrame() {
-		initUI();
+	public MainFrame(
+			@Value("${server.port:8080}") int port,
+			@Value("${server.http.port:8081}") int httpPort,
+			@Value("${server.ssl.enabled:false}") boolean ssl,
+			Manager manager, ClientManager clientManager
+	) {
+        this.manager = manager;
+        this.clientManager = clientManager;
+        this.port = port;
+        this.httpPort = httpPort;
+        this.ssl = ssl;
+        initUI();
 	}
 
 	private void initUI() {

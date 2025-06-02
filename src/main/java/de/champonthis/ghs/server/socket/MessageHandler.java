@@ -1,13 +1,10 @@
 package de.champonthis.ghs.server.socket;
 
 import java.time.Duration;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.ScheduledFuture;
 
+import lombok.Getter;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
@@ -39,27 +36,37 @@ import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 @Component
 public class MessageHandler extends TextWebSocketHandler {
 
-	private List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
-	private List<WebSocketSessionContainer> webSocketSessionsCleanUp = Collections.synchronizedList(new LinkedList<>());
+	@Getter
+    private final List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
+	@Getter
+    private final List<WebSocketSessionContainer> webSocketSessionsCleanUp = Collections.synchronizedList(new LinkedList<>());
 
-	@Autowired
-	private Manager manager;
-	@Autowired
-	private Gson gson;
-	@Autowired
-	private ThreadPoolTaskScheduler threadPoolTaskScheduler;
+	private final Manager manager;
+	private final Gson gson;
+	private final ThreadPoolTaskScheduler threadPoolTaskScheduler;
 	private ScheduledFuture<?> cleanUpSessionTask;
 
-	@Value("${build.version}")
-	private String buildVersion;
+	private final String buildVersion;
+	private final boolean isPublic;
+	private final boolean debug;
 
-	@Value("${ghs-server.public:false}")
-	private boolean isPublic;
+    public MessageHandler(
+			@Value("${build.version}") String buildVersion,
+			@Value("${ghs-server.public:false}") boolean isPublic,
+			@Value("${ghs-server.debug:false}") boolean debug,
+			Manager manager,
+			Gson gson,
+			ThreadPoolTaskScheduler threadPoolTaskScheduler
+	) {
+        this.manager = manager;
+        this.gson = gson;
+        this.threadPoolTaskScheduler = threadPoolTaskScheduler;
+        this.buildVersion = buildVersion;
+        this.isPublic = isPublic;
+        this.debug = debug;
+    }
 
-	@Value("${ghs-server.debug:false}")
-	private boolean debug;
-
-	@Override
+    @Override
 	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
 		webSocketSessions.add(new WebSocketSessionContainer(-1, session));
@@ -210,7 +217,7 @@ public class MessageHandler extends TextWebSocketHandler {
 								if (gameUpdate == null) {
 									sendError(session, "invalid game payload");
 								} else {
-									if (gameUpdate.getRevision() == game.getRevision()) {
+									if (Objects.equals(gameUpdate.getRevision(), game.getRevision())) {
 										game.setPlaySeconds(gameUpdate.getPlaySeconds());
 										gameUpdate = game;
 									} else if (gameUpdate.getRevision() < game.getRevision()) {
@@ -420,7 +427,7 @@ public class MessageHandler extends TextWebSocketHandler {
 									for (WebSocketSessionContainer container : webSocketSessions) {
 										if (!container.getSession().getId().equals(session.getId())
 												&& container.getGameId() == gameId
-												&& webSocketSessionsCleanUp.indexOf(container) == -1) {
+												&& !webSocketSessionsCleanUp.contains(container)) {
 											JsonObject gameResponse = new JsonObject();
 											if (!game.isServer()) {
 												gameUpdate.setServer(isServerSession(container.getSession(), gameId));
@@ -458,7 +465,7 @@ public class MessageHandler extends TextWebSocketHandler {
 									for (WebSocketSessionContainer container : webSocketSessions) {
 										if (!container.getSession().getId().equals(session.getId())
 												&& container.getGameId() == gameId
-												&& webSocketSessionsCleanUp.indexOf(container) == -1) {
+												&& !webSocketSessionsCleanUp.contains(container)) {
 											JsonObject gameResponse = new JsonObject();
 											if (!game.isServer()) {
 												updateGame.setServer(isServerSession(container.getSession(), gameId));
@@ -586,7 +593,7 @@ public class MessageHandler extends TextWebSocketHandler {
 
 								for (WebSocketSessionContainer container : webSocketSessions) {
 									if (container.getSession() != session && container.getGameId() == gameId
-											&& webSocketSessionsCleanUp.indexOf(container) == -1) {
+											&& !webSocketSessionsCleanUp.contains(container)) {
 										JsonObject settingsResponse = new JsonObject();
 										settingsResponse.addProperty("type", "settings");
 										settingsResponse.add("payload", gson.toJsonTree(settingsUpdate));
@@ -618,7 +625,7 @@ public class MessageHandler extends TextWebSocketHandler {
 		long serverSessionIndex = Long.MAX_VALUE;
 		boolean isServer = false;
 		for (WebSocketSessionContainer container : webSocketSessions) {
-			if (webSocketSessionsCleanUp.indexOf(container) == -1) {
+			if (!webSocketSessionsCleanUp.contains(container)) {
 				int containerIndex = webSocketSessions.indexOf(container);
 				if (container.getSession() == session) {
 					if (containerIndex < serverSessionIndex) {
@@ -629,7 +636,6 @@ public class MessageHandler extends TextWebSocketHandler {
 					break;
 				} else if (container.getGameId() == gameId && containerIndex < serverSessionIndex) {
 					serverSessionIndex = containerIndex;
-					isServer = false;
 				}
 			}
 		}
@@ -649,14 +655,6 @@ public class MessageHandler extends TextWebSocketHandler {
 		if (stop) {
 			throw new SendErrorException("Error: " + message);
 		}
-	}
-
-	public List<WebSocketSessionContainer> getWebSocketSessions() {
-		return webSocketSessions;
-	}
-
-	public List<WebSocketSessionContainer> getWebSocketSessionsCleanUp() {
-		return webSocketSessionsCleanUp;
 	}
 
 }

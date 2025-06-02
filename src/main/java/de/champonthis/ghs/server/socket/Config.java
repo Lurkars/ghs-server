@@ -12,10 +12,13 @@ import org.springframework.web.socket.server.standard.ServletServerContainerFact
 @EnableWebSocket
 public class Config implements WebSocketConfigurer {
 
-	@Autowired
-	private MessageHandler messageHandler;
+	private final MessageHandler messageHandler;
 
-	@Override
+    public Config(MessageHandler messageHandler) {
+        this.messageHandler = messageHandler;
+    }
+
+    @Override
 	public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
 		webSocketHandlerRegistry.addHandler(messageHandler, "/").setAllowedOrigins("*");
 	}

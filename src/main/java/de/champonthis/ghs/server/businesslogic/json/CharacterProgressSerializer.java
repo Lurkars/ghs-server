@@ -19,7 +19,7 @@ import de.champonthis.ghs.server.util.RequiredTypeAdapterFactory;
 
 public class CharacterProgressSerializer implements JsonSerializer<CharacterProgress> {
 
-	private Gson gson = new GsonBuilder()
+	private final Gson gson = new GsonBuilder()
 			.registerTypeAdapter(ScenarioStats.class, new ScenarioStatsDeserializer())
 			.registerTypeAdapter(ScenarioStats.class, new ScenarioStatsSerializer())
 			.registerTypeAdapterFactory(new RequiredTypeAdapterFactory()).create();
