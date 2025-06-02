@@ -50,7 +50,7 @@ jobs:
           architecture: x64
       - name: Build and push DockerHub image
         run: |
-          mvn install -P db-sqlite-image -Dimage.name=${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}
+          mvn install -P db-sqlite-image -Dimage.name=${{ env.SLUG_DOCKERHUB }} -Djib.to.tags=${{ steps.meta.outputs.version }},latest
 
       - name: Lowercase GHCR repository name # required because docker doesn't support uppercase chars: https://github.com/docker/build-push-action/issues/37
         run: |
@@ -58,7 +58,7 @@ jobs:
 
       - name: Build and push GHCR image
         run: |
-          mvn install -P db-sqlite-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }}:${{ steps.meta.outputs.version }}
+          mvn install -P db-sqlite-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }} -Djib.to.tags=${{ steps.meta.outputs.version }},latest
 
       - name: Inspect Image published to Docker
         run: |
