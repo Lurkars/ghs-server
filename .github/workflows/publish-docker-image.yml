@@ -51,6 +51,8 @@ jobs:
       - name: Build and push DockerHub image
         run: |
           mvn install -P db-sqlite-image -Dimage.name=${{ env.SLUG_DOCKERHUB }} -Djib.to.tags=${{ steps.meta.outputs.version }},latest
+          mvn install -P db-postgresql-image -Dimage.name=${{ env.SLUG_DOCKERHUB }}-postgresql -Djib.to.tags=${{ steps.meta.outputs.version }},latest
+          mvn install -P db-mariadb-image -Dimage.name=${{ env.SLUG_DOCKERHUB }}-mariadb -Djib.to.tags=${{ steps.meta.outputs.version }},latest
 
       - name: Lowercase GHCR repository name # required because docker doesn't support uppercase chars: https://github.com/docker/build-push-action/issues/37
         run: |
@@ -59,12 +61,30 @@ jobs:
       - name: Build and push GHCR image
         run: |
           mvn install -P db-sqlite-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }} -Djib.to.tags=${{ steps.meta.outputs.version }},latest
+          mvn install -P db-postgresql-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }}-postgresql -Djib.to.tags=${{ steps.meta.outputs.version }},latest
+          mvn install -P db-mariadb-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }}-mariadb -Djib.to.tags=${{ steps.meta.outputs.version }},latest
 
-      - name: Inspect Image published to Docker
+      - name: Inspect SQLite Image published to Docker
         run: |
           docker pull "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
           docker image inspect "${{ env.SLUG_DOCKERHUB }}:${{ steps.meta.outputs.version }}"
-      - name: Inspect Image published to GHCR
+      - name: Inspect Postgresql Image published to Docker
+        run: |
+          docker pull "${{ env.SLUG_DOCKERHUB }}-postgresql:${{ steps.meta.outputs.version }}"
+          docker image inspect "${{ env.SLUG_DOCKERHUB }}-postgresql:${{ steps.meta.outputs.version }}"
+      - name: Inspect MariaDB Image published to Docker
+        run: |
+          docker pull "${{ env.SLUG_DOCKERHUB }}-mariadb:${{ steps.meta.outputs.version }}"
+          docker image inspect "${{ env.SLUG_DOCKERHUB }}-mariadb:${{ steps.meta.outputs.version }}"
+      - name: Inspect SQLite Image published to GHCR
         run: |
           docker pull "ghcr.io/${{ env.SLUG_GHCR_LC }}:${{ steps.meta.outputs.version }}"
           docker image inspect "ghcr.io/${{ env.SLUG_GHCR_LC }}:${{ steps.meta.outputs.version }}"
+      - name: Inspect Postgresql Image published to GHCR
+        run: |
+          docker pull "ghcr.io/${{ env.SLUG_GHCR_LC }}-postgresql:${{ steps.meta.outputs.version }}"
+          docker image inspect "ghcr.io/${{ env.SLUG_GHCR_LC }}-postgresql:${{ steps.meta.outputs.version }}"
+      - name: Inspect MariaDB Image published to GHCR
+        run: |
+          docker pull "ghcr.io/${{ env.SLUG_GHCR_LC }}-mariadb:${{ steps.meta.outputs.version }}"
+          docker image inspect "ghcr.io/${{ env.SLUG_GHCR_LC }}-mariadb:${{ steps.meta.outputs.version }}"
