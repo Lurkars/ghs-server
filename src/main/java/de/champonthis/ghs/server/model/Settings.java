@@ -147,6 +147,8 @@ public class Settings {
 	@Required
 	private boolean fhTrialsApply = true;
 	@Required
+	private boolean gh2eImbuement = false;
+	@Required
 	private boolean hideAbsent = false;
 	@Required
 	private boolean hideStats = false;
