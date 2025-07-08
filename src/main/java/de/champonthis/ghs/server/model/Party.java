@@ -88,5 +88,8 @@ public class Party {
 	private Boolean envelopeB;
 	private Integer trials;
 	private GardenModel garden;
+	@Required
+	private Map<String, Integer> factionReputation = new HashMap<>();
+	private Integer imbuement;
 
 }
