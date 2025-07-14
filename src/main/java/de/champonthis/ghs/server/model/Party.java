@@ -86,6 +86,10 @@ public class Party {
 	@Required
 	private LinkedList<String> lootDeckSections = new LinkedList<>();
 	private Boolean envelopeB;
+	@Required
+	private Map<String, LinkedList<String>> eventDecks = new HashMap<>();
+	@Required
+	private LinkedList<EventCardIdentifier> eventCards = new LinkedList<>();
 	private Integer trials;
 	private GardenModel garden;
 	@Required

@@ -93,6 +93,7 @@ public class GameModel {
 	@Required
 	private LinkedList<Integer> favorPoints = new LinkedList<>();
 	private Boolean keepFavors = false;
+	private String eventDraw;
 	// Migration
 	private LinkedList<ScenarioRuleIdentifier> disgardedScenarioRules = new LinkedList<>();
 
