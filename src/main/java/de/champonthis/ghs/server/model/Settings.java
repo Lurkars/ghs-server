@@ -135,6 +135,12 @@ public class Settings {
 	@Required
 	private boolean expireConditions = true;
 	@Required
+	private boolean events = true;
+	@Required
+	private boolean eventsApply = true;
+	@Required
+	private boolean eventsDraw = true;
+	@Required
 	private boolean fhChallenges = false;
 	@Required
 	private boolean fhChallengesApply = true;
