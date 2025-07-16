@@ -11,7 +11,7 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<image.name>gloomhavensecretariat/ghs-server</image.name>
-		<revision>0.122.0</revision>
+		<revision>0.123.0</revision>
 	</properties>
 
 	<parent>
