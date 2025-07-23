@@ -12,9 +12,13 @@ env:
   SLUG_GHCR: ${{ github.repository_owner }}/ghs-server
 
 jobs:
-  build-and-publish-docker-image:
-    name: Build and Publish Docker Image
+  build-and-publish-images:
+    name: Build and Publish ${{ matrix.db }} ${{ matrix.arch }} Image
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        db: [sqlite, postgresql, mariadb]
+        arch: [amd64, arm64]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -52,29 +56,69 @@ jobs:
         run: |
           echo "SLUG_GHCR_LC=${SLUG_GHCR,,}" >>${GITHUB_ENV}
 
-      - name: Build and push AMD64 images with JIB
+      - name: Set database-specific variables
         run: |
-          # SQLite AMD64
-          mvn install -P db-sqlite-image -Dimage.name=${{ env.SLUG_DOCKERHUB }} -Djib.to.tags=${{ steps.meta.outputs.version }}-amd64 -Djib.from.platforms=linux/amd64
-          mvn install -P db-sqlite-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }} -Djib.to.tags=${{ steps.meta.outputs.version }}-amd64 -Djib.from.platforms=linux/amd64
-          # PostgreSQL AMD64
-          mvn install -P db-postgresql-image -Dimage.name=${{ env.SLUG_DOCKERHUB }}-postgresql -Djib.to.tags=${{ steps.meta.outputs.version }}-amd64 -Djib.from.platforms=linux/amd64
-          mvn install -P db-postgresql-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }}-postgresql -Djib.to.tags=${{ steps.meta.outputs.version }}-amd64 -Djib.from.platforms=linux/amd64
-          # MariaDB AMD64
-          mvn install -P db-mariadb-image -Dimage.name=${{ env.SLUG_DOCKERHUB }}-mariadb -Djib.to.tags=${{ steps.meta.outputs.version }}-amd64 -Djib.from.platforms=linux/amd64
-          mvn install -P db-mariadb-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }}-mariadb -Djib.to.tags=${{ steps.meta.outputs.version }}-amd64 -Djib.from.platforms=linux/amd64
+          if [ "${{ matrix.db }}" = "sqlite" ]; then
+            echo "DB_PROFILE=db-sqlite-image" >> $GITHUB_ENV
+            echo "IMAGE_SUFFIX=" >> $GITHUB_ENV
+          else
+            echo "DB_PROFILE=db-${{ matrix.db }}-image" >> $GITHUB_ENV
+            echo "IMAGE_SUFFIX=-${{ matrix.db }}" >> $GITHUB_ENV
+          fi
 
-      - name: Build and push ARM64 images with JIB
+      - name: Build and push to DockerHub
         run: |
-          # SQLite ARM64
-          mvn install -P db-sqlite-image -Dimage.name=${{ env.SLUG_DOCKERHUB }} -Djib.to.tags=${{ steps.meta.outputs.version }}-arm64 -Djib.from.platforms=linux/arm64
-          mvn install -P db-sqlite-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }} -Djib.to.tags=${{ steps.meta.outputs.version }}-arm64 -Djib.from.platforms=linux/arm64
-          # PostgreSQL ARM64
-          mvn install -P db-postgresql-image -Dimage.name=${{ env.SLUG_DOCKERHUB }}-postgresql -Djib.to.tags=${{ steps.meta.outputs.version }}-arm64 -Djib.from.platforms=linux/arm64
-          mvn install -P db-postgresql-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }}-postgresql -Djib.to.tags=${{ steps.meta.outputs.version }}-arm64 -Djib.from.platforms=linux/arm64
-          # MariaDB ARM64
-          mvn install -P db-mariadb-image -Dimage.name=${{ env.SLUG_DOCKERHUB }}-mariadb -Djib.to.tags=${{ steps.meta.outputs.version }}-arm64 -Djib.from.platforms=linux/arm64
-          mvn install -P db-mariadb-image -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }}-mariadb -Djib.to.tags=${{ steps.meta.outputs.version }}-arm64 -Djib.from.platforms=linux/arm64
+          mvn install -P ${{ env.DB_PROFILE }} \
+            -Dimage.name=${{ env.SLUG_DOCKERHUB }}${{ env.IMAGE_SUFFIX }} \
+            -Djib.to.tags=${{ steps.meta.outputs.version }}-${{ matrix.arch }} \
+            -Djib.from.platforms=linux/${{ matrix.arch }}
+
+      - name: Add delay for GHCR publishing
+        run: |
+          # Stagger GHCR pushes to avoid concurrent upload issues
+          case "${{ matrix.db }}-${{ matrix.arch }}" in
+            "sqlite-amd64") sleep 0 ;;
+            "sqlite-arm64") sleep 30 ;;
+            "postgresql-amd64") sleep 60 ;;
+            "postgresql-arm64") sleep 90 ;;
+            "mariadb-amd64") sleep 120 ;;
+            "mariadb-arm64") sleep 150 ;;
+          esac
+
+      - name: Build and push to GHCR
+        run: |
+          mvn install -P ${{ env.DB_PROFILE }} \
+            -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }}${{ env.IMAGE_SUFFIX }} \
+            -Djib.to.tags=${{ steps.meta.outputs.version }}-${{ matrix.arch }} \
+            -Djib.from.platforms=linux/${{ matrix.arch }}
+
+  create-manifests:
+    name: Create multiarch manifests
+    runs-on: ubuntu-latest
+    needs: build-and-publish-images
+    steps:
+      - name: Docker metadata
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: |
+            ${{ env.SLUG_DOCKERHUB }}
+            ghcr.io/${{ env.SLUG_GHCR }}
+      - name: Login to DockerHub
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_USERNAME }}
+          password: ${{ secrets.DOCKER_PASSWORD }}
+      - name: Login to GHCR
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Lowercase GHCR repository name
+        run: |
+          echo "SLUG_GHCR_LC=${SLUG_GHCR,,}" >>${GITHUB_ENV}
 
       - name: Create and push multiarch manifests for DockerHub
         run: |
