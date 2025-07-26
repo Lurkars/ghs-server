@@ -1,55 +1,35 @@
 package de.champonthis.ghs.server.socket;
 
-import java.time.Duration;
-import java.util.Collections;
-import java.util.ConcurrentModificationException;
-import java.util.Iterator;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Objects;
-import java.util.concurrent.ScheduledFuture;
-
+import com.google.gson.Gson;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import de.champonthis.ghs.server.businesslogic.Manager;
+import de.champonthis.ghs.server.model.*;
+import de.champonthis.ghs.server.socket.exception.SendErrorException;
+import de.champonthis.ghs.server.socket.model.MessageType;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskScheduler;
+import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Component;
-import org.springframework.util.StringUtils;
+import org.springframework.util.CollectionUtils;
 import org.springframework.web.socket.CloseStatus;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.WebSocketMessage;
 import org.springframework.web.socket.WebSocketSession;
 import org.springframework.web.socket.handler.TextWebSocketHandler;
 
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-
-import de.champonthis.ghs.server.businesslogic.Manager;
-import de.champonthis.ghs.server.model.GameCharacterModel;
-import de.champonthis.ghs.server.model.GameModel;
-import de.champonthis.ghs.server.model.GameMonsterModel;
-import de.champonthis.ghs.server.model.Identifier;
-import de.champonthis.ghs.server.model.Party;
-import de.champonthis.ghs.server.model.Permissions;
-import de.champonthis.ghs.server.model.Settings;
-import de.champonthis.ghs.server.socket.exception.SendErrorException;
-import de.champonthis.ghs.server.socket.model.MessageType;
-import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
-import lombok.Getter;
+import java.io.IOException;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Objects;
 
 @Component
 public class MessageHandler extends TextWebSocketHandler {
 
-	@Getter
-	private final List<WebSocketSessionContainer> webSocketSessions = Collections.synchronizedList(new LinkedList<>());
-	@Getter
-	private final List<WebSocketSessionContainer> webSocketSessionsCleanUp = Collections
-			.synchronizedList(new LinkedList<>());
-
 	private final Manager manager;
+	private final WebSocketSessionsManager webSocketSessionsManager;
 	private final Gson gson;
-	private final ThreadPoolTaskScheduler threadPoolTaskScheduler;
-	private ScheduledFuture<?> cleanUpSessionTask;
 
 	private final String buildVersion;
 	private final boolean isPublic;
@@ -60,91 +40,60 @@ public class MessageHandler extends TextWebSocketHandler {
 			@Value("${ghs-server.public:false}") boolean isPublic,
 			@Value("${ghs-server.debug:false}") boolean debug,
 			Manager manager,
-			Gson gson,
-			ThreadPoolTaskScheduler threadPoolTaskScheduler) {
+			WebSocketSessionsManager webSocketSessionsManager,
+			Gson gson
+	) {
 		this.manager = manager;
+		this.webSocketSessionsManager = webSocketSessionsManager;
 		this.gson = gson;
-		this.threadPoolTaskScheduler = threadPoolTaskScheduler;
 		this.buildVersion = buildVersion;
 		this.isPublic = isPublic;
 		this.debug = debug;
 	}
 
 	@Override
-	public void afterConnectionEstablished(WebSocketSession session) throws Exception {
+	public void afterConnectionEstablished(@NonNull WebSocketSession session) throws Exception {
 		super.afterConnectionEstablished(session);
-		webSocketSessions.add(new WebSocketSessionContainer(-1, session));
+		webSocketSessionsManager.addSession(-1L, session);
 	}
 
 	@Override
-	public void afterConnectionClosed(WebSocketSession session, CloseStatus status) throws Exception {
+	public void afterConnectionClosed(@NonNull WebSocketSession session, @NonNull CloseStatus status) throws Exception {
 		super.afterConnectionClosed(session, status);
-		WebSocketSessionContainer webSocketSessionContainer = null;
-		Iterator<WebSocketSessionContainer> findSession = webSocketSessions.iterator();
-		while (findSession.hasNext()) {
-			WebSocketSessionContainer container = findSession.next();
-			if (container.getSession() == session) {
-				webSocketSessionContainer = container;
-				break;
-			}
+		String sessionId = session.getId();
+		Long gameId = webSocketSessionsManager.getGameIdBySessionId(sessionId);
+		webSocketSessionsManager.removeSessionById(sessionId);
+		if (gameId == -1L) {
+			return;
 		}
-		if (webSocketSessionContainer != null) {
-			if (cleanUpSessionTask != null) {
-				cleanUpSessionTask.cancel(false);
-			}
-			long gameId = webSocketSessionContainer.getGameId();
-			webSocketSessionContainer.setGameId(-1);
-			webSocketSessionsCleanUp.add(webSocketSessionContainer);
-			if (gameId != -1) {
-				Iterator<WebSocketSessionContainer> findOthers = webSocketSessions.iterator();
-				while (findOthers.hasNext()) {
-					try {
-						WebSocketSessionContainer container = findOthers.next();
-						if (webSocketSessionsCleanUp.indexOf(container) == -1 && container.getGameId() == gameId) {
-							if (container.getSession().isOpen()) {
-								GameModel game = manager.getGame(gameId);
-								if (game == null) {
-									sendError(container.getSession(), "No game found for 'id=" + gameId + "'");
-								} else {
-									game.setServer(isServerSession(container.getSession(), gameId));
-									JsonObject gameResponse = new JsonObject();
-									gameResponse.addProperty("type", "game-update");
-									gameResponse.add("payload", gson.toJsonTree(game));
-									gameResponse.addProperty("serverVersion", buildVersion);
-									container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
-								}
-							}
-						}
-					} catch (ConcurrentModificationException e) {
-						break;
-					}
-				}
-			}
-
-			if (cleanUpSessionTask == null || cleanUpSessionTask.isCancelled()) {
-				cleanUpSessionTask = threadPoolTaskScheduler.scheduleWithFixedDelay(new CleanUpSessionsRunner(),
-						Duration.ofMillis(120000));
-			}
+		List<WebSocketSession> otherSessions = webSocketSessionsManager.getSessionsByGameId(gameId);
+		if (CollectionUtils.isEmpty(otherSessions)) {
+			return;
 		}
-	}
-
-	class CleanUpSessionsRunner implements Runnable {
-
-		@Override
-		public void run() {
-			for (WebSocketSessionContainer container : webSocketSessionsCleanUp) {
-				webSocketSessions.remove(container);
-			}
-			webSocketSessionsCleanUp.clear();
+		GameModel game = manager.getGame(gameId);
+		if (game == null) {
+			sendError(session, "No game found for 'id=" + gameId + "'");
+			return;
 		}
+		game.setServer(webSocketSessionsManager.isServerSession(session, gameId));
+		JsonObject gameResponse = new JsonObject();
+		gameResponse.addProperty("type", "game-update");
+		gameResponse.add("payload", gson.toJsonTree(game));
+		gameResponse.addProperty("serverVersion", buildVersion);
+		String jsonMessage = gson.toJson(gameResponse);
+		otherSessions.forEach(s -> {
+			try {
+				s.sendMessage(new TextMessage(jsonMessage));
+			} catch (IOException e) {
+				throw new RuntimeException(e);
+			}
+		});
 	}
 
 	@Override
-	public void handleMessage(WebSocketSession session, WebSocketMessage<?> message) throws Exception {
+	public void handleMessage(@NonNull WebSocketSession session, @NonNull WebSocketMessage<?> message) throws Exception {
 		super.handleMessage(session, message);
-		if (message instanceof TextMessage) {
-			TextMessage textMessage = (TextMessage) message;
-
+		if (message instanceof TextMessage textMessage) {
 			try {
 				JsonObject messageObject = JsonParser.parseString(textMessage.getPayload()).getAsJsonObject();
 
@@ -157,13 +106,16 @@ public class MessageHandler extends TextWebSocketHandler {
 						? messageObject.get("code").getAsString()
 						: messageObject.get("password").getAsString();
 
-				if (!StringUtils.hasText(gameCode)) {
+				if (StringUtils.isBlank(gameCode)) {
 					sendError(session, "empty 'game code'");
 				} else if (gameCode.length() > 1024) {
 					sendError(session, "game code too long!");
 				}
 
 				Long gameId = manager.getGameIdByGameCode(gameCode);
+				if (webSocketSessionsManager.getGameIdBySessionId(session.getId()) == -1L) {
+					webSocketSessionsManager.updateSession(gameId, session);
+				}
 
 				if (gameId == null) {
 					// if first game code or public create new game for game code
@@ -193,7 +145,7 @@ public class MessageHandler extends TextWebSocketHandler {
 
 						Permissions permissions = manager.getPermissionsByGameCode(gameCode);
 
-						game.setServer(isServerSession(session, gameId));
+						game.setServer(webSocketSessionsManager.isServerSession(session, gameId));
 
 						MessageType type = MessageType
 								.valueOf(messageObject.get("type").getAsString().toUpperCase().replace("-", "_"));
@@ -232,18 +184,18 @@ public class MessageHandler extends TextWebSocketHandler {
 
 										if (!permissions.isScenario()
 												&& !gson.toJson(gameUpdate.getScenario())
-														.equals(gson.toJson(game.getScenario()))) {
+												.equals(gson.toJson(game.getScenario()))) {
 											sendError(session, "Permission(s) missing: scenario");
 										}
 										if (!permissions.isScenario()
 												&& !gson.toJson(gameUpdate.getSections())
-														.equals(gson.toJson(game.getSections()))) {
+												.equals(gson.toJson(game.getSections()))) {
 											sendError(session, "Permission(s) missing: scenario");
 										}
 										if (!permissions.isScenario() && (gameUpdate.getEdition() != null
 												&& !gameUpdate.getEdition().equals(game.getEdition())
 												|| game.getEdition() != null
-														&& !game.getEdition().equals(gameUpdate.getEdition()))) {
+												&& !game.getEdition().equals(gameUpdate.getEdition()))) {
 											sendError(session, "Permission(s) missing: scenario");
 										}
 										if (!permissions.isElements() && !gson.toJson(gameUpdate.getElementBoard())
@@ -252,7 +204,7 @@ public class MessageHandler extends TextWebSocketHandler {
 										}
 										if (!permissions.isLootDeck()
 												&& !gson.toJson(gameUpdate.getLootDeck())
-														.equals(gson.toJson(game.getLootDeck()))) {
+												.equals(gson.toJson(game.getLootDeck()))) {
 											sendError(session, "Permission(s) missing: lootDeck");
 										}
 										if (!permissions.isRound() && gameUpdate.getRound() != game.getRound()) {
@@ -266,20 +218,20 @@ public class MessageHandler extends TextWebSocketHandler {
 										}
 										if (!permissions.isAttackModifiers()
 												&& !gson.toJson(gameUpdate.getMonsterAttackModifierDeck())
-														.equals(gson.toJson(game.getMonsterAttackModifierDeck()))) {
+												.equals(gson.toJson(game.getMonsterAttackModifierDeck()))) {
 											sendError(session, "Permission(s) missing");
 										}
 										if (!permissions.isAttackModifiers()
 												&& !gson.toJson(gameUpdate.getAllyAttackModifierDeck())
-														.equals(gson.toJson(game.getAllyAttackModifierDeck()))) {
+												.equals(gson.toJson(game.getAllyAttackModifierDeck()))) {
 											sendError(session, "Permission(s) missing: attackModifiers");
 										}
 										if (!permissions.isParty()
 												&& (!gson.toJson(gameUpdate.getParty())
-														.equals(gson.toJson(game.getParty()))
-														|| !gson
-																.toJson(gameUpdate.getParties())
-																.equals(gson.toJson(game.getParties())))) {
+												.equals(gson.toJson(game.getParty()))
+												|| !gson
+												.toJson(gameUpdate.getParties())
+												.equals(gson.toJson(game.getParties())))) {
 											sendError(session, "Permission(s) missing: party");
 										}
 										if (!permissions.isCharacters()) {
@@ -297,11 +249,11 @@ public class MessageHandler extends TextWebSocketHandler {
 												for (GameCharacterModel character : game.getCharacters()) {
 													if (updateCharacter.getName().equals(character.getName())
 															&& updateCharacter.getEdition()
-																	.equals(character.getEdition())) {
+															.equals(character.getEdition())) {
 														for (Identifier characterFigure : permissions.getCharacter()) {
 															if (characterFigure.getName().equals(character.getName())
 																	&& characterFigure.getEdition()
-																			.equals(character.getEdition())) {
+																	.equals(character.getEdition())) {
 																characterPermission = true;
 																break;
 															}
@@ -381,11 +333,11 @@ public class MessageHandler extends TextWebSocketHandler {
 												for (GameMonsterModel monster : game.getMonsters()) {
 													if (updateMonster.getName().equals(monster.getName())
 															&& updateMonster.getEdition()
-																	.equals(monster.getEdition())) {
+															.equals(monster.getEdition())) {
 														for (Identifier monsterFigure : permissions.getMonster()) {
 															if (monsterFigure.getName().equals(monster.getName())
 																	&& monsterFigure.getEdition()
-																			.equals(monster.getEdition())) {
+																	.equals(monster.getEdition())) {
 																monsterPermission = true;
 																break;
 															}
@@ -410,7 +362,7 @@ public class MessageHandler extends TextWebSocketHandler {
 
 															if (scenarioPermissions
 																	|| gson.toJson(updateMonster)
-																			.equals(gson.toJson(monster))) {
+																	.equals(gson.toJson(monster))) {
 																monsterPermission = true;
 																break;
 															}
@@ -428,24 +380,28 @@ public class MessageHandler extends TextWebSocketHandler {
 									gameUpdate.setServer(false);
 									manager.setGame(gameId, gameUpdate);
 
-									for (WebSocketSessionContainer container : webSocketSessions) {
-										if (!container.getSession().getId().equals(session.getId())
-												&& container.getGameId() == gameId
-												&& !webSocketSessionsCleanUp.contains(container)) {
-											JsonObject gameResponse = new JsonObject();
-											if (!game.isServer()) {
-												gameUpdate.setServer(isServerSession(container.getSession(), gameId));
-											}
-											gameResponse.addProperty("type",
-													type.toString().toLowerCase().replace('_', '-'));
-											gameResponse.add("payload", gson.toJsonTree(gameUpdate));
-											gameResponse.add("undoinfo", messageObject.get("undoinfo"));
-											gameResponse.add("revision", messageObject.get("revision"));
-											gameResponse.add("undolength", messageObject.get("undolength"));
-											gameResponse.addProperty("serverVersion", buildVersion);
-											container.getSession()
-													.sendMessage(new TextMessage(gson.toJson(gameResponse)));
+									List<WebSocketSession> otherSessions = webSocketSessionsManager
+											.getOtherSessions(gameId, session.getId());
+									if (!CollectionUtils.isEmpty(otherSessions)) {
+										JsonObject gameResponse = new JsonObject();
+										if (!game.isServer()) {
+											gameUpdate.setServer(webSocketSessionsManager.isServerSession(session, gameId));
 										}
+										gameResponse.addProperty("type",
+												type.toString().toLowerCase().replace('_', '-'));
+										gameResponse.add("payload", gson.toJsonTree(gameUpdate));
+										gameResponse.add("undoinfo", messageObject.get("undoinfo"));
+										gameResponse.add("revision", messageObject.get("revision"));
+										gameResponse.add("undolength", messageObject.get("undolength"));
+										gameResponse.addProperty("serverVersion", buildVersion);
+										String jsonMessage = gson.toJson(gameResponse);
+										otherSessions.forEach(s -> {
+											try {
+												s.sendMessage(new TextMessage(jsonMessage));
+											} catch (IOException e) {
+												throw new RuntimeException(e);
+											}
+										});
 									}
 								}
 								break;
@@ -466,20 +422,24 @@ public class MessageHandler extends TextWebSocketHandler {
 									updateGame.setServer(false);
 									manager.setGame(gameId, updateGame);
 
-									for (WebSocketSessionContainer container : webSocketSessions) {
-										if (!container.getSession().getId().equals(session.getId())
-												&& container.getGameId() == gameId
-												&& !webSocketSessionsCleanUp.contains(container)) {
-											JsonObject gameResponse = new JsonObject();
-											if (!game.isServer()) {
-												updateGame.setServer(isServerSession(container.getSession(), gameId));
-											}
-											gameResponse.addProperty("type", "game-update");
-											gameResponse.add("payload", gson.toJsonTree(updateGame));
-											gameResponse.addProperty("serverVersion", buildVersion);
-											container.getSession()
-													.sendMessage(new TextMessage(gson.toJson(gameResponse)));
+									List<WebSocketSession> otherSessions = webSocketSessionsManager
+											.getOtherSessions(gameId, session.getId());
+									if (!CollectionUtils.isEmpty(otherSessions)) {
+										JsonObject gameResponse = new JsonObject();
+										if (!game.isServer()) {
+											updateGame.setServer(webSocketSessionsManager.isServerSession(session, gameId));
 										}
+										gameResponse.addProperty("type", "game-update");
+										gameResponse.add("payload", gson.toJsonTree(updateGame));
+										gameResponse.addProperty("serverVersion", buildVersion);
+										String jsonMessage = gson.toJson(gameResponse);
+										otherSessions.forEach(s -> {
+											try {
+												s.sendMessage(new TextMessage(jsonMessage));
+											} catch (IOException e) {
+												throw new RuntimeException(e);
+											}
+										});
 									}
 								}
 								break;
@@ -495,15 +455,15 @@ public class MessageHandler extends TextWebSocketHandler {
 								JsonElement payload = messageObject.get("payload");
 								if (!payload.isJsonObject()
 										|| !payload.getAsJsonObject().has("password")
-												&& !payload.getAsJsonObject().has("code")
+										&& !payload.getAsJsonObject().has("code")
 										|| !payload.getAsJsonObject().has("permissions")) {
 									sendError(session, "invalid 'payload'");
 								}
 
 								String permissionGameCode = payload.getAsJsonObject().has("code")
 										&& !payload.getAsJsonObject().get("code").isJsonNull()
-												? payload.getAsJsonObject().get("code").getAsString()
-												: payload.getAsJsonObject().get("password").getAsString();
+										? payload.getAsJsonObject().get("code").getAsString()
+										: payload.getAsJsonObject().get("password").getAsString();
 
 								Long permissionGameId = manager.getGameIdByGameCode(permissionGameCode);
 
@@ -532,7 +492,7 @@ public class MessageHandler extends TextWebSocketHandler {
 								manager.saveGameCode(permissionGameCode, gson.toJson(permissionPermissions), gameId);
 								break;
 							case REQUEST_GAME:
-								game.setServer(isServerSession(session, gameId));
+								game.setServer(webSocketSessionsManager.isServerSession(session, gameId));
 
 								JsonObject gameResponse = new JsonObject();
 								gameResponse.addProperty("type", "game");
@@ -547,16 +507,12 @@ public class MessageHandler extends TextWebSocketHandler {
 								session.sendMessage(new TextMessage(gson.toJson(permissionsResponse)));
 
 								if (!game.isServer()) {
-									for (WebSocketSessionContainer container : webSocketSessions) {
-										if (container.getGameId() == gameId
-												&& webSocketSessionsCleanUp.indexOf(container) == -1) {
-											JsonObject updateResponse = new JsonObject();
-											updateResponse.addProperty("type", "requestUpdate");
-											updateResponse.addProperty("serverVersion", buildVersion);
-											container.getSession()
-													.sendMessage(new TextMessage(gson.toJson(updateResponse)));
-											break;
-										}
+									WebSocketSession requestUpdateSession = webSocketSessionsManager.getSessionsByGameId(gameId).stream().findFirst().orElse(null);
+									if (requestUpdateSession != null) {
+										JsonObject requestUpdateResponse = new JsonObject();
+										requestUpdateResponse.addProperty("type", "requestUpdate");
+										requestUpdateResponse.addProperty("serverVersion", buildVersion);
+										requestUpdateSession.sendMessage(new TextMessage(gson.toJson(requestUpdateResponse)));
 									}
 								}
 
@@ -595,16 +551,21 @@ public class MessageHandler extends TextWebSocketHandler {
 									manager.setSettings(settingsUpdate, gameId);
 								}
 
-								for (WebSocketSessionContainer container : webSocketSessions) {
-									if (container.getSession() != session && container.getGameId() == gameId
-											&& !webSocketSessionsCleanUp.contains(container)) {
-										JsonObject settingsResponse = new JsonObject();
-										settingsResponse.addProperty("type", "settings");
-										settingsResponse.add("payload", gson.toJsonTree(settingsUpdate));
-										settingsResponse.addProperty("serverVersion", buildVersion);
-										container.getSession()
-												.sendMessage(new TextMessage(gson.toJson(settingsResponse)));
-									}
+								List<WebSocketSession> otherSessions = webSocketSessionsManager
+										.getOtherSessions(gameId, session.getId());
+								if (!CollectionUtils.isEmpty(otherSessions)) {
+									JsonObject settingsResponse = new JsonObject();
+									settingsResponse.addProperty("type", "settings");
+									settingsResponse.add("payload", gson.toJsonTree(settingsUpdate));
+									settingsResponse.addProperty("serverVersion", buildVersion);
+									String jsonMessage = gson.toJson(settingsResponse);
+									otherSessions.forEach(s -> {
+										try {
+											s.sendMessage(new TextMessage(jsonMessage));
+										} catch (IOException e) {
+											throw new RuntimeException(e);
+										}
+									});
 								}
 								break;
 							default:
@@ -622,28 +583,6 @@ public class MessageHandler extends TextWebSocketHandler {
 				}
 			}
 		}
-
-	}
-
-	public boolean isServerSession(WebSocketSession session, Long gameId) {
-		long serverSessionIndex = Long.MAX_VALUE;
-		boolean isServer = false;
-		for (WebSocketSessionContainer container : webSocketSessions) {
-			if (!webSocketSessionsCleanUp.contains(container)) {
-				int containerIndex = webSocketSessions.indexOf(container);
-				if (container.getSession() == session) {
-					if (containerIndex < serverSessionIndex) {
-						serverSessionIndex = containerIndex;
-						isServer = true;
-					}
-					container.setGameId(gameId);
-					break;
-				} else if (container.getGameId() == gameId && containerIndex < serverSessionIndex) {
-					serverSessionIndex = containerIndex;
-				}
-			}
-		}
-		return isServer;
 	}
 
 	protected void sendError(WebSocketSession session, String message) throws Exception {
