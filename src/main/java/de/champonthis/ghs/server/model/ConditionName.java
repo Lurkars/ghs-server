@@ -81,6 +81,9 @@ public enum ConditionName {
 	@SerializedName("retaliate")
 	RETALIATE,
 
+	@SerializedName("safeguard")
+	SAFEGUARD,
+
 	@SerializedName("plague")
 	PLAGUE,
 
