@@ -1,13 +1,14 @@
 package de.champonthis.ghs.server.controller;
 
+import java.util.List;
 import java.util.Objects;
 import java.util.Optional;
 
+import de.champonthis.ghs.server.socket.WebSocketSessionsManager;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.server.ResponseStatusException;
 import org.springframework.web.socket.TextMessage;
+import org.apache.commons.lang3.StringUtils;
 
 import com.google.gson.Gson;
 import com.google.gson.JsonArray;
@@ -32,7 +34,7 @@ import de.champonthis.ghs.server.model.GameState;
 import de.champonthis.ghs.server.model.Identifier;
 import de.champonthis.ghs.server.model.Permissions;
 import de.champonthis.ghs.server.socket.MessageHandler;
-import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
+import org.springframework.web.socket.WebSocketSession;
 
 @RestController
 @RequestMapping("game")
@@ -40,8 +42,8 @@ import de.champonthis.ghs.server.socket.model.WebSocketSessionContainer;
 public class GameController {
 
 	private final Manager manager;
+	private final WebSocketSessionsManager webSocketSessionsManager;
 	private final Gson gson;
-	private final MessageHandler messageHandler;
 	private final boolean isPublic;
 	private final boolean debug;
 
@@ -49,17 +51,18 @@ public class GameController {
 			@Value("${ghs-server.public:false}") boolean isPublic,
 			@Value("${ghs-server.debug:false}") boolean debug,
 			Manager manager,
+			WebSocketSessionsManager webSocketSessionsManager,
 			Gson gson,
 			MessageHandler messageHandler) {
 		this.manager = manager;
+		this.webSocketSessionsManager = webSocketSessionsManager;
 		this.gson = gson;
-		this.messageHandler = messageHandler;
 		this.isPublic = isPublic;
 		this.debug = debug;
 	}
 
 	protected GameModel getGame(String gameCode) {
-		if (!StringUtils.hasText(gameCode)) {
+		if (StringUtils.isBlank(gameCode)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
 		}
 
@@ -85,16 +88,19 @@ public class GameController {
 		return game;
 	}
 
-	@GetMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
+	@GetMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
 	public String requestGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode) {
 		return gson.toJson(getGame(gameCode));
 	}
 
-	@PostMapping(produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String updateGame(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
-			@RequestParam Optional<Boolean> silent, @RequestBody String payload) {
+	@PostMapping(produces = {MediaType.APPLICATION_JSON_VALUE})
+	public String updateGame(
+			@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
+			@RequestParam Optional<Boolean> silent,
+			@RequestBody String payload
+	) {
 
-		if (!StringUtils.hasText(gameCode)) {
+		if (StringUtils.isBlank(gameCode)) {
 			throw new ResponseStatusException(HttpStatus.UNAUTHORIZED);
 		} else if (gameCode.length() > 1024) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "game code too long");
@@ -148,7 +154,7 @@ public class GameController {
 				}
 				if (!permissions.isScenario()
 						&& (gameUpdate.getEdition() != null && !gameUpdate.getEdition().equals(game.getEdition())
-								|| game.getEdition() != null && !game.getEdition().equals(gameUpdate.getEdition()))) {
+						|| game.getEdition() != null && !game.getEdition().equals(gameUpdate.getEdition()))) {
 					throw new ResponseStatusException(HttpStatus.FORBIDDEN, "Permission(s) missing: scenario");
 				}
 				if (!permissions.isElements()
@@ -304,20 +310,19 @@ public class GameController {
 			manager.setGame(gameId, gameUpdate);
 
 			if (silent.isEmpty() || !silent.get()) {
-				for (WebSocketSessionContainer container : messageHandler.getWebSocketSessions()) {
-					if (container.getGameId() == gameId
-							&& !messageHandler.getWebSocketSessionsCleanUp().contains(container)) {
-						JsonObject gameResponse = new JsonObject();
-						if (!game.isServer()) {
-							gameUpdate.setServer(messageHandler.isServerSession(container.getSession(), gameId));
-						}
-						gameResponse.addProperty("type", "game");
-						gameResponse.add("payload", gson.toJsonTree(gameUpdate));
-						if (undoInfo != null) {
-							gameResponse.add("undoinfo", undoInfo);
-						}
-						container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+				List<WebSocketSession> sessions = webSocketSessionsManager.getSessionsByGameId(gameId);
+				String serverSessionId = webSocketSessionsManager.getServerSessionId(gameId);
+				JsonObject gameResponse = new JsonObject();
+				gameResponse.addProperty("type", "game");
+				if (undoInfo != null) {
+					gameResponse.add("undoinfo", undoInfo);
+				}
+				for (WebSocketSession s : sessions) {
+					if (!game.isServer()) {
+						gameUpdate.setServer(StringUtils.equals(s.getId(), serverSessionId));
 					}
+					gameResponse.add("payload", gson.toJsonTree(gameUpdate));
+					s.sendMessage(new TextMessage(gson.toJson(gameResponse)));
 				}
 			}
 
@@ -331,9 +336,11 @@ public class GameController {
 		}
 	}
 
-	@PostMapping(value = "/initiative", produces = { MediaType.APPLICATION_JSON_VALUE })
-	public String setInitiative(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
-			@RequestBody String payload) {
+	@PostMapping(value = "/initiative", produces = {MediaType.APPLICATION_JSON_VALUE})
+	public String setInitiative(
+			@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
+			@RequestBody String payload
+	) {
 
 		GameModel game = getGame(gameCode);
 
@@ -401,26 +408,23 @@ public class GameController {
 			game.setServer(false);
 			manager.setGame(gameId, game);
 
-			for (WebSocketSessionContainer container : messageHandler.getWebSocketSessions()) {
-				if (container.getGameId() == gameId
-						&& !messageHandler.getWebSocketSessionsCleanUp().contains(container)) {
-					JsonObject gameResponse = new JsonObject();
-					if (!game.isServer()) {
-						game.setServer(messageHandler.isServerSession(container.getSession(), gameId));
-					}
-					gameResponse.addProperty("type", "game");
-					gameResponse.add("payload", gson.toJsonTree(game));
-
-					JsonArray undoInfo = new JsonArray();
-					undoInfo.add("serverSync");
-					undoInfo.add("setInitiative");
-					undoInfo.add("#" + playerNumber);
-					undoInfo.add(initiative);
-					gameResponse.add("undoinfo", undoInfo);
-					container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+			JsonObject gameResponse = new JsonObject();
+			gameResponse.addProperty("type", "game");
+			JsonArray undoInfo = new JsonArray();
+			undoInfo.add("serverSync");
+			undoInfo.add("setInitiative");
+			undoInfo.add("#" + playerNumber);
+			undoInfo.add(initiative);
+			gameResponse.add("undoinfo", undoInfo);
+			List<WebSocketSession> sessions = webSocketSessionsManager.getSessionsByGameId(gameId);
+			String serverSessionId = webSocketSessionsManager.getServerSessionId(gameId);
+			for (WebSocketSession s : sessions) {
+				if (!game.isServer()) {
+					game.setServer(StringUtils.equals(s.getId(), serverSessionId));
 				}
+				gameResponse.add("payload", gson.toJsonTree(game));
+				s.sendMessage(new TextMessage(gson.toJson(gameResponse)));
 			}
-
 			return gson.toJson(game);
 		} catch (Exception e) {
 			if (!(e instanceof ResponseStatusException)) {
@@ -432,8 +436,10 @@ public class GameController {
 	}
 
 	@PostMapping(value = "/command")
-	public void remoteCommand(@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
-			@RequestBody String payload) {
+	public void remoteCommand(
+			@RequestHeader(name = HttpHeaders.AUTHORIZATION) String gameCode,
+			@RequestBody String payload
+	) {
 
 		Long gameId = manager.getGameIdByGameCode(gameCode);
 
@@ -456,23 +462,18 @@ public class GameController {
 		if (!data.has("id")) {
 			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "invalid command payload");
 		}
-
-		for (WebSocketSessionContainer container : messageHandler.getWebSocketSessions()) {
-			if (container.getGameId() == gameId
-					&& !messageHandler.getWebSocketSessionsCleanUp().contains(container)) {
-				try {
-					JsonObject response = new JsonObject();
-					response.addProperty("type", "remoteCommand");
-					response.add("payload", data);
-					container.getSession()
-							.sendMessage(new TextMessage(gson.toJson(response)));
-				} catch (Exception e) {
-					if (debug) {
-						e.printStackTrace();
-					}
+		JsonObject response = new JsonObject();
+		response.addProperty("type", "remoteCommand");
+		response.add("payload", data);
+		String jsonMessage = gson.toJson(response);
+		for (WebSocketSession s : webSocketSessionsManager.getSessionsByGameId(gameId)) {
+			try {
+				s.sendMessage(new TextMessage(jsonMessage));
+			} catch (Exception e) {
+				if (debug) {
+					e.printStackTrace();
 				}
 			}
 		}
-
 	}
 }
