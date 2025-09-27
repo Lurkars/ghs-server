@@ -129,7 +129,7 @@ spring.datasource.password=<password>
 
 ### Use as GHS Backup Server
 
-You can also use the server component to be used as GHS Backup Server to accept game payloads and store to file system. The upload url is `http://{your-ip}:{server-port}/backup`. To enable, add the following lines to the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs`:
+You can also use the server component to be used as GHS Backup Server to accept game payloads and store to file system. The upload url is `http://{your-ip}:{server-port}/backup/{FILENAME}` with `POST` and requires a Token in `Authorization Header` for authorization. To enable, add the following lines to the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs`:
 
 
 ```
