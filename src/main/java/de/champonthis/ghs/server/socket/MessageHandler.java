@@ -101,7 +101,7 @@ public class MessageHandler extends TextWebSocketHandler {
 					try {
 						WebSocketSessionContainer container = findOthers.next();
 						if (webSocketSessionsCleanUp.indexOf(container) == -1 && container.getGameId() == gameId) {
-							if (container.getSession().isOpen()) {
+							if (container.getSession() != session && container.getSession().isOpen()) {
 								GameModel game = manager.getGame(gameId);
 								if (game == null) {
 									sendError(container.getSession(), "No game found for 'id=" + gameId + "'");

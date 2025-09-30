@@ -138,6 +138,14 @@ ghs-server.backup.path=<path-to-backup>
 ghs-server.backup.authorization=<token>
 ```
 
+On client side, enable *Automatic Backups* under *Data Management* and configure with the following
+
+| Parameter            | Value                                              | Description                                                                                                                                                                                                                                               |
+|----------------------|----------------------------------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Upload url           | `http://{your-ip}:{server-port}/backup/{FILENAME}` | {FILENAME} (or {WINDOWS_FILENAME} to exclude special characters) is a placeholder and gets automatically replaced with `ghs-autobackup-<timestamp>.json`. If you choose not to use `{FILENAME}` you must have some filename after the `/backup/` endpoint |
+| Method               | POST                                               |                                                                                                                                                                                                                                                           |
+| Authorization Header | \<token\>                                          | The token you used in the server's `application.properties` file                                                                                                                                                                                          |
+
 ## How to use with GHS
 
 Go to the main menu in Gloomhaven Secretariat (GHS) and click on **Connect to Server**. Enter the IP/Hostname of the server in **Host** (on the same machine just use `localhost`), set **Port** to `8080` (if not changed default port).

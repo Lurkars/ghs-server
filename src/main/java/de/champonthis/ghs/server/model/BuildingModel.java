@@ -12,5 +12,6 @@ public class BuildingModel {
 	private int level;
 	@Required
 	private String state;
+	private Boolean attacked;
 
 }
