@@ -125,6 +125,10 @@ public class Settings {
 	@Required
 	private boolean disableStandees = false;
 	@Required
+	private boolean drawRandomItem = true;
+	@Required
+	private boolean drawRandomScenario = true;
+	@Required
 	private LinkedList<String> editionDataUrls = new LinkedList<>();
 	@Required
 	private LinkedList<String> editions = new LinkedList<>();
