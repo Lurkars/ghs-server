@@ -200,6 +200,8 @@ public class Settings {
 	@Required
 	private boolean showExpandedAbilityCard = false;
 	@Required
+	private boolean showExpandedStatCard = false;
+	@Required
 	private boolean showFullAbilityCard = false;
 	@Required
 	private boolean sortFigures = true;
