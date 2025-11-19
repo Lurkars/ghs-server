@@ -39,6 +39,8 @@ public class Settings {
 	@Required
 	private boolean alwaysFhSolo = false;
 	@Required
+	private boolean alwaysGh2eImbuement = false;
+	@Required
 	private boolean alwaysHazardousTerrain = false;
 	@Required
 	private boolean alwaysLootApplyDialog = false;
