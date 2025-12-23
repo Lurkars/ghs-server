@@ -12,13 +12,13 @@
 		<java.version>17</java.version>
 		<image.name>gloomhavensecretariat/ghs-server</image.name>
 		<jib-maven-plugin.version>3.4.6</jib-maven-plugin.version>
-		<revision>0.140.0</revision>
+		<revision>0.143.0</revision>
 	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.8</version>
+		<version>3.5.9</version>
 		<relativePath />
 	</parent>
 

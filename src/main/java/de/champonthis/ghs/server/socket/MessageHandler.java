@@ -122,8 +122,12 @@ public class MessageHandler extends TextWebSocketHandler {
 			}
 
 			if (cleanUpSessionTask == null || cleanUpSessionTask.isCancelled()) {
-				cleanUpSessionTask = threadPoolTaskScheduler.scheduleWithFixedDelay(new CleanUpSessionsRunner(),
-						Duration.ofMillis(120000));
+				try {
+					cleanUpSessionTask = threadPoolTaskScheduler.scheduleWithFixedDelay(new CleanUpSessionsRunner(),
+							Duration.ofMillis(120000));
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		}
 	}
@@ -132,10 +136,14 @@ public class MessageHandler extends TextWebSocketHandler {
 
 		@Override
 		public void run() {
-			for (WebSocketSessionContainer container : webSocketSessionsCleanUp) {
-				webSocketSessions.remove(container);
+			try {
+				for (WebSocketSessionContainer container : webSocketSessionsCleanUp) {
+					webSocketSessions.remove(container);
+				}
+				webSocketSessionsCleanUp.clear();
+			} catch (Exception e) {
+				e.printStackTrace();
 			}
-			webSocketSessionsCleanUp.clear();
 		}
 	}
 
