@@ -115,7 +115,8 @@ public class MessageHandler extends TextWebSocketHandler {
 								}
 							}
 						}
-					} catch (ConcurrentModificationException e) {
+					} catch (Exception e) {
+						e.printStackTrace();
 						break;
 					}
 				}

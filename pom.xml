@@ -12,7 +12,7 @@
 		<java.version>17</java.version>
 		<image.name>gloomhavensecretariat/ghs-server</image.name>
 		<jib-maven-plugin.version>3.4.6</jib-maven-plugin.version>
-		<revision>0.143.0</revision>
+		<revision>0.144.0</revision>
 	</properties>
 
 	<parent>
