@@ -1,0 +1,24 @@
+{
+  "name": "ghs-server-puppeteer",
+  "version": "1.0.0",
+  "description": "Automated tests for the Gloomhaven Secretariat software.",
+  "main": "test.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Lurkars/ghs-server.git"
+  },
+  "author": "",
+  "license": "AGPL-3.0",
+  "bugs": {
+    "url": "https://github.com/Lurkars/ghs-server/issues"
+  },
+  "homepage": "https://github.com/Lurkars/ghs-server#readme",
+  "dependencies": {
+    "puppeteer": "^24.10.0",
+    "uuid": "^11.1.0"
+  },
+  "type": "module"
+}
