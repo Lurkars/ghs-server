@@ -155,6 +155,8 @@ public class Settings {
 	@Required
 	private boolean fhSecondEdition = false;
 	@Required
+	private boolean fhShareResources = false;
+	@Required
 	private boolean fhTrials = false;
 	@Required
 	private boolean fhTrialsApply = true;
