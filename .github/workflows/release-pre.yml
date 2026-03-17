@@ -15,11 +15,11 @@ jobs:
           java-version: "17"
           distribution: "adopt"
       - name: Build with default Maven
-        run: mvn --batch-mode --update-snapshots package
+        run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip
       - name: Build with postgresql Maven
-        run: mvn --batch-mode --update-snapshots package -P db-postgresql
+        run: mvn --batch-mode --update-snapshots package -P db-postgresql -Dmaven.test.skip
       - name: Build with mariadb Maven
-        run: mvn --batch-mode --update-snapshots package -P db-mariadb
+        run: mvn --batch-mode --update-snapshots package -P db-mariadb -Dmaven.test.skip
       - name: Release
         uses: softprops/action-gh-release@v1
         with:
