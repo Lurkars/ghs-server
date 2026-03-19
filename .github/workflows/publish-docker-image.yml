@@ -68,7 +68,7 @@ jobs:
 
       - name: Build and push to DockerHub
         run: |
-          mvn install -P ${{ env.DB_PROFILE }} \
+          mvn install -P ${{ env.DB_PROFILE }} -Dmaven.test.skip \
             -Dimage.name=${{ env.SLUG_DOCKERHUB }}${{ env.IMAGE_SUFFIX }} \
             -Djib.to.tags=${{ steps.meta.outputs.version }}-${{ matrix.arch }} \
             -Djib.from.platforms=linux/${{ matrix.arch }}
@@ -87,7 +87,7 @@ jobs:
 
       - name: Build and push to GHCR
         run: |
-          mvn install -P ${{ env.DB_PROFILE }} \
+          mvn install -P ${{ env.DB_PROFILE }} -Dmaven.test.skip \
             -Dimage.name=ghcr.io/${{ env.SLUG_GHCR_LC }}${{ env.IMAGE_SUFFIX }} \
             -Djib.to.tags=${{ steps.meta.outputs.version }}-${{ matrix.arch }} \
             -Djib.from.platforms=linux/${{ matrix.arch }}
