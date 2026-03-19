@@ -110,7 +110,11 @@ public class MessageHandler extends TextWebSocketHandler {
 									gameResponse.addProperty("type", "game-update");
 									gameResponse.add("payload", gson.toJsonTree(game));
 									gameResponse.addProperty("serverVersion", buildVersion);
-									container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+									try {
+										container.getSession().sendMessage(new TextMessage(gson.toJson(gameResponse)));
+									} catch (IllegalStateException e) {
+										// session closed between isOpen() check and send — ignore
+									}
 								}
 							}
 						}

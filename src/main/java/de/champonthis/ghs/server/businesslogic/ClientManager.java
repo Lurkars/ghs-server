@@ -41,6 +41,7 @@ public class ClientManager implements SmartInitializingSingleton {
 	private final int httpPort;
 	private final String externalHost;
 	private final boolean defaultClientSettings;
+	private final boolean checkOnStartup;
 
 	private final Gson gson = new Gson();
 
@@ -50,13 +51,15 @@ public class ClientManager implements SmartInitializingSingleton {
 			@Value("${server.port:8080}") int port,
 			@Value("${server.http.port:8081}") int httpPort,
 			@Value("${ghs-server.externalHost:}") String externalHost,
-			@Value("${ghs-server.defaultClientSettings:false}") boolean defaultClientSettings) {
+			@Value("${ghs-server.defaultClientSettings:false}") boolean defaultClientSettings,
+			@Value("${ghs-server.checkOnStartup:true}") boolean checkOnStartup) {
 		this.lastestClientOnStartup = lastestClientOnStartup;
 		this.ssl = ssl;
 		this.port = port;
 		this.httpPort = httpPort;
 		this.externalHost = externalHost;
 		this.defaultClientSettings = defaultClientSettings;
+		this.checkOnStartup = checkOnStartup;
 	}
 
 	@Override
@@ -248,6 +251,9 @@ public class ClientManager implements SmartInitializingSingleton {
 
 	@EventListener
 	void checkOnStartup(ApplicationReadyEvent event) {
+		if (!checkOnStartup) {
+			return;
+		}
 		for (String host : getHosts()) {
 			if (checkClientRunning(host)) {
 				System.out.println("Client running at: " + getClientUrl(host));

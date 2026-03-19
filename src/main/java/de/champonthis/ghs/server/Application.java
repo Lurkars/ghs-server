@@ -9,6 +9,7 @@ import java.util.Arrays;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Profile;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
 import org.springframework.core.io.FileSystemResource;
@@ -30,6 +31,7 @@ public class Application {
 	}
 
 	@Bean
+	@Profile("!test")
 	public PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
 		File ghsFolder = new File(System.getProperty("user.home"), ".ghs");
 		if (!ghsFolder.exists()) {
