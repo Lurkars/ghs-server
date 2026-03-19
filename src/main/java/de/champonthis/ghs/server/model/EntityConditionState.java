@@ -13,6 +13,9 @@ public enum EntityConditionState {
 	@SerializedName("expire")
 	EXPIRE,
 
+	@SerializedName("roundExpire")
+	ROUND_EXPIRE,
+
 	@SerializedName("removed")
 	REMOVED,
 
