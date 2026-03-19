@@ -138,6 +138,8 @@ ghs-server.backup.path=<path-to-backup>
 ghs-server.backup.authorization=<token>
 ```
 
+> ⚠️ **Note**: If you are running ghs-server behind a **nginx reverse proxy**, nginx's default `client_max_body_size` is **1 MB**, which can cause `413 Request Entity Too Large` errors for larger game states. Add `client_max_body_size 10m;` (or a higher value) to your nginx `location` or `server` block to fix this.
+
 On client side, enable *Automatic Backups* under *Data Management* and configure with the following
 
 | Parameter            | Value                                              | Description                                                                                                                                                                                                                                                   |
