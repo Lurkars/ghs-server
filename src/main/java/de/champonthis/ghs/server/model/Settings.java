@@ -107,6 +107,8 @@ public class Settings {
 	@Required
 	private boolean characterItemsApply = true;
 	@Required
+	private boolean characterItemsShareHouseRule = false;
+	@Required
 	private boolean characterSheet = true;
 	@Required
 	private boolean characterShieldRetaliate = false;
@@ -185,6 +187,8 @@ public class Settings {
 	private boolean moveElements = true;
 	@Required
 	private boolean partySheet = true;
+	@Required
+	private boolean passiveSummons = true;
 	@Required
 	private boolean randomStandees = false;
 	@Required

@@ -41,6 +41,7 @@ public class GameSummonModel {
 	private String additionalAction;
 	private boolean active = false;
 	private boolean dormant = false;
+	private boolean passive = false;
 	private boolean revealed = false;
 	private String thumbnail;
 	private String thumbnailUrl;
