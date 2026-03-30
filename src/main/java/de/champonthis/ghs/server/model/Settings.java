@@ -47,7 +47,7 @@ public class Settings {
 	@Required
 	private boolean alwaysLootDeck = false;
 	@Required
-	private boolean amAdvantage = false;
+	private boolean amAdvantage = true;
 	@Required
 	private boolean amAdvantageHouseRule = false;
 	@Required
