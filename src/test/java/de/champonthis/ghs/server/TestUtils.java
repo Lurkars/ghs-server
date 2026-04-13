@@ -1,27 +1,31 @@
 package de.champonthis.ghs.server;
 
-import com.google.gson.JsonArray;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.*;
-import org.springframework.lang.NonNull;
-import org.springframework.web.socket.TextMessage;
-import org.springframework.web.socket.WebSocketSession;
-import org.springframework.web.socket.client.standard.StandardWebSocketClient;
-import org.springframework.web.socket.handler.TextWebSocketHandler;
+import static org.assertj.core.api.Assertions.assertThat;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import java.io.IOException;
 import java.util.concurrent.BlockingQueue;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.TimeUnit;
 
-import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
+import org.springframework.http.HttpEntity;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpMethod;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
+import org.springframework.web.socket.TextMessage;
+import org.springframework.web.socket.WebSocketSession;
+import org.springframework.web.socket.client.standard.StandardWebSocketClient;
+import org.springframework.web.socket.handler.TextWebSocketHandler;
+
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 
 public class TestUtils {
 
-	public static void assertRevisionViaRest(String code, long expectedRevision, TestRestTemplate restTemplate) {
+	public static void assertRevisionViaRest(String code, long expectedRevision, RestTemplate restTemplate) {
 		HttpHeaders headers = new HttpHeaders();
 		headers.set(HttpHeaders.AUTHORIZATION, code);
 		ResponseEntity<String> resp = restTemplate.exchange(
@@ -34,7 +38,8 @@ public class TestUtils {
 	}
 
 	/** Connects a WS client and immediately sends request-game. */
-	public static TestHandler connectAndRequestGame(String code, StandardWebSocketClient wsClient, String wsUrl) throws Exception {
+	public static TestHandler connectAndRequestGame(String code, StandardWebSocketClient wsClient, String wsUrl)
+			throws Exception {
 		TestHandler handler = new TestHandler();
 		WebSocketSession session = wsClient.execute(handler, wsUrl).get(5, TimeUnit.SECONDS);
 		handler.session = session;
@@ -104,7 +109,7 @@ public class TestUtils {
 		private final BlockingQueue<JsonObject> received = new LinkedBlockingQueue<>();
 
 		@Override
-		protected void handleTextMessage(@NonNull WebSocketSession session, @NonNull TextMessage message) {
+		protected void handleTextMessage(WebSocketSession session, TextMessage message) {
 			try {
 				received.add(JsonParser.parseString(message.getPayload()).getAsJsonObject());
 			} catch (Exception ignored) {
@@ -120,10 +125,13 @@ public class TestUtils {
 			long deadline = System.currentTimeMillis() + TimeUnit.SECONDS.toMillis(timeout);
 			while (true) {
 				long remaining = deadline - System.currentTimeMillis();
-				if (remaining <= 0) return null;
+				if (remaining <= 0)
+					return null;
 				JsonObject msg = received.poll(remaining, TimeUnit.MILLISECONDS);
-				if (msg == null) return null;
-				if (type.equals(msg.get("type").getAsString())) return msg;
+				if (msg == null)
+					return null;
+				if (type.equals(msg.get("type").getAsString()))
+					return msg;
 			}
 		}
 	}

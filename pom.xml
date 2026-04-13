@@ -11,14 +11,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<image.name>gloomhavensecretariat/ghs-server</image.name>
-		<jib-maven-plugin.version>3.4.6</jib-maven-plugin.version>
-		<revision>0.153.0</revision>
+		<jib-maven-plugin.version>3.5.1</jib-maven-plugin.version>
+		<revision>0.155.0</revision>
 	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.5.13</version>
+		<version>4.0.5</version>
 		<relativePath />
 	</parent>
 
@@ -36,7 +36,7 @@
 
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
+			<artifactId>spring-boot-starter-webmvc</artifactId>
 		</dependency>
 
 		<dependency>
@@ -50,8 +50,8 @@
 		</dependency>
 
 		<dependency>
-			<groupId>org.liquibase</groupId>
-			<artifactId>liquibase-core</artifactId>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-liquibase</artifactId>
 		</dependency>
 
 		<dependency>
@@ -122,7 +122,6 @@
 						<configuration>
 							<mainClass>de.champonthis.ghs.server.Application</mainClass>
 							<finalName>ghs-server-v${revision}</finalName>
-							<executable>true</executable>
 							<layout>ZIP</layout>
 						</configuration>
 						<executions>
@@ -204,7 +203,6 @@
 						<configuration>
 							<mainClass>de.champonthis.ghs.server.Application</mainClass>
 							<finalName>ghs-server-v${revision}-postgresql</finalName>
-							<executable>true</executable>
 							<layout>ZIP</layout>
 						</configuration>
 						<executions>
@@ -279,7 +277,6 @@
 						<configuration>
 							<mainClass>de.champonthis.ghs.server.Application</mainClass>
 							<finalName>ghs-server-v${revision}-mariadb</finalName>
-							<executable>true</executable>
 							<layout>ZIP</layout>
 						</configuration>
 						<executions>
@@ -342,7 +339,7 @@
 				<dependency>
 					<groupId>net.bull.javamelody</groupId>
 					<artifactId>javamelody-spring-boot-starter</artifactId>
-					<version>2.0.1</version>
+					<version>2.6.0</version>
 				</dependency>
 
 				<dependency>

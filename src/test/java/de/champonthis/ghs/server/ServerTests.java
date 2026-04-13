@@ -1,6 +1,9 @@
 package de.champonthis.ghs.server;
 
-import static de.champonthis.ghs.server.TestUtils.*;
+import static de.champonthis.ghs.server.TestUtils.assertRevisionViaRest;
+import static de.champonthis.ghs.server.TestUtils.buildMinimalCharacter;
+import static de.champonthis.ghs.server.TestUtils.connectAndRequestGame;
+import static de.champonthis.ghs.server.TestUtils.sendGameUpdate;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
@@ -9,9 +12,7 @@ import java.util.UUID;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -20,12 +21,16 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.ActiveProfiles;
+import org.springframework.web.client.RestTemplate;
 import org.springframework.web.socket.TextMessage;
 import org.springframework.web.socket.client.standard.StandardWebSocketClient;
+import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+
+import de.champonthis.ghs.server.TestUtils.TestHandler;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 @ActiveProfiles("test")
@@ -34,8 +39,7 @@ class ServerTests {
 	@LocalServerPort
 	private int port;
 
-	@Autowired
-	private TestRestTemplate restTemplate;
+	private RestTemplate restTemplate;
 
 	private StandardWebSocketClient wsClient;
 	private String wsUrl;
@@ -52,6 +56,15 @@ class ServerTests {
 		wsUrl = "ws://localhost:" + port + "/";
 		wsClient = new StandardWebSocketClient();
 		gameCode = "happy-" + UUID.randomUUID();
+
+		restTemplate = new RestTemplate();
+		restTemplate.setUriTemplateHandler(new DefaultUriBuilderFactory("http://localhost:" + port));
+		restTemplate.setErrorHandler(new org.springframework.web.client.DefaultResponseErrorHandler() {
+			@Override
+			public boolean hasError(org.springframework.http.client.ClientHttpResponse response) {
+				return false;
+			}
+		});
 	}
 
 	@AfterEach
@@ -106,12 +119,13 @@ class ServerTests {
 
 		// Send with the same revision, a changed playSeconds, and a changed round
 		long updatedPlaySeconds = originalPlaySeconds + 60;
-		payload.addProperty("revision", revision);            // same — ping
+		payload.addProperty("revision", revision); // same — ping
 		payload.addProperty("playSeconds", updatedPlaySeconds);
-		payload.addProperty("round", originalRound + 5);      // must be ignored
+		payload.addProperty("round", originalRound + 5); // must be ignored
 		sendGameUpdate(handler.session, gameCode, payload);
 
-		// Wait for the server to process the ping, then verify via REST GET (synchronous)
+		// Wait for the server to process the ping, then verify via REST GET
+		// (synchronous)
 		Thread.sleep(300);
 
 		HttpHeaders headers = new HttpHeaders();
@@ -177,7 +191,8 @@ class ServerTests {
 	}
 
 	/**
-	 * When client A sends a game update, client B (connected to the same game) must receive it.
+	 * When client A sends a game update, client B (connected to the same game) must
+	 * receive it.
 	 */
 	@Test
 	void gameUpdateIsBroadcastToAllClients() throws Exception {
@@ -279,8 +294,8 @@ class ServerTests {
 
 		// Write settings using real field names from the Settings model
 		JsonObject settingsPayload = new JsonObject();
-		settingsPayload.addProperty("battleGoals", true);   // default is false
-		settingsPayload.addProperty("locale", "de");        // default is "en"
+		settingsPayload.addProperty("battleGoals", true); // default is false
+		settingsPayload.addProperty("locale", "de"); // default is "en"
 
 		JsonObject settingsMsg = new JsonObject();
 		settingsMsg.addProperty("type", "settings");
@@ -480,9 +495,9 @@ class ServerTests {
 	/**
 	 * Simulates the client-side undo flow: set some fields, advance them, then
 	 * send the previous state as a game-undo. Verifies that:
-	 *  - the state is reverted to the pre-change values
-	 *  - the broadcast arrives on other clients with type "game-undo" (not "game")
-	 *  - the undoinfo field is forwarded in the broadcast
+	 * - the state is reverted to the pre-change values
+	 * - the broadcast arrives on other clients with type "game-undo" (not "game")
+	 * - the undoinfo field is forwarded in the broadcast
 	 * Note: the server does not implement undo logic itself — it stores whatever
 	 * payload arrives and re-broadcasts it with the "game-undo" type. The client
 	 * is responsible for sending the correct previous state.
@@ -545,7 +560,8 @@ class ServerTests {
 		undoMsg.add("undoinfo", undoInfo);
 		clientB.session.sendMessage(new TextMessage(undoMsg.toString()));
 
-		// clientA must receive the undo broadcast with the correct type and reverted values
+		// clientA must receive the undo broadcast with the correct type and reverted
+		// values
 		JsonObject broadcast = clientA.waitForType("game-undo", defaultTimeout);
 		assertThat(broadcast).as("Client A must receive a game-undo broadcast").isNotNull();
 		assertThat(broadcast.getAsJsonArray("undoinfo").get(1).getAsString()).isEqualTo("undo");
@@ -569,9 +585,9 @@ class ServerTests {
 	/**
 	 * Simulates the client-side redo flow: set some fields, undo them, then redo
 	 * to restore the undone state. Verifies that:
-	 *  - the state is restored to the post-change values after redo
-	 *  - the broadcast arrives on other clients with type "game-redo" (not "game")
-	 *  - the undoinfo field is forwarded in the broadcast
+	 * - the state is restored to the post-change values after redo
+	 * - the broadcast arrives on other clients with type "game-redo" (not "game")
+	 * - the undoinfo field is forwarded in the broadcast
 	 * Like undo, the server is a pass-through — the client sends the "future" state
 	 * as the redo payload.
 	 */
@@ -636,7 +652,8 @@ class ServerTests {
 		redoMsg.add("undoinfo", redoInfo);
 		clientB.session.sendMessage(new TextMessage(redoMsg.toString()));
 
-		// clientA must receive the redo broadcast with the correct type and restored values
+		// clientA must receive the redo broadcast with the correct type and restored
+		// values
 		JsonObject broadcast = clientA.waitForType("game-redo", defaultTimeout);
 		assertThat(broadcast).as("Client A must receive a game-redo broadcast").isNotNull();
 		assertThat(broadcast.getAsJsonArray("undoinfo").get(1).getAsString()).isEqualTo("redo");
@@ -956,7 +973,8 @@ class ServerTests {
 	}
 
 	/**
-	 * A POST /game with a revision lower than the server's current revision must be rejected with 400 Bad Request.
+	 * A POST /game with a revision lower than the server's current revision must be
+	 * rejected with 400 Bad Request.
 	 */
 	@Test
 	void restStaleRevisionIsRejected() throws Exception {
