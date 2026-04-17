@@ -4,7 +4,6 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Condition;
 import org.springframework.context.annotation.ConditionContext;
 import org.springframework.core.type.AnnotatedTypeMetadata;
-import org.springframework.lang.NonNull;
 
 public class HttpServerCondition implements Condition {
 
@@ -19,7 +18,7 @@ public class HttpServerCondition implements Condition {
     }
 
     @Override
-    public boolean matches(@NonNull ConditionContext context, @NonNull AnnotatedTypeMetadata metadata) {
+    public boolean matches(ConditionContext context, AnnotatedTypeMetadata metadata) {
         return this.ssl
                 || Boolean.TRUE.equals(context.getEnvironment().getProperty("server.ssl.enabled", Boolean.class));
     }
