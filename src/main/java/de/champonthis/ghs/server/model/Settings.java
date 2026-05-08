@@ -91,9 +91,11 @@ public class Settings {
 	@Required
 	private boolean calculate = true;
 	@Required
-	private boolean calculateStats = true;
+	private boolean calculateAdvantageStats = true;
 	@Required
 	private boolean calculateShieldStats = true;
+	@Required
+	private boolean calculateStats = true;
 	@Required
 	private boolean characterAttackModifierDeck = true;
 	@Required
@@ -153,11 +155,15 @@ public class Settings {
 	@Required
 	private boolean fhChallengesApply = true;
 	@Required
+	private boolean fhGarden = true;
+	@Required
 	private boolean fhGhItems = false;
 	@Required
 	private boolean fhSecondEdition = false;
 	@Required
 	private boolean fhShareResources = false;
+	@Required
+	private boolean fhPets = true;
 	@Required
 	private boolean fhTrials = false;
 	@Required

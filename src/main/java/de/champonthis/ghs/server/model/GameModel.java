@@ -38,6 +38,7 @@ public class GameModel {
 	private LinkedList<ScenarioRuleIdentifier> appliedScenarioRules = new LinkedList<>();
 	@Required
 	private LinkedList<ScenarioRuleIdentifier> discardedScenarioRules = new LinkedList<>();
+	private LinkedList<ScenarioRuleIdentifier> activeScenarioRules = new LinkedList<>();
 	@Required
 	private int level = 1;
 	@Required
@@ -48,6 +49,7 @@ public class GameModel {
 	private int bonusAdjustment = 0;
 	@Required
 	private boolean ge5Player = true;
+	private boolean ge5PlayerCapped = false;
 	@Required
 	private int playerCount = 0;
 	@Required
