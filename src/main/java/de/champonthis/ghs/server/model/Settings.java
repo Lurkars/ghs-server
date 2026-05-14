@@ -190,6 +190,8 @@ public class Settings {
 	@Required
 	private boolean monsterAttackModifierDeck = true;
 	@Required
+	private boolean monsterInitativeRange = false;
+	@Required
 	private boolean moveElements = true;
 	@Required
 	private boolean partySheet = true;
