@@ -65,6 +65,8 @@ public class Settings {
 	@Required
 	private boolean applyRetirement = true;
 	@Required
+	private boolean automaticEndRound = false;
+	@Required
 	private boolean automaticFirstFigure = false;
 	@Required
 	private boolean automaticPassTime = true;
