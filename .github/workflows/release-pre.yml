@@ -8,24 +8,44 @@ jobs:
     name: Create Pre-Release
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - name: Create draft pre-release
+        run: gh release create "${{ github.ref_name }}" --draft --prerelease --title "${{ github.ref_name }}" --generate-notes --repo "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  release_jars:
+    name: Build and release JARs
+    needs: create_release
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: "17"
-          distribution: "adopt"
+          distribution: "temurin"
       - name: Build with default Maven
         run: mvn --batch-mode --update-snapshots package -Dmaven.test.skip
       - name: Build with postgresql Maven
         run: mvn --batch-mode --update-snapshots package -P db-postgresql -Dmaven.test.skip
       - name: Build with mariadb Maven
         run: mvn --batch-mode --update-snapshots package -P db-mariadb -Dmaven.test.skip
-      - name: Release
-        uses: softprops/action-gh-release@v1
-        with:
-          generate_release_notes: true
-          prerelease: true
-          files: |
-            ./target/ghs-server-${{github.ref_name}}.jar
-            ./target/ghs-server-${{github.ref_name}}-postgresql.jar
-            ./target/ghs-server-${{github.ref_name}}-mariadb.jar
+      - name: Upload JARs to release
+        run: |
+          gh release upload "${{ github.ref_name }}" \
+            "./target/ghs-server-${{ github.ref_name }}.jar" \
+            "./target/ghs-server-${{ github.ref_name }}-postgresql.jar" \
+            "./target/ghs-server-${{ github.ref_name }}-mariadb.jar" \
+            --repo "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+  publish:
+    name: Publish Pre-Release
+    needs: release_jars
+    runs-on: ubuntu-latest
+    steps:
+      - name: Publish draft pre-release
+        run: gh release edit "${{ github.ref_name }}" --draft=false --repo "${{ github.repository }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -12,22 +12,20 @@ jobs:
     name: Build and deploy
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
       - name: Set up JDK 17
-        uses: actions/setup-java@v4
+        uses: actions/setup-java@v5
         with:
           java-version: "17"
-          distribution: "adopt"
+          distribution: "temurin"
       - name: Build with Maven
         run: mvn --batch-mode --update-snapshots clean package -P db-postgresql,melody -Dmaven.test.skip
-      - uses: mdallasanta/ssh-scp-deploy@v1.2.0
-        with:
-          local: "./target/ghs-server-${{github.ref_name}}-postgresql.jar"
-          remote: "~/ghs-server.jar"
-          host: ${{secrets.HOST}}
-          port: ${{secrets.PORT}}
-          user: ${{secrets.USER}}
-          key: ${{secrets.KEY}}
-          pre_upload: sudo systemctl stop ghs-server.service
-          post_upload: sudo systemctl start ghs-server.service
-          ssh_options: -o StrictHostKeyChecking=no
+      - name: Deploy via SSH/SCP
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -p "${{ secrets.PORT }}" "${{ secrets.HOST }}" >> ~/.ssh/known_hosts
+          ssh -i ~/.ssh/deploy_key -p "${{ secrets.PORT }}" "${{ secrets.USER }}@${{ secrets.HOST }}" "sudo systemctl stop ghs-server.service"
+          scp -i ~/.ssh/deploy_key -P "${{ secrets.PORT }}" "./target/ghs-server-${{ github.ref_name }}-postgresql.jar" "${{ secrets.USER }}@${{ secrets.HOST }}:~/ghs-server.jar"
+          ssh -i ~/.ssh/deploy_key -p "${{ secrets.PORT }}" "${{ secrets.USER }}@${{ secrets.HOST }}" "sudo systemctl start ghs-server.service"
