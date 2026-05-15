@@ -20,5 +20,6 @@ public class GameEntityConditionModel {
 	private boolean expired;
 	@Required
 	private boolean highlight;
+	private Integer highlightValue;
 
 }
