@@ -16,6 +16,7 @@ public class Party {
 	private LinkedList<ConditionName> conditions = new LinkedList<>();
 	private LinkedList<String> battleGoalEditions = new LinkedList<>();
 	private LinkedList<Identifier> filteredBattleGoals = new LinkedList<>();
+	private LinkedList<Identifier> filteredItems = new LinkedList<>();
 	private String location;
 	private String notes;
 	private String achievements;

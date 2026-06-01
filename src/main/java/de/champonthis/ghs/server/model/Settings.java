@@ -161,6 +161,8 @@ public class Settings {
 	@Required
 	private boolean fhGhItems = false;
 	@Required
+	private boolean fhGh2eItems = false;
+	@Required
 	private boolean fhSecondEdition = false;
 	@Required
 	private boolean fhShareResources = false;
@@ -170,6 +172,8 @@ public class Settings {
 	private boolean fhTrials = false;
 	@Required
 	private boolean fhTrialsApply = true;
+	@Required
+	private boolean Gh2eFhItems = false;
 	@Required
 	private boolean gh2eImbuement = true;
 	@Required
