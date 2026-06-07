@@ -1,0 +1,14 @@
+{
+  "slug": "frosthavenTracker",
+  "displayName": "dev · Frosthaven Tracker (GHS Server)",
+  "description": "Gloomhaven Secretariat sync server (http://localhost:8080). SQLite and config in %USERPROFILE%\\.ghs",
+  "port": 8080,
+  "command": {
+    "executable": "java",
+    "arguments": "-Duser.home=C:\\Users\\ddrewitz -jar run\\ghs-server-v0.163.0.jar -Djava.awt.headless=true"
+  },
+  "env": {
+    "USERPROFILE": "C:\\Users\\ddrewitz",
+    "HOME": "C:\\Users\\ddrewitz"
+  },
+  "startMode": "Manual"
