@@ -81,6 +81,8 @@ public class Party {
 	@Required
 	private LinkedList<PetIdentifier> pets = new LinkedList<>();
 	@Required
+	private LinkedList<Identifier> specialItems = new LinkedList<>();
+	@Required
 	private LinkedList<Loot> lootDeckEnhancements = new LinkedList<>();
 	@Required
 	private LinkedList<LootType> lootDeckFixed = new LinkedList<>();
