@@ -27,6 +27,8 @@ public class GameMonsterModel {
 	@Required
 	private LinkedList<Integer> abilities = new LinkedList<>();
 	@Required
+	private LinkedList<Boolean> revealedAbilities = new LinkedList<>();
+	@Required
 	private LinkedList<GameMonsterEntityModel> entities = new LinkedList<>();
 	@Required
 	private boolean isAlly = false;

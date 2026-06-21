@@ -15,6 +15,8 @@ public class GameAttackModifierDeckModel {
 	@Required
 	private LinkedList<Integer> discarded = new LinkedList<>();
 	@Required
+	private LinkedList<Boolean> revealed = new LinkedList<>();
+	@Required
 	private boolean active = true;
 	private Integer lastVisible;
 	private String state;
