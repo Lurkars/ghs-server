@@ -173,7 +173,7 @@ public class Settings {
 	@Required
 	private boolean fhTrialsApply = true;
 	@Required
-	private boolean Gh2eFhItems = false;
+	private boolean gh2eFhItems = false;
 	@Required
 	private boolean gh2eImbuement = true;
 	@Required
