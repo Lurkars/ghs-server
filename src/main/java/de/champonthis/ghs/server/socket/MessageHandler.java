@@ -53,11 +53,13 @@ public class MessageHandler extends TextWebSocketHandler {
 	private final String buildVersion;
 	private final boolean isPublic;
 	private final boolean debug;
+	private final Integer ping;
 
 	public MessageHandler(
 			@Value("${build.version}") String buildVersion,
 			@Value("${ghs-server.public:false}") boolean isPublic,
 			@Value("${ghs-server.debug:false}") boolean debug,
+			@Value("${ghs-server.ping:}") Integer ping,
 			Manager manager,
 			Gson gson,
 			ThreadPoolTaskScheduler threadPoolTaskScheduler) {
@@ -67,6 +69,7 @@ public class MessageHandler extends TextWebSocketHandler {
 		this.buildVersion = buildVersion;
 		this.isPublic = isPublic;
 		this.debug = debug;
+		this.ping = ping;
 	}
 
 	@Override
@@ -106,6 +109,7 @@ public class MessageHandler extends TextWebSocketHandler {
 									sendError(container.getSession(), "No game found for 'id=" + gameId + "'");
 								} else {
 									game.setServer(isServerSession(container.getSession(), gameId));
+									game.setServerPing(ping);
 									JsonObject gameResponse = new JsonObject();
 									gameResponse.addProperty("type", "game-update");
 									gameResponse.add("payload", gson.toJsonTree(game));
@@ -206,6 +210,7 @@ public class MessageHandler extends TextWebSocketHandler {
 						Permissions permissions = manager.getPermissionsByGameCode(gameCode);
 
 						game.setServer(isServerSession(session, gameId));
+						game.setServerPing(ping);
 
 						MessageType type = MessageType
 								.valueOf(messageObject.get("type").getAsString().toUpperCase().replace("-", "_"));
@@ -438,6 +443,7 @@ public class MessageHandler extends TextWebSocketHandler {
 									}
 
 									gameUpdate.setServer(false);
+									gameUpdate.setServerPing(ping);
 									manager.setGame(gameId, gameUpdate);
 
 									for (WebSocketSessionContainer container : webSocketSessions) {
@@ -448,6 +454,7 @@ public class MessageHandler extends TextWebSocketHandler {
 											if (!game.isServer()) {
 												gameUpdate.setServer(isServerSession(container.getSession(), gameId));
 											}
+											gameUpdate.setServerPing(ping);
 											gameResponse.addProperty("type",
 													type.toString().toLowerCase().replace('_', '-'));
 											gameResponse.add("payload", gson.toJsonTree(gameUpdate));
@@ -476,6 +483,7 @@ public class MessageHandler extends TextWebSocketHandler {
 									updateGame = game;
 
 									updateGame.setServer(false);
+									updateGame.setServerPing(ping);
 									manager.setGame(gameId, updateGame);
 
 									for (WebSocketSessionContainer container : webSocketSessions) {
@@ -486,6 +494,7 @@ public class MessageHandler extends TextWebSocketHandler {
 											if (!game.isServer()) {
 												updateGame.setServer(isServerSession(container.getSession(), gameId));
 											}
+											updateGame.setServerPing(ping);
 											gameResponse.addProperty("type", "game-update");
 											gameResponse.add("payload", gson.toJsonTree(updateGame));
 											gameResponse.addProperty("serverVersion", buildVersion);
@@ -545,6 +554,7 @@ public class MessageHandler extends TextWebSocketHandler {
 								break;
 							case REQUEST_GAME:
 								game.setServer(isServerSession(session, gameId));
+								game.setServerPing(ping);
 
 								JsonObject gameResponse = new JsonObject();
 								gameResponse.addProperty("type", "game");

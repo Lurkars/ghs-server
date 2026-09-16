@@ -44,10 +44,12 @@ public class GameController {
 	private final MessageHandler messageHandler;
 	private final boolean isPublic;
 	private final boolean debug;
+	private final Integer ping;
 
 	public GameController(
 			@Value("${ghs-server.public:false}") boolean isPublic,
 			@Value("${ghs-server.debug:false}") boolean debug,
+			@Value("${ghs-server.ping:}") Integer ping,
 			Manager manager,
 			Gson gson,
 			MessageHandler messageHandler) {
@@ -56,6 +58,7 @@ public class GameController {
 		this.messageHandler = messageHandler;
 		this.isPublic = isPublic;
 		this.debug = debug;
+		this.ping = ping;
 	}
 
 	protected GameModel getGame(String gameCode) {
@@ -81,6 +84,8 @@ public class GameController {
 		if (game == null) {
 			throw new ResponseStatusException(HttpStatus.NO_CONTENT);
 		}
+
+		game.setServerPing(ping);
 
 		return game;
 	}
@@ -321,6 +326,7 @@ public class GameController {
 				}
 			}
 
+			gameUpdate.setServerPing(ping);
 			return gson.toJson(gameUpdate);
 		} catch (Exception e) {
 			if (!(e instanceof ResponseStatusException)) {
@@ -421,6 +427,7 @@ public class GameController {
 				}
 			}
 
+			game.setServerPing(ping);
 			return gson.toJson(game);
 		} catch (Exception e) {
 			if (!(e instanceof ResponseStatusException)) {

@@ -86,6 +86,7 @@ public class GameModel {
 	private LinkedList<String> unlockedCharacters = new LinkedList<>();
 	@Required
 	private boolean server = false;
+	private Integer serverPing;
 	private ScenarioFinish finish;
 	@Required
 	private LinkedList<GameClockTimestamp> gameClock = new LinkedList<>();

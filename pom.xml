@@ -11,14 +11,14 @@
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<java.version>17</java.version>
 		<image.name>gloomhavensecretariat/ghs-server</image.name>
-		<jib-maven-plugin.version>3.5.1</jib-maven-plugin.version>
-		<revision>0.167.0</revision>
+		<jib-maven-plugin.version>3.5.2</jib-maven-plugin.version>
+		<revision>0.170.0</revision>
 	</properties>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>4.1.0</version>
+		<version>4.1.1</version>
 		<relativePath />
 	</parent>
 

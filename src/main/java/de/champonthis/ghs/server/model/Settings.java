@@ -175,6 +175,8 @@ public class Settings {
 	@Required
 	private boolean gh2eFhItems = false;
 	@Required
+	private boolean gh2eForceFactionEnvelopes = false;
+	@Required
 	private boolean gh2eImbuement = true;
 	@Required
 	private boolean gh2eImbuementKeep = false;

@@ -18,20 +18,19 @@ This will run a basic server for a single game code (e.g. for a group, you can s
 
 ### Quickstart
 
-1. Install *Java 17* (or higher) (***Requirement changes with newer version!***) *Runtime Environment*: [Installation Guide for different OS'](https://adoptium.net/en-GB/installation/)
+1. Install _Java 17_ (or higher) (**_Requirement changes with newer version!_**) _Runtime Environment_: [Installation Guide for different OS'](https://adoptium.net/en-GB/installation/)
 2. Download the appropriate latest `jar` executable (without `-mariadb`- or `-postfix`-suffix) from the [latest release](https://github.com/Lurkars/ghs-server/releases/latest) assets.
 3. Execute the `jar` file (should be working automatically with your Java Runtime Environment)
 4. You should see a similar window:<br><img width="776" alt="image" src="./resources/Screenshot1.png">
-	
-	> ⚠️ **Important**: If you do not see any local IP address listed besides `localhost`, please check your Firewall settings! After allowing the application in your network and restarting the app, you should see your local IP starting with `192.[...]` in most cases!
+
+   > ⚠️ **Important**: If you do not see any local IP address listed besides `localhost`, please check your Firewall settings! After allowing the application in your network and restarting the app, you should see your local IP starting with `192.[...]` in most cases!
 
 5. Click the **Install latest client** button, afterwards window should look like this:<br><img width="776" alt="image" src="./resources/Screenshot2.png">
 6. On any device in your local network, you should now be able to access the client with the listed address `http://192.[...]:8080/index.html` and connect to your server via `Host: 192.[...]`and `Port: 8080`.
-  	
-  	> ℹ️ **Notice**: Connecting from a different client running with HTTPS (like [gloomhaven-secretariat.de](https://gloomhaven-secretariat.de)) won't work! If you want the server to be accessbile from HTTPS, see [Enable SSL](#enable-ssl).
 
+   > ℹ️ **Notice**: Connecting from a different client running with HTTPS (like [gloomhaven-secretariat.de](https://gloomhaven-secretariat.de)) won't work! If you want the server to be accessbile from HTTPS, see [Enable SSL](#enable-ssl).
 
-All data is stored in `<your-home-folder>/.ghs` ([List of home-folders for different OS'](https://en.wikipedia.org/wiki/Home_directory#Default_home_directory_per_operating_system)). 
+All data is stored in `<your-home-folder>/.ghs` ([List of home-folders for different OS'](https://en.wikipedia.org/wiki/Home_directory#Default_home_directory_per_operating_system)).
 If you want to reset the server, just delete the `ghs.sqlite` database file in this directory.
 
 ## How to run (advanced)
@@ -77,6 +76,10 @@ Replace `<NEW PORT>` with the port of your choice.
 
 A public server will accept any **Game Code** and create a game for it. The **Game Code** is therefore more of an identifier for a single game than a password protection. To make a public server, edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.public=true`.
 
+### Forced client ping
+
+Edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `ghs-server.ping=<value in seconds>` to enable a forced ping on all clients to the server. This can keep the connection alive in some cases, where you experience regular disconnects.
+
 ### Enable SSL
 
 If you want to connect to the server from a client using HTTPS (NOTE: this is not the case if you run your own client locally!), the websocket connection will be upgraded to wss by any modern browser. Therefore, connecting to a server on the local network is only possible if SSL is enabled. A self-signed certificate is already included (yes, including a hardcoded password visible to everyone). So to easily enable SSL, just edit the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs` and add the following line: `server.ssl.enabled=true`. As a self-signed certificate is used, it is untrusted by all modern browsers. To connect, just type `https://{your-ip}:{server-port}` (`https://localhost:8080` with default values) and accept the security warnings. You should then be able to connect using SSL. (This must be done for each client).
@@ -90,14 +93,13 @@ server.ssl.key-store-password=
 server.ssl.key-alias=
 ```
 
-To generate a certificate file from your [Let's Encrypt](https://letsencrypt.org/) certificate, use 
+To generate a certificate file from your [Let's Encrypt](https://letsencrypt.org/) certificate, use
 
 ```
 openssl pkcs12 -export -in fullchain.pem -inkey privkey.pem -CAfile chain.pem -caname root -name ghs-server -out ghs-server.p12
 ```
 
 This will prompt for a password and then create a `ghs-server.p12` file which will be referenced as `server.ssl.key-store`.
-
 
 #### Automatic HTTP
 
@@ -131,7 +133,6 @@ spring.datasource.password=<password>
 
 You can also use the server component to be used as GHS Backup Server to accept game payloads and store to file system. The upload url is `http://{your-ip}:{server-port}/backup/{FILENAME}` with `POST` and requires a Token in `Authorization Header` for authorization. To enable, add the following lines to the `application.properties` file in the GHS server configuration folder `<your-home-folder>/.ghs`:
 
-
 ```
 # replace <path-to-backup> with an accessible path to store the backup files and <token> as authorization header for authentication.
 ghs-server.backup.path=<path-to-backup>
@@ -140,10 +141,10 @@ ghs-server.backup.authorization=<token>
 
 > ⚠️ **Note**: If you are running ghs-server behind a **nginx reverse proxy**, nginx's default `client_max_body_size` is **1 MB**, which can cause `413 Request Entity Too Large` errors for larger game states. Add `client_max_body_size 10m;` (or a higher value) to your nginx `location` or `server` block to fix this.
 
-On client side, enable *Automatic Backups* under *Data Management* and configure with the following
+On client side, enable _Automatic Backups_ under _Data Management_ and configure with the following
 
 | Parameter            | Value                                              | Description                                                                                                                                                                                                                                                   |
-|----------------------|----------------------------------------------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| -------------------- | -------------------------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | Upload url           | `http://{your-ip}:{server-port}/backup/{FILENAME}` | `{FILENAME}` and `{WINDOWS_FILENAME}` (to exclude special characters) are placeholders and get automatically replaced with `ghs-autobackup-<timestamp>.json`. If you choose not to use `{FILENAME}` you must have some filename after the `/backup/` endpoint |
 | Method               | POST                                               |                                                                                                                                                                                                                                                               |
 | Authorization Header | \<token\>                                          | The token you used in the server's `application.properties` file                                                                                                                                                                                              |
@@ -178,4 +179,3 @@ The source code is licensed under [AGPL](/LICENSE)
 ## Personal disclaimer
 
 This is a hobby project I do in my spare time. The software fills a practical need due to the demise of the original Helper application, so I am following the **Quick'n'Dirty** approach to get things done quickly. This of course leads to a lack of quality and testing and the code base is definitely not in line with my profession.
-	 
