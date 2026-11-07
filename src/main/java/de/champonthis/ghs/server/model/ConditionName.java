@@ -87,6 +87,9 @@ public enum ConditionName {
 	@SerializedName("plague")
 	PLAGUE,
 
+	@SerializedName("blind")
+	BLIND,
+
 	@SerializedName("invalid")
 	INVALID
 }
