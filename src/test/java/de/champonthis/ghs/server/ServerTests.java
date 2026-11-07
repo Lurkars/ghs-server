@@ -27,6 +27,7 @@ import org.springframework.web.socket.client.standard.StandardWebSocketClient;
 import org.springframework.web.util.DefaultUriBuilderFactory;
 
 import com.google.gson.JsonArray;
+import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 
@@ -296,6 +297,16 @@ class ServerTests {
 		JsonObject settingsPayload = new JsonObject();
 		settingsPayload.addProperty("battleGoals", true); // default is false
 		settingsPayload.addProperty("locale", "de"); // default is "en"
+		JsonArray soundboardSounds = new JsonArray();
+		JsonObject customSound = new JsonObject();
+		customSound.addProperty("id", "horn");
+		customSound.addProperty("src", "https://example.com/horn.ogg");
+		soundboardSounds.add(customSound);
+		JsonObject disabledSound = new JsonObject();
+		disabledSound.addProperty("id", "gold");
+		disabledSound.add("src", JsonNull.INSTANCE);
+		soundboardSounds.add(disabledSound);
+		settingsPayload.add("soundboardSounds", soundboardSounds);
 
 		JsonObject settingsMsg = new JsonObject();
 		settingsMsg.addProperty("type", "settings");
@@ -316,6 +327,13 @@ class ServerTests {
 				.isTrue();
 		assertThat(settingsResponse.getAsJsonObject("payload").get("locale").getAsString())
 				.isEqualTo("de");
+		JsonArray responseSounds = settingsResponse.getAsJsonObject("payload").getAsJsonArray("soundboardSounds");
+		assertThat(responseSounds).hasSize(2);
+		assertThat(responseSounds.get(0)).isEqualTo(customSound);
+		JsonObject responseDisabledSound = responseSounds.get(1).getAsJsonObject();
+		assertThat(responseDisabledSound.get("id").getAsString()).isEqualTo("gold");
+		// null src is omitted by Gson
+		assertThat(responseDisabledSound.has("src") && !responseDisabledSound.get("src").isJsonNull()).isFalse();
 
 		handler.session.close();
 	}

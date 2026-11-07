@@ -232,6 +232,8 @@ public class Settings {
 	@Required
 	private boolean sortFigures = true;
 	@Required
+	private LinkedList<Sound> soundboardSounds = new LinkedList<>();
+	@Required
 	private LinkedList<String> spoilers = new LinkedList<>();
 	@Required
 	private boolean standees = true;
