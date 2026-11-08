@@ -40,5 +40,6 @@ public class CharacterProgress {
 	private LinkedList<Integer> deck = new LinkedList<>();
 	@Required
 	private LinkedList<Enhancement> enhancements = new LinkedList<>();
+	private RpgProgress rpg;
 
 }

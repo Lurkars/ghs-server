@@ -39,5 +39,6 @@ public class GameMonsterEntityModel {
 	private LinkedList<String> extraActions = new LinkedList<>();
 	@Required
 	private LinkedList<String> extraActionsPersistent = new LinkedList<>();
+	private int rpgAction = -1;
 
 }

@@ -90,6 +90,9 @@ public enum ConditionName {
 	@SerializedName("blind")
 	BLIND,
 
+	@SerializedName("pacify")
+	PACIFY,
+
 	@SerializedName("invalid")
 	INVALID
 }
