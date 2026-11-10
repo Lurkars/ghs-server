@@ -39,6 +39,7 @@ public class GameSummonModel {
 	private LinkedList<String> tags = new LinkedList<>();
 	private String action;
 	private String additionalAction;
+	private String specialAction;
 	private boolean active = false;
 	private boolean dormant = false;
 	private boolean passive = false;

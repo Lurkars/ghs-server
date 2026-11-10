@@ -12,9 +12,10 @@ import lombok.EqualsAndHashCode;
 public class ScenarioStats extends DamageStats {
 
     private GameScenarioModel scenario;
+    private Long timestamp;
     private boolean success;
     private Integer level;
-    private Integer difficutly;
+    private Integer difficulty;
     private Integer gold;
     private Integer xp;
     private Integer treasures;
