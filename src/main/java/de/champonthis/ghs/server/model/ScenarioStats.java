@@ -19,6 +19,7 @@ public class ScenarioStats extends DamageStats {
     private Integer gold;
     private Integer xp;
     private Integer treasures;
+    private Integer rounds;
     @Required
     private Map<LootType, Integer> loot = new HashMap<>();
     @Required
