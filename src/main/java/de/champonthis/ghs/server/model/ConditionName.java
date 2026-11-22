@@ -93,6 +93,12 @@ public enum ConditionName {
 	@SerializedName("pacify")
 	PACIFY,
 
+	@SerializedName("push")
+	PUSH,
+
+	@SerializedName("pull")
+	PULL,
+
 	@SerializedName("invalid")
 	INVALID
 }
