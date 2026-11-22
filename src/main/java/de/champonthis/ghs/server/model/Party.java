@@ -97,6 +97,8 @@ public class Party {
 	private GardenModel garden;
 	@Required
 	private Map<String, Integer> factionReputation = new HashMap<>();
+	private LinkedList<String> factionUnlocks = new LinkedList<>();
 	private Integer imbuement;
+	private OutpostAttackModel outpostAttack;
 
 }

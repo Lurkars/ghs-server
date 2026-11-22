@@ -36,5 +36,7 @@ public class ScenarioFinish {
 	private Identifier randomSideScenario;
 	@Required
 	private LinkedList<Boolean> trials = new LinkedList<>();
+	private LinkedList<Boolean> calendarSectionConditional = new LinkedList<>();
+	private String overlayCustomText;
 
 }
