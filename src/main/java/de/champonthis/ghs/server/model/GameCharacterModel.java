@@ -71,5 +71,6 @@ public class GameCharacterModel {
 	private LinkedList<String> extraActions = new LinkedList<>();
 	@Required
 	private LinkedList<String> extraActionsPersistent = new LinkedList<>();
+	private CharacterAbilityCards abilityCards;
 
 }
